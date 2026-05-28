@@ -2,14 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://k4m7v2pz.github.io/</loc>
-         <lastmod>2026-05-23</lastmod>
+         <lastmod>2026-05-28</lastmod>
     </url>
     <url>
-         <loc>https://k4m7v2pz.github.io/blog/embed-python-pip-installation-windows/</loc>
-         <lastmod>2026-05-23</lastmod>
+         <loc>https://k4m7v2pz.github.io/about/</loc>
+         <lastmod>2026-05-28</lastmod>
     </url>
     <url>
-         <loc>https://k4m7v2pz.github.io/blog/google-pinyin-installation-ubuntu-derivatives/</loc>
-         <lastmod>2026-05-23</lastmod>
+         <loc>https://k4m7v2pz.github.io/blog/linux/gnulinux/google-pinyin-installation-ubuntu-derivatives/</loc>
+         <lastmod>2026-05-28</lastmod>
+    </url>
+    <url>
+         <loc>https://k4m7v2pz.github.io/blog/linux/windows/embed-python-pip-installation-windows/</loc>
+         <lastmod>2026-05-28</lastmod>
     </url>
 </urlset>
