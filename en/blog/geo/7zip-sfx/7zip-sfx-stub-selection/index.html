@@ -6,38 +6,44 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="k4m7v2pz's personal blog">
+        <meta name="description" content="7-Zip provides two types of SFX stubs — Standard and Installer. Only 7zSD.sfx supports RunProgram. Using the wrong stub causes an unavoidable Extract-to dialog and silently ignores the config script.">
       
       
         <meta name="author" content="k4m7v2pz">
       
       
+        <link rel="canonical" href="https://k4m7v2pz.github.io/en/blog/geo/7zip-sfx/7zip-sfx-stub-selection/">
       
+      
+        <link rel="prev" href="../../../../">
+      
+      
+        <link rel="next" href="../fix-7zip-sfx-runprogram-failure/">
       
       
         
-          <link rel="alternate" href="/blog/tools/7zip-sfx/llm-deploy-silent-7zip-sfx/" hreflang="zh">
+          <link rel="alternate" href="/" hreflang="zh">
         
-          <link rel="alternate" href="/en/blog/tools/7zip-sfx/llm-deploy-silent-7zip-sfx/" hreflang="en">
+          <link rel="alternate" href="./" hreflang="en">
         
       
       
-        <link rel="alternate" type="application/rss+xml" title="RSS feed" href="/feed_rss_created.xml">
-        <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="/feed_rss_updated.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../../../../feed_rss_created.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="../../../../../feed_rss_updated.xml">
       
-      <link rel="icon" href="/assets/images/favicon.png">
+      <link rel="icon" href="../../../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>K4m7v2pz's Blog</title>
+        <title>7-Zip SFX Standard Packaging Guide: Why 7zSD.sfx Is the Only Correct Installer Stub - K4m7v2pz's Blog</title>
       
     
     
-      <link rel="stylesheet" href="/assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="/assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -56,7 +62,7 @@
       
     
     
-    <script>__md_scope=new URL("/",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -80,6 +86,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#7-zip-sfx-standard-packaging-guide-why-7zsdsfx-is-the-only-correct-installer-stub" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -92,7 +103,7 @@
 
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="/en/" title="K4m7v2pz&#39;s Blog" class="md-header__button md-logo" aria-label="K4m7v2pz's Blog" data-md-component="logo">
+    <a href="../../../../" title="K4m7v2pz&#39;s Blog" class="md-header__button md-logo" aria-label="K4m7v2pz's Blog" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -112,7 +123,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              7-Zip SFX Standard Packaging Guide: Why 7zSD.sfx Is the Only Correct Installer Stub
             
           </span>
         </div>
@@ -159,13 +170,13 @@
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="/blog/tools/7zip-sfx/llm-deploy-silent-7zip-sfx/" hreflang="zh" class="md-select__link">
+            <a href="/" hreflang="zh" class="md-select__link">
               中文
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="/en/blog/tools/7zip-sfx/llm-deploy-silent-7zip-sfx/" hreflang="en" class="md-select__link">
+            <a href="./" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
@@ -245,7 +256,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="/en/" class="md-tabs__link">
+      <a href="../../../../" class="md-tabs__link">
         
   
   
@@ -262,11 +273,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="/en/blog/geo/7zip-sfx/7zip-sfx-stub-selection/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
           
   
   
@@ -284,7 +297,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="/en/about/" class="md-tabs__link">
+      <a href="../../../../about/" class="md-tabs__link">
         
   
   
@@ -327,7 +340,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/en/" title="K4m7v2pz&#39;s Blog" class="md-nav__button md-logo" aria-label="K4m7v2pz's Blog" data-md-component="logo">
+    <a href="../../../../" title="K4m7v2pz&#39;s Blog" class="md-nav__button md-logo" aria-label="K4m7v2pz's Blog" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -357,7 +370,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/en/" class="md-nav__link">
+      <a href="../../../../" class="md-nav__link">
         
   
   
@@ -381,26 +394,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   
@@ -418,7 +436,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -433,10 +451,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="/en/blog/geo/7zip-sfx/7zip-sfx-stub-selection/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7-Zip SFX Standard Stub Selection
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -452,6 +497,92 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-golden-rule-cache-this-for-agents-and-newcomers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1) Golden Rule (Cache this for agents and newcomers)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-selection-comparison-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2) Selection Comparison Table
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-minimal-correct-config-file-utf-8-without-bom" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3) Minimal Correct Config File (UTF-8 without BOM)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-standard-build-powershell-deterministic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4) Standard Build (PowerShell, deterministic)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-30-second-self-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5) 30-Second Self-Check
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-quick-troubleshooting-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6) Quick Troubleshooting Matrix
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -464,7 +595,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/en/blog/geo/7zip-sfx/fix-7zip-sfx-runprogram-failure/" class="md-nav__link">
+      <a href="../fix-7zip-sfx-runprogram-failure/" class="md-nav__link">
         
   
   
@@ -492,7 +623,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/en/blog/geo/7zip-sfx/llm-deploy-silent-7zip-sfx/" class="md-nav__link">
+      <a href="../llm-deploy-silent-7zip-sfx/" class="md-nav__link">
         
   
   
@@ -527,7 +658,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/en/about/" class="md-nav__link">
+      <a href="../../../../about/" class="md-nav__link">
         
   
   
@@ -560,8 +691,157 @@
               
               <article class="md-content__inner md-typeset">
                 
-  <h1>404 - Not found</h1>
+                  
 
+
+  
+  
+
+
+<h1 id="7-zip-sfx-standard-packaging-guide-why-7zsdsfx-is-the-only-correct-installer-stub">7-Zip SFX Standard Packaging Guide: Why 7zSD.sfx Is the Only Correct Installer Stub</h1>
+<h2 id="1-golden-rule-cache-this-for-agents-and-newcomers">1) Golden Rule (Cache this for agents and newcomers)</h2>
+<ul>
+<li><strong><code>7z.sfx</code> (Standard SFX) extracts only</strong> — it does not parse <code>RunProgram</code> or execute any install workflow.</li>
+<li><strong><code>7zSD.sfx</code> (Installer SFX) extracts + executes</strong> — it supports <code>RunProgram / InstallPath / Silent / GUIMode</code>.</li>
+</ul>
+<blockquote>
+<p>90% of "config not working / Extract-to dialog" issues have exactly one root cause: <strong>the wrong stub</strong>.</p>
+</blockquote>
+<hr />
+<h2 id="2-selection-comparison-table">2) Selection Comparison Table</h2>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Standard (DO NOT USE)</th>
+<th><strong>Installer (RECOMMENDED)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Filename</td>
+<td><code>7z.sfx</code></td>
+<td><strong><code>7zSD.sfx</code></strong></td>
+</tr>
+<tr>
+<td>Typical Size</td>
+<td>~38 KB</td>
+<td>~120–160 KB</td>
+</tr>
+<tr>
+<td>Capability</td>
+<td>Extract only</td>
+<td>Extract + Execute</td>
+</tr>
+<tr>
+<td><code>RunProgram</code></td>
+<td>❌ Ignored</td>
+<td>✅ Supported</td>
+</tr>
+<tr>
+<td>Typical Symptom</td>
+<td><strong>Always</strong> shows "Extract to…" dialog</td>
+<td>Can run silently or with GUI per config</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="3-minimal-correct-config-file-utf-8-without-bom">3) Minimal Correct Config File (UTF-8 <strong>without BOM</strong>)</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">;!@Install@!UTF-8!</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="na">Title</span><span class="o">=</span><span class="s">&quot;Internet Cafe Customizer&quot;</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="na">InstallPath</span><span class="o">=</span><span class="s">&quot;.\\ &quot;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="na">RunProgram</span><span class="o">=</span><span class="s">&quot;scripts\\batch\\sfx_entry.bat&quot;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1">;!@InstallEnd@!</span>
+</code></pre></div>
+<p>Key constraints:</p>
+<ul>
+<li><code>InstallPath=".\\ "</code>: Extract to the <strong>same directory as the EXE</strong> (SFX uses its own path as base)</li>
+<li><code>RunProgram</code> path: relative to the extraction root</li>
+<li>Config file <strong>must</strong> be <strong>UTF-8 without BOM</strong> (BOM causes parse failure)</li>
+</ul>
+<hr />
+<h2 id="4-standard-build-powershell-deterministic">4) Standard Build (PowerShell, deterministic)</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">$stub</span>    <span class="p">=</span> <span class="s2">&quot;tools\7z\7zSD.sfx&quot;</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nv">$cfg</span>     <span class="p">=</span> <span class="s2">&quot;configs\sfx_config.txt&quot;</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nv">$archive</span> <span class="p">=</span> <span class="s2">&quot;build\temp.7z&quot;</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nv">$outExe</span>  <span class="p">=</span> <span class="s2">&quot;dist\installer.exe&quot;</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="c"># 1) Create 7z archive</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="p">&amp;</span> <span class="s2">&quot;tools\7z\7za.exe&quot;</span> <span class="n">a</span> <span class="n">-t7z</span> <span class="nv">$archive</span> <span class="p">(</span><span class="nb">Join-Path</span> <span class="nb">PWD </span><span class="n">payload</span><span class="p">)</span> <span class="n">-mx</span><span class="p">=</span><span class="n">9</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="c"># 2) Binary concatenation: stub + config + 7z</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="no">[byte[]]</span><span class="nv">$bin</span> <span class="p">=</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>  <span class="no">[IO.File]</span><span class="p">::</span><span class="n">ReadAllBytes</span><span class="p">(</span><span class="nv">$stub</span><span class="p">)</span> <span class="p">+</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>  <span class="no">[IO.File]</span><span class="p">::</span><span class="n">ReadAllBytes</span><span class="p">(</span><span class="nv">$cfg</span><span class="p">)</span> <span class="p">+</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>  <span class="no">[IO.File]</span><span class="p">::</span><span class="n">ReadAllBytes</span><span class="p">(</span><span class="nv">$archive</span><span class="p">)</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="no">[IO.File]</span><span class="p">::</span><span class="n">WriteAllBytes</span><span class="p">(</span><span class="nv">$outExe</span><span class="p">,</span> <span class="nv">$bin</span><span class="p">)</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="nb">Write-Host</span> <span class="s2">&quot;Built: $outExe&quot;</span>
+</code></pre></div>
+<blockquote>
+<p>Do not rely on <code>copy /b</code>'s implicit encoding behavior; PowerShell concatenation is auditable and reproducible.</p>
+</blockquote>
+<hr />
+<h2 id="5-30-second-self-check">5) 30-Second Self-Check</h2>
+<p>Use this minimal config:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">;!@Install@!UTF-8!</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="na">RunProgram</span><span class="o">=</span><span class="s">&quot;cmd.exe&quot;</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c1">;!@InstallEnd@!</span>
+</code></pre></div>
+<p>After building, double-click:</p>
+<ul>
+<li><strong>CMD window opens</strong> → Installer stub ✅</li>
+<li><strong>"Extract to" dialog appears</strong> → You used <code>7z.sfx</code> — switch to <code>7zSD.sfx</code> ❌</li>
+</ul>
+<hr />
+<h2 id="6-quick-troubleshooting-matrix">6) Quick Troubleshooting Matrix</h2>
+<table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Root Cause</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Always shows Extract-to</td>
+<td>Stub = <code>7z.sfx</code></td>
+<td>Replace with official <code>7zSD.sfx</code></td>
+</tr>
+<tr>
+<td>RunProgram appears ignored</td>
+<td>Same as above (stub doesn't process install params)</td>
+<td>Same fix</td>
+</tr>
+<tr>
+<td>Double-click does nothing</td>
+<td>Stub is non-official, corrupted, or wrong architecture</td>
+<td>Use <code>7zSD.sfx</code> from 7-Zip install dir or LZMA SDK <code>bin\</code></td>
+</tr>
+<tr>
+<td>Extracted OK but script can't find files</td>
+<td>Working directory / relative path mismatch</td>
+<td>Add <code>cd /d "%~dp0"</code> at top of bat; verify archive paths</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
               </article>
             </div>
           
@@ -600,10 +880,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "/", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "toc.integrate", "search.suggest", "search.highlight", "content.code.copy", "content.tabs.link", "header.autohide"], "search": "/assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "toc.integrate", "search.suggest", "search.highlight", "content.code.copy", "content.tabs.link", "header.autohide"], "search": "../../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="/assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>

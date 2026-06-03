@@ -6,21 +6,25 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="k4m7v2pz 的博客">
+        <meta name="description" content="可复现步骤：选对 7zSD.sfx Stub；写无 BOM config；用 PowerShell 拼接单文件 EXE；并用最小自检防止退化为 Extract-to。">
       
       
         <meta name="author" content="k4m7v2pz">
       
       
-        <link rel="canonical" href="https://k4m7v2pz.github.io/blog/linux/gnulinux/google-pinyin-installation-ubuntu-derivatives/">
+        <link rel="canonical" href="https://k4m7v2pz.github.io/blog/tools/7zip-sfx/llm-deploy-silent-7zip-sfx/">
       
       
-        <link rel="prev" href="../../../..">
+        <link rel="prev" href="../fix-7zip-sfx-runprogram-failure/">
       
       
-        <link rel="next" href="../../windows/embed-python-pip-installation-windows/">
+        <link rel="next" href="../../../../about/">
       
       
+        
+          <link rel="alternate" href="./" hreflang="zh">
+        
+          <link rel="alternate" href="../../../../en/blog/tools/7zip-sfx/llm-deploy-silent-7zip-sfx/" hreflang="en">
         
       
       
@@ -32,7 +36,7 @@
     
     
       
-        <title>在 Ubuntu 衍生版上安装 Google 拼音 - K4m7v2pz's Blog</title>
+        <title>LLM/CI 部署指南：构建静默 7-Zip SFX 安装包（无对话框） - K4m7v2pz's Blog</title>
       
     
     
@@ -83,7 +87,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#ubuntu-google" class="md-skip">
+        <a href="#llmci-7-zip-sfx" class="md-skip">
           跳转至
         </a>
       
@@ -119,7 +123,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              在 Ubuntu 衍生版上安装 Google 拼音
+              LLM/CI 部署指南：构建静默 7-Zip SFX 安装包（无对话框）
             
           </span>
         </div>
@@ -155,6 +159,32 @@
     
       <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
     
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="选择当前语言">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="zh" class="md-select__link">
+              中文
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../../../en/blog/tools/7zip-sfx/llm-deploy-silent-7zip-sfx/" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
     
     
       
@@ -243,8 +273,6 @@
   
   
   
-    
-  
   
     
     
@@ -252,13 +280,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="./" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../../os/gnulinux/google-pinyin-installation-ubuntu-derivatives/" class="md-tabs__link">
           
   
   
@@ -296,18 +322,21 @@
   
   
   
-  
-    <li class="md-tabs__item">
-      <a href="../../../.." class="md-tabs__link">
-        
+    
   
   
     
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../7zip-sfx-stub-selection/" class="md-tabs__link">
+          
+  
   
   工具
 
-      </a>
-    </li>
+        </a>
+      </li>
+    
   
 
       
@@ -414,31 +443,26 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
             
   
   
@@ -456,7 +480,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -471,31 +495,26 @@
                 
   
   
-    
   
   
-  
     
     
     
     
       
       
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
         
           
-          
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
-        
-          
-          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="">
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
             
   
   
@@ -513,7 +532,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_1">
             <span class="md-nav__icon md-icon"></span>
             
@@ -528,37 +547,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    在 Ubuntu 衍生版上安装 Google 拼音
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../../os/gnulinux/google-pinyin-installation-ubuntu-derivatives/" class="md-nav__link">
         
   
   
@@ -574,48 +566,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="目录">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        测试成功的发行版
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        安装步骤
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -642,20 +592,17 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
         
           
-          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
             
   
   
@@ -691,7 +638,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../windows/embed-python-pip-installation-windows/" class="md-nav__link">
+      <a href="../../../os/windows/embed-python-pip-installation-windows/" class="md-nav__link">
         
   
   
@@ -758,11 +705,32 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../../.." class="md-nav__link">
+  
+    
+    
+    
+    
+      
         
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
   
   
   <span class="md-ellipsis">
@@ -776,7 +744,209 @@
   
   
 
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    工具
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7zip-sfx-stub-selection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7-Zip SFX 标准 Stub 选型
+  
+
+    
+  </span>
+  
+  
+
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fix-7zip-sfx-runprogram-failure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    修复 RunProgram 失效
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LLM 静默部署 EXE
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LLM 静默部署 EXE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1) 输入/输出契约
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-config" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2) Config（完全静默模板）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-agentci" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3) 构建脚本（Agent/CI 可稳定复现）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-ci-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4) 验证协议（可写进 CI check）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5) 约束（避免幻觉）
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -828,40 +998,62 @@
   
 
 
-<h1 id="ubuntu-google">在 Ubuntu 衍生版上安装 Google 拼音</h1>
-<h2 id="_1">测试成功的发行版</h2>
+<h1 id="llmci-7-zip-sfx">LLM/CI 部署指南：构建静默 7-Zip SFX 安装包（无对话框）</h1>
+<h2 id="1">1) 输入/输出契约</h2>
 <ul>
-<li>Lubuntu 24.04</li>
-<li>Ubuntu Studio 24.04</li>
+<li><strong>Stub（固定）</strong>：<code>tools/7z/7zSD.sfx</code>（安装型，~128KB）</li>
+<li><strong>Config</strong>：<code>configs/sfx_config.txt</code>（UTF-8 <strong>无 BOM</strong>）</li>
+<li><strong>Payload</strong>：打进 <code>temp.7z</code>（必须是 <strong>7z</strong>，不是 zip）</li>
+<li><strong>Output</strong>：<code>dist/deploy.exe</code>（双击 = 解压 + 执行）</li>
 </ul>
-<p><strong>注意</strong>：fcitx 4.x 已于 2024 年 5 月正式归档，停止上游维护。由于设计原因，fcitx4 无法在 Wayland 环境下运行。推荐迁移到 fcitx5，使用 <code>fcitx5-chinese-addons</code> 替代 <code>fcitx-googlepinyin</code>。</p>
-<p><strong>说明</strong>：虽然 fcitx5 是推荐的下一代输入法框架，但网络上仍存在大量基于 fcitx 4.x 的教程。本教程经过人工验证测试，在上述 Ubuntu 衍生版上可正常使用，对于需要参考 fcitx 4.x 配置的用户仍然有参考价值。</p>
-<h2 id="_2">安装步骤</h2>
-<ol>
-<li>
-<p><strong>安装 Fcitx 和 Google 拼音</strong>
-   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>fcitx<span class="w"> </span>fcitx-googlepinyin
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>Logout（登出）</strong></p>
-</li>
-<li>
-<p><strong>Login（登录）</strong></p>
-</li>
-<li>
-<p><strong>Open Fcitx Configuration（进入 Fcitx 配置）</strong></p>
-</li>
-<li>Click <code>+</code>（点击 <code>+</code>）</li>
-<li>Uncheck <code>Only Show Current Language</code>（取消勾选 <code>Only Show Current Language</code>）</li>
-<li>Search for <code>Google Pinyin</code> (case-insensitive)（搜索 Google Pinyin，不区分大小写）</li>
-<li>
-<p>Select it and click <code>OK</code>（选中，点击 OK）</p>
-</li>
-<li>
-<p><strong>Use <code>Ctrl</code> + <code>Space</code> to toggle between English and Chinese input（在任意输入框使用 <code>Ctrl</code> + <code>Space</code> 与英文输入法切换）</strong></p>
-</li>
-</ol>
+<hr />
+<h2 id="2-config">2) Config（完全静默模板）</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">;!@Install@!UTF-8!</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="na">Title</span><span class="o">=</span><span class="s">&quot;Silent Deploy&quot;</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="na">InstallPath</span><span class="o">=</span><span class="s">&quot;.\\ &quot;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="na">GUIMode</span><span class="o">=</span><span class="s">&quot;2&quot;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="na">Silent</span><span class="o">=</span><span class="s">&quot;2&quot;</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="na">OverwriteMode</span><span class="o">=</span><span class="s">&quot;2&quot;</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="na">RunProgram</span><span class="o">=</span><span class="s">&quot;setup.bat&quot;</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="c1">;!@InstallEnd@!</span>
+</code></pre></div>
+<p>说明：</p>
+<ul>
+<li><code>GUIMode="2"</code> + <code>Silent</code> 抑制 UI</li>
+<li><code>InstallPath=".\\ "</code> → 解压到 EXE 同目录</li>
+<li><code>setup.bat</code> 必须在归档内，且内部用 <code>%~dp0</code> 定位自身</li>
+</ul>
+<hr />
+<h2 id="3-agentci">3) 构建脚本（Agent/CI 可稳定复现）</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">param</span><span class="p">(</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  <span class="no">[string]</span><span class="nv">$Stub</span>    <span class="p">=</span> <span class="s2">&quot;tools\7z\7zSD.sfx&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  <span class="no">[string]</span><span class="nv">$Cfg</span>     <span class="p">=</span> <span class="s2">&quot;configs\sfx_config.txt&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  <span class="no">[string]</span><span class="nv">$Archive</span> <span class="p">=</span> <span class="s2">&quot;build\temp.7z&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>  <span class="no">[string]</span><span class="nv">$Out</span>     <span class="p">=</span> <span class="s2">&quot;dist\deploy.exe&quot;</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">)</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="no">[byte[]]</span><span class="nv">$bin</span> <span class="p">=</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>  <span class="no">[IO.File]</span><span class="p">::</span><span class="n">ReadAllBytes</span><span class="p">(</span><span class="nv">$Stub</span><span class="p">)</span> <span class="p">+</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>  <span class="no">[IO.File]</span><span class="p">::</span><span class="n">ReadAllBytes</span><span class="p">(</span><span class="nv">$Cfg</span><span class="p">)</span> <span class="p">+</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>  <span class="no">[IO.File]</span><span class="p">::</span><span class="n">ReadAllBytes</span><span class="p">(</span><span class="nv">$Archive</span><span class="p">)</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="no">[IO.File]</span><span class="p">::</span><span class="n">WriteAllBytes</span><span class="p">(</span><span class="nv">$Out</span><span class="p">,</span> <span class="nv">$bin</span><span class="p">)</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="nb">Write-Host</span> <span class="s2">&quot;Built: $Out&quot;</span>
+</code></pre></div>
+<hr />
+<h2 id="4-ci-check">4) 验证协议（可写进 CI check）</h2>
+<ul>
+<li><strong>PE 头 sanity</strong>：stub 段应以 <code>MZ</code> 开头</li>
+<li><strong>Stub size sanity</strong>：<code>7zSD.sfx</code> 通常在 100–200KB</li>
+<li><strong>Runtime smoke</strong>：用 <code>RunProgram=cmd.exe</code> 自检，确保不退化为 Extract-to</li>
+</ul>
+<hr />
+<h2 id="5">5) 约束（避免幻觉）</h2>
+<ul>
+<li><strong>内部归档必须是 7z</strong>（<code>-t7z</code>），不是 zip</li>
+<li>Windows Explorer <strong>不会</strong>把它当 zip；但 7-Zip/WinRAR 能解包</li>
+<li>想"原生可右击解压"就直接发 <strong>zip 便携包</strong>，别试图把 SFX 伪装成 zip</li>
+</ul>
 
 
 
