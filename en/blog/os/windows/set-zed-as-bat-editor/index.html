@@ -32,7 +32,7 @@
     
     
       
-        <title>设置 Zed 为 .bat 文件的默认编辑器 - K4m7v2pz's Blog</title>
+        <title>Set Zed as the Default Editor for .bat Files - K4m7v2pz's Blog</title>
       
     
     
@@ -83,7 +83,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#zed-bat" class="md-skip">
+        <a href="#set-zed-as-the-default-editor-for-bat-files" class="md-skip">
           Skip to content
         </a>
       
@@ -119,7 +119,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              设置 Zed 为 .bat 文件的默认编辑器
+              Set Zed as the Default Editor for .bat Files
             
           </span>
         </div>
@@ -273,7 +273,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../geo/7zip-sfx/7zip-sfx-stub-selection/" class="md-tabs__link">
+        <a href="../../../geo/7zip-sfx/7zip-sfx-stub-selection.md" class="md-tabs__link">
           
   
   
@@ -443,7 +443,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../geo/7zip-sfx/7zip-sfx-stub-selection/" class="md-nav__link">
+      <a href="../../../geo/7zip-sfx/7zip-sfx-stub-selection.md" class="md-nav__link">
         
   
   
@@ -471,7 +471,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../geo/7zip-sfx/fix-7zip-sfx-runprogram-failure/" class="md-nav__link">
+      <a href="../../../geo/7zip-sfx/fix-7zip-sfx-runprogram-failure.md" class="md-nav__link">
         
   
   
@@ -499,7 +499,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../geo/7zip-sfx/llm-deploy-silent-7zip-sfx/" class="md-nav__link">
+      <a href="../../../geo/7zip-sfx/llm-deploy-silent-7zip-sfx.md" class="md-nav__link">
         
   
   
@@ -574,100 +574,100 @@
   
 
 
-<h1 id="zed-bat">设置 Zed 为 .bat 文件的默认编辑器</h1>
-<h2 id="_1">概述</h2>
-<p>本文档介绍如何配置 Windows 10 中 <code>.bat</code> 文件的右键菜单，实现以下效果：</p>
+<h1 id="set-zed-as-the-default-editor-for-bat-files">Set Zed as the Default Editor for .bat Files</h1>
+<h2 id="overview">Overview</h2>
+<p>This document describes how to configure the right-click menu for <code>.bat</code> files in Windows 10 to achieve the following effects:</p>
 <ul>
-<li><strong>双击 .bat 文件</strong>：保持默认行为，使用 Windows Terminal 执行脚本</li>
-<li><strong>右键菜单"编辑"</strong>：使用 Zed 编辑器打开文件</li>
+<li><strong>Double-click .bat file</strong>: Keep the default behavior, execute the script using Windows Terminal</li>
+<li><strong>Right-click menu "Edit"</strong>: Open the file using Zed editor</li>
 </ul>
-<h2 id="_2">实现原理</h2>
-<h3 id="windows">Windows 文件关联机制</h3>
-<p>Windows 通过注册表管理文件关联，优先级顺序为：</p>
+<h2 id="implementation-principle">Implementation Principle</h2>
+<h3 id="windows-file-association-mechanism">Windows File Association Mechanism</h3>
+<p>Windows manages file associations through the registry, with priority order:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>HKCU\Software\Classes &gt; HKLM\Software\Classes
 </code></pre></div>
-<p><code>.bat</code> 文件的默认关联为 <code>batfile</code>，双击时会执行 <code>cmd.exe /c xxx.bat</code>。我们只需要修改右键菜单的"编辑"选项，不影响默认执行行为。</p>
-<h2 id="_3">配置步骤</h2>
-<h3 id="powershell">方法一：使用 PowerShell 脚本（推荐）</h3>
-<p>创建并运行以下 PowerShell 脚本：</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c"># 设置 .bat 文件右键&quot;编辑&quot;用 Zed 打开</span>
+<p>The default association for <code>.bat</code> files is <code>batfile</code>, which executes <code>cmd.exe /c xxx.bat</code> when double-clicked. We only need to modify the "Edit" option in the right-click menu without affecting the default execution behavior.</p>
+<h2 id="configuration-steps">Configuration Steps</h2>
+<h3 id="method-1-use-powershell-script-recommended">Method 1: Use PowerShell Script (Recommended)</h3>
+<p>Create and run the following PowerShell script:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c"># Set right-click &quot;Edit&quot; for .bat files to open with Zed</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nv">$zedPath</span> <span class="p">=</span> <span class="s2">&quot;C:\Users\user\AppData\Local\Programs\Zed\Zed.exe&quot;</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c"># 创建右键菜单&quot;编辑&quot;选项</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">reg</span> <span class="n">add</span> <span class="s2">&quot;HKCU\Software\Classes\batfile\shell\edit&quot;</span> <span class="p">/</span><span class="n">ve</span> <span class="p">/</span><span class="n">d</span> <span class="s2">&quot;编辑&quot;</span> <span class="p">/</span><span class="n">f</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c"># Create right-click menu &quot;Edit&quot; option</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">reg</span> <span class="n">add</span> <span class="s2">&quot;HKCU\Software\Classes\batfile\shell\edit&quot;</span> <span class="p">/</span><span class="n">ve</span> <span class="p">/</span><span class="n">d</span> <span class="s2">&quot;Edit&quot;</span> <span class="p">/</span><span class="n">f</span>
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">reg</span> <span class="n">add</span> <span class="s2">&quot;HKCU\Software\Classes\batfile\shell\edit\command&quot;</span> <span class="p">/</span><span class="n">ve</span> <span class="p">/</span><span class="n">d</span> <span class="s2">&quot;</span><span class="se">`&quot;</span><span class="s2">$zedPath</span><span class="se">`&quot;</span><span class="s2"> </span><span class="se">`&quot;</span><span class="s2">%1</span><span class="se">`&quot;</span><span class="s2">&quot;</span> <span class="p">/</span><span class="n">f</span>
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="nb">Write-Host</span> <span class="s2">&quot;配置完成！&quot;</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="nb">Write-Host</span> <span class="s2">&quot;Configuration completed!&quot;</span>
 </code></pre></div>
-<h3 id="_4">方法二：手动修改注册表</h3>
+<h3 id="method-2-manually-modify-the-registry">Method 2: Manually Modify the Registry</h3>
 <ol>
 <li>
-<p>打开注册表编辑器：<code>regedit</code></p>
+<p>Open Registry Editor: <code>regedit</code></p>
 </li>
 <li>
-<p>导航到以下路径：
+<p>Navigate to the following path:
    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>HKEY_CURRENT_USER\Software\Classes\batfile\shell\edit
 </code></pre></div></p>
 </li>
 <li>
-<p>设置默认值为 <code>编辑</code></p>
+<p>Set the default value to <code>Edit</code></p>
 </li>
 <li>
-<p>在 <code>edit</code> 下创建 <code>command</code> 子键，设置默认值为：
+<p>Create a <code>command</code> subkey under <code>edit</code> and set its default value to:
    <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>&quot;C:\Users\user\AppData\Local\Programs\Zed\Zed.exe&quot; &quot;%1&quot;
 </code></pre></div></p>
 </li>
 </ol>
-<h2 id="_5">验证配置</h2>
-<h3 id="_6">检查注册表设置</h3>
+<h2 id="verification">Verification</h2>
+<h3 id="check-registry-settings">Check Registry Settings</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>reg query &quot;HKCU\Software\Classes\batfile\shell\edit&quot; /s
 </code></pre></div>
-<p>预期输出：</p>
+<p>Expected output:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>HKEY_CURRENT_USER\Software\Classes\batfile\shell\edit
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    (默认)    REG_SZ    编辑
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    (Default)    REG_SZ    Edit
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>HKEY_CURRENT_USER\Software\Classes\batfile\shell\edit\command
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    (默认)    REG_SZ    &quot;C:\Users\user\AppData\Local\Programs\Zed\Zed.exe&quot; &quot;%1&quot;
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    (Default)    REG_SZ    &quot;C:\Users\user\AppData\Local\Programs\Zed\Zed.exe&quot; &quot;%1&quot;
 </code></pre></div>
-<h3 id="_7">测试效果</h3>
+<h3 id="test-the-effect">Test the Effect</h3>
 <ol>
-<li><strong>双击 .bat 文件</strong>：应该打开 Windows Terminal 并执行脚本</li>
-<li><strong>右键 .bat 文件 → 编辑</strong>：应该用 Zed 打开文件</li>
+<li><strong>Double-click .bat file</strong>: Should open Windows Terminal and execute the script</li>
+<li><strong>Right-click .bat file → Edit</strong>: Should open the file with Zed</li>
 </ol>
-<h2 id="_8">注意事项</h2>
-<h3 id="userchoice">UserChoice 优先级问题</h3>
-<p>如果修改后没有生效，可能是 <code>UserChoice</code> 设置覆盖了你的配置。需要删除：</p>
+<h2 id="notes">Notes</h2>
+<h3 id="userchoice-priority-issue">UserChoice Priority Issue</h3>
+<p>If the changes don't take effect, it may be because <code>UserChoice</code> settings override your configuration. Remove it:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nb">Remove-Item</span> <span class="n">-Path</span> <span class="s2">&quot;HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.bat\UserChoice&quot;</span> <span class="n">-Force</span> <span class="n">-ErrorAction</span> <span class="n">SilentlyContinue</span>
 </code></pre></div>
-<h3 id="_9">重启资源管理器</h3>
-<p>修改注册表后，建议重启文件资源管理器使设置生效：</p>
+<h3 id="restart-file-explorer">Restart File Explorer</h3>
+<p>After modifying the registry, it's recommended to restart File Explorer for changes to take effect:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nb">Stop-Process</span> <span class="n">-Name</span> <span class="n">explorer</span> <span class="n">-Force</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nb">Start-Process</span> <span class="n">explorer</span>
 </code></pre></div>
-<h3 id="_10">迁移到其他编辑器</h3>
-<p>如果以后更换编辑器（如 VS Code、Notepad++ 等），只需修改 <code>command</code> 路径：</p>
+<h3 id="migrate-to-another-editor">Migrate to Another Editor</h3>
+<p>If you switch to another editor later (e.g., VS Code, Notepad++, etc.), simply modify the <code>command</code> path:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">reg</span> <span class="n">add</span> <span class="s2">&quot;HKCU\Software\Classes\batfile\shell\edit\command&quot;</span> <span class="p">/</span><span class="n">ve</span> <span class="p">/</span><span class="n">d</span> <span class="s2">&quot;</span><span class="se">`&quot;</span><span class="s2">C:\Program Files\Microsoft VS Code\Code.exe</span><span class="se">`&quot;</span><span class="s2"> </span><span class="se">`&quot;</span><span class="s2">%1</span><span class="se">`&quot;</span><span class="s2">&quot;</span> <span class="p">/</span><span class="n">f</span>
 </code></pre></div>
-<h2 id="_11">常见问题</h2>
-<h3 id="_12">右键菜单显示乱码</h3>
-<p>问题原因：注册表中菜单文本编码错误。</p>
-<p>解决方案：</p>
+<h2 id="common-issues">Common Issues</h2>
+<h3 id="garbled-text-in-right-click-menu">Garbled Text in Right-Click Menu</h3>
+<p>Cause: Menu text encoding error in the registry.</p>
+<p>Solution:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">reg</span> <span class="n">delete</span> <span class="s2">&quot;HKCU\Software\Classes\batfile\shell\edit&quot;</span> <span class="p">/</span><span class="n">f</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">reg</span> <span class="n">add</span> <span class="s2">&quot;HKCU\Software\Classes\batfile\shell\edit&quot;</span> <span class="p">/</span><span class="n">ve</span> <span class="p">/</span><span class="n">d</span> <span class="s2">&quot;编辑&quot;</span> <span class="p">/</span><span class="n">f</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">reg</span> <span class="n">add</span> <span class="s2">&quot;HKCU\Software\Classes\batfile\shell\edit&quot;</span> <span class="p">/</span><span class="n">ve</span> <span class="p">/</span><span class="n">d</span> <span class="s2">&quot;Edit&quot;</span> <span class="p">/</span><span class="n">f</span>
 </code></pre></div>
-<h3 id="_13">修改后双击行为改变</h3>
-<p>问题原因：可能错误修改了 <code>.bat</code> 的默认打开程序。</p>
-<p>解决方案：恢复默认关联：</p>
+<h3 id="double-click-behavior-changed-after-modification">Double-Click Behavior Changed After Modification</h3>
+<p>Cause: May have incorrectly modified the default program for <code>.bat</code> files.</p>
+<p>Solution: Restore the default association:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">reg</span> <span class="n">add</span> <span class="s2">&quot;HKCU\Software\Classes\.bat&quot;</span> <span class="p">/</span><span class="n">ve</span> <span class="p">/</span><span class="n">d</span> <span class="s2">&quot;batfile&quot;</span> <span class="p">/</span><span class="n">f</span>
 </code></pre></div>
-<h2 id="_14">总结</h2>
-<p>通过修改 <code>HKCU\Software\Classes\batfile\shell\edit</code> 注册表项，我们实现了：</p>
+<h2 id="summary">Summary</h2>
+<p>By modifying the <code>HKCU\Software\Classes\batfile\shell\edit</code> registry key, we achieved:</p>
 <ul>
-<li>保持 <code>.bat</code> 文件的默认执行行为（使用 Windows Terminal）</li>
-<li>右键"编辑"选项使用 Zed 打开</li>
-<li>配置不影响系统级设置（仅影响当前用户）</li>
+<li>Keep the default execution behavior of <code>.bat</code> files (using Windows Terminal)</li>
+<li>Use Zed for the right-click "Edit" option</li>
+<li>Configuration doesn't affect system-level settings (only affects current user)</li>
 </ul>
-<p>这种方式既满足了编辑需求，又不破坏脚本的正常执行功能。</p>
+<p>This approach meets editing needs without breaking the normal execution functionality of scripts.</p>
 
 
 
