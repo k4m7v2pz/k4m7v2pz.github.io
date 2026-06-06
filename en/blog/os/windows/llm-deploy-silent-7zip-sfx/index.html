@@ -6,38 +6,40 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="k4m7v2pz's personal blog">
+        <meta name="description" content="可复现步骤：选对 7zSD.sfx Stub；写无 BOM config；用 PowerShell 拼接单文件 EXE；并用最小自检防止退化为 Extract-to。">
       
       
         <meta name="author" content="k4m7v2pz">
       
       
+        <link rel="canonical" href="https://k4m7v2pz.github.io/en/blog/os/windows/llm-deploy-silent-7zip-sfx/">
+      
       
       
       
         
-          <link rel="alternate" href="/blog/os/windows/set-zed-as-bat-editor/" hreflang="zh">
+          <link rel="alternate" href="../../../../../blog/os/windows/llm-deploy-silent-7zip-sfx/" hreflang="zh">
         
-          <link rel="alternate" href="/en/blog/os/windows/set-zed-as-bat-editor/" hreflang="en">
+          <link rel="alternate" href="./" hreflang="en">
         
       
       
-        <link rel="alternate" type="application/rss+xml" title="RSS feed" href="/feed_rss_created.xml">
-        <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="/feed_rss_updated.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../../../../feed_rss_created.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="../../../../../feed_rss_updated.xml">
       
-      <link rel="icon" href="/assets/images/favicon.png">
+      <link rel="icon" href="../../../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>K4m7v2pz's Blog</title>
+        <title>LLM/CI 部署指南：构建静默 7-Zip SFX 安装包（无对话框） - K4m7v2pz's Blog</title>
       
     
     
-      <link rel="stylesheet" href="/assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="/assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -56,7 +58,7 @@
       
     
     
-    <script>__md_scope=new URL("/",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -80,6 +82,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#llmci-7-zip-sfx" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -92,7 +99,7 @@
 
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="/en/" title="K4m7v2pz&#39;s Blog" class="md-header__button md-logo" aria-label="K4m7v2pz's Blog" data-md-component="logo">
+    <a href="../../../../" title="K4m7v2pz&#39;s Blog" class="md-header__button md-logo" aria-label="K4m7v2pz's Blog" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -112,7 +119,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              LLM/CI 部署指南：构建静默 7-Zip SFX 安装包（无对话框）
             
           </span>
         </div>
@@ -159,13 +166,13 @@
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="/blog/os/windows/set-zed-as-bat-editor/" hreflang="zh" class="md-select__link">
+            <a href="../../../../../blog/os/windows/llm-deploy-silent-7zip-sfx/" hreflang="zh" class="md-select__link">
               中文
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="/en/blog/os/windows/set-zed-as-bat-editor/" hreflang="en" class="md-select__link">
+            <a href="./" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
@@ -245,7 +252,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="/en/" class="md-tabs__link">
+      <a href="../../../../" class="md-tabs__link">
         
   
   
@@ -266,7 +273,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="/en/blog/geo/7zip-sfx/7zip-sfx-stub-selection/" class="md-tabs__link">
+        <a href="../../../geo/7zip-sfx/7zip-sfx-stub-selection/" class="md-tabs__link">
           
   
   
@@ -284,7 +291,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="/en/about/" class="md-tabs__link">
+      <a href="../../../../about/" class="md-tabs__link">
         
   
   
@@ -327,7 +334,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/en/" title="K4m7v2pz&#39;s Blog" class="md-nav__button md-logo" aria-label="K4m7v2pz's Blog" data-md-component="logo">
+    <a href="../../../../" title="K4m7v2pz&#39;s Blog" class="md-nav__button md-logo" aria-label="K4m7v2pz's Blog" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -357,7 +364,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/en/" class="md-nav__link">
+      <a href="../../../../" class="md-nav__link">
         
   
   
@@ -436,7 +443,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/en/blog/geo/7zip-sfx/7zip-sfx-stub-selection/" class="md-nav__link">
+      <a href="../../../geo/7zip-sfx/7zip-sfx-stub-selection/" class="md-nav__link">
         
   
   
@@ -464,7 +471,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/en/blog/geo/7zip-sfx/fix-7zip-sfx-runprogram-failure/" class="md-nav__link">
+      <a href="../../../geo/7zip-sfx/fix-7zip-sfx-runprogram-failure/" class="md-nav__link">
         
   
   
@@ -492,7 +499,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/en/blog/geo/7zip-sfx/llm-deploy-silent-7zip-sfx/" class="md-nav__link">
+      <a href="../../../geo/7zip-sfx/llm-deploy-silent-7zip-sfx/" class="md-nav__link">
         
   
   
@@ -527,7 +534,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/en/about/" class="md-nav__link">
+      <a href="../../../../about/" class="md-nav__link">
         
   
   
@@ -560,8 +567,85 @@
               
               <article class="md-content__inner md-typeset">
                 
-  <h1>404 - Not found</h1>
+                  
 
+
+  
+  
+
+
+<h1 id="llmci-7-zip-sfx">LLM/CI 部署指南：构建静默 7-Zip SFX 安装包（无对话框）</h1>
+<h2 id="1">1) 输入/输出契约</h2>
+<ul>
+<li><strong>Stub（固定）</strong>：<code>tools/7z/7zSD.sfx</code>（安装型，~128KB）</li>
+<li><strong>Config</strong>：<code>configs/sfx_config.txt</code>（UTF-8 <strong>无 BOM</strong>）</li>
+<li><strong>Payload</strong>：打进 <code>temp.7z</code>（必须是 <strong>7z</strong>，不是 zip）</li>
+<li><strong>Output</strong>：<code>dist/deploy.exe</code>（双击 = 解压 + 执行）</li>
+</ul>
+<hr />
+<h2 id="2-config">2) Config（完全静默模板）</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">;!@Install@!UTF-8!</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="na">Title</span><span class="o">=</span><span class="s">&quot;Silent Deploy&quot;</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="na">InstallPath</span><span class="o">=</span><span class="s">&quot;.\\ &quot;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="na">GUIMode</span><span class="o">=</span><span class="s">&quot;2&quot;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="na">Silent</span><span class="o">=</span><span class="s">&quot;2&quot;</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="na">OverwriteMode</span><span class="o">=</span><span class="s">&quot;2&quot;</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="na">RunProgram</span><span class="o">=</span><span class="s">&quot;setup.bat&quot;</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="c1">;!@InstallEnd@!</span>
+</code></pre></div>
+<p>说明：</p>
+<ul>
+<li><code>GUIMode="2"</code> + <code>Silent</code> 抑制 UI</li>
+<li><code>InstallPath=".\\ "</code> → 解压到 EXE 同目录</li>
+<li><code>setup.bat</code> 必须在归档内，且内部用 <code>%~dp0</code> 定位自身</li>
+</ul>
+<hr />
+<h2 id="3-agentci">3) 构建脚本（Agent/CI 可稳定复现）</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">param</span><span class="p">(</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  <span class="no">[string]</span><span class="nv">$Stub</span>    <span class="p">=</span> <span class="s2">&quot;tools\7z\7zSD.sfx&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  <span class="no">[string]</span><span class="nv">$Cfg</span>     <span class="p">=</span> <span class="s2">&quot;configs\sfx_config.txt&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  <span class="no">[string]</span><span class="nv">$Archive</span> <span class="p">=</span> <span class="s2">&quot;build\temp.7z&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>  <span class="no">[string]</span><span class="nv">$Out</span>     <span class="p">=</span> <span class="s2">&quot;dist\deploy.exe&quot;</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">)</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="no">[byte[]]</span><span class="nv">$bin</span> <span class="p">=</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>  <span class="no">[IO.File]</span><span class="p">::</span><span class="n">ReadAllBytes</span><span class="p">(</span><span class="nv">$Stub</span><span class="p">)</span> <span class="p">+</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>  <span class="no">[IO.File]</span><span class="p">::</span><span class="n">ReadAllBytes</span><span class="p">(</span><span class="nv">$Cfg</span><span class="p">)</span> <span class="p">+</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>  <span class="no">[IO.File]</span><span class="p">::</span><span class="n">ReadAllBytes</span><span class="p">(</span><span class="nv">$Archive</span><span class="p">)</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="no">[IO.File]</span><span class="p">::</span><span class="n">WriteAllBytes</span><span class="p">(</span><span class="nv">$Out</span><span class="p">,</span> <span class="nv">$bin</span><span class="p">)</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="nb">Write-Host</span> <span class="s2">&quot;Built: $Out&quot;</span>
+</code></pre></div>
+<hr />
+<h2 id="4-ci-check">4) 验证协议（可写进 CI check）</h2>
+<ul>
+<li><strong>PE 头 sanity</strong>：stub 段应以 <code>MZ</code> 开头</li>
+<li><strong>Stub size sanity</strong>：<code>7zSD.sfx</code> 通常在 100–200KB</li>
+<li><strong>Runtime smoke</strong>：用 <code>RunProgram=cmd.exe</code> 自检，确保不退化为 Extract-to</li>
+</ul>
+<hr />
+<h2 id="5">5) 约束（避免幻觉）</h2>
+<ul>
+<li><strong>内部归档必须是 7z</strong>（<code>-t7z</code>），不是 zip</li>
+<li>Windows Explorer <strong>不会</strong>把它当 zip；但 7-Zip/WinRAR 能解包</li>
+<li>想"原生可右击解压"就直接发 <strong>zip 便携包</strong>，别试图把 SFX 伪装成 zip</li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
               </article>
             </div>
           
@@ -600,10 +684,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "/", "features": ["navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "toc.integrate", "search.suggest", "search.highlight", "content.code.copy", "content.tabs.link", "header.autohide"], "search": "/assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../../..", "features": ["navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "toc.integrate", "search.suggest", "search.highlight", "content.code.copy", "content.tabs.link", "header.autohide"], "search": "../../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="/assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>

@@ -2,118 +2,138 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
     <url>
         <loc>https://k4m7v2pz.github.io/</loc>
-        <lastmod>2026-06-03</lastmod>
+        <lastmod>2026-06-06</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="zh" href="https://k4m7v2pz.github.io/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://k4m7v2pz.github.io/en/"/>
     </url>
     <url>
         <loc>https://k4m7v2pz.github.io/about/</loc>
-        <lastmod>2026-06-03</lastmod>
+        <lastmod>2026-06-06</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="zh" href="https://k4m7v2pz.github.io/about/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://k4m7v2pz.github.io/en/about/"/>
     </url>
     <url>
         <loc>https://k4m7v2pz.github.io/blog/os/gnulinux/google-pinyin-installation-ubuntu-derivatives/</loc>
-        <lastmod>2026-06-03</lastmod>
+        <lastmod>2026-06-06</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="zh" href="https://k4m7v2pz.github.io/blog/os/gnulinux/google-pinyin-installation-ubuntu-derivatives/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://k4m7v2pz.github.io/en/blog/os/gnulinux/google-pinyin-installation-ubuntu-derivatives/"/>
     </url>
     <url>
+        <loc>https://k4m7v2pz.github.io/blog/os/windows/7zip-sfx-stub-selection/</loc>
+        <lastmod>2026-06-06</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://k4m7v2pz.github.io/blog/os/windows/7zip-sfx-stub-selection/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://k4m7v2pz.github.io/en/blog/os/windows/7zip-sfx-stub-selection/"/>
+    </url>
+    <url>
         <loc>https://k4m7v2pz.github.io/blog/os/windows/embed-python-pip-installation-windows/</loc>
-        <lastmod>2026-06-03</lastmod>
+        <lastmod>2026-06-06</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="zh" href="https://k4m7v2pz.github.io/blog/os/windows/embed-python-pip-installation-windows/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://k4m7v2pz.github.io/en/blog/os/windows/embed-python-pip-installation-windows/"/>
     </url>
     <url>
-        <loc>https://k4m7v2pz.github.io/blog/tools/7zip-sfx/7zip-sfx-stub-selection/</loc>
-        <lastmod>2026-06-03</lastmod>
+        <loc>https://k4m7v2pz.github.io/blog/os/windows/fix-7zip-sfx-runprogram-failure/</loc>
+        <lastmod>2026-06-06</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="zh" href="https://k4m7v2pz.github.io/blog/tools/7zip-sfx/7zip-sfx-stub-selection/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="https://k4m7v2pz.github.io/en/blog/tools/7zip-sfx/7zip-sfx-stub-selection/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://k4m7v2pz.github.io/blog/os/windows/fix-7zip-sfx-runprogram-failure/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://k4m7v2pz.github.io/en/blog/os/windows/fix-7zip-sfx-runprogram-failure/"/>
     </url>
     <url>
-        <loc>https://k4m7v2pz.github.io/blog/tools/7zip-sfx/fix-7zip-sfx-runprogram-failure/</loc>
-        <lastmod>2026-06-03</lastmod>
+        <loc>https://k4m7v2pz.github.io/blog/os/windows/llm-deploy-silent-7zip-sfx/</loc>
+        <lastmod>2026-06-06</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="zh" href="https://k4m7v2pz.github.io/blog/tools/7zip-sfx/fix-7zip-sfx-runprogram-failure/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="https://k4m7v2pz.github.io/en/blog/tools/7zip-sfx/fix-7zip-sfx-runprogram-failure/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://k4m7v2pz.github.io/blog/os/windows/llm-deploy-silent-7zip-sfx/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://k4m7v2pz.github.io/en/blog/os/windows/llm-deploy-silent-7zip-sfx/"/>
     </url>
     <url>
-        <loc>https://k4m7v2pz.github.io/blog/tools/7zip-sfx/llm-deploy-silent-7zip-sfx/</loc>
-        <lastmod>2026-06-03</lastmod>
+        <loc>https://k4m7v2pz.github.io/blog/os/windows/set-zed-as-bat-editor/</loc>
+        <lastmod>2026-06-06</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="zh" href="https://k4m7v2pz.github.io/blog/tools/7zip-sfx/llm-deploy-silent-7zip-sfx/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="https://k4m7v2pz.github.io/en/blog/tools/7zip-sfx/llm-deploy-silent-7zip-sfx/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://k4m7v2pz.github.io/blog/os/windows/set-zed-as-bat-editor/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://k4m7v2pz.github.io/en/blog/os/windows/set-zed-as-bat-editor/"/>
     </url>
     <url>
         <loc>https://k4m7v2pz.github.io/en/</loc>
-        <lastmod>2026-06-03</lastmod>
+        <lastmod>2026-06-06</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://k4m7v2pz.github.io/en/"/>
         <xhtml:link rel="alternate" hreflang="zh" href="https://k4m7v2pz.github.io/"/>
     </url>
     <url>
         <loc>https://k4m7v2pz.github.io/en/about/</loc>
-        <lastmod>2026-06-03</lastmod>
+        <lastmod>2026-06-06</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://k4m7v2pz.github.io/en/about/"/>
         <xhtml:link rel="alternate" hreflang="zh" href="https://k4m7v2pz.github.io/about/"/>
     </url>
     <url>
+        <loc>https://k4m7v2pz.github.io/en/blog/geo/set-zed-as-bat-editor/</loc>
+        <lastmod>2026-06-06</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://k4m7v2pz.github.io/en/blog/geo/set-zed-as-bat-editor/"/>
+    </url>
+    <url>
         <loc>https://k4m7v2pz.github.io/en/blog/geo/7zip-sfx/7zip-sfx-stub-selection/</loc>
-        <lastmod>2026-06-03</lastmod>
+        <lastmod>2026-06-06</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://k4m7v2pz.github.io/en/blog/geo/7zip-sfx/7zip-sfx-stub-selection/"/>
     </url>
     <url>
         <loc>https://k4m7v2pz.github.io/en/blog/geo/7zip-sfx/fix-7zip-sfx-runprogram-failure/</loc>
-        <lastmod>2026-06-03</lastmod>
+        <lastmod>2026-06-06</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://k4m7v2pz.github.io/en/blog/geo/7zip-sfx/fix-7zip-sfx-runprogram-failure/"/>
     </url>
     <url>
         <loc>https://k4m7v2pz.github.io/en/blog/geo/7zip-sfx/llm-deploy-silent-7zip-sfx/</loc>
-        <lastmod>2026-06-03</lastmod>
+        <lastmod>2026-06-06</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://k4m7v2pz.github.io/en/blog/geo/7zip-sfx/llm-deploy-silent-7zip-sfx/"/>
     </url>
     <url>
         <loc>https://k4m7v2pz.github.io/en/blog/os/gnulinux/google-pinyin-installation-ubuntu-derivatives/</loc>
-        <lastmod>2026-06-03</lastmod>
+        <lastmod>2026-06-06</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://k4m7v2pz.github.io/en/blog/os/gnulinux/google-pinyin-installation-ubuntu-derivatives/"/>
         <xhtml:link rel="alternate" hreflang="zh" href="https://k4m7v2pz.github.io/blog/os/gnulinux/google-pinyin-installation-ubuntu-derivatives/"/>
     </url>
     <url>
+        <loc>https://k4m7v2pz.github.io/en/blog/os/windows/7zip-sfx-stub-selection/</loc>
+        <lastmod>2026-06-06</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://k4m7v2pz.github.io/en/blog/os/windows/7zip-sfx-stub-selection/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://k4m7v2pz.github.io/blog/os/windows/7zip-sfx-stub-selection/"/>
+    </url>
+    <url>
         <loc>https://k4m7v2pz.github.io/en/blog/os/windows/embed-python-pip-installation-windows/</loc>
-        <lastmod>2026-06-03</lastmod>
+        <lastmod>2026-06-06</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://k4m7v2pz.github.io/en/blog/os/windows/embed-python-pip-installation-windows/"/>
         <xhtml:link rel="alternate" hreflang="zh" href="https://k4m7v2pz.github.io/blog/os/windows/embed-python-pip-installation-windows/"/>
     </url>
     <url>
-        <loc>https://k4m7v2pz.github.io/en/blog/tools/7zip-sfx/7zip-sfx-stub-selection/</loc>
-        <lastmod>2026-06-03</lastmod>
+        <loc>https://k4m7v2pz.github.io/en/blog/os/windows/fix-7zip-sfx-runprogram-failure/</loc>
+        <lastmod>2026-06-06</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="en" href="https://k4m7v2pz.github.io/en/blog/tools/7zip-sfx/7zip-sfx-stub-selection/"/>
-        <xhtml:link rel="alternate" hreflang="zh" href="https://k4m7v2pz.github.io/blog/tools/7zip-sfx/7zip-sfx-stub-selection/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://k4m7v2pz.github.io/en/blog/os/windows/fix-7zip-sfx-runprogram-failure/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://k4m7v2pz.github.io/blog/os/windows/fix-7zip-sfx-runprogram-failure/"/>
     </url>
     <url>
-        <loc>https://k4m7v2pz.github.io/en/blog/tools/7zip-sfx/fix-7zip-sfx-runprogram-failure/</loc>
-        <lastmod>2026-06-03</lastmod>
+        <loc>https://k4m7v2pz.github.io/en/blog/os/windows/llm-deploy-silent-7zip-sfx/</loc>
+        <lastmod>2026-06-06</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="en" href="https://k4m7v2pz.github.io/en/blog/tools/7zip-sfx/fix-7zip-sfx-runprogram-failure/"/>
-        <xhtml:link rel="alternate" hreflang="zh" href="https://k4m7v2pz.github.io/blog/tools/7zip-sfx/fix-7zip-sfx-runprogram-failure/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://k4m7v2pz.github.io/en/blog/os/windows/llm-deploy-silent-7zip-sfx/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://k4m7v2pz.github.io/blog/os/windows/llm-deploy-silent-7zip-sfx/"/>
     </url>
     <url>
-        <loc>https://k4m7v2pz.github.io/en/blog/tools/7zip-sfx/llm-deploy-silent-7zip-sfx/</loc>
-        <lastmod>2026-06-03</lastmod>
+        <loc>https://k4m7v2pz.github.io/en/blog/os/windows/set-zed-as-bat-editor/</loc>
+        <lastmod>2026-06-06</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="en" href="https://k4m7v2pz.github.io/en/blog/tools/7zip-sfx/llm-deploy-silent-7zip-sfx/"/>
-        <xhtml:link rel="alternate" hreflang="zh" href="https://k4m7v2pz.github.io/blog/tools/7zip-sfx/llm-deploy-silent-7zip-sfx/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://k4m7v2pz.github.io/en/blog/os/windows/set-zed-as-bat-editor/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://k4m7v2pz.github.io/blog/os/windows/set-zed-as-bat-editor/"/>
     </url>
 </urlset>

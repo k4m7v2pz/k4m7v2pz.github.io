@@ -6,25 +6,21 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="可复现步骤：选对 7zSD.sfx Stub；写无 BOM config；用 PowerShell 拼接单文件 EXE；并用最小自检防止退化为 Extract-to。">
+        <meta name="description" content="7-Zip 有标准 SFX 与安装型 SFX 两类 Stub；只有 7zSD.sfx 支持 RunProgram。混淆两者会导致必弹 Extract-to 对话框且脚本永不执行。">
       
       
         <meta name="author" content="k4m7v2pz">
       
       
-        <link rel="canonical" href="https://k4m7v2pz.github.io/blog/tools/7zip-sfx/llm-deploy-silent-7zip-sfx/">
+        <link rel="canonical" href="https://k4m7v2pz.github.io/blog/os/windows/7zip-sfx-stub-selection/">
       
       
-        <link rel="prev" href="../fix-7zip-sfx-runprogram-failure/">
-      
-      
-        <link rel="next" href="../../../../about/">
       
       
         
           <link rel="alternate" href="./" hreflang="zh">
         
-          <link rel="alternate" href="../../../../en/blog/tools/7zip-sfx/llm-deploy-silent-7zip-sfx/" hreflang="en">
+          <link rel="alternate" href="../../../../en/blog/os/windows/7zip-sfx-stub-selection/" hreflang="en">
         
       
       
@@ -36,7 +32,7 @@
     
     
       
-        <title>LLM/CI 部署指南：构建静默 7-Zip SFX 安装包（无对话框） - K4m7v2pz's Blog</title>
+        <title>7-Zip SFX 标准打包规范：为何 7zSD.sfx 是唯一正确的安装型 Stub - K4m7v2pz's Blog</title>
       
     
     
@@ -87,7 +83,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#llmci-7-zip-sfx" class="md-skip">
+        <a href="#7-zip-sfx-7zsdsfx-stub" class="md-skip">
           跳转至
         </a>
       
@@ -123,7 +119,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              LLM/CI 部署指南：构建静默 7-Zip SFX 安装包（无对话框）
+              7-Zip SFX 标准打包规范：为何 7zSD.sfx 是唯一正确的安装型 Stub
             
           </span>
         </div>
@@ -176,7 +172,7 @@
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../en/blog/tools/7zip-sfx/llm-deploy-silent-7zip-sfx/" hreflang="en" class="md-select__link">
+            <a href="../../../../en/blog/os/windows/7zip-sfx-stub-selection/" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
@@ -284,7 +280,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../os/gnulinux/google-pinyin-installation-ubuntu-derivatives/" class="md-tabs__link">
+        <a href="../../gnulinux/google-pinyin-installation-ubuntu-derivatives/" class="md-tabs__link">
           
   
   
@@ -322,13 +318,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../7zip-sfx-stub-selection/" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../../../zh/blog/tools/7zip-sfx/7zip-sfx-stub-selection.md" class="md-tabs__link">
           
   
   
@@ -550,7 +544,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../os/gnulinux/google-pinyin-installation-ubuntu-derivatives/" class="md-nav__link">
+      <a href="../../gnulinux/google-pinyin-installation-ubuntu-derivatives/" class="md-nav__link">
         
   
   
@@ -638,7 +632,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../os/windows/embed-python-pip-installation-windows/" class="md-nav__link">
+      <a href="../embed-python-pip-installation-windows/" class="md-nav__link">
         
   
   
@@ -705,31 +699,26 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
             
   
   
@@ -747,7 +736,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
@@ -765,7 +754,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../7zip-sfx-stub-selection/" class="md-nav__link">
+      <a href="../../../../zh/blog/tools/7zip-sfx/7zip-sfx-stub-selection.md" class="md-nav__link">
         
   
   
@@ -793,7 +782,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../fix-7zip-sfx-runprogram-failure/" class="md-nav__link">
+      <a href="../../../../zh/blog/tools/7zip-sfx/fix-7zip-sfx-runprogram-failure.md" class="md-nav__link">
         
   
   
@@ -818,37 +807,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    LLM 静默部署 EXE
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../../../zh/blog/tools/7zip-sfx/llm-deploy-silent-7zip-sfx.md" class="md-nav__link">
         
   
   
@@ -864,81 +826,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="目录">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1) 输入/输出契约
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-config" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2) Config（完全静默模板）
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-agentci" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3) 构建脚本（Agent/CI 可稳定复现）
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-ci-check" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4) 验证协议（可写进 CI check）
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5) 约束（避免幻觉）
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -998,62 +885,134 @@
   
 
 
-<h1 id="llmci-7-zip-sfx">LLM/CI 部署指南：构建静默 7-Zip SFX 安装包（无对话框）</h1>
-<h2 id="1">1) 输入/输出契约</h2>
+<h1 id="7-zip-sfx-7zsdsfx-stub">7-Zip SFX 标准打包规范：为何 7zSD.sfx 是唯一正确的安装型 Stub</h1>
+<h2 id="1-agent">1) 铁律（Agent/新人应缓存的结论）</h2>
 <ul>
-<li><strong>Stub（固定）</strong>：<code>tools/7z/7zSD.sfx</code>（安装型，~128KB）</li>
-<li><strong>Config</strong>：<code>configs/sfx_config.txt</code>（UTF-8 <strong>无 BOM</strong>）</li>
-<li><strong>Payload</strong>：打进 <code>temp.7z</code>（必须是 <strong>7z</strong>，不是 zip）</li>
-<li><strong>Output</strong>：<code>dist/deploy.exe</code>（双击 = 解压 + 执行）</li>
+<li><strong><code>7z.sfx</code>（标准 SFX）只能"解压"</strong>：不解析 <code>RunProgram</code>，不执行安装流程。</li>
+<li><strong><code>7zSD.sfx</code>（安装型 SFX）才能"解压 + 执行"</strong>：支持 <code>RunProgram / InstallPath / Silent / GUIMode</code>。</li>
 </ul>
+<blockquote>
+<p>90% 的"配置无效 / 弹 Extract-to"问题，根因只有一个：<strong>Stub 用错</strong>。</p>
+</blockquote>
 <hr />
-<h2 id="2-config">2) Config（完全静默模板）</h2>
+<h2 id="2-rag">2) 选型对照表（可 RAG 直抽）</h2>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>标准版（不要用）</th>
+<th><strong>安装版（应使用）</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>文件名</td>
+<td><code>7z.sfx</code></td>
+<td><strong><code>7zSD.sfx</code></strong></td>
+</tr>
+<tr>
+<td>典型大小</td>
+<td>~38 KB</td>
+<td>~120–160 KB</td>
+</tr>
+<tr>
+<td>能力</td>
+<td>解压</td>
+<td>解压 + 执行</td>
+</tr>
+<tr>
+<td><code>RunProgram</code></td>
+<td>❌ 被忽略</td>
+<td>✅ 有效</td>
+</tr>
+<tr>
+<td>典型症状</td>
+<td><strong>必然</strong>弹 "Extract to…" 对话框</td>
+<td>可按配置走静默/对话框</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="3-utf-8-bom">3) 最小正确配置文件（UTF-8 <strong>无 BOM</strong>）</h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">;!@Install@!UTF-8!</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="na">Title</span><span class="o">=</span><span class="s">&quot;Silent Deploy&quot;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="na">Title</span><span class="o">=</span><span class="s">&quot;Internet Cafe Customizer&quot;</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="na">InstallPath</span><span class="o">=</span><span class="s">&quot;.\\ &quot;</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="na">GUIMode</span><span class="o">=</span><span class="s">&quot;2&quot;</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="na">Silent</span><span class="o">=</span><span class="s">&quot;2&quot;</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="na">OverwriteMode</span><span class="o">=</span><span class="s">&quot;2&quot;</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="na">RunProgram</span><span class="o">=</span><span class="s">&quot;setup.bat&quot;</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="c1">;!@InstallEnd@!</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="na">RunProgram</span><span class="o">=</span><span class="s">&quot;scripts\\batch\\sfx_entry.bat&quot;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1">;!@InstallEnd@!</span>
 </code></pre></div>
-<p>说明：</p>
+<p>关键约束：</p>
 <ul>
-<li><code>GUIMode="2"</code> + <code>Silent</code> 抑制 UI</li>
-<li><code>InstallPath=".\\ "</code> → 解压到 EXE 同目录</li>
-<li><code>setup.bat</code> 必须在归档内，且内部用 <code>%~dp0</code> 定位自身</li>
+<li><code>InstallPath=".\\ "</code>：解压到 <strong>EXE 所在目录</strong>（SFX 以自身路径为基准）</li>
+<li><code>RunProgram</code> 路径：相对于解压根目录</li>
+<li>配置文件必须 <strong>UTF-8 无 BOM</strong>（带 BOM 会解析异常）</li>
 </ul>
 <hr />
-<h2 id="3-agentci">3) 构建脚本（Agent/CI 可稳定复现）</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">param</span><span class="p">(</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  <span class="no">[string]</span><span class="nv">$Stub</span>    <span class="p">=</span> <span class="s2">&quot;tools\7z\7zSD.sfx&quot;</span><span class="p">,</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  <span class="no">[string]</span><span class="nv">$Cfg</span>     <span class="p">=</span> <span class="s2">&quot;configs\sfx_config.txt&quot;</span><span class="p">,</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  <span class="no">[string]</span><span class="nv">$Archive</span> <span class="p">=</span> <span class="s2">&quot;build\temp.7z&quot;</span><span class="p">,</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>  <span class="no">[string]</span><span class="nv">$Out</span>     <span class="p">=</span> <span class="s2">&quot;dist\deploy.exe&quot;</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">)</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="no">[byte[]]</span><span class="nv">$bin</span> <span class="p">=</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>  <span class="no">[IO.File]</span><span class="p">::</span><span class="n">ReadAllBytes</span><span class="p">(</span><span class="nv">$Stub</span><span class="p">)</span> <span class="p">+</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>  <span class="no">[IO.File]</span><span class="p">::</span><span class="n">ReadAllBytes</span><span class="p">(</span><span class="nv">$Cfg</span><span class="p">)</span> <span class="p">+</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>  <span class="no">[IO.File]</span><span class="p">::</span><span class="n">ReadAllBytes</span><span class="p">(</span><span class="nv">$Archive</span><span class="p">)</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="no">[IO.File]</span><span class="p">::</span><span class="n">WriteAllBytes</span><span class="p">(</span><span class="nv">$Out</span><span class="p">,</span> <span class="nv">$bin</span><span class="p">)</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="nb">Write-Host</span> <span class="s2">&quot;Built: $Out&quot;</span>
+<h2 id="4-powershell">4) 标准构建（PowerShell，确定性最高）</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">$stub</span>    <span class="p">=</span> <span class="s2">&quot;tools\7z\7zSD.sfx&quot;</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nv">$cfg</span>     <span class="p">=</span> <span class="s2">&quot;configs\sfx_config.txt&quot;</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nv">$archive</span> <span class="p">=</span> <span class="s2">&quot;build\temp.7z&quot;</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nv">$outExe</span>  <span class="p">=</span> <span class="s2">&quot;dist\installer.exe&quot;</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="c"># 1) 打 7z 归档（示例）</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="p">&amp;</span> <span class="s2">&quot;tools\7z\7za.exe&quot;</span> <span class="n">a</span> <span class="n">-t7z</span> <span class="nv">$archive</span> <span class="p">(</span><span class="nb">Join-Path</span> <span class="nb">PWD </span><span class="n">payload</span><span class="p">)</span> <span class="n">-mx</span><span class="p">=</span><span class="n">9</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="c"># 2) 二进制拼接：stub + config + 7z</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="no">[byte[]]</span><span class="nv">$bin</span> <span class="p">=</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>  <span class="no">[IO.File]</span><span class="p">::</span><span class="n">ReadAllBytes</span><span class="p">(</span><span class="nv">$stub</span><span class="p">)</span> <span class="p">+</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>  <span class="no">[IO.File]</span><span class="p">::</span><span class="n">ReadAllBytes</span><span class="p">(</span><span class="nv">$cfg</span><span class="p">)</span> <span class="p">+</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>  <span class="no">[IO.File]</span><span class="p">::</span><span class="n">ReadAllBytes</span><span class="p">(</span><span class="nv">$archive</span><span class="p">)</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="no">[IO.File]</span><span class="p">::</span><span class="n">WriteAllBytes</span><span class="p">(</span><span class="nv">$outExe</span><span class="p">,</span> <span class="nv">$bin</span><span class="p">)</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="nb">Write-Host</span> <span class="s2">&quot;Built: $outExe&quot;</span>
 </code></pre></div>
+<blockquote>
+<p>不建议依赖 <code>copy /b</code> 的隐式编码表现；PowerShell 拼接更可审计、可复现。</p>
+</blockquote>
 <hr />
-<h2 id="4-ci-check">4) 验证协议（可写进 CI check）</h2>
+<h2 id="5-30-stub">5) 30 秒自检（判断手里 Stub 对不对）</h2>
+<p>用最小 config：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">;!@Install@!UTF-8!</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="na">RunProgram</span><span class="o">=</span><span class="s">&quot;cmd.exe&quot;</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c1">;!@InstallEnd@!</span>
+</code></pre></div>
+<p>拼接后双击：</p>
 <ul>
-<li><strong>PE 头 sanity</strong>：stub 段应以 <code>MZ</code> 开头</li>
-<li><strong>Stub size sanity</strong>：<code>7zSD.sfx</code> 通常在 100–200KB</li>
-<li><strong>Runtime smoke</strong>：用 <code>RunProgram=cmd.exe</code> 自检，确保不退化为 Extract-to</li>
+<li><strong>弹出 CMD 窗口</strong> → Stub 支持安装型 ✅</li>
+<li><strong>弹出 "Extract to" 对话框</strong> → 这是 <code>7z.sfx</code>，换 <code>7zSD.sfx</code> ❌</li>
 </ul>
 <hr />
-<h2 id="5">5) 约束（避免幻觉）</h2>
-<ul>
-<li><strong>内部归档必须是 7z</strong>（<code>-t7z</code>），不是 zip</li>
-<li>Windows Explorer <strong>不会</strong>把它当 zip；但 7-Zip/WinRAR 能解包</li>
-<li>想"原生可右击解压"就直接发 <strong>zip 便携包</strong>，别试图把 SFX 伪装成 zip</li>
-</ul>
+<h2 id="6">6) 快速排错矩阵</h2>
+<table>
+<thead>
+<tr>
+<th>现象</th>
+<th>根因</th>
+<th>修复</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>必弹 Extract-to</td>
+<td>Stub=<code>7z.sfx</code></td>
+<td>换官方 <code>7zSD.sfx</code></td>
+</tr>
+<tr>
+<td>RunProgram 像不存在</td>
+<td>同上（Stub 不吃安装参数）</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>双击完全无反应</td>
+<td>Stub 非官方/损坏/位数怪</td>
+<td>用 7-Zip 安装目录或 LZMA SDK 的 <code>bin\7zSD.sfx</code></td>
+</tr>
+<tr>
+<td>解压成功但脚本找不到文件</td>
+<td>工作目录/相对路径错</td>
+<td>bat 首行 <code>cd /d "%~dp0"</code>；核对归档内路径</td>
+</tr>
+</tbody>
+</table>
 
 
 
