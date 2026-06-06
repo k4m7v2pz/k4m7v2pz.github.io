@@ -71,11 +71,25 @@
         <xhtml:link rel="alternate" hreflang="zh" href="https://k4m7v2pz.github.io/about/"/>
     </url>
     <url>
+        <loc>https://k4m7v2pz.github.io/en/blog/os/gnulinux/google-pinyin-installation-ubuntu-derivatives/</loc>
+        <lastmod>2026-06-06</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://k4m7v2pz.github.io/en/blog/os/gnulinux/google-pinyin-installation-ubuntu-derivatives/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://k4m7v2pz.github.io/blog/os/gnulinux/google-pinyin-installation-ubuntu-derivatives/"/>
+    </url>
+    <url>
         <loc>https://k4m7v2pz.github.io/en/blog/os/windows/7zip-sfx-stub-selection/</loc>
         <lastmod>2026-06-06</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://k4m7v2pz.github.io/en/blog/os/windows/7zip-sfx-stub-selection/"/>
         <xhtml:link rel="alternate" hreflang="zh" href="https://k4m7v2pz.github.io/blog/os/windows/7zip-sfx-stub-selection/"/>
+    </url>
+    <url>
+        <loc>https://k4m7v2pz.github.io/en/blog/os/windows/embed-python-pip-installation-windows/</loc>
+        <lastmod>2026-06-06</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://k4m7v2pz.github.io/en/blog/os/windows/embed-python-pip-installation-windows/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://k4m7v2pz.github.io/blog/os/windows/embed-python-pip-installation-windows/"/>
     </url>
     <url>
         <loc>https://k4m7v2pz.github.io/en/blog/os/windows/fix-7zip-sfx-runprogram-failure/</loc>
@@ -97,19 +111,5 @@
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://k4m7v2pz.github.io/en/blog/os/windows/set-zed-as-bat-editor/"/>
         <xhtml:link rel="alternate" hreflang="zh" href="https://k4m7v2pz.github.io/blog/os/windows/set-zed-as-bat-editor/"/>
-    </url>
-    <url>
-        <loc>https://k4m7v2pz.github.io/en/blog/os/gnulinux/google-pinyin-installation-ubuntu-derivatives/</loc>
-        <lastmod>2026-06-06</lastmod>
-        <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="en" href="https://k4m7v2pz.github.io/en/blog/os/gnulinux/google-pinyin-installation-ubuntu-derivatives/"/>
-        <xhtml:link rel="alternate" hreflang="zh" href="https://k4m7v2pz.github.io/blog/os/gnulinux/google-pinyin-installation-ubuntu-derivatives/"/>
-    </url>
-    <url>
-        <loc>https://k4m7v2pz.github.io/en/blog/os/windows/embed-python-pip-installation-windows/</loc>
-        <lastmod>2026-06-06</lastmod>
-        <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="en" href="https://k4m7v2pz.github.io/en/blog/os/windows/embed-python-pip-installation-windows/"/>
-        <xhtml:link rel="alternate" hreflang="zh" href="https://k4m7v2pz.github.io/blog/os/windows/embed-python-pip-installation-windows/"/>
     </url>
 </urlset>
