@@ -6,25 +6,25 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="当 SFX 双击只弹 Extract-to、或 Silent/GUIMode 不生效、或双击毫无反应，根因几乎必是 Stub 类型错误或编码/路径约束被破坏。">
+        <meta name="description" content="在 Windows 上安装 python-embed 嵌入式 Python 并配置 pip 教程">
       
       
         <meta name="author" content="k4m7v2pz">
       
       
-        <link rel="canonical" href="https://k4m7v2pz.github.io/blog/os/windows/fix-7zip-sfx-runprogram-failure/">
+        <link rel="canonical" href="https://k4m7v2pz.github.io/blog/operating-system/windows/embed-python-pip-installation-windows/">
       
       
-        <link rel="prev" href="../7zip-sfx-stub-selection/">
+        <link rel="prev" href="../../gnulinux/google-pinyin-installation-ubuntu-derivatives/">
       
       
-        <link rel="next" href="../llm-deploy-silent-7zip-sfx/">
+        <link rel="next" href="../7zip-sfx-stub-selection/">
       
       
         
           <link rel="alternate" href="./" hreflang="zh">
         
-          <link rel="alternate" href="../../../../en/blog/os/windows/fix-7zip-sfx-runprogram-failure/" hreflang="en">
+          <link rel="alternate" href="../../../../en/blog/operating-system/windows/embed-python-pip-installation-windows/" hreflang="en">
         
       
       
@@ -36,7 +36,7 @@
     
     
       
-        <title>修复 7-Zip SFX RunProgram 失效：正确选型与诊断矩阵 - K4m7v2pz's Blog</title>
+        <title>嵌入式 Python Windows 版 pip 安装教程 - K4m7v2pz's Blog</title>
       
     
     
@@ -87,7 +87,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#7-zip-sfx-runprogram" class="md-skip">
+        <a href="#python-windows-pip-python-embed" class="md-skip">
           跳转至
         </a>
       
@@ -123,7 +123,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              修复 7-Zip SFX RunProgram 失效：正确选型与诊断矩阵
+              嵌入式 Python Windows 版 pip 安装教程
             
           </span>
         </div>
@@ -176,7 +176,7 @@
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../en/blog/os/windows/fix-7zip-sfx-runprogram-failure/" hreflang="en" class="md-select__link">
+            <a href="../../../../en/blog/operating-system/windows/embed-python-pip-installation-windows/" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
@@ -300,6 +300,44 @@
   
 
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../zh/blog/tools/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  工具
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../zh/blog/games/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  游戏
+
+      </a>
+    </li>
   
 
       
@@ -611,10 +649,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../embed-python-pip-installation-windows/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    嵌入式 Python Windows 版 pip 安装
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -630,6 +695,103 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        操作系统支持
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        版本选择
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        下载
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        安装步骤
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pip 使用方法
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        本文目的
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        注意事项
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -667,37 +829,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    修复 RunProgram 失效
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../fix-7zip-sfx-runprogram-failure/" class="md-nav__link">
         
   
   
@@ -713,92 +848,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="目录">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#1-agent" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1) 典型错误描述（人/搜索引擎/Agent 都会这么说）
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2) 唯一最重要的原因
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3) 诊断矩阵（可直接匹配症状）
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-powershell" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4) 验证配置文件编码（PowerShell）
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5) 最小修复步骤（按顺序）
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-stub" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6) 自检 Stub（诊断锚）
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -882,6 +931,60 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../../zh/blog/tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    工具
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../zh/blog/games/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    游戏
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../../about/" class="md-nav__link">
         
   
@@ -922,81 +1025,104 @@
   
 
 
-<h1 id="7-zip-sfx-runprogram">修复 7-Zip SFX RunProgram 失效：正确选型与诊断矩阵</h1>
-<h2 id="1-agent">1) 典型错误描述（人/搜索引擎/Agent 都会这么说）</h2>
+<h1 id="python-windows-pip-python-embed">嵌入式 Python Windows 版 pip 安装教程 (python-embed)</h1>
+<p>本文与嵌入式硬件开发无关。</p>
+<h2 id="_1">操作系统支持</h2>
+<p>本教程已在以下操作系统上测试成功：</p>
 <ul>
-<li>"我写了 <code>RunProgram</code>，双击却只弹 <strong>Extract to</strong>。"</li>
-<li>"<code>Silent=2</code> / <code>GUIMode=2</code> 写了也像没写。"</li>
-<li>"双击 <strong>完全没反应</strong>，没有任何窗口。"</li>
+<li>Windows 11</li>
+<li>Windows 10</li>
+<li>Windows Server 2016</li>
+<li>Windows Server 2012 R2</li>
 </ul>
-<hr />
-<h2 id="2">2) 唯一最重要的原因</h2>
-<p><strong><code>7z.sfx</code>（标准 SFX）不实现安装执行管线。</strong>
-只要 Stub 是它，以下字段等效于不存在：</p>
-<ul>
-<li><code>RunProgram</code></li>
-<li><code>ExecuteFile</code></li>
-<li><code>InstallPath</code>（不会按安装型语义处理）</li>
-<li><code>Silent / GUIMode / OverwriteMode</code></li>
-</ul>
-<p>于是你一定看到"纯解压器 UI"。</p>
-<hr />
-<h2 id="3">3) 诊断矩阵（可直接匹配症状）</h2>
+<h2 id="_2">版本选择</h2>
 <table>
 <thead>
 <tr>
-<th>症状</th>
-<th>立刻检查</th>
-<th>结论</th>
+<th>Python 版本</th>
+<th>状态</th>
+<th>备注</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>必弹 "Extract to…"</td>
-<td>Stub 文件名/大小（应为 <code>7zSD.sfx</code> ~120–160KB）</td>
-<td>误用 <code>7z.sfx</code> → 换 Stub</td>
+<td>3.12, 3.11, 3.10</td>
+<td>正常</td>
+<td>推荐使用</td>
 </tr>
 <tr>
-<td>双击无窗口/无报错</td>
-<td>Stub 是否官方 <code>7zSD.sfx</code></td>
-<td>非官方/损坏 → 用 LZMA SDK/7-Zip 官方 bin</td>
-</tr>
-<tr>
-<td>解压完脚本不跑</td>
-<td>归档内是否存在该文件、路径大小写、bat 工作目录</td>
-<td>用 <code>cd /d "%~dp0"</code> + 相对路径核验</td>
-</tr>
-<tr>
-<td>"参数像无效"</td>
-<td>配置文件编码</td>
-<td><strong>必须是 UTF-8 无 BOM</strong>（BOM 会导致解析退化）</td>
+<td>3.9, 3.8</td>
+<td>可能出现 SSL 错误</td>
+<td>解决办法：换网络、换节点</td>
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="4-powershell">4) 验证配置文件编码（PowerShell）</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nv">$b</span> <span class="p">=</span> <span class="no">[IO.File]</span><span class="p">::</span><span class="n">ReadAllBytes</span><span class="p">(</span><span class="s2">&quot;configs\sfx_config.txt&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">if</span> <span class="p">(</span><span class="nv">$b</span><span class="p">[</span><span class="n">0</span><span class="p">]</span> <span class="o">-eq</span> <span class="n">0xEF</span> <span class="o">-and</span> <span class="nv">$b</span><span class="p">[</span><span class="n">1</span><span class="p">]</span> <span class="o">-eq</span> <span class="n">0xBB</span> <span class="o">-and</span> <span class="nv">$b</span><span class="p">[</span><span class="n">2</span><span class="p">]</span> <span class="o">-eq</span> <span class="n">0xBF</span><span class="p">)</span> <span class="p">{</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  <span class="nb">Write-Warning</span> <span class="s2">&quot;BOM detected — save as UTF-8 without signature&quot;</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="nb">Write-Host</span> <span class="s2">&quot;No BOM (OK)&quot;</span> <span class="p">}</span>
-</code></pre></div>
-<hr />
-<h2 id="5">5) 最小修复步骤（按顺序）</h2>
-<ol>
-<li>拿 <strong>官方</strong> <code>7zSD.sfx</code>（7-Zip 安装目录 <code>bin\7zSD.sfx</code> 或 LZMA SDK）</li>
-<li>确保 config = <strong>UTF-8 无 BOM</strong></li>
-<li>用 <strong>PowerShell 拼接</strong>（别信 <code>copy /b</code> 的黑魔法）</li>
-<li>用下面"cmd.exe 自检"确认 Stub 没被换错</li>
-</ol>
-<hr />
-<h2 id="6-stub">6) 自检 Stub（诊断锚）</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">;!@Install@!UTF-8!</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="na">RunProgram</span><span class="o">=</span><span class="s">&quot;cmd.exe&quot;</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1">;!@InstallEnd@!</span>
-</code></pre></div>
+<h2 id="_3">下载</h2>
 <ul>
-<li>弹 <strong>CMD</strong> → Stub OK</li>
-<li>弹 <strong>Extract to</strong> → Stub WRONG（标准版）</li>
+<li>从 <a href="https://www.python.org/">python.org</a> 下载 <code>python-3.x.x-embed-amd64.zip</code></li>
+<li>从 <a href="https://bootstrap.pypa.io/get-pip.py">https://bootstrap.pypa.io/get-pip.py</a> 下载 <code>get-pip.py</code></li>
+</ul>
+<p><strong>解压</strong>：将 <code>python-3.x.x-embed-amd64.zip</code> 解压到任意目录，建议使用压缩软件的"以文件名创建文件夹"功能，会自动创建 <code>python-3.x.x-embed-amd64</code> 文件夹。</p>
+<h2 id="_4">安装步骤</h2>
+<ol>
+<li><strong>配置网络代理（如需要）</strong></li>
+</ol>
+<p><strong>HTTP/Socks 代理</strong>：</p>
+<p>临时设置代理环境变量（仅对当前会话有效）：
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c"># HTTP 代理</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nv">$env:HTTP_PROXY</span><span class="p">=</span><span class="s2">&quot;http://proxy.example.com:8080&quot;</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nv">$env:HTTPS_PROXY</span><span class="p">=</span><span class="s2">&quot;http://proxy.example.com:8080&quot;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c"># Socks 代理  </span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="nv">$env:HTTP_PROXY</span><span class="p">=</span><span class="s2">&quot;socks5://proxy.example.com:1080&quot;</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="nv">$env:HTTPS_PROXY</span><span class="p">=</span><span class="s2">&quot;socks5://proxy.example.com:1080&quot;</span>
+</code></pre></div></p>
+<p><strong>Tun 模式代理</strong>：
+   - 在您使用的代理客户端中找到 Tun/Tunnel/虚拟网卡相关选项并启用
+   - 不同客户端的操作方式各异，请参考各自软件的文档
+   - 启用后通常无需额外配置环境变量</p>
+<ol>
+<li><strong>运行 get-pip.py</strong>
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">Set-Location</span> <span class="s2">&quot;PATH TO YOUR LOCATION\python-3.x.x-embed-amd64&quot;</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="p">.\</span><span class="n">python</span><span class="p">.</span><span class="n">exe</span> <span class="p">.\</span><span class="n">any-path</span><span class="p">\</span><span class="nb">get-pip</span><span class="p">.</span><span class="n">py</span>
+</code></pre></div></li>
+<li>
+<p>可以观察到自动创建了 <code>Lib</code>、<code>Scripts</code> 目录</p>
+</li>
+<li>
+<p><strong>编辑配置文件</strong></p>
+</li>
+<li>在 <code>python-3.x.x-embed-amd64</code> 目录下找到 <code>python3xx.pth</code> 或 <code>python3xx._pth</code> 文件（具体文件名取决于 Python 版本）</li>
+<li>打开文件，找到 <code>#import site</code> 所在行，去掉前面的 <code>#</code>，改为 <code>import site</code></li>
+</ol>
+<h2 id="pip">pip 使用方法</h2>
+<ol>
+<li>
+<p><strong>使用 Python 模块方式</strong>
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">Set-Location</span> <span class="s2">&quot;PATH TO YOUR LOCATION\python-3.x.x-embed-amd64&quot;</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="p">.\</span><span class="n">python</span><span class="p">.</span><span class="n">exe</span> <span class="n">-m</span> <span class="n">pip</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>使用可执行文件方式</strong>
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">Set-Location</span> <span class="s2">&quot;PATH TO YOUR LOCATION\python-3.x.x-embed-amd64&quot;</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="p">.\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">pip</span><span class="p">.</span><span class="n">exe</span>
+</code></pre></div></p>
+</li>
+</ol>
+<h2 id="_5">本文目的</h2>
+<p>本文旨在向中文用户介绍如何在 Windows 上使用 <code>python-embed</code>（嵌入式 Python），以<strong>文件夹形式</strong>将 Python 运行环境（解释器）与 Python 程序一并打包。这种方式的优势：</p>
+<ul>
+<li><strong>无需编译为 exe 单文件</strong>：避免了使用打包工具生成的包含 <code>.pyc</code> 文件的可执行文件，这些文件无法被人类直接阅读或编辑</li>
+<li><strong>保证代码可编辑性</strong>：所有代码保持原始的 <code>.py</code> 格式，随时可以修改和调试</li>
+<li><strong>不依赖 Git</strong>：对于不熟悉 Git 版本控制的用户友好</li>
+<li><strong>适合私有项目</strong>：特别适合编写不开源的私有项目，无需处理版本控制的复杂性</li>
+<li><strong>便于传播</strong>：可以在 Windows x64 系统间随意复制和执行，对大陆售卖的"挂机宝"（提供 RDP 的低价 NAT 虚拟机）等环境非常友好</li>
+</ul>
+<h2 id="_6">注意事项</h2>
+<ul>
+<li><strong>关于依赖管理</strong>：如果需要更现代的依赖管理工具，可以考虑 <a href="https://github.com/astral-sh/uv">uv</a>，但请注意 uv 更适合开源项目开发或生产环境部署，可能与本文"便于在不同系统间传播"的核心思想不完全一致</li>
+<li><strong>网络要求</strong>：安装依赖时可能需要访问境外服务器，建议配置代理以获得更好的下载速度</li>
 </ul>
 
 

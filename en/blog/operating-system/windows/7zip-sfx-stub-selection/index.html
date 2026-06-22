@@ -1,49 +1,49 @@
 
 <!doctype html>
-<html lang="zh" class="no-js">
+<html lang="en" class="no-js">
   <head>
     
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="可复现步骤：选对 7zSD.sfx Stub；写无 BOM config；用 PowerShell 拼接单文件 EXE；并用最小自检防止退化为 Extract-to。">
+        <meta name="description" content="7-Zip provides two types of SFX stubs — Standard and Installer. Only 7zSD.sfx supports RunProgram. Using the wrong stub causes an unavoidable Extract-to dialog and silently ignores the config script.">
       
       
         <meta name="author" content="k4m7v2pz">
       
       
-        <link rel="canonical" href="https://k4m7v2pz.github.io/blog/os/windows/llm-deploy-silent-7zip-sfx/">
+        <link rel="canonical" href="https://k4m7v2pz.github.io/en/blog/operating-system/windows/7zip-sfx-stub-selection/">
       
       
-        <link rel="prev" href="../fix-7zip-sfx-runprogram-failure/">
+        <link rel="prev" href="../embed-python-pip-installation-windows/">
       
       
-        <link rel="next" href="../set-zed-as-bat-editor/">
+        <link rel="next" href="../fix-7zip-sfx-runprogram-failure/">
       
       
         
-          <link rel="alternate" href="./" hreflang="zh">
+          <link rel="alternate" href="../../../../../blog/operating-system/windows/7zip-sfx-stub-selection/" hreflang="zh">
         
-          <link rel="alternate" href="../../../../en/blog/os/windows/llm-deploy-silent-7zip-sfx/" hreflang="en">
+          <link rel="alternate" href="./" hreflang="en">
         
       
       
-        <link rel="alternate" type="application/rss+xml" title="RSS 订阅" href="../../../../feed_rss_created.xml">
-        <link rel="alternate" type="application/rss+xml" title="已更新内容的 RSS 订阅" href="../../../../feed_rss_updated.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../../../../feed_rss_created.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="../../../../../feed_rss_updated.xml">
       
-      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <link rel="icon" href="../../../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>LLM/CI 部署指南：构建静默 7-Zip SFX 安装包（无对话框） - K4m7v2pz's Blog</title>
+        <title>7-Zip SFX Standard Packaging Guide: Why 7zSD.sfx Is the Only Correct Installer Stub - K4m7v2pz's Blog</title>
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -62,7 +62,7 @@
       
     
     
-    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -87,8 +87,8 @@
     <div data-md-component="skip">
       
         
-        <a href="#llmci-7-zip-sfx" class="md-skip">
-          跳转至
+        <a href="#7-zip-sfx-standard-packaging-guide-why-7zsdsfx-is-the-only-correct-installer-stub" class="md-skip">
+          Skip to content
         </a>
       
     </div>
@@ -102,8 +102,8 @@
   
 
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
-  <nav class="md-header__inner md-grid" aria-label="页眉">
-    <a href="../../../.." title="K4m7v2pz&#39;s Blog" class="md-header__button md-logo" aria-label="K4m7v2pz's Blog" data-md-component="logo">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../../" title="K4m7v2pz&#39;s Blog" class="md-header__button md-logo" aria-label="K4m7v2pz's Blog" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -123,7 +123,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              LLM/CI 部署指南：构建静默 7-Zip SFX 安装包（无对话框）
+              7-Zip SFX Standard Packaging Guide: Why 7zSD.sfx Is the Only Correct Installer Stub
             
           </span>
         </div>
@@ -163,20 +163,20 @@
       <div class="md-header__option">
   <div class="md-select">
     
-    <button class="md-header__button md-icon" aria-label="选择当前语言">
+    <button class="md-header__button md-icon" aria-label="Select language">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
     </button>
     <div class="md-select__inner">
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="./" hreflang="zh" class="md-select__link">
+            <a href="../../../../../blog/operating-system/windows/7zip-sfx-stub-selection/" hreflang="zh" class="md-select__link">
               中文
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../en/blog/os/windows/llm-deploy-silent-7zip-sfx/" hreflang="en" class="md-select__link">
+            <a href="./" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
@@ -197,16 +197,16 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
         
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
         
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
       </label>
-      <nav class="md-search__options" aria-label="查找">
+      <nav class="md-search__options" aria-label="Search">
         
-        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
           
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
         </button>
@@ -219,7 +219,7 @@
       <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
         <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
-            正在初始化搜索引擎
+            Initializing search
           </div>
           <ol class="md-search-result__list" role="presentation"></ol>
         </div>
@@ -231,7 +231,7 @@
     
     
       <div class="md-header__source">
-        <a href="https://github.com/k4m7v2pz/k4m7v2pz.github.io" title="前往仓库" class="md-source" data-md-component="source">
+        <a href="https://github.com/k4m7v2pz/k4m7v2pz.github.io" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
@@ -246,7 +246,7 @@
   
     
       
-<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
       
@@ -256,13 +256,13 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../.." class="md-tabs__link">
+      <a href="../../../../" class="md-tabs__link">
         
   
   
     
   
-  首页
+  Home
 
       </a>
     </li>
@@ -292,7 +292,7 @@
           
   
   
-  操作系统
+  Operating System
 
         </a>
       </li>
@@ -309,13 +309,51 @@
   
   
     <li class="md-tabs__item">
+      <a href="../../../tools/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Tools
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../games/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Games
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
       <a href="../../../../about/" class="md-tabs__link">
         
   
   
     
   
-  关于
+  About
 
       </a>
     </li>
@@ -350,9 +388,9 @@
 
   
 
-<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../../.." title="K4m7v2pz&#39;s Blog" class="md-nav__button md-logo" aria-label="K4m7v2pz's Blog" data-md-component="logo">
+    <a href="../../../../" title="K4m7v2pz&#39;s Blog" class="md-nav__button md-logo" aria-label="K4m7v2pz's Blog" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -362,7 +400,7 @@
   </label>
   
     <div class="md-nav__source">
-      <a href="https://github.com/k4m7v2pz/k4m7v2pz.github.io" title="前往仓库" class="md-source" data-md-component="source">
+      <a href="https://github.com/k4m7v2pz/k4m7v2pz.github.io" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
@@ -382,14 +420,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../.." class="md-nav__link">
+      <a href="../../../../" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    首页
+    Home
   
 
     
@@ -437,7 +475,7 @@
   <span class="md-ellipsis">
     
   
-    操作系统
+    Operating System
   
 
     
@@ -453,7 +491,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    操作系统
+    Operating System
   
 
           </label>
@@ -528,7 +566,7 @@
   <span class="md-ellipsis">
     
   
-    在 Ubuntu 衍生版上安装 Google 拼音
+    Install Google Pinyin on Ubuntu Derivatives
   
 
     
@@ -621,63 +659,7 @@
   <span class="md-ellipsis">
     
   
-    嵌入式 Python Windows 版 pip 安装
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../7zip-sfx-stub-selection/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    7-Zip SFX 标准 Stub 选型
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../fix-7zip-sfx-runprogram-failure/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    修复 RunProgram 失效
+    Embedded Python pip Installation
   
 
     
@@ -714,7 +696,7 @@
   <span class="md-ellipsis">
     
   
-    LLM 静默部署 EXE
+    7-Zip SFX Standard Stub Selection
   
 
     
@@ -732,7 +714,7 @@
   <span class="md-ellipsis">
     
   
-    LLM 静默部署 EXE
+    7-Zip SFX Standard Stub Selection
   
 
     
@@ -744,7 +726,7 @@
       
         
 
-<nav class="md-nav md-nav--secondary" aria-label="目录">
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
   
@@ -753,15 +735,15 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      目录
+      Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
+  <a href="#1-golden-rule-cache-this-for-agents-and-newcomers" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1) 输入/输出契约
+        1) Golden Rule (Cache this for agents and newcomers)
       
     </span>
   </a>
@@ -769,10 +751,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-config" class="md-nav__link">
+  <a href="#2-selection-comparison-table" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2) Config（完全静默模板）
+        2) Selection Comparison Table
       
     </span>
   </a>
@@ -780,10 +762,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-agentci" class="md-nav__link">
+  <a href="#3-minimal-correct-config-file-utf-8-without-bom" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3) 构建脚本（Agent/CI 可稳定复现）
+        3) Minimal Correct Config File (UTF-8 without BOM)
       
     </span>
   </a>
@@ -791,10 +773,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-ci-check" class="md-nav__link">
+  <a href="#4-standard-build-powershell-deterministic" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4) 验证协议（可写进 CI check）
+        4) Standard Build (PowerShell, deterministic)
       
     </span>
   </a>
@@ -802,10 +784,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5" class="md-nav__link">
+  <a href="#5-30-second-self-check" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5) 约束（避免幻觉）
+        5) 30-Second Self-Check
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-quick-troubleshooting-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6) Quick Troubleshooting Matrix
       
     </span>
   </a>
@@ -828,6 +821,62 @@
   
   
     <li class="md-nav__item">
+      <a href="../fix-7zip-sfx-runprogram-failure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fix RunProgram Failure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../llm-deploy-silent-7zip-sfx/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LLM Silent EXE Deployment
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../set-zed-as-bat-editor/" class="md-nav__link">
         
   
@@ -835,7 +884,7 @@
   <span class="md-ellipsis">
     
   
-    设置 Zed 为 bat 编辑器
+    Set Zed as bat Editor
   
 
     
@@ -871,6 +920,60 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../games/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Games
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../../about/" class="md-nav__link">
         
   
@@ -878,7 +981,7 @@
   <span class="md-ellipsis">
     
   
-    关于
+    About
   
 
     
@@ -911,62 +1014,134 @@
   
 
 
-<h1 id="llmci-7-zip-sfx">LLM/CI 部署指南：构建静默 7-Zip SFX 安装包（无对话框）</h1>
-<h2 id="1">1) 输入/输出契约</h2>
+<h1 id="7-zip-sfx-standard-packaging-guide-why-7zsdsfx-is-the-only-correct-installer-stub">7-Zip SFX Standard Packaging Guide: Why 7zSD.sfx Is the Only Correct Installer Stub</h1>
+<h2 id="1-golden-rule-cache-this-for-agents-and-newcomers">1) Golden Rule (Cache this for agents and newcomers)</h2>
 <ul>
-<li><strong>Stub（固定）</strong>：<code>tools/7z/7zSD.sfx</code>（安装型，~128KB）</li>
-<li><strong>Config</strong>：<code>configs/sfx_config.txt</code>（UTF-8 <strong>无 BOM</strong>）</li>
-<li><strong>Payload</strong>：打进 <code>temp.7z</code>（必须是 <strong>7z</strong>，不是 zip）</li>
-<li><strong>Output</strong>：<code>dist/deploy.exe</code>（双击 = 解压 + 执行）</li>
+<li><strong><code>7z.sfx</code> (Standard SFX) extracts only</strong> — it does not parse <code>RunProgram</code> or execute any install workflow.</li>
+<li><strong><code>7zSD.sfx</code> (Installer SFX) extracts + executes</strong> — it supports <code>RunProgram / InstallPath / Silent / GUIMode</code>.</li>
 </ul>
+<blockquote>
+<p>90% of "config not working / Extract-to dialog" issues have exactly one root cause: <strong>the wrong stub</strong>.</p>
+</blockquote>
 <hr />
-<h2 id="2-config">2) Config（完全静默模板）</h2>
+<h2 id="2-selection-comparison-table">2) Selection Comparison Table</h2>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Standard (DO NOT USE)</th>
+<th><strong>Installer (RECOMMENDED)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Filename</td>
+<td><code>7z.sfx</code></td>
+<td><strong><code>7zSD.sfx</code></strong></td>
+</tr>
+<tr>
+<td>Typical Size</td>
+<td>~38 KB</td>
+<td>~120–160 KB</td>
+</tr>
+<tr>
+<td>Capability</td>
+<td>Extract only</td>
+<td>Extract + Execute</td>
+</tr>
+<tr>
+<td><code>RunProgram</code></td>
+<td>❌ Ignored</td>
+<td>✅ Supported</td>
+</tr>
+<tr>
+<td>Typical Symptom</td>
+<td><strong>Always</strong> shows "Extract to…" dialog</td>
+<td>Can run silently or with GUI per config</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="3-minimal-correct-config-file-utf-8-without-bom">3) Minimal Correct Config File (UTF-8 <strong>without BOM</strong>)</h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">;!@Install@!UTF-8!</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="na">Title</span><span class="o">=</span><span class="s">&quot;Silent Deploy&quot;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="na">Title</span><span class="o">=</span><span class="s">&quot;Internet Cafe Customizer&quot;</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="na">InstallPath</span><span class="o">=</span><span class="s">&quot;.\\ &quot;</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="na">GUIMode</span><span class="o">=</span><span class="s">&quot;2&quot;</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="na">Silent</span><span class="o">=</span><span class="s">&quot;2&quot;</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="na">OverwriteMode</span><span class="o">=</span><span class="s">&quot;2&quot;</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="na">RunProgram</span><span class="o">=</span><span class="s">&quot;setup.bat&quot;</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="c1">;!@InstallEnd@!</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="na">RunProgram</span><span class="o">=</span><span class="s">&quot;scripts\\batch\\sfx_entry.bat&quot;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1">;!@InstallEnd@!</span>
 </code></pre></div>
-<p>说明：</p>
+<p>Key constraints:</p>
 <ul>
-<li><code>GUIMode="2"</code> + <code>Silent</code> 抑制 UI</li>
-<li><code>InstallPath=".\\ "</code> → 解压到 EXE 同目录</li>
-<li><code>setup.bat</code> 必须在归档内，且内部用 <code>%~dp0</code> 定位自身</li>
+<li><code>InstallPath=".\\ "</code>: Extract to the <strong>same directory as the EXE</strong> (SFX uses its own path as base)</li>
+<li><code>RunProgram</code> path: relative to the extraction root</li>
+<li>Config file <strong>must</strong> be <strong>UTF-8 without BOM</strong> (BOM causes parse failure)</li>
 </ul>
 <hr />
-<h2 id="3-agentci">3) 构建脚本（Agent/CI 可稳定复现）</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">param</span><span class="p">(</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  <span class="no">[string]</span><span class="nv">$Stub</span>    <span class="p">=</span> <span class="s2">&quot;tools\7z\7zSD.sfx&quot;</span><span class="p">,</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  <span class="no">[string]</span><span class="nv">$Cfg</span>     <span class="p">=</span> <span class="s2">&quot;configs\sfx_config.txt&quot;</span><span class="p">,</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  <span class="no">[string]</span><span class="nv">$Archive</span> <span class="p">=</span> <span class="s2">&quot;build\temp.7z&quot;</span><span class="p">,</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>  <span class="no">[string]</span><span class="nv">$Out</span>     <span class="p">=</span> <span class="s2">&quot;dist\deploy.exe&quot;</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">)</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="no">[byte[]]</span><span class="nv">$bin</span> <span class="p">=</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>  <span class="no">[IO.File]</span><span class="p">::</span><span class="n">ReadAllBytes</span><span class="p">(</span><span class="nv">$Stub</span><span class="p">)</span> <span class="p">+</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>  <span class="no">[IO.File]</span><span class="p">::</span><span class="n">ReadAllBytes</span><span class="p">(</span><span class="nv">$Cfg</span><span class="p">)</span> <span class="p">+</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>  <span class="no">[IO.File]</span><span class="p">::</span><span class="n">ReadAllBytes</span><span class="p">(</span><span class="nv">$Archive</span><span class="p">)</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="no">[IO.File]</span><span class="p">::</span><span class="n">WriteAllBytes</span><span class="p">(</span><span class="nv">$Out</span><span class="p">,</span> <span class="nv">$bin</span><span class="p">)</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="nb">Write-Host</span> <span class="s2">&quot;Built: $Out&quot;</span>
+<h2 id="4-standard-build-powershell-deterministic">4) Standard Build (PowerShell, deterministic)</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">$stub</span>    <span class="p">=</span> <span class="s2">&quot;tools\7z\7zSD.sfx&quot;</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nv">$cfg</span>     <span class="p">=</span> <span class="s2">&quot;configs\sfx_config.txt&quot;</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nv">$archive</span> <span class="p">=</span> <span class="s2">&quot;build\temp.7z&quot;</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nv">$outExe</span>  <span class="p">=</span> <span class="s2">&quot;dist\installer.exe&quot;</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="c"># 1) Create 7z archive</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="p">&amp;</span> <span class="s2">&quot;tools\7z\7za.exe&quot;</span> <span class="n">a</span> <span class="n">-t7z</span> <span class="nv">$archive</span> <span class="p">(</span><span class="nb">Join-Path</span> <span class="nb">PWD </span><span class="n">payload</span><span class="p">)</span> <span class="n">-mx</span><span class="p">=</span><span class="n">9</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="c"># 2) Binary concatenation: stub + config + 7z</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="no">[byte[]]</span><span class="nv">$bin</span> <span class="p">=</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>  <span class="no">[IO.File]</span><span class="p">::</span><span class="n">ReadAllBytes</span><span class="p">(</span><span class="nv">$stub</span><span class="p">)</span> <span class="p">+</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>  <span class="no">[IO.File]</span><span class="p">::</span><span class="n">ReadAllBytes</span><span class="p">(</span><span class="nv">$cfg</span><span class="p">)</span> <span class="p">+</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>  <span class="no">[IO.File]</span><span class="p">::</span><span class="n">ReadAllBytes</span><span class="p">(</span><span class="nv">$archive</span><span class="p">)</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="no">[IO.File]</span><span class="p">::</span><span class="n">WriteAllBytes</span><span class="p">(</span><span class="nv">$outExe</span><span class="p">,</span> <span class="nv">$bin</span><span class="p">)</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="nb">Write-Host</span> <span class="s2">&quot;Built: $outExe&quot;</span>
 </code></pre></div>
+<blockquote>
+<p>Do not rely on <code>copy /b</code>'s implicit encoding behavior; PowerShell concatenation is auditable and reproducible.</p>
+</blockquote>
 <hr />
-<h2 id="4-ci-check">4) 验证协议（可写进 CI check）</h2>
+<h2 id="5-30-second-self-check">5) 30-Second Self-Check</h2>
+<p>Use this minimal config:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">;!@Install@!UTF-8!</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="na">RunProgram</span><span class="o">=</span><span class="s">&quot;cmd.exe&quot;</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c1">;!@InstallEnd@!</span>
+</code></pre></div>
+<p>After building, double-click:</p>
 <ul>
-<li><strong>PE 头 sanity</strong>：stub 段应以 <code>MZ</code> 开头</li>
-<li><strong>Stub size sanity</strong>：<code>7zSD.sfx</code> 通常在 100–200KB</li>
-<li><strong>Runtime smoke</strong>：用 <code>RunProgram=cmd.exe</code> 自检，确保不退化为 Extract-to</li>
+<li><strong>CMD window opens</strong> → Installer stub ✅</li>
+<li><strong>"Extract to" dialog appears</strong> → You used <code>7z.sfx</code> — switch to <code>7zSD.sfx</code> ❌</li>
 </ul>
 <hr />
-<h2 id="5">5) 约束（避免幻觉）</h2>
-<ul>
-<li><strong>内部归档必须是 7z</strong>（<code>-t7z</code>），不是 zip</li>
-<li>Windows Explorer <strong>不会</strong>把它当 zip；但 7-Zip/WinRAR 能解包</li>
-<li>想"原生可右击解压"就直接发 <strong>zip 便携包</strong>，别试图把 SFX 伪装成 zip</li>
-</ul>
+<h2 id="6-quick-troubleshooting-matrix">6) Quick Troubleshooting Matrix</h2>
+<table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Root Cause</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Always shows Extract-to</td>
+<td>Stub = <code>7z.sfx</code></td>
+<td>Replace with official <code>7zSD.sfx</code></td>
+</tr>
+<tr>
+<td>RunProgram appears ignored</td>
+<td>Same as above (stub doesn't process install params)</td>
+<td>Same fix</td>
+</tr>
+<tr>
+<td>Double-click does nothing</td>
+<td>Stub is non-official, corrupted, or wrong architecture</td>
+<td>Use <code>7zSD.sfx</code> from 7-Zip install dir or LZMA SDK <code>bin\</code></td>
+</tr>
+<tr>
+<td>Extracted OK but script can't find files</td>
+<td>Working directory / relative path mismatch</td>
+<td>Add <code>cd /d "%~dp0"</code> at top of bat; verify archive paths</td>
+</tr>
+</tbody>
+</table>
 
 
 
@@ -1021,10 +1196,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "toc.integrate", "search.suggest", "search.highlight", "content.code.copy", "content.tabs.link", "header.autohide"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../../..", "features": ["navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "toc.integrate", "search.suggest", "search.highlight", "content.code.copy", "content.tabs.link", "header.autohide"], "search": "../../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>

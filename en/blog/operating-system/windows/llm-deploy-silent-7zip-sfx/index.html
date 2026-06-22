@@ -6,23 +6,23 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="7-Zip provides two types of SFX stubs — Standard and Installer. Only 7zSD.sfx supports RunProgram. Using the wrong stub causes an unavoidable Extract-to dialog and silently ignores the config script.">
+        <meta name="description" content="Reproducible steps: select the correct 7zSD.sfx stub, write a BOM-free config, use PowerShell to concatenate a single-file EXE, and run a minimal self-check to prevent regression to Extract-to behavior.">
       
       
         <meta name="author" content="k4m7v2pz">
       
       
-        <link rel="canonical" href="https://k4m7v2pz.github.io/en/blog/os/windows/7zip-sfx-stub-selection/">
+        <link rel="canonical" href="https://k4m7v2pz.github.io/en/blog/operating-system/windows/llm-deploy-silent-7zip-sfx/">
       
       
-        <link rel="prev" href="../embed-python-pip-installation-windows/">
+        <link rel="prev" href="../fix-7zip-sfx-runprogram-failure/">
       
       
-        <link rel="next" href="../fix-7zip-sfx-runprogram-failure/">
+        <link rel="next" href="../set-zed-as-bat-editor/">
       
       
         
-          <link rel="alternate" href="../../../../../blog/os/windows/7zip-sfx-stub-selection/" hreflang="zh">
+          <link rel="alternate" href="../../../../../blog/operating-system/windows/llm-deploy-silent-7zip-sfx/" hreflang="zh">
         
           <link rel="alternate" href="./" hreflang="en">
         
@@ -36,7 +36,7 @@
     
     
       
-        <title>7-Zip SFX Standard Packaging Guide: Why 7zSD.sfx Is the Only Correct Installer Stub - K4m7v2pz's Blog</title>
+        <title>LLM/CI Deployment Guide: Building Silent 7-Zip SFX Installers (No Dialogs) - K4m7v2pz's Blog</title>
       
     
     
@@ -87,7 +87,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#7-zip-sfx-standard-packaging-guide-why-7zsdsfx-is-the-only-correct-installer-stub" class="md-skip">
+        <a href="#llmci-deployment-guide-building-silent-7-zip-sfx-installers-no-dialogs" class="md-skip">
           Skip to content
         </a>
       
@@ -123,7 +123,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              7-Zip SFX Standard Packaging Guide: Why 7zSD.sfx Is the Only Correct Installer Stub
+              LLM/CI Deployment Guide: Building Silent 7-Zip SFX Installers (No Dialogs)
             
           </span>
         </div>
@@ -170,7 +170,7 @@
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="../../../../../blog/os/windows/7zip-sfx-stub-selection/" hreflang="zh" class="md-select__link">
+            <a href="../../../../../blog/operating-system/windows/llm-deploy-silent-7zip-sfx/" hreflang="zh" class="md-select__link">
               中文
             </a>
           </li>
@@ -300,6 +300,44 @@
   
 
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../tools/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Tools
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../games/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Games
+
+      </a>
+    </li>
   
 
       
@@ -639,37 +677,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    7-Zip SFX Standard Stub Selection
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../7zip-sfx-stub-selection/" class="md-nav__link">
         
   
   
@@ -685,92 +696,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#1-golden-rule-cache-this-for-agents-and-newcomers" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1) Golden Rule (Cache this for agents and newcomers)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-selection-comparison-table" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2) Selection Comparison Table
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-minimal-correct-config-file-utf-8-without-bom" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3) Minimal Correct Config File (UTF-8 without BOM)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-standard-build-powershell-deterministic" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4) Standard Build (PowerShell, deterministic)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-30-second-self-check" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5) 30-Second Self-Check
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-quick-troubleshooting-matrix" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6) Quick Troubleshooting Matrix
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -808,10 +733,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../llm-deploy-silent-7zip-sfx/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LLM Silent EXE Deployment
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -827,6 +779,81 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-inputoutput-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1) Input/Output Contract
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-config-fully-silent-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2) Config (Fully Silent Template)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-build-script-agentci-reproducible" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3) Build Script (Agent/CI reproducible)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-validation-protocol-ci-checkable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4) Validation Protocol (CI-checkable)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-constraints-avoid-hallucination" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5) Constraints (Avoid Hallucination)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -882,6 +909,60 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../games/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Games
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../../about/" class="md-nav__link">
         
   
@@ -922,134 +1003,62 @@
   
 
 
-<h1 id="7-zip-sfx-standard-packaging-guide-why-7zsdsfx-is-the-only-correct-installer-stub">7-Zip SFX Standard Packaging Guide: Why 7zSD.sfx Is the Only Correct Installer Stub</h1>
-<h2 id="1-golden-rule-cache-this-for-agents-and-newcomers">1) Golden Rule (Cache this for agents and newcomers)</h2>
+<h1 id="llmci-deployment-guide-building-silent-7-zip-sfx-installers-no-dialogs">LLM/CI Deployment Guide: Building Silent 7-Zip SFX Installers (No Dialogs)</h1>
+<h2 id="1-inputoutput-contract">1) Input/Output Contract</h2>
 <ul>
-<li><strong><code>7z.sfx</code> (Standard SFX) extracts only</strong> — it does not parse <code>RunProgram</code> or execute any install workflow.</li>
-<li><strong><code>7zSD.sfx</code> (Installer SFX) extracts + executes</strong> — it supports <code>RunProgram / InstallPath / Silent / GUIMode</code>.</li>
+<li><strong>Stub (fixed)</strong>: <code>tools/7z/7zSD.sfx</code> (installer type, ~128KB)</li>
+<li><strong>Config</strong>: <code>configs/sfx_config.txt</code> (UTF-8 <strong>without BOM</strong>)</li>
+<li><strong>Payload</strong>: Packaged into <code>temp.7z</code> (<strong>must</strong> be 7z, not zip)</li>
+<li><strong>Output</strong>: <code>dist/deploy.exe</code> (double-click = extract + execute)</li>
 </ul>
-<blockquote>
-<p>90% of "config not working / Extract-to dialog" issues have exactly one root cause: <strong>the wrong stub</strong>.</p>
-</blockquote>
 <hr />
-<h2 id="2-selection-comparison-table">2) Selection Comparison Table</h2>
-<table>
-<thead>
-<tr>
-<th>Attribute</th>
-<th>Standard (DO NOT USE)</th>
-<th><strong>Installer (RECOMMENDED)</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Filename</td>
-<td><code>7z.sfx</code></td>
-<td><strong><code>7zSD.sfx</code></strong></td>
-</tr>
-<tr>
-<td>Typical Size</td>
-<td>~38 KB</td>
-<td>~120–160 KB</td>
-</tr>
-<tr>
-<td>Capability</td>
-<td>Extract only</td>
-<td>Extract + Execute</td>
-</tr>
-<tr>
-<td><code>RunProgram</code></td>
-<td>❌ Ignored</td>
-<td>✅ Supported</td>
-</tr>
-<tr>
-<td>Typical Symptom</td>
-<td><strong>Always</strong> shows "Extract to…" dialog</td>
-<td>Can run silently or with GUI per config</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="3-minimal-correct-config-file-utf-8-without-bom">3) Minimal Correct Config File (UTF-8 <strong>without BOM</strong>)</h2>
+<h2 id="2-config-fully-silent-template">2) Config (Fully Silent Template)</h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">;!@Install@!UTF-8!</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="na">Title</span><span class="o">=</span><span class="s">&quot;Internet Cafe Customizer&quot;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="na">Title</span><span class="o">=</span><span class="s">&quot;Silent Deploy&quot;</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="na">InstallPath</span><span class="o">=</span><span class="s">&quot;.\\ &quot;</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="na">RunProgram</span><span class="o">=</span><span class="s">&quot;scripts\\batch\\sfx_entry.bat&quot;</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1">;!@InstallEnd@!</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="na">GUIMode</span><span class="o">=</span><span class="s">&quot;2&quot;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="na">Silent</span><span class="o">=</span><span class="s">&quot;2&quot;</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="na">OverwriteMode</span><span class="o">=</span><span class="s">&quot;2&quot;</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="na">RunProgram</span><span class="o">=</span><span class="s">&quot;setup.bat&quot;</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="c1">;!@InstallEnd@!</span>
 </code></pre></div>
-<p>Key constraints:</p>
+<p>Notes:</p>
 <ul>
-<li><code>InstallPath=".\\ "</code>: Extract to the <strong>same directory as the EXE</strong> (SFX uses its own path as base)</li>
-<li><code>RunProgram</code> path: relative to the extraction root</li>
-<li>Config file <strong>must</strong> be <strong>UTF-8 without BOM</strong> (BOM causes parse failure)</li>
+<li><code>GUIMode="2"</code> + <code>Silent</code> suppress all UI</li>
+<li><code>InstallPath=".\\ "</code> → extract to EXE's directory</li>
+<li><code>setup.bat</code> must exist inside the archive and use <code>%~dp0</code> to locate itself</li>
 </ul>
 <hr />
-<h2 id="4-standard-build-powershell-deterministic">4) Standard Build (PowerShell, deterministic)</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">$stub</span>    <span class="p">=</span> <span class="s2">&quot;tools\7z\7zSD.sfx&quot;</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nv">$cfg</span>     <span class="p">=</span> <span class="s2">&quot;configs\sfx_config.txt&quot;</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nv">$archive</span> <span class="p">=</span> <span class="s2">&quot;build\temp.7z&quot;</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nv">$outExe</span>  <span class="p">=</span> <span class="s2">&quot;dist\installer.exe&quot;</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="c"># 1) Create 7z archive</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="p">&amp;</span> <span class="s2">&quot;tools\7z\7za.exe&quot;</span> <span class="n">a</span> <span class="n">-t7z</span> <span class="nv">$archive</span> <span class="p">(</span><span class="nb">Join-Path</span> <span class="nb">PWD </span><span class="n">payload</span><span class="p">)</span> <span class="n">-mx</span><span class="p">=</span><span class="n">9</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="c"># 2) Binary concatenation: stub + config + 7z</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="no">[byte[]]</span><span class="nv">$bin</span> <span class="p">=</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>  <span class="no">[IO.File]</span><span class="p">::</span><span class="n">ReadAllBytes</span><span class="p">(</span><span class="nv">$stub</span><span class="p">)</span> <span class="p">+</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>  <span class="no">[IO.File]</span><span class="p">::</span><span class="n">ReadAllBytes</span><span class="p">(</span><span class="nv">$cfg</span><span class="p">)</span> <span class="p">+</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>  <span class="no">[IO.File]</span><span class="p">::</span><span class="n">ReadAllBytes</span><span class="p">(</span><span class="nv">$archive</span><span class="p">)</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="no">[IO.File]</span><span class="p">::</span><span class="n">WriteAllBytes</span><span class="p">(</span><span class="nv">$outExe</span><span class="p">,</span> <span class="nv">$bin</span><span class="p">)</span>
-<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="nb">Write-Host</span> <span class="s2">&quot;Built: $outExe&quot;</span>
+<h2 id="3-build-script-agentci-reproducible">3) Build Script (Agent/CI reproducible)</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">param</span><span class="p">(</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  <span class="no">[string]</span><span class="nv">$Stub</span>    <span class="p">=</span> <span class="s2">&quot;tools\7z\7zSD.sfx&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  <span class="no">[string]</span><span class="nv">$Cfg</span>     <span class="p">=</span> <span class="s2">&quot;configs\sfx_config.txt&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  <span class="no">[string]</span><span class="nv">$Archive</span> <span class="p">=</span> <span class="s2">&quot;build\temp.7z&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>  <span class="no">[string]</span><span class="nv">$Out</span>     <span class="p">=</span> <span class="s2">&quot;dist\deploy.exe&quot;</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">)</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="no">[byte[]]</span><span class="nv">$bin</span> <span class="p">=</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>  <span class="no">[IO.File]</span><span class="p">::</span><span class="n">ReadAllBytes</span><span class="p">(</span><span class="nv">$Stub</span><span class="p">)</span> <span class="p">+</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>  <span class="no">[IO.File]</span><span class="p">::</span><span class="n">ReadAllBytes</span><span class="p">(</span><span class="nv">$Cfg</span><span class="p">)</span> <span class="p">+</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>  <span class="no">[IO.File]</span><span class="p">::</span><span class="n">ReadAllBytes</span><span class="p">(</span><span class="nv">$Archive</span><span class="p">)</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="no">[IO.File]</span><span class="p">::</span><span class="n">WriteAllBytes</span><span class="p">(</span><span class="nv">$Out</span><span class="p">,</span> <span class="nv">$bin</span><span class="p">)</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="nb">Write-Host</span> <span class="s2">&quot;Built: $Out&quot;</span>
 </code></pre></div>
-<blockquote>
-<p>Do not rely on <code>copy /b</code>'s implicit encoding behavior; PowerShell concatenation is auditable and reproducible.</p>
-</blockquote>
 <hr />
-<h2 id="5-30-second-self-check">5) 30-Second Self-Check</h2>
-<p>Use this minimal config:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">;!@Install@!UTF-8!</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="na">RunProgram</span><span class="o">=</span><span class="s">&quot;cmd.exe&quot;</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c1">;!@InstallEnd@!</span>
-</code></pre></div>
-<p>After building, double-click:</p>
+<h2 id="4-validation-protocol-ci-checkable">4) Validation Protocol (CI-checkable)</h2>
 <ul>
-<li><strong>CMD window opens</strong> → Installer stub ✅</li>
-<li><strong>"Extract to" dialog appears</strong> → You used <code>7z.sfx</code> — switch to <code>7zSD.sfx</code> ❌</li>
+<li><strong>PE header sanity</strong>: stub must start with <code>MZ</code></li>
+<li><strong>Stub size sanity</strong>: <code>7zSD.sfx</code> is typically 100–200KB</li>
+<li><strong>Runtime smoke test</strong>: use <code>RunProgram=cmd.exe</code> to verify it doesn't regress to Extract-to</li>
 </ul>
 <hr />
-<h2 id="6-quick-troubleshooting-matrix">6) Quick Troubleshooting Matrix</h2>
-<table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Root Cause</th>
-<th>Fix</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Always shows Extract-to</td>
-<td>Stub = <code>7z.sfx</code></td>
-<td>Replace with official <code>7zSD.sfx</code></td>
-</tr>
-<tr>
-<td>RunProgram appears ignored</td>
-<td>Same as above (stub doesn't process install params)</td>
-<td>Same fix</td>
-</tr>
-<tr>
-<td>Double-click does nothing</td>
-<td>Stub is non-official, corrupted, or wrong architecture</td>
-<td>Use <code>7zSD.sfx</code> from 7-Zip install dir or LZMA SDK <code>bin\</code></td>
-</tr>
-<tr>
-<td>Extracted OK but script can't find files</td>
-<td>Working directory / relative path mismatch</td>
-<td>Add <code>cd /d "%~dp0"</code> at top of bat; verify archive paths</td>
-</tr>
-</tbody>
-</table>
+<h2 id="5-constraints-avoid-hallucination">5) Constraints (Avoid Hallucination)</h2>
+<ul>
+<li><strong>The internal archive MUST be 7z</strong> (<code>-t7z</code>), not zip</li>
+<li>Windows Explorer will <strong>not</strong> treat it as a zip; but 7-Zip/WinRAR can unpack it</li>
+<li>For "right-click extract" behavior, distribute a <strong>zip portable package</strong> instead — don't try to disguise SFX as zip</li>
+</ul>
 
 
 
