@@ -6,44 +6,44 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Configure Windows 10/11 to use Zed editor for the right-click "Edit" option on .bat files">
+        <meta name="description" content="A complete walkthrough of diagnosing and fixing a black screen during the splash sequence in a Bevy 0.14 game project, including wrong turns and lessons learned">
       
       
         <meta name="author" content="k4m7v2pz">
       
       
-        <link rel="canonical" href="https://k4m7v2pz.github.io/en/blog/operating-system/windows/set-zed-as-bat-editor/">
+        <link rel="canonical" href="https://k4m7v2pz.github.io/en/blog/games/mighty-rodent-splash-black-screen-debug/">
       
       
-        <link rel="prev" href="../llm-deploy-silent-7zip-sfx/">
+        <link rel="prev" href="../../operating-system/windows/set-zed-as-bat-editor/">
       
       
-        <link rel="next" href="../../../games/mighty-rodent-splash-black-screen-debug/">
+        <link rel="next" href="../../../about/">
       
       
         
-          <link rel="alternate" href="../../../../../blog/operating-system/windows/set-zed-as-bat-editor/" hreflang="zh">
+          <link rel="alternate" href="../../../../blog/games/mighty-rodent-splash-black-screen-debug/" hreflang="zh">
         
           <link rel="alternate" href="./" hreflang="en">
         
       
       
-        <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../../../../feed_rss_created.xml">
-        <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="../../../../../feed_rss_updated.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../../../feed_rss_created.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="../../../../feed_rss_updated.xml">
       
-      <link rel="icon" href="../../../../../assets/images/favicon.png">
+      <link rel="icon" href="../../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>Set Zed as the Default Editor for .bat Files - K4m7v2pz's Blog</title>
+        <title>Debugging Black Screen on Mighty Rodent Splash Screen - K4m7v2pz's Blog</title>
       
     
     
-      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -62,7 +62,7 @@
       
     
     
-    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -87,7 +87,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#set-zed-as-the-default-editor-for-bat-files" class="md-skip">
+        <a href="#debugging-black-screen-on-mighty-rodent-splash-screen" class="md-skip">
           Skip to content
         </a>
       
@@ -103,7 +103,7 @@
 
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../../../" title="K4m7v2pz&#39;s Blog" class="md-header__button md-logo" aria-label="K4m7v2pz's Blog" data-md-component="logo">
+    <a href="../../../" title="K4m7v2pz&#39;s Blog" class="md-header__button md-logo" aria-label="K4m7v2pz's Blog" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -123,7 +123,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Set Zed as the Default Editor for .bat Files
+              Debugging Black Screen on Mighty Rodent Splash Screen
             
           </span>
         </div>
@@ -170,7 +170,7 @@
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="../../../../../blog/operating-system/windows/set-zed-as-bat-editor/" hreflang="zh" class="md-select__link">
+            <a href="../../../../blog/games/mighty-rodent-splash-black-screen-debug/" hreflang="zh" class="md-select__link">
               中文
             </a>
           </li>
@@ -256,7 +256,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../../" class="md-tabs__link">
+      <a href="../../../" class="md-tabs__link">
         
   
   
@@ -273,8 +273,6 @@
   
   
   
-    
-  
   
     
     
@@ -282,13 +280,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../../gnulinux/google-pinyin-installation-ubuntu-derivatives/" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../operating-system/gnulinux/google-pinyin-installation-ubuntu-derivatives/" class="md-tabs__link">
           
   
   
@@ -309,7 +305,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../tools/" class="md-tabs__link">
+      <a href="../../tools/" class="md-tabs__link">
         
   
   
@@ -326,11 +322,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../../games/mighty-rodent-splash-black-screen-debug/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
           
   
   
@@ -348,7 +346,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../../about/" class="md-tabs__link">
+      <a href="../../../about/" class="md-tabs__link">
         
   
   
@@ -391,7 +389,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../../../" title="K4m7v2pz&#39;s Blog" class="md-nav__button md-logo" aria-label="K4m7v2pz's Blog" data-md-component="logo">
+    <a href="../../../" title="K4m7v2pz&#39;s Blog" class="md-nav__button md-logo" aria-label="K4m7v2pz's Blog" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -421,7 +419,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../" class="md-nav__link">
+      <a href="../../../" class="md-nav__link">
         
   
   
@@ -445,31 +443,26 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
             
   
   
@@ -487,7 +480,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -511,20 +504,17 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
         
           
-          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="">
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
             
   
   
@@ -560,7 +550,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../gnulinux/google-pinyin-installation-ubuntu-derivatives/" class="md-nav__link">
+      <a href="../../operating-system/gnulinux/google-pinyin-installation-ubuntu-derivatives/" class="md-nav__link">
         
   
   
@@ -593,31 +583,26 @@
                 
   
   
-    
   
   
-  
     
     
     
     
       
       
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
         
           
-          
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
-        
-          
-          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
             
   
   
@@ -635,7 +620,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -653,7 +638,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../embed-python-pip-installation-windows/" class="md-nav__link">
+      <a href="../../operating-system/windows/embed-python-pip-installation-windows/" class="md-nav__link">
         
   
   
@@ -681,7 +666,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../7zip-sfx-stub-selection/" class="md-nav__link">
+      <a href="../../operating-system/windows/7zip-sfx-stub-selection/" class="md-nav__link">
         
   
   
@@ -709,7 +694,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../fix-7zip-sfx-runprogram-failure/" class="md-nav__link">
+      <a href="../../operating-system/windows/fix-7zip-sfx-runprogram-failure/" class="md-nav__link">
         
   
   
@@ -737,7 +722,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../llm-deploy-silent-7zip-sfx/" class="md-nav__link">
+      <a href="../../operating-system/windows/llm-deploy-silent-7zip-sfx/" class="md-nav__link">
         
   
   
@@ -762,6 +747,133 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../../operating-system/windows/set-zed-as-bat-editor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Set Zed as bat Editor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Games
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Games
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
     
   
   
@@ -781,7 +893,7 @@
   <span class="md-ellipsis">
     
   
-    Set Zed as bat Editor
+    Debugging Black Screen on Mighty Rodent Splash Screen
   
 
     
@@ -799,7 +911,7 @@
   <span class="md-ellipsis">
     
   
-    Set Zed as bat Editor
+    Debugging Black Screen on Mighty Rodent Splash Screen
   
 
     
@@ -825,10 +937,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
+  <a href="#1-symptoms" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Overview
+        1. Symptoms
       
     </span>
   </a>
@@ -836,22 +948,55 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#implementation-principle" class="md-nav__link">
+  <a href="#2-wrong-turns-during-diagnosis-in-chronological-order" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Implementation Principle
+        2. Wrong Turns During Diagnosis (in chronological order)
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Implementation Principle">
+    <nav class="md-nav" aria-label="2. Wrong Turns During Diagnosis (in chronological order)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#windows-file-association-mechanism" class="md-nav__link">
+  <a href="#wrong-turn-1-suspecting-the-splash-system-wasnt-compiled-in" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Windows File Association Mechanism
+        Wrong Turn 1: Suspecting the splash system wasn't compiled in
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wrong-turn-2-suspecting-onenterdefault_state-doesnt-fire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wrong Turn 2: Suspecting OnEnter(default_state) doesn't fire
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wrong-turn-3-misled-by-log-diagnostics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wrong Turn 3: Misled by log diagnostics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wrong-turn-4-searching-bevy-source-for-camera2dbundle-default-transform" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wrong Turn 4: Searching Bevy source for Camera2dBundle default transform
       
     </span>
   </a>
@@ -864,177 +1009,54 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#configuration-steps" class="md-nav__link">
+  <a href="#3-root-cause-pinned-down-by-a-diagnostic-system" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Configuration Steps
+        3. Root Cause (Pinned Down by a Diagnostic System)
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Configuration Steps">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#method-1-use-powershell-script-recommended" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Method 1: Use PowerShell Script (Recommended)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#method-2-manually-modify-the-registry" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Method 2: Manually Modify the Registry
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#verification" class="md-nav__link">
+  <a href="#4-fix" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Verification
+        4. Fix
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Verification">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#check-registry-settings" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Check Registry Settings
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#test-the-effect" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Test the Effect
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#notes" class="md-nav__link">
+  <a href="#5-minor-changes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Notes
+        5. Minor Changes
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Notes">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#userchoice-priority-issue" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        UserChoice Priority Issue
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#restart-file-explorer" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Restart File Explorer
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#migrate-to-another-editor" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Migrate to Another Editor
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#common-issues" class="md-nav__link">
+  <a href="#6-lessons-learned" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Common Issues
+        6. Lessons Learned
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Common Issues">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#garbled-text-in-right-click-menu" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Garbled Text in Right-Click Menu
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#double-click-behavior-changed-after-modification" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Double-Click Behavior Changed After Modification
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#summary" class="md-nav__link">
+  <a href="#7-verification" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Summary
+        7. Verification
       
     </span>
   </a>
@@ -1056,14 +1078,6 @@
     </li>
   
 
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
     
       
       
@@ -1072,121 +1086,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../tools/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Tools
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
-        
-          
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Games
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Games
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../games/mighty-rodent-splash-black-screen-debug/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Debugging Black Screen on Mighty Rodent Splash Screen
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../../about/" class="md-nav__link">
+      <a href="../../../about/" class="md-nav__link">
         
   
   
@@ -1226,100 +1126,175 @@
   
 
 
-<h1 id="set-zed-as-the-default-editor-for-bat-files">Set Zed as the Default Editor for .bat Files</h1>
-<h2 id="overview">Overview</h2>
-<p>This document describes how to configure the right-click menu for <code>.bat</code> files in Windows 10 to achieve the following effects:</p>
+<h1 id="debugging-black-screen-on-mighty-rodent-splash-screen">Debugging Black Screen on Mighty Rodent Splash Screen</h1>
+<blockquote>
+<p>Date: 2026-07-09
+Project: rust-bevy-mighty-rodent（Bevy 0.14 rewrite of Mighty Rodent）
+Symptom: After <code>cargo run</code>, the game window shows a black screen for ~2 seconds, then jumps straight to MainMenu — the two splash images (<code>jaggedlogo.jpg</code> / <code>mainpic.jpg</code>) never appear.</p>
+</blockquote>
+<h2 id="1-symptoms">1. Symptoms</h2>
 <ul>
-<li><strong>Double-click .bat file</strong>: Keep the default behavior, execute the script using Windows Terminal</li>
-<li><strong>Right-click menu "Edit"</strong>: Open the file using Zed editor</li>
+<li>Window appears → black screen for ~2s → MainMenu.</li>
+<li>Expected: jaggedlogo.jpg fully visible 1.5s → fade to black 0.8s → mainpic.jpg brighten from black + blue loading bar 2.0s → hold bright 0.5s → MainMenu.</li>
 </ul>
-<h2 id="implementation-principle">Implementation Principle</h2>
-<h3 id="windows-file-association-mechanism">Windows File Association Mechanism</h3>
-<p>Windows manages file associations through the registry, with priority order:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>HKCU\Software\Classes &gt; HKLM\Software\Classes
-</code></pre></div>
-<p>The default association for <code>.bat</code> files is <code>batfile</code>, which executes <code>cmd.exe /c xxx.bat</code> when double-clicked. We only need to modify the "Edit" option in the right-click menu without affecting the default execution behavior.</p>
-<h2 id="configuration-steps">Configuration Steps</h2>
-<h3 id="method-1-use-powershell-script-recommended">Method 1: Use PowerShell Script (Recommended)</h3>
-<p>Create and run the following PowerShell script:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c"># Set right-click &quot;Edit&quot; for .bat files to open with Zed</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nv">$zedPath</span> <span class="p">=</span> <span class="s2">&quot;C:\Users\user\AppData\Local\Programs\Zed\Zed.exe&quot;</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c"># Create right-click menu &quot;Edit&quot; option</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">reg</span> <span class="n">add</span> <span class="s2">&quot;HKCU\Software\Classes\batfile\shell\edit&quot;</span> <span class="p">/</span><span class="n">ve</span> <span class="p">/</span><span class="n">d</span> <span class="s2">&quot;Edit&quot;</span> <span class="p">/</span><span class="n">f</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">reg</span> <span class="n">add</span> <span class="s2">&quot;HKCU\Software\Classes\batfile\shell\edit\command&quot;</span> <span class="p">/</span><span class="n">ve</span> <span class="p">/</span><span class="n">d</span> <span class="s2">&quot;</span><span class="se">`&quot;</span><span class="s2">$zedPath</span><span class="se">`&quot;</span><span class="s2"> </span><span class="se">`&quot;</span><span class="s2">%1</span><span class="se">`&quot;</span><span class="s2">&quot;</span> <span class="p">/</span><span class="n">f</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="nb">Write-Host</span> <span class="s2">&quot;Configuration completed!&quot;</span>
-</code></pre></div>
-<h3 id="method-2-manually-modify-the-registry">Method 2: Manually Modify the Registry</h3>
-<ol>
-<li>
-<p>Open Registry Editor: <code>regedit</code></p>
-</li>
-<li>
-<p>Navigate to the following path:
-   <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>HKEY_CURRENT_USER\Software\Classes\batfile\shell\edit
-</code></pre></div></p>
-</li>
-<li>
-<p>Set the default value to <code>Edit</code></p>
-</li>
-<li>
-<p>Create a <code>command</code> subkey under <code>edit</code> and set its default value to:
-   <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>&quot;C:\Users\user\AppData\Local\Programs\Zed\Zed.exe&quot; &quot;%1&quot;
-</code></pre></div></p>
-</li>
-</ol>
-<h2 id="verification">Verification</h2>
-<h3 id="check-registry-settings">Check Registry Settings</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>reg query &quot;HKCU\Software\Classes\batfile\shell\edit&quot; /s
-</code></pre></div>
-<p>Expected output:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>HKEY_CURRENT_USER\Software\Classes\batfile\shell\edit
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    (Default)    REG_SZ    Edit
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>HKEY_CURRENT_USER\Software\Classes\batfile\shell\edit\command
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    (Default)    REG_SZ    &quot;C:\Users\user\AppData\Local\Programs\Zed\Zed.exe&quot; &quot;%1&quot;
-</code></pre></div>
-<h3 id="test-the-effect">Test the Effect</h3>
-<ol>
-<li><strong>Double-click .bat file</strong>: Should open Windows Terminal and execute the script</li>
-<li><strong>Right-click .bat file → Edit</strong>: Should open the file with Zed</li>
-</ol>
-<h2 id="notes">Notes</h2>
-<h3 id="userchoice-priority-issue">UserChoice Priority Issue</h3>
-<p>If the changes don't take effect, it may be because <code>UserChoice</code> settings override your configuration. Remove it:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nb">Remove-Item</span> <span class="n">-Path</span> <span class="s2">&quot;HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.bat\UserChoice&quot;</span> <span class="n">-Force</span> <span class="n">-ErrorAction</span> <span class="n">SilentlyContinue</span>
-</code></pre></div>
-<h3 id="restart-file-explorer">Restart File Explorer</h3>
-<p>After modifying the registry, it's recommended to restart File Explorer for changes to take effect:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nb">Stop-Process</span> <span class="n">-Name</span> <span class="n">explorer</span> <span class="n">-Force</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nb">Start-Process</span> <span class="n">explorer</span>
-</code></pre></div>
-<h3 id="migrate-to-another-editor">Migrate to Another Editor</h3>
-<p>If you switch to another editor later (e.g., VS Code, Notepad++, etc.), simply modify the <code>command</code> path:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">reg</span> <span class="n">add</span> <span class="s2">&quot;HKCU\Software\Classes\batfile\shell\edit\command&quot;</span> <span class="p">/</span><span class="n">ve</span> <span class="p">/</span><span class="n">d</span> <span class="s2">&quot;</span><span class="se">`&quot;</span><span class="s2">C:\Program Files\Microsoft VS Code\Code.exe</span><span class="se">`&quot;</span><span class="s2"> </span><span class="se">`&quot;</span><span class="s2">%1</span><span class="se">`&quot;</span><span class="s2">&quot;</span> <span class="p">/</span><span class="n">f</span>
-</code></pre></div>
-<h2 id="common-issues">Common Issues</h2>
-<h3 id="garbled-text-in-right-click-menu">Garbled Text in Right-Click Menu</h3>
-<p>Cause: Menu text encoding error in the registry.</p>
-<p>Solution:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">reg</span> <span class="n">delete</span> <span class="s2">&quot;HKCU\Software\Classes\batfile\shell\edit&quot;</span> <span class="p">/</span><span class="n">f</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">reg</span> <span class="n">add</span> <span class="s2">&quot;HKCU\Software\Classes\batfile\shell\edit&quot;</span> <span class="p">/</span><span class="n">ve</span> <span class="p">/</span><span class="n">d</span> <span class="s2">&quot;Edit&quot;</span> <span class="p">/</span><span class="n">f</span>
-</code></pre></div>
-<h3 id="double-click-behavior-changed-after-modification">Double-Click Behavior Changed After Modification</h3>
-<p>Cause: May have incorrectly modified the default program for <code>.bat</code> files.</p>
-<p>Solution: Restore the default association:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">reg</span> <span class="n">add</span> <span class="s2">&quot;HKCU\Software\Classes\.bat&quot;</span> <span class="p">/</span><span class="n">ve</span> <span class="p">/</span><span class="n">d</span> <span class="s2">&quot;batfile&quot;</span> <span class="p">/</span><span class="n">f</span>
-</code></pre></div>
-<h2 id="summary">Summary</h2>
-<p>By modifying the <code>HKCU\Software\Classes\batfile\shell\edit</code> registry key, we achieved:</p>
+<h2 id="2-wrong-turns-during-diagnosis-in-chronological-order">2. Wrong Turns During Diagnosis (in chronological order)</h2>
+<h3 id="wrong-turn-1-suspecting-the-splash-system-wasnt-compiled-in">Wrong Turn 1: Suspecting the splash system wasn't compiled in</h3>
 <ul>
-<li>Keep the default execution behavior of <code>.bat</code> files (using Windows Terminal)</li>
-<li>Use Zed for the right-click "Edit" option</li>
-<li>Configuration doesn't affect system-level settings (only affects current user)</li>
+<li><code>src/splash.rs</code> appeared as <code>??</code> (untracked) in <code>git status</code>, raising suspicion it wasn't linked into the binary.</li>
+<li>Verified: <code>cargo check</code> passes, <code>main.rs:4</code> has <code>mod splash;</code>, <code>main.rs:105</code> registers <code>splash::SplashPlugin</code> — the code is indeed compiled in.</li>
+<li><strong>Conclusion: Not a compilation issue.</strong></li>
 </ul>
-<p>This approach meets editing needs without breaking the normal execution functionality of scripts.</p>
+<h3 id="wrong-turn-2-suspecting-onenterdefault_state-doesnt-fire">Wrong Turn 2: Suspecting <code>OnEnter(default_state)</code> doesn't fire</h3>
+<ul>
+<li><code>AppState::SplashLogo</code> is the <code>#[default]</code> initial state, and <code>show_splash_logo</code> was originally scheduled on <code>OnEnter(SplashLogo)</code>.</li>
+<li>Suspected that Bevy 0.14 doesn't fire <code>OnEnter</code> for the default state at startup.</li>
+<li>Fix: moved <code>show_splash_logo</code> from <code>OnEnter</code> to <code>Startup</code>.</li>
+<li>Verified: re-ran → still black screen.</li>
+<li><strong>Conclusion: Moving to <code>Startup</code> was correct (kept), but it wasn't the root cause.</strong></li>
+</ul>
+<h3 id="wrong-turn-3-misled-by-log-diagnostics">Wrong Turn 3: Misled by log diagnostics</h3>
+<ul>
+<li>Relied on <code>info!("Splash: Jaggedblade logo")</code> to confirm the system executed. This line appeared <strong>0 times</strong> in the log.</li>
+<li>Inferred: "the splash system didn't run" — <strong>this inference was wrong</strong>.</li>
+<li>Truth: <code>main.rs:93</code> has <code>.disable::&lt;LogPlugin&gt;()</code>, which disables Bevy's built-in logger. But <code>info!</code> in <code>src/splash.rs</code> comes from <code>bevy::prelude::*</code> (the Bevy logger), so it's <strong>silenced entirely</strong>. Meanwhile <code>main.rs:120</code>'s <code>log::info!("Bevy app starting")</code> uses the <code>log</code> crate (routed through simplelog), so it prints fine.</li>
+<li><strong>Gotcha: <code>bevy::prelude::*</code>'s <code>info!</code> ≠ <code>log::info!</code>. After <code>disable::&lt;LogPlugin&gt;()</code>, the former is silent while the latter works. When diagnosing Bevy systems that use <code>info!</code>, switch to <code>log::info!</code>.</strong></li>
+<li>Verified: replaced all 4 <code>info!</code> calls in splash with <code>log::info!</code> → logs finally appeared.</li>
+<li><strong>Conclusion: It was a diagnostic blind spot, not a missing system.</strong></li>
+</ul>
+<h3 id="wrong-turn-4-searching-bevy-source-for-camera2dbundle-default-transform">Wrong Turn 4: Searching Bevy source for <code>Camera2dBundle</code> default transform</h3>
+<ul>
+<li>Wanted to confirm whether the camera's default z is positive (which would put z=0 sprites behind the camera).</li>
+<li>Grepped for <code>Camera2dBundle</code> in <code>~/.cargo/registry/src/.../bevy-0.14.2/crates/</code> — no output.</li>
+<li>After two rounds of searching, stopped per STOP WHEN STUCK.</li>
+<li><strong>Conclusion: Don't dig through Bevy source for API defaults; just print the runtime transform values from a diagnostic system.</strong></li>
+</ul>
+<h2 id="3-root-cause-pinned-down-by-a-diagnostic-system">3. Root Cause (Pinned Down by a Diagnostic System)</h2>
+<p>Added a temporary <code>splash_diag_system</code> (in <code>Update</code>, with a one-shot <code>Local</code> flag) inside <code>SplashPlugin::build</code>, using <code>log::info!</code> to print camera count, splash entity count, transforms, custom_size, and texture handle paths:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>DIAG: cameras=1, splash_entities=2, splash_images=1
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>DIAG cam0: translation=Vec3(0.0, 0.0, 0.0) (z=0.00)
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>DIAG img0: translation=Vec3(0.0, 0.0, 0.0) (z=0.00) custom_size=Some(Vec2(800.0, 600.0)) path=gfx/jaggedlogo.jpg
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>Splash: Jaggedblade logo (Startup)
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>Splash: Main title picture (loading)
+</code></pre></div>
+<p><strong>Facts established:</strong>
+- The splash system executed (both stages ran).
+- The camera was spawned at origin z=0, looking toward -Z (Camera2dBundle default).
+- The splash image was spawned with the correct texture handle path (<code>gfx/jaggedlogo.jpg</code>) and custom_size (800×600).
+- <strong>The image is at z=0, coincident with the camera plane.</strong></p>
+<p><strong>Root cause:</strong> Bevy's 2D camera near plane is slightly in front of z=0. <strong>A sprite at z=0 coincides with the camera plane and is not rendered by the 2D pipeline</strong> → black screen. All visible sprites must have <strong>negative</strong> z values (in front of the camera), with smaller z being farther away.</p>
+<p>The original z values were all wrong:</p>
+<table>
+<thead>
+<tr>
+<th>Sprite</th>
+<th>Original z</th>
+<th>Issue</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Black background</td>
+<td>-1.0</td>
+<td>OK (always in front of camera)</td>
+</tr>
+<tr>
+<td>Splash images (logo + mainpic)</td>
+<td>0.0</td>
+<td>Coincident with camera plane, not rendered → black screen</td>
+</tr>
+<tr>
+<td>Loading bar background</td>
+<td>0.5</td>
+<td>Positive value, behind camera, invisible</td>
+</tr>
+<tr>
+<td>Loading bar fill</td>
+<td>1.0</td>
+<td>Same as above</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4-fix">4. Fix</h2>
+<p>In <code>src/splash.rs</code>, changed all splash sprite z values to negative, ordered by layer from far to near:</p>
+<table>
+<thead>
+<tr>
+<th>Sprite</th>
+<th>New z</th>
+<th>Layer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Black background</td>
+<td>-1.0 (unchanged)</td>
+<td>Farthest</td>
+</tr>
+<tr>
+<td>Splash images</td>
+<td>-0.5</td>
+<td>In front of background</td>
+</tr>
+<tr>
+<td>Loading bar background</td>
+<td>-0.4</td>
+<td>In front of images</td>
+</tr>
+<tr>
+<td>Loading bar fill</td>
+<td>-0.3</td>
+<td>Frontmost</td>
+</tr>
+</tbody>
+</table>
+<p>Code anchors:
+- <code>spawn_splash</code>: splash image <code>Transform::from_xyz(0.0, 0.0, -0.5)</code> (was 0.0)
+- <code>show_splash_main</code>: loading bar background <code>Transform::from_xyz(0.0, -280.0, -0.4)</code> (was 0.5)
+- <code>show_splash_main</code>: loading bar fill <code>Transform::from_xyz(-200.0, -280.0, -0.3)</code> (was 1.0)</p>
+<h2 id="5-minor-changes">5. Minor Changes</h2>
+<ol>
+<li><strong><code>show_splash_logo</code> moved to <code>Startup</code></strong> (workaround for Bevy 0.14 <code>OnEnter(default_state)</code> not firing) — kept, as it aligns with timing.</li>
+<li><strong>Replaced 4 <code>info!</code> calls with <code>log::info!</code> in splash</strong> — kept, so diagnostics actually reach simplelog.</li>
+<li><strong>Diagnostic system <code>splash_diag_system</code></strong> — deleted, its mission is complete.</li>
+<li><strong>Loading bar color changed to green</strong>: <code>Color::srgb(0.0, 0.8, 0.0)</code> (was <code>Color::srgb(0.0, 0.8, 1.0)</code> blue).</li>
+</ol>
+<h2 id="6-lessons-learned">6. Lessons Learned</h2>
+<table>
+<thead>
+<tr>
+<th>Gotcha</th>
+<th>Takeaway</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>bevy::prelude::*</code>'s <code>info!</code> is silent after <code>disable::&lt;LogPlugin&gt;()</code></td>
+<td>When diagnosing whether a Bevy system executes, use <code>log::info!</code> (routed through simplelog), not <code>info!</code></td>
+</tr>
+<tr>
+<td>Bevy 2D camera looks toward -Z, near plane is in front of 0</td>
+<td><strong>2D sprite z must be negative</strong> to be visible; z=0 coincides with the camera plane and won't render; positive values are behind the camera and invisible</td>
+</tr>
+<tr>
+<td><code>OnEnter(default_state)</code> doesn't fire in Bevy 0.14</td>
+<td>Use <code>Startup</code> for initialization systems on the default state, not <code>OnEnter</code></td>
+</tr>
+<tr>
+<td>Searching Bevy source for API defaults</td>
+<td>Don't dig through source; print runtime values from a diagnostic system</td>
+</tr>
+<tr>
+<td>"No log output" → "System didn't run"</td>
+<td>First confirm the logging route (which logger is active) before inferring execution status</td>
+</tr>
+</tbody>
+</table>
+<h2 id="7-verification">7. Verification</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>cargo check  → passed (only 14 pre-existing unrelated warnings)
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>cargo run    → jaggedlogo.jpg fully visible → fade to black → mainpic.jpg brightens + green loading bar fills → MainMenu ✅
+</code></pre></div>
+<hr />
+<p>Co-Authored-By: AtomCode (GLM-5.2) <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#110;&#111;&#114;&#101;&#112;&#108;&#121;&#64;&#97;&#116;&#111;&#109;&#103;&#105;&#116;&#46;&#99;&#111;&#109;">&#110;&#111;&#114;&#101;&#112;&#108;&#121;&#64;&#97;&#116;&#111;&#109;&#103;&#105;&#116;&#46;&#99;&#111;&#109;</a></p>
 
 
 
@@ -1374,10 +1349,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../../../..", "features": ["navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "toc.integrate", "search.suggest", "search.highlight", "content.code.copy", "content.tabs.link", "header.autohide"], "search": "../../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "toc.integrate", "search.suggest", "search.highlight", "content.code.copy", "content.tabs.link", "header.autohide"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>
