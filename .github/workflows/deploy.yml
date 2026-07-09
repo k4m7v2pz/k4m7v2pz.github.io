@@ -22,19 +22,22 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install uv
-        uses: astral-sh/setup-uv@v3
-        with:
-          version: "latest"
+      - name: Install mdBook
+        run: |
+          curl -fsSL https://github.com/rust-lang/mdBook/releases/download/v0.5.4/mdbook-v0.5.4-x86_64-unknown-linux-gnu.tar.gz \
+            | tar xz -C /usr/local/bin
 
-      - name: Set up Python
-        run: uv python install 3.14
+      - name: Create output directory
+        run: mkdir -p ${{ github.workspace }}/site
 
-      - name: Install dependencies
-        run: uv sync
+      - name: Build Chinese (zh)
+        run: mdbook build ${{ github.workspace }}/book-zh --dest-dir ${{ github.workspace }}/site/zh
 
-      - name: Build site
-        run: uv run mkdocs build
+      - name: Build English (en)
+        run: mdbook build ${{ github.workspace }}/book-en --dest-dir ${{ github.workspace }}/site/en
+
+      - name: Copy root index
+        run: cp ${{ github.workspace }}/index.html ${{ github.workspace }}/site/
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4

@@ -1,0 +1,11 @@
+[book]
+title = "K4m7v2pz's Blog"
+authors = ["k4m7v2pz"]
+language = "en"
+src = "src"
+description = "k4m7v2pz's personal blog"
+
+[output.html]
+site-url = "https://k4m7v2pz.github.io/en/"
+edit-url-template = "https://github.com/k4m7v2pz/k4m7v2pz.github.io/edit/dev/book-en/{path}"
+git-repository-url = "https://github.com/k4m7v2pz/k4m7v2pz.github.io"

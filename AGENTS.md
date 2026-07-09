@@ -2,7 +2,7 @@
 
 本文件是本仓库的 Agent 协作约定。**Agent 在与人类的协作方式发生变动时，必须自动编辑本文件以反映现状。** 人类也可随时手动修订。
 
-本项目使用 TRAE AI IDE 和 MkDocs 构建。
+本项目使用 TRAE AI IDE 和 **mdBook**（Rust 静态站生成器）构建。
 
 ---
 
@@ -80,7 +80,7 @@ Agent 在执行 `git commit` 前必须：
 - 人类指定了新的代理或网络配置 → 不要写进 git，但要在本文件"附录"里记协作约束
 - 人类偏好变更（如"文章分类规则变了"）→ 在"附录"里记设计原则
 - 新的自动行为约定（如"中英文必须同步更新"）→ 在本文件里记成规则
-- 工具链锁定（如"MkDocs 版本锁定"）→ 在"附录"里记技术锚点
+- 工具链变更（如"从 MkDocs 迁到 mdBook"）→ 在本文件里更新技术锚点
 
 **执行方式**：Agent 在执行完变动后，`edit_file` 本文件追加/修订对应条目，下次会话 Agent 读到本文件即继承约定。
 
@@ -92,9 +92,11 @@ Agent 在执行 `git commit` 前必须：
 
 ### A. 技术锚点
 
-- **MkDocs + Material 主题**：`mkdocs.yml` 配了 i18n 中英文双语言、Material 主题、RSS 插件。
-- **Python 3.10+，uv 包管理器**：用 `uv sync` 安装依赖，`uv run mkdocs serve` 本地预览，`uv run mkdocs build` 构建。
-- **i18n 文档结构**：中文在 `docs/zh/`，英文在 `docs/en/`，通过 `mkdocs_static_i18n` 插件管理。
+- **静态站生成器：mdBook v0.5.x**（Rust 编写，单二进制）。不再使用 MkDocs / Python / uv。
+- **双语言分目录构建**：中文在 `book-zh/`，英文在 `book-en/`，各自有独立的 `book.toml` 和 `src/`。
+- **构建产物**：`bash build.sh` 同时构建中英文到 `site/zh/` 和 `site/en/`，根 `index.html` 提供语言选择页。
+- **CI/CD**：GitHub Actions（`.github/workflows/deploy.yml`）在 push 到 `dev` 分支时自动构建并部署到 GitHub Pages。
+- **mdBook 不需额外依赖**，只需安装 mdBook 二进制本身。
 
 ### B. 网络配置
 
@@ -106,20 +108,20 @@ Agent 在执行 `git commit` 前必须：
 1. **草稿先放 inbox**：来自外部 AI 或其他来源的 `.md` 文件应先放入 `inbox/`，由 Agent 处理。
 2. **Agent 处理步骤**：
    - 分析内容，识别语言
-   - 添加 MkDocs 标准 front matter（title/date/tags/description/categories）
-   - 根据内容主题确定目标目录
+   - 添加 mdBook 兼容的 front matter（标准 Markdown 元数据 YAML front matter）
+   - 根据内容主题确定目标目录（`book-zh/src/blog/` 或 `book-en/src/blog/`）
    - 中文文件自动翻译到英文版本
-   - 更新 `mkdocs.yml` 导航配置
+   - 更新对应语言的 `SUMMARY.md`
    - 删除 `inbox/` 中的原始文件
 3. **目录分类规则**：
 
 | 内容主题 | 中文路径 | 英文路径 |
 |---------|---------|---------|
-| Windows 工具/自动化 | `docs/zh/blog/operating-system/windows/` | `docs/en/blog/operating-system/windows/` |
-| Linux/Unix 相关 | `docs/zh/blog/operating-system/gnulinux/` | `docs/en/blog/operating-system/gnulinux/` |
-| 开发相关 | `docs/zh/blog/programming/` | `docs/en/blog/programming/` |
-| 通用工具 | `docs/zh/blog/tools/` | `docs/en/blog/tools/` |
-| 游戏相关 | `docs/zh/blog/games/` | `docs/en/blog/games/` |
+| Windows 工具/自动化 | `book-zh/src/blog/operating-system/windows/` | `book-en/src/blog/operating-system/windows/` |
+| Linux/Unix 相关 | `book-zh/src/blog/operating-system/gnulinux/` | `book-en/src/blog/operating-system/gnulinux/` |
+| 开发相关 | `book-zh/src/blog/programming/` | `book-en/src/blog/programming/` |
+| 通用工具 | `book-zh/src/blog/tools/` | `book-en/src/blog/tools/` |
+| 游戏相关 | `book-zh/src/blog/games/` | `book-en/src/blog/games/` |
 
 4. **中英文需保持同步更新**，对应目录结构一致。
 
@@ -130,23 +132,31 @@ Agent 在执行 `git commit` 前必须：
 
 ### E. 工作流锚点
 
-- **改动验证**：每次改动后 `uv run mkdocs build` 验证构建，不要跳过。
+- **改动验证**：每次改动后 `bash build.sh` 验证构建，不要跳过。
+- **本地预览**：构建后直接用浏览器打开 `site/zh/index.html` 或 `site/en/index.html`。
 - **commit 前核对暂存区**：按本文件"脱敏政策"第 4 条执行。
 
 ### F. 项目结构
 
 ```
-docs/
-├── zh/                    # 中文文档
-│   ├── index.md          # 首页
-│   ├── about.md          # 关于页
-│   └── blog/
-│       ├── operating-system/  # 操作系统相关文章
-│       │   ├── gnulinux/
-│       │   └── windows/
-│       ├── tools/             # 工具类文章（待填充）
-│       └── games/             # 游戏类文章
-└── en/                    # 英文文档
+book-zh/                   # 中文 mdBook 项目
+├── book.toml             # 中文版配置
+└── src/
+    ├── SUMMARY.md        # 中文目录
+    ├── index.md          # 首页
+    ├── about.md          # 关于页
+    └── blog/
+        ├── operating-system/
+        │   ├── gnulinux/
+        │   └── windows/
+        ├── tools/
+        ├── programming/
+        └── games/
+
+book-en/                   # 英文 mdBook 项目
+├── book.toml
+└── src/
+    ├── SUMMARY.md
     ├── index.md
     ├── about.md
     └── blog/
@@ -154,8 +164,11 @@ docs/
         │   ├── gnulinux/
         │   └── windows/
         ├── tools/
+        ├── programming/
         └── games/
 
-mkdocs.yml     # MkDocs 配置（含中英文 i18n 配置）
-inbox/         # 文章草稿收件箱
+build.sh                  # 本地构建脚本
+index.html                # 根语言选择页
+inbox/                    # 文章草稿收件箱
+.github/workflows/deploy.yml  # CI/CD
 ```
