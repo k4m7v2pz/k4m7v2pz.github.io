@@ -1,0 +1,108 @@
+site_name: K4m7v2pz's Blog
+site_url: https://k4m7v2pz.github.io
+site_author: k4m7v2pz
+site_description: k4m7v2pz 的博客
+
+repo_name: k4m7v2pz/k4m7v2pz.github.io
+repo_url: https://github.com/k4m7v2pz/k4m7v2pz.github.io
+
+theme:
+  name: material
+  language: zh
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: 切换到暗色模式
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: 切换到亮色模式
+  features:
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - toc.integrate
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.tabs.link
+    - header.autohide
+  navigation:
+    previous: false
+    next: false
+  hide:
+    - footer
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - admonition
+  - pymdownx.details
+  - pymdownx.mark
+  - attr_list
+  - md_in_html
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+plugins:
+  - search
+  - rss:
+      match_path: blog/.*
+      date_from_meta:
+        as_creation: date
+        as_update: date
+  - i18n:
+      docs_structure: folder
+      fallback_to_default: true
+      reconfigure_material: true
+      reconfigure_search: true
+      languages:
+        - locale: zh
+          name: 中文
+          default: true
+          build: true
+          site_name: "K4m7v2pz's Blog"
+          site_description: k4m7v2pz 的博客
+          nav:
+            - 首页: zh/index.md
+            - 操作系统:
+                - GNU/Linux:
+                    - 在 Ubuntu 衍生版上安装 Google 拼音: zh/blog/operating-system/gnulinux/google-pinyin-installation-ubuntu-derivatives.md
+                - Windows:
+                    - 嵌入式 Python Windows 版 pip 安装: zh/blog/operating-system/windows/embed-python-pip-installation-windows.md
+                    - 7-Zip SFX 标准 Stub 选型: zh/blog/operating-system/windows/7zip-sfx-stub-selection.md
+                    - 修复 RunProgram 失效: zh/blog/operating-system/windows/fix-7zip-sfx-runprogram-failure.md
+                    - LLM 静默部署 EXE: zh/blog/operating-system/windows/llm-deploy-silent-7zip-sfx.md
+                    - 设置 Zed 为 bat 编辑器: zh/blog/operating-system/windows/set-zed-as-bat-editor.md
+            - 工具: zh/blog/tools/
+            - 游戏: zh/blog/games/
+            - 关于: zh/about.md
+        - locale: en
+          name: English
+          build: true
+          site_name: "K4m7v2pz's Blog"
+          site_description: k4m7v2pz's personal blog
+          nav:
+            - Home: en/index.md
+            - Operating System:
+                - GNU/Linux:
+                    - Install Google Pinyin on Ubuntu Derivatives: en/blog/operating-system/gnulinux/google-pinyin-installation-ubuntu-derivatives.md
+                - Windows:
+                    - Embedded Python pip Installation: en/blog/operating-system/windows/embed-python-pip-installation-windows.md
+                    - 7-Zip SFX Standard Stub Selection: en/blog/operating-system/windows/7zip-sfx-stub-selection.md
+                    - Fix RunProgram Failure: en/blog/operating-system/windows/fix-7zip-sfx-runprogram-failure.md
+                    - LLM Silent EXE Deployment: en/blog/operating-system/windows/llm-deploy-silent-7zip-sfx.md
+                    - Set Zed as bat Editor: en/blog/operating-system/windows/set-zed-as-bat-editor.md
+            - Tools: en/blog/tools/
+            - Games: en/blog/games/
+            - About: en/about.md

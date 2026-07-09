@@ -3,3 +3,9 @@
 site
 __pycache__
 *.pyc
+
+reference/*
+!reference/README.md
+
+# AtomCode local-scope configs (machine-specific)
+.atomcode/local/

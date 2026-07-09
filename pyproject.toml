@@ -1,0 +1,12 @@
+[project]
+name = "pthmz-github-io"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "mkdocs>=1.6.1",
+    "mkdocs-material>=9.7.6",
+    "mkdocs-rss-plugin>=1.19.0",
+    "mkdocs-static-i18n>=1.3.1",
+]
