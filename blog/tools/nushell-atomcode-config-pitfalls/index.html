@@ -6,25 +6,25 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="记录 Bevy 0.14 游戏项目中 Splash 黑屏问题的完整诊断过程与修复方案，包含多个诊断弯路和经验教训">
+        <meta name="description" content="记录在 macOS 上配置 Nushell 0.113.1 与 AtomCode 时遇到的 5 个典型坑，包括配置目录路径错误、验证方式误区、PATH 继承问题、配置项名称混淆以及默认值覆盖问题">
       
       
         <meta name="author" content="k4m7v2pz">
       
       
-        <link rel="canonical" href="https://k4m7v2pz.github.io/blog/games/mighty-rodent-splash-black-screen-debug/">
+        <link rel="canonical" href="https://k4m7v2pz.github.io/blog/tools/nushell-atomcode-config-pitfalls/">
       
       
-        <link rel="prev" href="../../programming/rust-bevy-0.13-to-0.14-upgrade-guide/">
+        <link rel="prev" href="../../operating-system/windows/set-zed-as-bat-editor/">
       
       
-        <link rel="next" href="../../../about/">
+        <link rel="next" href="../wezterm-nushell-cargo-not-found/">
       
       
         
           <link rel="alternate" href="./" hreflang="zh">
         
-          <link rel="alternate" href="../../../en/blog/games/mighty-rodent-splash-black-screen-debug/" hreflang="en">
+          <link rel="alternate" href="../../../en/blog/tools/nushell-atomcode-config-pitfalls/" hreflang="en">
         
       
       
@@ -36,7 +36,7 @@
     
     
       
-        <title>Mighty Rodent Splash 黑屏踩坑记录 - K4m7v2pz's Blog</title>
+        <title>Nushell + AtomCode 配置踩坑记录 - K4m7v2pz's Blog</title>
       
     
     
@@ -87,7 +87,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#mighty-rodent-splash" class="md-skip">
+        <a href="#1" class="md-skip">
           跳转至
         </a>
       
@@ -123,7 +123,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Mighty Rodent Splash 黑屏踩坑记录
+              Nushell + AtomCode 配置踩坑记录
             
           </span>
         </div>
@@ -176,7 +176,7 @@
           </li>
         
           <li class="md-select__item">
-            <a href="../../../en/blog/games/mighty-rodent-splash-black-screen-debug/" hreflang="en" class="md-select__link">
+            <a href="../../../en/blog/tools/nushell-atomcode-config-pitfalls/" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
@@ -303,11 +303,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../tools/nushell-atomcode-config-pitfalls/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
           
   
   
@@ -343,13 +345,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="./" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../games/mighty-rodent-splash-black-screen-debug/" class="md-tabs__link">
           
   
   
@@ -839,26 +839,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   
@@ -876,7 +881,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -891,10 +896,35 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../tools/nushell-atomcode-config-pitfalls/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Nushell + AtomCode 配置踩坑记录
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -910,6 +940,324 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 背景
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-1nushell-confignushell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 坑 1：nushell 实际加载的配置目录不是 ~/.config/nushell/
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 坑 1：nushell 实际加载的配置目录不是 ~/.config/nushell/">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 现象
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 真相
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 修复
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-2nu-c-confignu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 坑 2：nu -c 不加载 config.nu，用它验证配置会误判
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 坑 2：nu -c 不加载 config.nu，用它验证配置会误判">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 现象
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 真相
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 正确验证方式
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-3-atomcode-not-found" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 坑 3：新开终端标签页报 atomcode not found，但旧会话里好好的
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 坑 3：新开终端标签页报 atomcode not found，但旧会话里好好的">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 现象
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 真因
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 修复
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-4-show_banner-banner" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 坑 4：配置项名是 show_banner，不是 banner
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 坑 4：配置项名是 show_banner，不是 banner">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 现象
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 真相
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-5github-issue-8698show_banner" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 坑 5：GitHub issue #8698——show_banner 被文件末尾的默认值覆盖
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. 坑 5：GitHub issue #8698——show_banner 被文件末尾的默认值覆盖">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 现象
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 真因
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 修复
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 最终生效配置
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. 最终生效配置">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-libraryapplication-supportnushellenvnu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 ~/Library/Application Support/nushell/env.nu
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-libraryapplication-supportnushellconfignu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 ~/Library/Application Support/nushell/config.nu（在注释段后追加）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. 总结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -922,7 +1270,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tools/wezterm-nushell-cargo-not-found/" class="md-nav__link">
+      <a href="../wezterm-nushell-cargo-not-found/" class="md-nav__link">
         
   
   
@@ -1041,31 +1389,26 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
             
   
   
@@ -1083,7 +1426,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1098,37 +1441,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Mighty Rodent Splash 黑屏踩坑记录
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../games/mighty-rodent-splash-black-screen-debug/" class="md-nav__link">
         
   
   
@@ -1144,153 +1460,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="目录">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        一、症状
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        二、诊断走过的弯路（按发生顺序）
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="二、诊断走过的弯路（按发生顺序）">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-splash" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        弯路 1：以为是 splash 系统没执行
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-onenter" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        弯路 2：以为是 OnEnter(默认状态) 不触发
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        弯路 3：被日志诊断误导
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-bevy-camera2dbundle-transform" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        弯路 4：在 Bevy 源码里查 Camera2dBundle 默认 transform
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        三、根因（诊断系统钉死）
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        四、修复
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        五、次要改动
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        六、经验沉淀
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        七、验证
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1350,175 +1519,101 @@
   
 
 
-<h1 id="mighty-rodent-splash">Mighty Rodent Splash 黑屏踩坑记录</h1>
-<blockquote>
-<p>日期：2026-07-09
-项目：rust-bevy-mighty-rodent（Bevy 0.14 重写 Mighty Rodent）
-现象：<code>cargo run</code> 后游戏窗口显示约 2 秒黑色，然后直接进主菜单，看不到 splash 两张图（<code>jaggedlogo.jpg</code> / <code>mainpic.jpg</code>）</p>
-</blockquote>
-<h2 id="_1">一、症状</h2>
-<ul>
-<li>窗口出现 → 黑屏约 2 秒 → 直接 MainMenu。</li>
-<li>期望：jaggedlogo.jpg 全显 1.5s → 淡到黑 0.8s → mainpic.jpg 从黑变亮 + 蓝色进度条 2.0s → 持亮 0.5s → MainMenu。</li>
-</ul>
-<h2 id="_2">二、诊断走过的弯路（按发生顺序）</h2>
-<h3 id="1-splash">弯路 1：以为是 splash 系统没执行</h3>
-<ul>
-<li><code>src/splash.rs</code> 是 <code>git status</code> 里的 <code>??</code> 未跟踪文件，怀疑没被编进 binary。</li>
-<li>验证：<code>cargo check</code> 通过，<code>main.rs:4</code> 有 <code>mod splash;</code>，<code>main.rs:105</code> 注册了 <code>splash::SplashPlugin</code>——代码确实编进去了。</li>
-<li><strong>结论：不是没编进。</strong></li>
-</ul>
-<h3 id="2-onenter">弯路 2：以为是 <code>OnEnter(默认状态)</code> 不触发</h3>
-<ul>
-<li><code>AppState::SplashLogo</code> 是 <code>#[default]</code> 初始态，<code>show_splash_logo</code> 原挂在 <code>OnEnter(SplashLogo)</code>。</li>
-<li>怀疑 Bevy 0.14 对"程序一开始就在的默认态"不触发 <code>OnEnter</code>。</li>
-<li>改法：把 <code>show_splash_logo</code> 从 <code>OnEnter</code> 改挂 <code>Startup</code>。</li>
-<li>验证：重跑 → 还是黑屏。</li>
-<li><strong>结论：改挂 Startup 是对的（保留），但不是黑屏根因。</strong></li>
-</ul>
-<h3 id="3">弯路 3：被日志诊断误导</h3>
-<ul>
-<li>想靠 <code>info!("Splash: Jaggedblade logo")</code> 确认系统执行没。日志里这条 <strong>0 次出现</strong>。</li>
-<li>推断："splash 系统没执行"——<strong>这个推断是错的</strong>。</li>
-<li>真相：<code>main.rs:93</code> <code>.disable::&lt;LogPlugin&gt;()</code> 禁了 Bevy 自带 logger，但 <code>src/splash.rs</code> 里 <code>info!</code> 是 <code>bevy::prelude::*</code> 的（走 Bevy logger），被禁后<strong>全沉默</strong>。而 <code>main.rs:120</code> 那条 <code>log::info!("Bevy app starting")</code> 走的是 <code>log</code> crate（simplelog 接的是这个），所以打得出来。</li>
-<li><strong>坑：<code>bevy::prelude::*</code> 的 <code>info!</code> ≠ <code>log::info!</code>。<code>disable::&lt;LogPlugin&gt;()</code> 后前者沉默，后者照常。诊断 splash 这类用 <code>info!</code> 的系统，要换 <code>log::info!</code>。</strong></li>
-<li>验证：把 splash 里 4 处 <code>info!</code> 全换成 <code>log::info!</code> → 日志真能打出来了。</li>
-<li><strong>结论：是诊断手段失灵，不是 splash 没执行。</strong></li>
-</ul>
-<h3 id="4-bevy-camera2dbundle-transform">弯路 4：在 Bevy 源码里查 <code>Camera2dBundle</code> 默认 transform</h3>
-<ul>
-<li>想确认相机默认 z 是不是正值（导致 z=0 的图在相机后面）。</li>
-<li>在 <code>~/.cargo/registry/src/.../bevy-0.14.2/crates/</code> 里 grep <code>Camera2dBundle</code> —— 无输出。</li>
-<li>绕了两轮没找到，按 STOP WHEN STUCK 放弃。</li>
-<li><strong>结论：别在 Bevy 源码里硬找 API，直接诊断系统打 transform 值。</strong></li>
-</ul>
-<h2 id="_3">三、根因（诊断系统钉死）</h2>
-<p>在 <code>SplashPlugin::build</code> 里临时加 <code>splash_diag_system</code>（Update，一次性 Local flag），用 <code>log::info!</code> 打相机数、splash 实体数、transform、custom_size、texture handle path：</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>DIAG: cameras=1, splash_entities=2, splash_images=1
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>DIAG cam0: translation=Vec3(0.0, 0.0, 0.0) (z=0.00)
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>DIAG img0: translation=Vec3(0.0, 0.0, 0.0) (z=0.00) custom_size=Some(Vec2(800.0, 600.0)) path=gfx/jaggedlogo.jpg
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>Splash: Jaggedblade logo (Startup)
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>Splash: Main title picture (loading)
+  <h1>Nushell + AtomCode 配置踩坑记录</h1>
+
+<p><strong>摘要：</strong> 本文记录了在 macOS 上配置 Nushell 0.113.1 与 AtomCode 时遇到的 5 个典型坑，包括配置目录路径错误、验证方式误区、PATH 继承问题、配置项名称混淆以及默认值覆盖问题，并给出最终生效配置。</p>
+<h2 id="1">1. 背景</h2>
+<p>日期：2026-07-07</p>
+<p>环境：macOS，Nushell 0.113.1（Homebrew），<code>nu</code> 在 <code>/opt/homebrew/bin/nu</code></p>
+<p>目标：① nushell 里能用 <code>atomcode</code> 命令；② 启动不显示 welcome message；③ 行末不显示时间</p>
+<h2 id="2-1nushell-confignushell">2. 坑 1：nushell 实际加载的配置目录不是 <code>~/.config/nushell/</code></h2>
+<h3 id="21">2.1 现象</h3>
+<p>在 <code>~/.config/nushell/env.nu</code> 里写 <code>$env.PROMPT_COMMAND_RIGHT = {|| "" }</code>，毫无效果——行末时间照旧显示。</p>
+<h3 id="22">2.2 真相</h3>
+<p>macOS 上 nushell 0.113 加载的默认配置目录是：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>~/Library/Application Support/nushell/
 </code></pre></div>
-<p><strong>事实：</strong>
-- splash 系统执行了（两段都跑了）。
-- 相机 spawn 了，位于原点 z=0，看向 -Z（Camera2dBundle 默认）。
-- splash 图 spawn 了，texture handle 路径对（<code>gfx/jaggedlogo.jpg</code>），custom_size 对（800×600）。
-- <strong>图 z=0，与相机平面重合。</strong></p>
-<p><strong>根因：</strong> Bevy 2D 相机近平面在 z=0 前一小段，<strong>z=0 的 sprite 与相机平面重合，2D 渲染管线不绘制</strong> → 黑屏。所有可见 sprite 的 z 必须为<strong>负</strong>（在相机前方），且 z 越小越远。</p>
-<p>原代码 z 值全错：</p>
-<table>
-<thead>
-<tr>
-<th>sprite</th>
-<th>原 z</th>
-<th>问题</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>黑背景</td>
-<td>-1.0</td>
-<td>OK（一直在相机前）</td>
-</tr>
-<tr>
-<td>splash 图（logo + mainpic）</td>
-<td>0.0</td>
-<td>与相机平面重合，不绘制 → 黑屏</td>
-</tr>
-<tr>
-<td>loading bar 背景</td>
-<td>0.5</td>
-<td>正值，在相机后面，不可见</td>
-</tr>
-<tr>
-<td>loading bar 填充</td>
-<td>1.0</td>
-<td>同上</td>
-</tr>
-</tbody>
-</table>
-<h2 id="_4">四、修复</h2>
-<p><code>src/splash.rs</code>，把所有 splash sprite 的 z 改成负值，按层序从远到近：</p>
-<table>
-<thead>
-<tr>
-<th>sprite</th>
-<th>新 z</th>
-<th>层序</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>黑背景</td>
-<td>-1.0（不变）</td>
-<td>最远</td>
-</tr>
-<tr>
-<td>splash 图</td>
-<td>-0.5</td>
-<td>背景前</td>
-</tr>
-<tr>
-<td>loading bar 背景</td>
-<td>-0.4</td>
-<td>图前</td>
-</tr>
-<tr>
-<td>loading bar 填充</td>
-<td>-0.3</td>
-<td>最前</td>
-</tr>
-</tbody>
-</table>
-<p>代码锚点：
-- <code>spawn_splash</code> 里 splash 图的 <code>Transform::from_xyz(0.0, 0.0, -0.5)</code>（原 0.0）
-- <code>show_splash_main</code> 里 loading bar 背景 <code>Transform::from_xyz(0.0, -280.0, -0.4)</code>（原 0.5）
-- <code>show_splash_main</code> 里 loading bar 填充 <code>Transform::from_xyz(-200.0, -280.0, -0.3)</code>（原 1.0）</p>
-<h2 id="_5">五、次要改动</h2>
-<ol>
-<li><strong><code>show_splash_logo</code> 改挂 <code>Startup</code></strong>（绕开 Bevy 0.14 <code>OnEnter(默认态)</code> 不触发问题）——保留，与时序一致。</li>
-<li><strong>splash 里 4 处 <code>info!</code> 改 <code>log::info!</code></strong>——保留，让诊断信息真能打到 simplelog。</li>
-<li><strong>诊断系统 <code>splash_diag_system</code></strong>——已删除，它已完成使命。</li>
-<li><strong>进度条颜色改成绿色</strong>：<code>Color::srgb(0.0, 0.8, 0.0)</code>（原 <code>Color::srgb(0.0, 0.8, 1.0)</code> 蓝色）。</li>
-</ol>
-<h2 id="_6">六、经验沉淀</h2>
-<table>
-<thead>
-<tr>
-<th>坑</th>
-<th>教训</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>bevy::prelude::*</code> 的 <code>info!</code> 在 <code>disable::&lt;LogPlugin&gt;()</code> 后沉默</td>
-<td>诊断 Bevy 系统执行情况，用 <code>log::info!</code>（走 simplelog），不要用 <code>info!</code></td>
-</tr>
-<tr>
-<td>Bevy 2D 相机看 -Z，近平面在 0 前</td>
-<td><strong>2D sprite 的 z 必须为负</strong>才可见；z=0 与相机平面重合不绘制；正值在相机后面不可见</td>
-</tr>
-<tr>
-<td><code>OnEnter(默认状态)</code> 在 Bevy 0.14 不触发</td>
-<td>默认态的初始化系统挂 <code>Startup</code>，不要挂 <code>OnEnter</code></td>
-</tr>
-<tr>
-<td>在 Bevy 源码里硬找 API</td>
-<td>别绕源码，直接诊断系统打运行时值</td>
-</tr>
-<tr>
-<td>凭"日志没打"推断"系统没执行"</td>
-<td>先确认日志路由对不对（logger 是哪套），再推断执行情况</td>
-</tr>
-</tbody>
-</table>
-<h2 id="_7">七、验证</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>cargo check  → 通过（只剩先前 14 个无关 warning）
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>cargo run    → jaggedlogo.jpg 全显 → 淡到黑 → mainpic.jpg 变亮 + 绿色进度条填满 → MainMenu ✅
+<p><strong>不是</strong> <code>~/.config/nushell/</code>（后者是 Linux 的路径）。确认当前实际加载目录：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>nu
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>$nu.default-config-dir
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a># =&gt; /Users/&lt;user&gt;/Library/Application Support/nushell
 </code></pre></div>
-<hr />
-<p>Co-Authored-By: AtomCode (GLM-5.2) <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#110;&#111;&#114;&#101;&#112;&#108;&#121;&#64;&#97;&#116;&#111;&#109;&#103;&#105;&#116;&#46;&#99;&#111;&#109;">&#110;&#111;&#114;&#101;&#112;&#108;&#121;&#64;&#97;&#116;&#111;&#109;&#103;&#105;&#116;&#46;&#99;&#111;&#109;</a></p>
+<p><code>~/.config/nushell/</code> 里那两个文件根本没被加载，写了等于白写。</p>
+<h3 id="23">2.3 修复</h3>
+<p>所有改动都放到 <code>~/Library/Application Support/nushell/</code> 下的 <code>env.nu</code> / <code>config.nu</code>。</p>
+<h2 id="3-2nu-c-confignu">3. 坑 2：<code>nu -c</code> 不加载 <code>config.nu</code>，用它验证配置会误判</h2>
+<h3 id="31">3.1 现象</h3>
+<p>在 <code>config.nu</code> 里设了 <code>$env.config.show_banner = false</code>，跑 <code>nu -c '$env.config.show_banner'</code> 返回 <code>true</code>，看似没生效。</p>
+<h3 id="32">3.2 真相</h3>
+<p><code>nu -c '...'</code>（非交互式脚本模式）<strong>根本不加载 <code>config.nu</code></strong>，它读的是内置默认值。所以用 <code>nu -c</code> 查 <code>$env.config.show_banner</code> 永远是默认的 <code>true</code>，会让人误以为设置没生效。</p>
+<h3 id="33">3.3 正确验证方式</h3>
+<p>用 <code>nu -e '...'</code>：执行命令后进入交互式 shell，<strong>会加载 <code>config.nu</code></strong>。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>nu<span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;print $&quot;banner=($env.config.show_banner)&quot;&#39;</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="c1"># =&gt; banner=false</span>
+</code></pre></div>
+<p>或者用 <code>expect</code> 模拟 TTY 启动真交互式会话来肉眼确认。</p>
+<h2 id="4-3-atomcode-not-found">4. 坑 3：新开终端标签页报 <code>atomcode not found</code>，但旧会话里好好的</h2>
+<h3 id="41">4.1 现象</h3>
+<p>在已开的终端里 nushell 能找到 <code>atomcode</code>（<code>which atomcode</code> 命中 <code>~/.local/bin/atomcode</code>）。但<strong>新开一个终端标签页</strong>后启动 nushell，跑 <code>atomcode</code> 报：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Error: nu::shell::external_command
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  × External command failed
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>   · Command `atomcode` not found
+</code></pre></div>
+<h3 id="42">4.2 真因</h3>
+<p><code>atomcode</code> 在 <code>~/.local/bin/</code>，该目录是被 <code>~/.zshrc</code> 里 <code>export PATH="~/.local/bin:$PATH"</code> 加进 PATH 的。但 macOS 终端 App（Terminal/iTerm）新开标签页时未必重跑 <code>~/.zshrc</code>——尤其当 shell 被设成「非登录」模式，或只读 <code>~/.zprofile</code>（而该文件是空的）时，新标签页拿到的是 GUI 进程继承来的精简 PATH，<strong>不含 <code>~/.local/bin</code></strong>。</p>
+<p>佐证：<code>launchctl getenv PATH</code> 输出为空，说明 GUI 进程层根本没设 PATH，新标签页的 PATH 全靠 zsh 启动文件，不保证跑 <code>~/.zshrc</code>。</p>
+<h3 id="43">4.3 修复</h3>
+<p>不依赖外部 shell 是否跑过 <code>~/.zshrc</code>，在 nushell 的 <code>env.nu</code>（每次启动无条件加载，早于 <code>config.nu</code>）里自己加 PATH：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a># ~/Library/Application Support/nushell/env.nu
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>use std/util &quot;path add&quot;
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>path add &quot;~/.local/bin&quot;
+</code></pre></div>
+<p>验证（故意给个不含 <code>~/.local/bin</code> 的精简外部 PATH，模拟最坏情况）：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>PATH=/opt/homebrew/bin:/usr/bin:/bin nu -e &#39;which atomcode | get command | print&#39;
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a># =&gt; atomcode   ← 仍可见
+</code></pre></div>
+<h2 id="5-4-show_banner-banner">5. 坑 4：配置项名是 <code>show_banner</code>，不是 <code>banner</code></h2>
+<h3 id="51">5.1 现象</h3>
+<p>跑 <code>nu -c '$env.config.banner'</code> 报：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Error: nu::shell::name_not_found
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>  · `-- did you mean &#39;show_banner&#39;?
+</code></pre></div>
+<h3 id="52">5.2 真相</h3>
+<p>关闭 welcome message 的配置项叫 <code>show_banner</code>（bool|string）：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>$env.config.show_banner = false      # 不显示
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>$env.config.show_banner = true       # 显示完整 banner（默认）
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>$env.config.show_banner = &quot;short&quot;    # 只显示启动耗时
+</code></pre></div>
+<p>查文档：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>config<span class="w"> </span>nu<span class="w"> </span>--doc<span class="w"> </span><span class="p">|</span><span class="w"> </span>nu-highlight<span class="w"> </span><span class="p">|</span><span class="w"> </span>less<span class="w"> </span>-R
+</code></pre></div>
+<h2 id="6-5github-issue-8698show_banner">6. 坑 5：GitHub issue #8698——<code>show_banner</code> 被文件末尾的默认值覆盖</h2>
+<h3 id="61">6.1 现象</h3>
+<p>有人在 <code>config.nu</code> 开头写 <code>$env.config.show_banner = false</code>，banner 依然出现。</p>
+<h3 id="62">6.2 真因</h3>
+<p>nushell 安装时生成的默认 <code>config.nu</code> 文件<strong>末尾自带</strong> <code>$env.config.show_banner = true</code>，写在开头的 <code>false</code> 被末尾的 <code>true</code> 覆盖。</p>
+<h3 id="63">6.3 修复</h3>
+<p>把自己的设置放在文件<strong>末尾</strong>，或删掉默认那行 <code>true</code>。可用 <code>config nu</code> 命令打开编辑器修改。</p>
+<h2 id="7">7. 最终生效配置</h2>
+<h3 id="71-libraryapplication-supportnushellenvnu">7.1 <code>~/Library/Application Support/nushell/env.nu</code></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a># 每次启动无条件加载，早于 config.nu
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a># 不依赖外部 shell 是否跑过 ~/.zshrc，自己确保 ~/.local/bin 在 PATH 里
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>use std/util &quot;path add&quot;
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>path add &quot;~/.local/bin&quot;
+</code></pre></div>
+<h3 id="72-libraryapplication-supportnushellconfignu">7.2 <code>~/Library/Application Support/nushell/config.nu</code>（在注释段后追加）</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a># 关闭启动 welcome message
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>$env.config.show_banner = false
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a># 清空右侧 prompt，去掉行末时间段
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>$env.PROMPT_COMMAND_RIGHT = {|| &quot;&quot; }
+</code></pre></div>
+<h2 id="8">8. 总结</h2>
+<ul>
+<li>配置放对目录：macOS 是 <code>~/Library/Application Support/nushell/</code>，不是 <code>~/.config/nushell/</code></li>
+<li>验证用 <code>nu -e</code>，别用 <code>nu -c</code>（后者不加载 <code>config.nu</code>）</li>
+<li>PATH 相关的放 <code>env.nu</code>（无条件加载），不依赖外部 shell 的 <code>~/.zshrc</code></li>
+<li>关 banner 的配置项是 <code>$env.config.show_banner</code>，注意被文件末尾默认值覆盖</li>
+</ul>
 
 
 

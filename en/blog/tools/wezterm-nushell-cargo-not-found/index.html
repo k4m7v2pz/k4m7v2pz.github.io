@@ -6,44 +6,44 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="When SFX double-click shows an Extract-to dialog, Silent/GUIMode are ignored, or nothing happens at all, the root cause is almost always wrong stub type or broken encoding/path constraints.">
+        <meta name="description" content="Troubleshooting cargo not found in WezTerm new tabs launching Nushell on macOS Apple Silicon — root causes include nushell not sourcing ~/.cargo/env, wrong default config directory, and string interpolation differences">
       
       
         <meta name="author" content="k4m7v2pz">
       
       
-        <link rel="canonical" href="https://k4m7v2pz.github.io/en/blog/operating-system/windows/fix-7zip-sfx-runprogram-failure/">
+        <link rel="canonical" href="https://k4m7v2pz.github.io/en/blog/tools/wezterm-nushell-cargo-not-found/">
       
       
-        <link rel="prev" href="../7zip-sfx-stub-selection/">
+        <link rel="prev" href="../nushell-atomcode-config-pitfalls/">
       
       
-        <link rel="next" href="../llm-deploy-silent-7zip-sfx/">
+        <link rel="next" href="../../programming/rust-bevy-0.13-to-0.14-upgrade-guide/">
       
       
         
-          <link rel="alternate" href="../../../../../blog/operating-system/windows/fix-7zip-sfx-runprogram-failure/" hreflang="zh">
+          <link rel="alternate" href="../../../../blog/tools/wezterm-nushell-cargo-not-found/" hreflang="zh">
         
           <link rel="alternate" href="./" hreflang="en">
         
       
       
-        <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../../../../feed_rss_created.xml">
-        <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="../../../../../feed_rss_updated.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../../../feed_rss_created.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="../../../../feed_rss_updated.xml">
       
-      <link rel="icon" href="../../../../../assets/images/favicon.png">
+      <link rel="icon" href="../../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>Fix 7-Zip SFX RunProgram Failure: Correct Stub Selection and Diagnostic Matrix - K4m7v2pz's Blog</title>
+        <title>WezTerm + Nushell + Cargo Command Not Found - K4m7v2pz's Blog</title>
       
     
     
-      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -62,7 +62,7 @@
       
     
     
-    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -87,7 +87,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#fix-7-zip-sfx-runprogram-failure-correct-stub-selection-and-diagnostic-matrix" class="md-skip">
+        <a href="#1-symptoms" class="md-skip">
           Skip to content
         </a>
       
@@ -103,7 +103,7 @@
 
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../../../" title="K4m7v2pz&#39;s Blog" class="md-header__button md-logo" aria-label="K4m7v2pz's Blog" data-md-component="logo">
+    <a href="../../../" title="K4m7v2pz&#39;s Blog" class="md-header__button md-logo" aria-label="K4m7v2pz's Blog" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -123,7 +123,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Fix 7-Zip SFX RunProgram Failure: Correct Stub Selection and Diagnostic Matrix
+              WezTerm + Nushell + Cargo Command Not Found
             
           </span>
         </div>
@@ -170,7 +170,7 @@
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="../../../../../blog/operating-system/windows/fix-7zip-sfx-runprogram-failure/" hreflang="zh" class="md-select__link">
+            <a href="../../../../blog/tools/wezterm-nushell-cargo-not-found/" hreflang="zh" class="md-select__link">
               中文
             </a>
           </li>
@@ -256,7 +256,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../../" class="md-tabs__link">
+      <a href="../../../" class="md-tabs__link">
         
   
   
@@ -273,8 +273,6 @@
   
   
   
-    
-  
   
     
     
@@ -282,13 +280,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../../gnulinux/google-pinyin-installation-ubuntu-derivatives/" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../operating-system/gnulinux/google-pinyin-installation-ubuntu-derivatives/" class="md-tabs__link">
           
   
   
@@ -307,11 +303,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../../tools/nushell-atomcode-config-pitfalls/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../nushell-atomcode-config-pitfalls/" class="md-tabs__link">
           
   
   
@@ -331,7 +329,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../programming/rust-bevy-0.13-to-0.14-upgrade-guide/" class="md-tabs__link">
+        <a href="../../programming/rust-bevy-0.13-to-0.14-upgrade-guide/" class="md-tabs__link">
           
   
   
@@ -351,7 +349,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../games/mighty-rodent-splash-black-screen-debug/" class="md-tabs__link">
+        <a href="../../games/mighty-rodent-splash-black-screen-debug/" class="md-tabs__link">
           
   
   
@@ -369,7 +367,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../../about/" class="md-tabs__link">
+      <a href="../../../about/" class="md-tabs__link">
         
   
   
@@ -412,7 +410,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../../../" title="K4m7v2pz&#39;s Blog" class="md-nav__button md-logo" aria-label="K4m7v2pz's Blog" data-md-component="logo">
+    <a href="../../../" title="K4m7v2pz&#39;s Blog" class="md-nav__button md-logo" aria-label="K4m7v2pz's Blog" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -442,7 +440,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../" class="md-nav__link">
+      <a href="../../../" class="md-nav__link">
         
   
   
@@ -466,31 +464,26 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
             
   
   
@@ -508,7 +501,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -532,20 +525,17 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
         
           
-          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="">
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
             
   
   
@@ -581,7 +571,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../gnulinux/google-pinyin-installation-ubuntu-derivatives/" class="md-nav__link">
+      <a href="../../operating-system/gnulinux/google-pinyin-installation-ubuntu-derivatives/" class="md-nav__link">
         
   
   
@@ -609,7 +599,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../gnulinux/centos7-jumpbox-dd-debian12-vps/" class="md-nav__link">
+      <a href="../../operating-system/gnulinux/centos7-jumpbox-dd-debian12-vps/" class="md-nav__link">
         
   
   
@@ -642,31 +632,26 @@
                 
   
   
-    
   
   
-  
     
     
     
     
       
       
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
         
           
-          
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
-        
-          
-          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
             
   
   
@@ -684,7 +669,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -702,7 +687,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../embed-python-pip-installation-windows/" class="md-nav__link">
+      <a href="../../operating-system/windows/embed-python-pip-installation-windows/" class="md-nav__link">
         
   
   
@@ -730,7 +715,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../7zip-sfx-stub-selection/" class="md-nav__link">
+      <a href="../../operating-system/windows/7zip-sfx-stub-selection/" class="md-nav__link">
         
   
   
@@ -755,37 +740,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Fix RunProgram Failure
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../operating-system/windows/fix-7zip-sfx-runprogram-failure/" class="md-nav__link">
         
   
   
@@ -801,92 +759,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#1-typical-error-description" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1) Typical Error Description
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-the-single-most-important-cause" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2) The Single Most Important Cause
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-diagnostic-matrix" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3) Diagnostic Matrix
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-verify-config-file-encoding-powershell" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4) Verify Config File Encoding (PowerShell)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-minimal-fix-steps-in-order" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5) Minimal Fix Steps (in order)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-self-check-stub-diagnostic-anchor" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6) Self-Check Stub (Diagnostic Anchor)
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -899,7 +771,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../llm-deploy-silent-7zip-sfx/" class="md-nav__link">
+      <a href="../../operating-system/windows/llm-deploy-silent-7zip-sfx/" class="md-nav__link">
         
   
   
@@ -927,7 +799,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../set-zed-as-bat-editor/" class="md-nav__link">
+      <a href="../../operating-system/windows/set-zed-as-bat-editor/" class="md-nav__link">
         
   
   
@@ -967,26 +839,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   
@@ -1004,7 +881,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1022,7 +899,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../tools/nushell-atomcode-config-pitfalls/" class="md-nav__link">
+      <a href="../nushell-atomcode-config-pitfalls/" class="md-nav__link">
         
   
   
@@ -1047,10 +924,35 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../../tools/wezterm-nushell-cargo-not-found/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    WezTerm + Nushell + Cargo Not Found
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1066,6 +968,118 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-symptoms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Symptoms
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-root-causes-three-issues-stacking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Root Causes (Three Issues Stacking)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Root Causes (Three Issues Stacking)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-nushell-doesnt-source-cargoenv" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Nushell Doesn't Source ~/.cargo/env
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-nushells-default-config-directory-isnt-confignushell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Nushell's Default Config Directory Isn't ~/.config/nushell/
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-nushell-string-interpolation-differs-from-bash" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Nushell String Interpolation Differs from Bash
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-fix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Fix
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1137,7 +1151,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../programming/rust-bevy-0.13-to-0.14-upgrade-guide/" class="md-nav__link">
+      <a href="../../programming/rust-bevy-0.13-to-0.14-upgrade-guide/" class="md-nav__link">
         
   
   
@@ -1224,7 +1238,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../games/mighty-rodent-splash-black-screen-debug/" class="md-nav__link">
+      <a href="../../games/mighty-rodent-splash-black-screen-debug/" class="md-nav__link">
         
   
   
@@ -1259,7 +1273,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../about/" class="md-nav__link">
+      <a href="../../../about/" class="md-nav__link">
         
   
   
@@ -1299,81 +1313,95 @@
   
 
 
-<h1 id="fix-7-zip-sfx-runprogram-failure-correct-stub-selection-and-diagnostic-matrix">Fix 7-Zip SFX RunProgram Failure: Correct Stub Selection and Diagnostic Matrix</h1>
-<h2 id="1-typical-error-description">1) Typical Error Description</h2>
-<ul>
-<li>"I wrote <code>RunProgram</code>, but double-click only shows <strong>Extract to</strong>."</li>
-<li>"<code>Silent=2</code> / <code>GUIMode=2</code> are written but have no effect."</li>
-<li>"Double-click does <strong>nothing</strong> — no window at all."</li>
-</ul>
-<hr />
-<h2 id="2-the-single-most-important-cause">2) The Single Most Important Cause</h2>
-<p><strong><code>7z.sfx</code> (Standard SFX) does not implement the install execution pipeline.</strong>
-When the stub is <code>7z.sfx</code>, the following fields are effectively non-existent:</p>
-<ul>
-<li><code>RunProgram</code></li>
-<li><code>ExecuteFile</code></li>
-<li><code>InstallPath</code> (not processed as installer semantics)</li>
-<li><code>Silent / GUIMode / OverwriteMode</code></li>
-</ul>
-<p>You will always see the "plain extractor UI".</p>
-<hr />
-<h2 id="3-diagnostic-matrix">3) Diagnostic Matrix</h2>
+  <h1>WezTerm + Nushell + Cargo Not Found</h1>
+
+<p><strong>Summary:</strong> This article documents troubleshooting <code>cargo</code> not found in new WezTerm tabs running Nushell on macOS (Apple Silicon). Core issues include nushell not sourcing <code>~/.cargo/env</code>, the default config directory not being <code>~/.config/nushell/</code>, and string interpolation syntax differences.</p>
+<h2 id="1-symptoms">1. Symptoms</h2>
+<p>Running <code>cargo run</code> in a new WezTerm tab with nushell:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>~/Documents/Code.localized/ra2md&gt; cargo run
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Error: nu::shell::external_command
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  × External command failed
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>   ╭─[repl_entry #3:1:1]
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a> 1 │ cargo run
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>   · ──┬──
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>   ·   ╰── Command `cargo` not found
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>   ╰────
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>  help: `cargo` is neither a Nushell built-in or a known external command
+</code></pre></div>
+<p>Each time, manually sourcing <code>~/.config/nushell/env.nu</code> would temporarily fix it, but a new tab would break again.</p>
+<h2 id="2-root-causes-three-issues-stacking">2. Root Causes (Three Issues Stacking)</h2>
+<h3 id="21-nushell-doesnt-source-cargoenv">2.1 Nushell Doesn't Source <code>~/.cargo/env</code></h3>
+<p>When rustup is installed, it writes a <strong>shell script</strong> to <code>~/.cargo/env</code> (a <code>case ":${PATH}:"…esac</code> block) that can only be sourced by bash/zsh and other POSIX shells. Nushell's syntax is different — <strong>it cannot and will not</strong> source this file. So while <code>source "$HOME/.cargo/env"</code> in <code>~/.zshrc</code> works for zsh, nushell does nothing on startup — cargo never makes it into <code>PATH</code>.</p>
+<h3 id="22-nushells-default-config-directory-isnt-confignushell">2.2 Nushell's Default Config Directory Isn't <code>~/.config/nushell/</code></h3>
+<p>This is the biggest trap. Following XDG conventions, many people (myself included) modify <code>~/.config/nushell/env.nu</code>, only to find <strong>their changes have no effect</strong>. Nushell 0.113 on macOS uses:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>~/Library/Application Support/nushell/
+</code></pre></div>
+<p>Not <code>~/.config/nushell/</code>. Verify with:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>echo $nu.default-config-dir
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>echo $nu.env-path          # ~/Library/Application Support/nushell/env.nu
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>echo $nu.config-path       # ~/Library/Application Support/nushell/config.nu
+</code></pre></div>
+<p>I had correctly added <code>path add "~/.cargo/bin"</code> in <code>~/.config/nushell/env.nu</code>, and sourcing it worked — but when WezTerm launched nushell, it loaded the file from the default path instead. <strong>Editing the wrong file</strong> is the core of this pitfall.</p>
+<h3 id="23-nushell-string-interpolation-differs-from-bash">2.3 Nushell String Interpolation Differs from Bash</h3>
+<p>While initially editing <code>~/.config/nushell/env.nu</code>, I also hit a syntax issue. The original attempt:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>$env.PATH = ($env.PATH | prepend &quot;$env.HOME/.cargo/bin&quot;)
+</code></pre></div>
+<p>In nushell, <strong>double-quoted strings do NOT interpolate variables</strong>. <code>"$env.HOME/.cargo/bin"</code> is treated as a literal string <code>$env.HOME/.cargo/bin</code>, adding a nonexistent directory to PATH. The correct syntax uses <code>$"..."</code> string interpolation with <code>(...)</code> subexpressions:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>$env.PATH = ($env.PATH | prepend $&quot;($env.HOME)/.cargo/bin&quot;)
+</code></pre></div>
+<p>Or better yet — use nushell's built-in <code>path add</code> utility (from <code>std/util</code>), which auto-expands <code>~</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>use std/util &quot;path add&quot;
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>path add &quot;~/.cargo/bin&quot;
+</code></pre></div>
+<h2 id="3-fix">3. Fix</h2>
+<p>Edit the file that is actually loaded: <code>~/Library/Application Support/nushell/env.nu</code>, and add <code>path add "~/.cargo/bin"</code>. Full change:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a># env.nu
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a># Always make ~/.local/bin visible (where atomcode lives), even when the
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a># terminal was started as a non-login shell and ~/.zshrc never ran.
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>use std/util &quot;path add&quot;
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>path add &quot;~/.local/bin&quot;
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a># cargo / rustup binaries — nushell doesn&#39;t auto-source ~/.cargo/env (it&#39;s an sh script)
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>path add &quot;~/.cargo/bin&quot;
+</code></pre></div>
+<p>Verification:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>which<span class="w"> </span>cargo
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="c1"># → /Users/&lt;user&gt;/.cargo/bin/cargo</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>cargo<span class="w"> </span>run
+</code></pre></div>
+<p>New WezTerm tabs work without manual sourcing.</p>
+<h2 id="4-summary">4. Summary</h2>
 <table>
 <thead>
 <tr>
-<th>Symptom</th>
-<th>Check Immediately</th>
-<th>Conclusion</th>
+<th>Pitfall</th>
+<th>Key Point</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Always shows "Extract to…"</td>
-<td>Stub filename/size (should be <code>7zSD.sfx</code> ~120–160KB)</td>
-<td>Wrong stub → Replace</td>
+<td>Nushell doesn't inherit <code>~/.cargo/env</code></td>
+<td>It's an sh script; you must add <code>path add "~/.cargo/bin"</code> yourself</td>
 </tr>
 <tr>
-<td>Double-click, no window, no error</td>
-<td>Is stub official <code>7zSD.sfx</code>?</td>
-<td>Unofficial/corrupted → Use LZMA SDK or 7-Zip official <code>bin\</code></td>
+<td>Editing <code>~/.config/nushell/</code> has no effect</td>
+<td>On macOS, nushell reads from <code>~/Library/Application Support/nushell/</code></td>
 </tr>
 <tr>
-<td>Extracted but script doesn't run</td>
-<td>Does the file exist in archive? Case sensitivity? bat working directory?</td>
-<td>Use <code>cd /d "%~dp0"</code> + verify relative path</td>
+<td><code>"$env.HOME/..."</code> is literal</td>
+<td>Nushell double quotes don't interpolate; use <code>$"($env.HOME)/..."</code></td>
 </tr>
 <tr>
-<td>"Parameters seem无效"</td>
-<td>Config file encoding</td>
-<td><strong>Must be UTF-8 without BOM</strong> (BOM degrades parsing)</td>
+<td>WezTerm new tab loses cargo again</td>
+<td>Not a WezTerm issue — nushell wasn't loading the correct env.nu</td>
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="4-verify-config-file-encoding-powershell">4) Verify Config File Encoding (PowerShell)</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nv">$b</span> <span class="p">=</span> <span class="no">[IO.File]</span><span class="p">::</span><span class="n">ReadAllBytes</span><span class="p">(</span><span class="s2">&quot;configs\sfx_config.txt&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">if</span> <span class="p">(</span><span class="nv">$b</span><span class="p">[</span><span class="n">0</span><span class="p">]</span> <span class="o">-eq</span> <span class="n">0xEF</span> <span class="o">-and</span> <span class="nv">$b</span><span class="p">[</span><span class="n">1</span><span class="p">]</span> <span class="o">-eq</span> <span class="n">0xBB</span> <span class="o">-and</span> <span class="nv">$b</span><span class="p">[</span><span class="n">2</span><span class="p">]</span> <span class="o">-eq</span> <span class="n">0xBF</span><span class="p">)</span> <span class="p">{</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  <span class="nb">Write-Warning</span> <span class="s2">&quot;BOM detected — save as UTF-8 without signature&quot;</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="nb">Write-Host</span> <span class="s2">&quot;No BOM (OK)&quot;</span> <span class="p">}</span>
-</code></pre></div>
-<hr />
-<h2 id="5-minimal-fix-steps-in-order">5) Minimal Fix Steps (in order)</h2>
-<ol>
-<li>Obtain <strong>official</strong> <code>7zSD.sfx</code> (from 7-Zip installation <code>bin\7zSD.sfx</code> or LZMA SDK)</li>
-<li>Ensure config = <strong>UTF-8 without BOM</strong></li>
-<li>Use <strong>PowerShell concatenation</strong> (don't trust <code>copy /b</code> magic)</li>
-<li>Use the "cmd.exe self-check" below to confirm the stub is correct</li>
-</ol>
-<hr />
-<h2 id="6-self-check-stub-diagnostic-anchor">6) Self-Check Stub (Diagnostic Anchor)</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">;!@Install@!UTF-8!</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="na">RunProgram</span><span class="o">=</span><span class="s">&quot;cmd.exe&quot;</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1">;!@InstallEnd@!</span>
-</code></pre></div>
+<h2 id="5-references">5. References</h2>
 <ul>
-<li><strong>CMD opens</strong> → Stub OK</li>
-<li><strong>Extract to dialog</strong> → Stub WRONG (Standard edition)</li>
+<li>Nushell configuration docs: <a href="https://www.nushell.sh/book/configuration.html">Configuration | Nushell</a></li>
+<li>Nushell string interpolation: <a href="https://www.nushell.sh/language/_strings.html">https://www.nushell.sh/language/_strings.html</a></li>
+<li>rustup file <code>~/.cargo/env</code>: POSIX shell only</li>
+<li>Nushell <code>std/util</code> module: <code>use std/util "path add"</code> provides the <code>path add</code> command</li>
 </ul>
 
 
@@ -1429,10 +1457,10 @@ When the stub is <code>7z.sfx</code>, the following fields are effectively non-e
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../../../..", "features": ["navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "toc.integrate", "search.suggest", "search.highlight", "content.code.copy", "content.tabs.link", "header.autohide"], "search": "../../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "toc.integrate", "search.suggest", "search.highlight", "content.code.copy", "content.tabs.link", "header.autohide"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>

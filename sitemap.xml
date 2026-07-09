@@ -22,6 +22,13 @@
         <xhtml:link rel="alternate" hreflang="en" href="https://k4m7v2pz.github.io/en/blog/games/mighty-rodent-splash-black-screen-debug/"/>
     </url>
     <url>
+        <loc>https://k4m7v2pz.github.io/blog/operating-system/gnulinux/centos7-jumpbox-dd-debian12-vps/</loc>
+        <lastmod>2026-07-09</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://k4m7v2pz.github.io/blog/operating-system/gnulinux/centos7-jumpbox-dd-debian12-vps/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://k4m7v2pz.github.io/en/blog/operating-system/gnulinux/centos7-jumpbox-dd-debian12-vps/"/>
+    </url>
+    <url>
         <loc>https://k4m7v2pz.github.io/blog/operating-system/gnulinux/google-pinyin-installation-ubuntu-derivatives/</loc>
         <lastmod>2026-07-09</lastmod>
         <changefreq>daily</changefreq>
@@ -64,6 +71,27 @@
         <xhtml:link rel="alternate" hreflang="en" href="https://k4m7v2pz.github.io/en/blog/operating-system/windows/set-zed-as-bat-editor/"/>
     </url>
     <url>
+        <loc>https://k4m7v2pz.github.io/blog/programming/rust-bevy-0.13-to-0.14-upgrade-guide/</loc>
+        <lastmod>2026-07-09</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://k4m7v2pz.github.io/blog/programming/rust-bevy-0.13-to-0.14-upgrade-guide/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://k4m7v2pz.github.io/en/blog/programming/rust-bevy-0.13-to-0.14-upgrade-guide/"/>
+    </url>
+    <url>
+        <loc>https://k4m7v2pz.github.io/blog/tools/nushell-atomcode-config-pitfalls/</loc>
+        <lastmod>2026-07-09</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://k4m7v2pz.github.io/blog/tools/nushell-atomcode-config-pitfalls/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://k4m7v2pz.github.io/en/blog/tools/nushell-atomcode-config-pitfalls/"/>
+    </url>
+    <url>
+        <loc>https://k4m7v2pz.github.io/blog/tools/wezterm-nushell-cargo-not-found/</loc>
+        <lastmod>2026-07-09</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://k4m7v2pz.github.io/blog/tools/wezterm-nushell-cargo-not-found/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://k4m7v2pz.github.io/en/blog/tools/wezterm-nushell-cargo-not-found/"/>
+    </url>
+    <url>
         <loc>https://k4m7v2pz.github.io/en/</loc>
         <lastmod>2026-07-09</lastmod>
         <changefreq>daily</changefreq>
@@ -83,6 +111,13 @@
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://k4m7v2pz.github.io/en/blog/games/mighty-rodent-splash-black-screen-debug/"/>
         <xhtml:link rel="alternate" hreflang="zh" href="https://k4m7v2pz.github.io/blog/games/mighty-rodent-splash-black-screen-debug/"/>
+    </url>
+    <url>
+        <loc>https://k4m7v2pz.github.io/en/blog/operating-system/gnulinux/centos7-jumpbox-dd-debian12-vps/</loc>
+        <lastmod>2026-07-09</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://k4m7v2pz.github.io/en/blog/operating-system/gnulinux/centos7-jumpbox-dd-debian12-vps/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://k4m7v2pz.github.io/blog/operating-system/gnulinux/centos7-jumpbox-dd-debian12-vps/"/>
     </url>
     <url>
         <loc>https://k4m7v2pz.github.io/en/blog/operating-system/gnulinux/google-pinyin-installation-ubuntu-derivatives/</loc>
@@ -125,5 +160,26 @@
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://k4m7v2pz.github.io/en/blog/operating-system/windows/set-zed-as-bat-editor/"/>
         <xhtml:link rel="alternate" hreflang="zh" href="https://k4m7v2pz.github.io/blog/operating-system/windows/set-zed-as-bat-editor/"/>
+    </url>
+    <url>
+        <loc>https://k4m7v2pz.github.io/en/blog/programming/rust-bevy-0.13-to-0.14-upgrade-guide/</loc>
+        <lastmod>2026-07-09</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://k4m7v2pz.github.io/en/blog/programming/rust-bevy-0.13-to-0.14-upgrade-guide/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://k4m7v2pz.github.io/blog/programming/rust-bevy-0.13-to-0.14-upgrade-guide/"/>
+    </url>
+    <url>
+        <loc>https://k4m7v2pz.github.io/en/blog/tools/nushell-atomcode-config-pitfalls/</loc>
+        <lastmod>2026-07-09</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://k4m7v2pz.github.io/en/blog/tools/nushell-atomcode-config-pitfalls/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://k4m7v2pz.github.io/blog/tools/nushell-atomcode-config-pitfalls/"/>
+    </url>
+    <url>
+        <loc>https://k4m7v2pz.github.io/en/blog/tools/wezterm-nushell-cargo-not-found/</loc>
+        <lastmod>2026-07-09</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://k4m7v2pz.github.io/en/blog/tools/wezterm-nushell-cargo-not-found/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://k4m7v2pz.github.io/blog/tools/wezterm-nushell-cargo-not-found/"/>
     </url>
 </urlset>

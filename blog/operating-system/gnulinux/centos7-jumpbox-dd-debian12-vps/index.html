@@ -1,49 +1,49 @@
 
 <!doctype html>
-<html lang="en" class="no-js">
+<html lang="zh" class="no-js">
   <head>
     
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="When SFX double-click shows an Extract-to dialog, Silent/GUIMode are ignored, or nothing happens at all, the root cause is almost always wrong stub type or broken encoding/path constraints.">
+        <meta name="description" content="记录在多开云 10 元/月低配 KVM VPS 上，通过 CentOS 7 跳板使用 DD 重装脚本安装 Debian 12 的完整过程，解决 glibc 版本不兼容问题">
       
       
         <meta name="author" content="k4m7v2pz">
       
       
-        <link rel="canonical" href="https://k4m7v2pz.github.io/en/blog/operating-system/windows/fix-7zip-sfx-runprogram-failure/">
+        <link rel="canonical" href="https://k4m7v2pz.github.io/blog/operating-system/gnulinux/centos7-jumpbox-dd-debian12-vps/">
       
       
-        <link rel="prev" href="../7zip-sfx-stub-selection/">
+        <link rel="prev" href="../google-pinyin-installation-ubuntu-derivatives/">
       
       
-        <link rel="next" href="../llm-deploy-silent-7zip-sfx/">
+        <link rel="next" href="../../windows/embed-python-pip-installation-windows/">
       
       
         
-          <link rel="alternate" href="../../../../../blog/operating-system/windows/fix-7zip-sfx-runprogram-failure/" hreflang="zh">
+          <link rel="alternate" href="./" hreflang="zh">
         
-          <link rel="alternate" href="./" hreflang="en">
+          <link rel="alternate" href="../../../../en/blog/operating-system/gnulinux/centos7-jumpbox-dd-debian12-vps/" hreflang="en">
         
       
       
-        <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../../../../feed_rss_created.xml">
-        <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="../../../../../feed_rss_updated.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS 订阅" href="../../../../feed_rss_created.xml">
+        <link rel="alternate" type="application/rss+xml" title="已更新内容的 RSS 订阅" href="../../../../feed_rss_updated.xml">
       
-      <link rel="icon" href="../../../../../assets/images/favicon.png">
+      <link rel="icon" href="../../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>Fix 7-Zip SFX RunProgram Failure: Correct Stub Selection and Diagnostic Matrix - K4m7v2pz's Blog</title>
+        <title>利用 CentOS 7 作为跳板在多开云 10 元低配 VPS 上 DD 安装 Debian 12 - K4m7v2pz's Blog</title>
       
     
     
-      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -62,7 +62,7 @@
       
     
     
-    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -87,8 +87,8 @@
     <div data-md-component="skip">
       
         
-        <a href="#fix-7-zip-sfx-runprogram-failure-correct-stub-selection-and-diagnostic-matrix" class="md-skip">
-          Skip to content
+        <a href="#10" class="md-skip">
+          跳转至
         </a>
       
     </div>
@@ -102,8 +102,8 @@
   
 
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
-  <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../../../" title="K4m7v2pz&#39;s Blog" class="md-header__button md-logo" aria-label="K4m7v2pz's Blog" data-md-component="logo">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../../.." title="K4m7v2pz&#39;s Blog" class="md-header__button md-logo" aria-label="K4m7v2pz's Blog" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -123,7 +123,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Fix 7-Zip SFX RunProgram Failure: Correct Stub Selection and Diagnostic Matrix
+              利用 CentOS 7 作为跳板在多开云 10 元低配 VPS 上 DD 安装 Debian 12
             
           </span>
         </div>
@@ -163,20 +163,20 @@
       <div class="md-header__option">
   <div class="md-select">
     
-    <button class="md-header__button md-icon" aria-label="Select language">
+    <button class="md-header__button md-icon" aria-label="选择当前语言">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
     </button>
     <div class="md-select__inner">
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="../../../../../blog/operating-system/windows/fix-7zip-sfx-runprogram-failure/" hreflang="zh" class="md-select__link">
+            <a href="./" hreflang="zh" class="md-select__link">
               中文
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="./" hreflang="en" class="md-select__link">
+            <a href="../../../../en/blog/operating-system/gnulinux/centos7-jumpbox-dd-debian12-vps/" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
@@ -197,16 +197,16 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
         
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
         
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
       </label>
-      <nav class="md-search__options" aria-label="Search">
+      <nav class="md-search__options" aria-label="查找">
         
-        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
           
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
         </button>
@@ -219,7 +219,7 @@
       <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
         <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
-            Initializing search
+            正在初始化搜索引擎
           </div>
           <ol class="md-search-result__list" role="presentation"></ol>
         </div>
@@ -231,7 +231,7 @@
     
     
       <div class="md-header__source">
-        <a href="https://github.com/k4m7v2pz/k4m7v2pz.github.io" title="Go to repository" class="md-source" data-md-component="source">
+        <a href="https://github.com/k4m7v2pz/k4m7v2pz.github.io" title="前往仓库" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
@@ -246,7 +246,7 @@
   
     
       
-<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
       
@@ -256,13 +256,13 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../../" class="md-tabs__link">
+      <a href="../../../.." class="md-tabs__link">
         
   
   
     
   
-  Home
+  首页
 
       </a>
     </li>
@@ -288,11 +288,11 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../../gnulinux/google-pinyin-installation-ubuntu-derivatives/" class="md-tabs__link">
+        <a href="../google-pinyin-installation-ubuntu-derivatives/" class="md-tabs__link">
           
   
   
-  Operating System
+  操作系统
 
         </a>
       </li>
@@ -315,7 +315,7 @@
           
   
   
-  Tools
+  工具
 
         </a>
       </li>
@@ -335,7 +335,7 @@
           
   
   
-  Programming
+  编程开发
 
         </a>
       </li>
@@ -355,7 +355,7 @@
           
   
   
-  Games
+  游戏
 
         </a>
       </li>
@@ -375,7 +375,7 @@
   
     
   
-  About
+  关于
 
       </a>
     </li>
@@ -410,9 +410,9 @@
 
   
 
-<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../../../" title="K4m7v2pz&#39;s Blog" class="md-nav__button md-logo" aria-label="K4m7v2pz's Blog" data-md-component="logo">
+    <a href="../../../.." title="K4m7v2pz&#39;s Blog" class="md-nav__button md-logo" aria-label="K4m7v2pz's Blog" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -422,7 +422,7 @@
   </label>
   
     <div class="md-nav__source">
-      <a href="https://github.com/k4m7v2pz/k4m7v2pz.github.io" title="Go to repository" class="md-source" data-md-component="source">
+      <a href="https://github.com/k4m7v2pz/k4m7v2pz.github.io" title="前往仓库" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
@@ -442,14 +442,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../" class="md-nav__link">
+      <a href="../../../.." class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Home
+    首页
   
 
     
@@ -497,7 +497,7 @@
   <span class="md-ellipsis">
     
   
-    Operating System
+    操作系统
   
 
     
@@ -513,130 +513,11 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Operating System
+    操作系统
   
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-          
-          
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
-        
-          
-          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    GNU/Linux
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_1">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    GNU/Linux
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../gnulinux/google-pinyin-installation-ubuntu-derivatives/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Install Google Pinyin on Ubuntu Derivatives
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../gnulinux/centos7-jumpbox-dd-debian12-vps/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    DD Install Debian 12 on a Cheap VPS Using CentOS 7
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
             
               
                 
@@ -663,17 +544,17 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
         
           
-          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="">
             
   
   
   <span class="md-ellipsis">
     
   
-    Windows
+    GNU/Linux
   
 
     
@@ -684,12 +565,12 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_2_2">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
             <span class="md-nav__icon md-icon"></span>
             
   
-    Windows
+    GNU/Linux
   
 
           </label>
@@ -702,42 +583,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../embed-python-pip-installation-windows/" class="md-nav__link">
+      <a href="../google-pinyin-installation-ubuntu-derivatives/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Embedded Python pip Installation
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../7zip-sfx-stub-selection/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    7-Zip SFX Standard Stub Selection
+    在 Ubuntu 衍生版上安装 Google 拼音
   
 
     
@@ -764,8 +617,6 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
-        
-      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
@@ -774,7 +625,7 @@
   <span class="md-ellipsis">
     
   
-    Fix RunProgram Failure
+    CentOS 7 跳板 DD 安装 Debian 12
   
 
     
@@ -792,7 +643,7 @@
   <span class="md-ellipsis">
     
   
-    Fix RunProgram Failure
+    CentOS 7 跳板 DD 安装 Debian 12
   
 
     
@@ -804,24 +655,22 @@
       
         
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+<nav class="md-nav md-nav--secondary" aria-label="目录">
   
   
-  
-    
   
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Table of contents
+      目录
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-typical-error-description" class="md-nav__link">
+  <a href="#10" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1) Typical Error Description
+        一、痛点溯源：为什么我要动这块"10 元机"？
       
     </span>
   </a>
@@ -829,10 +678,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-the-single-most-important-cause" class="md-nav__link">
+  <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2) The Single Most Important Cause
+        二、风险评估与环境确认
       
     </span>
   </a>
@@ -840,43 +689,71 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-diagnostic-matrix" class="md-nav__link">
+  <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3) Diagnostic Matrix
+        三、实战操作流（核心代码）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、实战操作流（核心代码）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-centos-7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 修复 CentOS 7 的"临终"源
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#4-verify-config-file-encoding-powershell" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4) Verify Config File Encoding (PowerShell)
+        2. 获取重装武器库
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#5-minimal-fix-steps-in-order" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#3-debian-12" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5) Minimal Fix Steps (in order)
+        3. 执行 Debian 12 重装指令
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#6-self-check-stub-diagnostic-anchor" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6) Self-Check Stub (Diagnostic Anchor)
+        4. 重启与静默安装
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、结果验证与后续
       
     </span>
   </a>
@@ -892,6 +769,69 @@
 
               
             
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Windows
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
               
                 
   
@@ -899,14 +839,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../llm-deploy-silent-7zip-sfx/" class="md-nav__link">
+      <a href="../../windows/embed-python-pip-installation-windows/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    LLM Silent EXE Deployment
+    嵌入式 Python Windows 版 pip 安装
   
 
     
@@ -927,14 +867,98 @@
   
   
     <li class="md-nav__item">
-      <a href="../set-zed-as-bat-editor/" class="md-nav__link">
+      <a href="../../windows/7zip-sfx-stub-selection/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Set Zed as bat Editor
+    7-Zip SFX 标准 Stub 选型
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/fix-7zip-sfx-runprogram-failure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    修复 RunProgram 失效
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/llm-deploy-silent-7zip-sfx/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LLM 静默部署 EXE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../windows/set-zed-as-bat-editor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    设置 Zed 为 bat 编辑器
   
 
     
@@ -993,7 +1017,7 @@
   <span class="md-ellipsis">
     
   
-    Tools
+    工具
   
 
     
@@ -1009,7 +1033,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Tools
+    工具
   
 
           </label>
@@ -1029,7 +1053,7 @@
   <span class="md-ellipsis">
     
   
-    Nushell + AtomCode Configuration Pitfalls
+    Nushell + AtomCode 配置踩坑记录
   
 
     
@@ -1057,7 +1081,7 @@
   <span class="md-ellipsis">
     
   
-    WezTerm + Nushell + Cargo Not Found
+    WezTerm + Nushell + Cargo 找不到命令
   
 
     
@@ -1108,7 +1132,7 @@
   <span class="md-ellipsis">
     
   
-    Programming
+    编程开发
   
 
     
@@ -1124,7 +1148,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Programming
+    编程开发
   
 
           </label>
@@ -1144,7 +1168,7 @@
   <span class="md-ellipsis">
     
   
-    Rust Bevy 0.13 to 0.14 Upgrade Guide
+    Rust Bevy 0.13 到 0.14 升级踩坑指南
   
 
     
@@ -1195,7 +1219,7 @@
   <span class="md-ellipsis">
     
   
-    Games
+    游戏
   
 
     
@@ -1211,7 +1235,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Games
+    游戏
   
 
           </label>
@@ -1231,7 +1255,7 @@
   <span class="md-ellipsis">
     
   
-    Debugging Black Screen on Mighty Rodent Splash Screen
+    Mighty Rodent Splash 黑屏踩坑记录
   
 
     
@@ -1266,7 +1290,7 @@
   <span class="md-ellipsis">
     
   
-    About
+    关于
   
 
     
@@ -1299,81 +1323,47 @@
   
 
 
-<h1 id="fix-7-zip-sfx-runprogram-failure-correct-stub-selection-and-diagnostic-matrix">Fix 7-Zip SFX RunProgram Failure: Correct Stub Selection and Diagnostic Matrix</h1>
-<h2 id="1-typical-error-description">1) Typical Error Description</h2>
+  <h1>CentOS 7 跳板 DD 安装 Debian 12</h1>
+
+<h2 id="10">一、痛点溯源：为什么我要动这块"10 元机"？</h2>
+<p>纯粹是手痒想折腾点新玩法。看到<strong>多开云</strong>这种 10 元/月的低配机，第一反应是买一台挂着跑跑 <strong>Trae Agent</strong>，或者丢在后台跑跑 <strong>OpenCode</strong> 这类字符界面工具。</p>
+<p>结果刚连上就吃了闭门羹。排查后发现是 <strong><code>glibc</code> 版本不兼容</strong>——这些现代工具链要求 <code>glibc</code> &gt;= 2.28，而商家给的默认底包还是经典的 <strong>CentOS 7</strong>（自带 <code>glibc 2.17</code>）。</p>
+<p>去找商家客服要个 Debian 或 Ubuntu 20.04+ 的镜像？不存在的，便宜机器的镜像库就那两三个老古董。商家不给换，那就自己动手！既然没法直接更换系统，那就拿 CentOS 7 当跳板，直接 DD 重装大法，硬生生把系统底包给"刷"成现代化的 <strong>Debian 12</strong>。</p>
+<h2 id="_1">二、风险评估与环境确认</h2>
+<p>在开始之前，先确认一下手里这块"砖"的参数，避免翻车：</p>
 <ul>
-<li>"I wrote <code>RunProgram</code>, but double-click only shows <strong>Extract to</strong>."</li>
-<li>"<code>Silent=2</code> / <code>GUIMode=2</code> are written but have no effect."</li>
-<li>"Double-click does <strong>nothing</strong> — no window at all."</li>
+<li><strong>价格与配置</strong>：多开云（Duokaiyun）10 元/月挂机宝。约 30-50GB 硬盘，KVM 架构（<strong>必须是 KVM，OpenVZ/LXC 无法 DD</strong>）。</li>
+<li><strong>系统现状</strong>：CentOS 7.2（已 EOL，官方源下线）。</li>
+<li><strong>核心风险</strong>：DD 操作会<strong>全盘格式化</strong> <code>/dev/sda</code>，数据无法恢复。请务必确认没有重要数据，或者已经备份。</li>
 </ul>
-<hr />
-<h2 id="2-the-single-most-important-cause">2) The Single Most Important Cause</h2>
-<p><strong><code>7z.sfx</code> (Standard SFX) does not implement the install execution pipeline.</strong>
-When the stub is <code>7z.sfx</code>, the following fields are effectively non-existent:</p>
-<ul>
-<li><code>RunProgram</code></li>
-<li><code>ExecuteFile</code></li>
-<li><code>InstallPath</code> (not processed as installer semantics)</li>
-<li><code>Silent / GUIMode / OverwriteMode</code></li>
-</ul>
-<p>You will always see the "plain extractor UI".</p>
-<hr />
-<h2 id="3-diagnostic-matrix">3) Diagnostic Matrix</h2>
-<table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Check Immediately</th>
-<th>Conclusion</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Always shows "Extract to…"</td>
-<td>Stub filename/size (should be <code>7zSD.sfx</code> ~120–160KB)</td>
-<td>Wrong stub → Replace</td>
-</tr>
-<tr>
-<td>Double-click, no window, no error</td>
-<td>Is stub official <code>7zSD.sfx</code>?</td>
-<td>Unofficial/corrupted → Use LZMA SDK or 7-Zip official <code>bin\</code></td>
-</tr>
-<tr>
-<td>Extracted but script doesn't run</td>
-<td>Does the file exist in archive? Case sensitivity? bat working directory?</td>
-<td>Use <code>cd /d "%~dp0"</code> + verify relative path</td>
-</tr>
-<tr>
-<td>"Parameters seem无效"</td>
-<td>Config file encoding</td>
-<td><strong>Must be UTF-8 without BOM</strong> (BOM degrades parsing)</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="4-verify-config-file-encoding-powershell">4) Verify Config File Encoding (PowerShell)</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nv">$b</span> <span class="p">=</span> <span class="no">[IO.File]</span><span class="p">::</span><span class="n">ReadAllBytes</span><span class="p">(</span><span class="s2">&quot;configs\sfx_config.txt&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">if</span> <span class="p">(</span><span class="nv">$b</span><span class="p">[</span><span class="n">0</span><span class="p">]</span> <span class="o">-eq</span> <span class="n">0xEF</span> <span class="o">-and</span> <span class="nv">$b</span><span class="p">[</span><span class="n">1</span><span class="p">]</span> <span class="o">-eq</span> <span class="n">0xBB</span> <span class="o">-and</span> <span class="nv">$b</span><span class="p">[</span><span class="n">2</span><span class="p">]</span> <span class="o">-eq</span> <span class="n">0xBF</span><span class="p">)</span> <span class="p">{</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  <span class="nb">Write-Warning</span> <span class="s2">&quot;BOM detected — save as UTF-8 without signature&quot;</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="nb">Write-Host</span> <span class="s2">&quot;No BOM (OK)&quot;</span> <span class="p">}</span>
+<h2 id="_2">三、实战操作流（核心代码）</h2>
+<p>整个过程分为四步，直接复制粘贴执行即可。</p>
+<h3 id="1-centos-7">1. 修复 CentOS 7 的"临终"源</h3>
+<p>由于 CentOS 7 已停止维护，默认源失效。必须先切换至阿里云 Vault 源，否则脚本依赖包装不上。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>mv<span class="w"> </span>/etc/yum.repos.d/CentOS-Base.repo<span class="w"> </span>/etc/yum.repos.d/CentOS-Base.repo.backup
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>curl<span class="w"> </span>-o<span class="w"> </span>/etc/yum.repos.d/CentOS-Base.repo<span class="w"> </span>http://mirrors.aliyun.com/repo/Centos-7.repo
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>yum<span class="w"> </span>clean<span class="w"> </span>all<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>yum<span class="w"> </span>makecache
 </code></pre></div>
-<hr />
-<h2 id="5-minimal-fix-steps-in-order">5) Minimal Fix Steps (in order)</h2>
-<ol>
-<li>Obtain <strong>official</strong> <code>7zSD.sfx</code> (from 7-Zip installation <code>bin\7zSD.sfx</code> or LZMA SDK)</li>
-<li>Ensure config = <strong>UTF-8 without BOM</strong></li>
-<li>Use <strong>PowerShell concatenation</strong> (don't trust <code>copy /b</code> magic)</li>
-<li>Use the "cmd.exe self-check" below to confirm the stub is correct</li>
-</ol>
-<hr />
-<h2 id="6-self-check-stub-diagnostic-anchor">6) Self-Check Stub (Diagnostic Anchor)</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">;!@Install@!UTF-8!</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="na">RunProgram</span><span class="o">=</span><span class="s">&quot;cmd.exe&quot;</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1">;!@InstallEnd@!</span>
+<h3 id="2">2. 获取重装武器库</h3>
+<p>下载 <code>bin456789/reinstall</code> 脚本（一个非常流行的第三方 DD 脚本）。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>curl<span class="w"> </span>-O<span class="w"> </span>https://cnb.cool/bin456789/reinstall/-/git/raw/main/reinstall.sh<span class="w"> </span><span class="o">||</span><span class="w"> </span>wget<span class="w"> </span>-O<span class="w"> </span>reinstall.sh<span class="w"> </span>https://cnb.cool/bin456789/reinstall/-/git/raw/main/reinstall.sh
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>chmod<span class="w"> </span>+x<span class="w"> </span>reinstall.sh
 </code></pre></div>
+<h3 id="3-debian-12">3. 执行 Debian 12 重装指令</h3>
+<p>指定目标系统，并设置好 Root 密码（<strong>请务必替换为您自己的强密码</strong>）。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>./reinstall.sh<span class="w"> </span>debian<span class="w"> </span><span class="m">12</span><span class="w"> </span>--password<span class="w"> </span>&lt;your-strong-password&gt;<span class="w"> </span>--username<span class="w"> </span>root
+</code></pre></div>
+<p><em>脚本会自动处理内核下载、GRUB 引导注入等复杂操作。</em></p>
+<h3 id="4">4. 重启与静默安装</h3>
+<p>脚本配置完 Grub 后，重启即进入 Debian 12 的网络安装流程。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>reboot
+</code></pre></div>
+<h2 id="_3">四、结果验证与后续</h2>
+<p>重启后大约 5-15 分钟，尝试通过 SSH 连接。如果能连上，说明重装成功。此时再把终端连上这台焕然一新的 Debian 12 机器，就能愉快地跑 Trae Agent 或 OpenCode 了。</p>
+<p><strong>避坑指南</strong>：</p>
 <ul>
-<li><strong>CMD opens</strong> → Stub OK</li>
-<li><strong>Extract to dialog</strong> → Stub WRONG (Standard edition)</li>
+<li>如果 SSH 连不上，去多开云后台开 <strong>VNC 控制台</strong>查看进度，有时网络波动会导致安装中断，重启机器让它继续跑就行。</li>
+<li>DD 完成后，第一件事就是修改默认密码，确保安全。</li>
 </ul>
 
 
@@ -1429,10 +1419,10 @@ When the stub is <code>7z.sfx</code>, the following fields are effectively non-e
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../../../..", "features": ["navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "toc.integrate", "search.suggest", "search.highlight", "content.code.copy", "content.tabs.link", "header.autohide"], "search": "../../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "toc.integrate", "search.suggest", "search.highlight", "content.code.copy", "content.tabs.link", "header.autohide"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
     
     
-      <script src="../../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>
