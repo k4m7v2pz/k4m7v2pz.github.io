@@ -1,0 +1,1489 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>K4m7v2pz&#x27;s Blog</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="k4m7v2pz&#x27;s personal blog">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="favicon-8114d1fc.png">
+        <link rel="stylesheet" href="css/variables-8adf115d.css">
+        <link rel="stylesheet" href="css/general-e96d0476.css">
+        <link rel="stylesheet" href="css/chrome-d279d366.css">
+        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex-4f9e0874.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc-95a8ccf1.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">K4m7v2pz&#x27;s Blog</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/k4m7v2pz/k4m7v2pz.github.io" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="home"><a href="#home" class="header">Home</a></h1>
+<hr>
+<h2 id="title-home-description-open-source-indie-game-assets--tools-navigation"><a class="header" href="#title-home-description-open-source-indie-game-assets--tools-navigation">title: Home
+description: Open-source indie game assets &amp; tools navigation</a></h2>
+<h1 id="k4m7v2pzs-blog"><a class="header" href="#k4m7v2pzs-blog">K4m7v2pz’s Blog</a></h1>
+<p><strong>Open-source indie game assets &amp; tools</strong> — code and assets you can pull, modify, and use commercially.</p>
+<hr>
+<hr>
+<h3 id="-windows-tools"><a class="header" href="#-windows-tools">🔧 Windows Tools</a></h3>
+<ul>
+<li><a href="https://github.com/k4m7v2pz/DisableMouseAccelerationCPP">DisableMouseAccelerationCPP</a> — Disable mouse acceleration on Internet cafe Win10 (C++)</li>
+<li><a href="https://github.com/k4m7v2pz/DisableMouseAccelerationCS">DisableMouseAccelerationCS</a> — Disable mouse acceleration on Internet cafe Win10 (C#)</li>
+<li><a href="https://github.com/k4m7v2pz/NaturalScrolling">NaturalScrolling</a> — Mac-style natural scrolling (C#)</li>
+<li><a href="https://github.com/k4m7v2pz/NaturalScrollingCPP">NaturalScrollingCPP</a> — Mac-style natural scrolling (C++)</li>
+<li><a href="https://github.com/k4m7v2pz/InternetBarUtility">InternetBarUtility</a> — Internet cafe utilities (Python)</li>
+<li><a href="https://github.com/k4m7v2pz/BlackWallpaperCPP">BlackWallpaperCPP</a> — Pure black wallpaper (C++)</li>
+<li><a href="https://github.com/k4m7v2pz/SoildWallpaperCS">SoildWallpaperCS</a> — Solid color wallpaper (C#)</li>
+</ul>
+<p><a href="https://github.com/k4m7v2pz">▶ More</a></p>
+<h3 id="-game-projects"><a class="header" href="#-game-projects">🎮 Game Projects</a></h3>
+<ul>
+<li><a href="https://github.com/k4m7v2pz/RF-Client">RF-Client</a> — Red Alert 2 Future Reunion Client</li>
+<li><a href="https://github.com/k4m7v2pz/GachimuchiSampling">GachimuchiSampling</a> — Philosophy Sampling</li>
+<li><a href="https://github.com/k4m7v2pz/timemachineplus">timemachineplus</a> — Apple Time Machine reimplementation with distributed backup support</li>
+</ul>
+<p><a href="https://github.com/k4m7v2pz">▶ More</a></p>
+<h3 id="-blog--notes"><a class="header" href="#-blog--notes">📓 Blog / Notes</a></h3>
+<p>Technical notes on OS, automation, and deployment</p>
+<p><a href="SUMMARY.html">▶ Read blog</a></p>
+<hr>
+<h2 id="about"><a class="header" href="#about">About</a></h2>
+<blockquote>
+<p><strong>Not paying for hype, not overdrawing on sentiment.</strong></p>
+</blockquote>
+<p>The author primarily writes in Chinese. The English version is optimized for AI search indexing (GEO).</p>
+<p>I love operating systems, programs, low-level logic, and code that actually runs. I do what I can with what I have — one computer, one working logic at a time.</p>
+<p>The beauty of open source: if you have idle resources — servers, hardware, bandwidth — you can take my code, compile it, run it, and put it to use. No need to report back, no need to pay. <strong>Let the code run on the hardware that needs it.</strong></p>
+<p><strong>My code hosting platforms (by priority):</strong></p>
+<ul>
+<li>🥇 <a href="https://gitcode.com/k4m7v2pz">GitCode</a> — Generous file storage and LFS quotas</li>
+<li>🥈 <a href="https://gitee.com/k4m7v2pz">Gitee</a> — Fast access in China</li>
+<li>🥉 <a href="https://github.com/k4m7v2pz">GitHub</a> — Global mainstream open-source platform</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="about-2"><a href="#about-2" class="header">About</a></h1>
+<hr>
+<h2 id="title-about-description-author-introduction-open-source-philosophy-code-hosting-platforms-and-sync-strategy"><a class="header" href="#title-about-description-author-introduction-open-source-philosophy-code-hosting-platforms-and-sync-strategy">title: About
+description: Author introduction, open source philosophy, code hosting platforms and sync strategy</a></h2>
+<h1 id="about-1"><a class="header" href="#about-1">About</a></h1>
+<h2 id="passion--resources"><a class="header" href="#passion--resources">Passion &amp; Resources</a></h2>
+<p>I’ll be honest — I don’t have much money.
+No racks of x86 motherboards, no collection of mini PCs,
+no multiple broadband lines, no cloud server cluster on standby.</p>
+<p>But that doesn’t stop me from loving this stuff —
+operating systems, programs, low-level logic, code that actually runs.
+So I often, or rather always, spend my time debugging or writing something new.
+I do what I can with what I have — one computer, one working logic at a time.</p>
+<p>The reality often looks different:
+People rent servers that sit idle, wasting away.
+People just want to feel what it’s like to “own an internet service” but have nothing to host.
+There’s hardware everywhere — big and small computers, fiber broadband from various ISPs — all gathering dust.</p>
+<p><strong>That’s the beauty of open source.</strong></p>
+<p>I love my programs.
+If you have idle resources sitting around,
+take my code, compile it, run it, throw it on a server and play with it.
+No need to report back, no need to pay me.
+<strong>Let the code run on the hardware that needs it.</strong></p>
+<h2 id="on-spending-money--why-open-source"><a class="header" href="#on-spending-money--why-open-source">On Spending Money &amp; Why Open Source</a></h2>
+<blockquote>
+<p><strong>Not paying for hype, not overdrawing on sentiment.</strong></p>
+<p>The current subscription model and platform tax are essentially <strong>a tax on time</strong>, not on value.
+I choose to walk half a step behind: freeload when I can, procrastinate when I can.
+I know they’ll drop prices — even go free — after fierce competition.
+I just don’t want to pay the premium for “having it now.”</p>
+</blockquote>
+<hr>
+<p><strong>More importantly: I don’t make money from open source.</strong></p>
+<p>Since these code, assets, and tools are never going to be monetized,
+I will never spend money on them.
+<strong>No memberships, no API credits, no SaaS subscriptions.</strong>
+Open source should survive the open-source way — not by individuals subsidizing platforms.</p>
+<hr>
+<h3 id="so-why-do-i-still-love-open-source"><a class="header" href="#so-why-do-i-still-love-open-source">So why do I still love open source?</a></h3>
+<p>Not because it brings me fame or fortune —
+those are at best byproducts.</p>
+<p>Even if I end up broke one day, open source will still give back to open source:</p>
+<ul>
+<li>You can freely pull the source code</li>
+<li>You can grab binaries from Releases or package managers</li>
+<li><strong>You can read it, modify it, share it</strong></li>
+</ul>
+<p>That’s the whole point of open source:
+<strong>It doesn’t need to charge you, and it doesn’t need to prove itself worthy.</strong></p>
+<h2 id="my-code-hosting-platforms-by-priority"><a class="header" href="#my-code-hosting-platforms-by-priority">My Code Hosting Platforms (by priority)</a></h2>
+<h3 id="-gitcode-primary"><a class="header" href="#-gitcode-primary">🥇 GitCode (Primary)</a></h3>
+<ul>
+<li>URL: https://gitcode.com/k4m7v2pz</li>
+<li>Features:
+<ul>
+<li>Generous file storage and LFS quotas (free 2GB LFS, 30GB repo storage)</li>
+<li>Game projects with assets are first-published here</li>
+</ul>
+</li>
+</ul>
+<h3 id="-gitee-backup"><a class="header" href="#-gitee-backup">🥈 Gitee (Backup)</a></h3>
+<ul>
+<li>URL: https://gitee.com/k4m7v2pz</li>
+<li>Features:
+<ul>
+<li>Domestic platform, Chinese UI, fast access in mainland China</li>
+<li>Public repos are subject to review, not the primary platform for new projects</li>
+<li>Existing projects are kept as mirrors</li>
+</ul>
+</li>
+</ul>
+<h3 id="-github-special-cases"><a class="header" href="#-github-special-cases">🥉 GitHub (Special Cases)</a></h3>
+<ul>
+<li>URL: https://github.com/k4m7v2pz</li>
+<li>Features:
+<ul>
+<li>Slower access or requires proxy, but the global mainstream platform</li>
+<li>Only preferred when accessing others’ repos or Releases</li>
+<li>Less familiar with maintaining repos in English UI, but comfortable with English when using others’ projects</li>
+<li>Created repos comply with mainland Chinese law as much as possible; starred repos may not</li>
+<li>Periodic pushes (not every minor change pushed immediately)</li>
+<li>May develop in GitCode private repos first, then batch-mirror results to GitHub</li>
+</ul>
+</li>
+</ul>
+<h2 id="sync-strategy"><a class="header" href="#sync-strategy">Sync Strategy</a></h2>
+<ul>
+<li>Each project has one primary platform where it’s first published</li>
+<li>Other platforms are manually synced via HTTPS as mirrors</li>
+<li><strong>Don’t put all eggs in one basket!</strong></li>
+</ul>
+<hr>
+<h2 id="about-blog-language"><a class="header" href="#about-blog-language">About Blog Language</a></h2>
+<p>The author primarily writes in Chinese. The English version is optimized for AI search indexing (GEO).</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="install-google-pinyin-on-ubuntu-derivatives-1"><a href="#install-google-pinyin-on-ubuntu-derivatives-1" class="header">Install Google Pinyin on Ubuntu Derivatives</a></h1>
+<hr>
+<h2 id="title-install-google-pinyin-on-ubuntu-derivatives-date-2024-06-11-tags-linux-ubuntu-fcitx-google-pinyin-input-method-description-install-and-configure-fcitx--google-pinyin-input-method-on-ubuntu-derivatives-categories-os"><a class="header" href="#title-install-google-pinyin-on-ubuntu-derivatives-date-2024-06-11-tags-linux-ubuntu-fcitx-google-pinyin-input-method-description-install-and-configure-fcitx--google-pinyin-input-method-on-ubuntu-derivatives-categories-os">title: Install Google Pinyin on Ubuntu Derivatives
+date: 2024-06-11
+tags: [Linux, Ubuntu, Fcitx, Google Pinyin, Input Method]
+description: Install and configure Fcitx + Google Pinyin input method on Ubuntu derivatives
+categories: os</a></h2>
+<h1 id="install-google-pinyin-on-ubuntu-derivatives"><a class="header" href="#install-google-pinyin-on-ubuntu-derivatives">Install Google Pinyin on Ubuntu Derivatives</a></h1>
+<h2 id="tested-distributions"><a class="header" href="#tested-distributions">Tested Distributions</a></h2>
+<ul>
+<li>Lubuntu 24.04</li>
+<li>Ubuntu Studio 24.04</li>
+</ul>
+<p><strong>Note</strong>: Fcitx 4.x was officially archived in May 2024 and upstream maintenance has stopped. Due to design limitations, fcitx4 cannot run under Wayland. Migration to fcitx5 is recommended, using <code>fcitx5-chinese-addons</code> instead of <code>fcitx-googlepinyin</code>.</p>
+<p><strong>Explanation</strong>: Although fcitx5 is the recommended next-generation input method framework, there are still many tutorials based on fcitx 4.x on the internet. This tutorial has been manually verified and tested on the Ubuntu derivatives listed above and works normally. It still has reference value for users who need to refer to fcitx 4.x configuration.</p>
+<h2 id="installation-steps"><a class="header" href="#installation-steps">Installation Steps</a></h2>
+<ol>
+<li>
+<p><strong>Install Fcitx and Google Pinyin</strong></p>
+<pre><code class="language-bash">sudo apt install fcitx fcitx-googlepinyin
+</code></pre>
+</li>
+<li>
+<p><strong>Logout</strong></p>
+</li>
+<li>
+<p><strong>Login</strong></p>
+</li>
+<li>
+<p><strong>Open Fcitx Configuration</strong></p>
+<ul>
+<li>Click <code>+</code></li>
+<li>Uncheck <code>Only Show Current Language</code></li>
+<li>Search for <code>Google Pinyin</code> (case-insensitive)</li>
+<li>Select it and click <code>OK</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Use <code>Ctrl</code> + <code>Space</code> to toggle between English and Chinese input</strong></p>
+</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="dd-install-debian-12-on-a-cheap-vps-using-centos-7"><a href="#dd-install-debian-12-on-a-cheap-vps-using-centos-7" class="header">DD Install Debian 12 on a Cheap VPS Using CentOS 7</a></h1>
+<hr>
+<h2 id="title-dd-install-debian-12-on-a-cheap-vps-using-centos-7-as-a-jump-box-date-2026-07-05-tags-linux-centos-debian-vps-dd-reinstall-glibc-description-a-step-by-step-guide-to-dd-reinstalling-debian-12-on-a-cheap-duokaiyun-kvm-vps-using-centos-7-as-a-jump-box-solving-the-glibc-version-incompatibility-issue-categories-os"><a class="header" href="#title-dd-install-debian-12-on-a-cheap-vps-using-centos-7-as-a-jump-box-date-2026-07-05-tags-linux-centos-debian-vps-dd-reinstall-glibc-description-a-step-by-step-guide-to-dd-reinstalling-debian-12-on-a-cheap-duokaiyun-kvm-vps-using-centos-7-as-a-jump-box-solving-the-glibc-version-incompatibility-issue-categories-os">title: DD Install Debian 12 on a Cheap VPS Using CentOS 7 as a Jump Box
+date: 2026-07-05
+tags: [linux, centos, debian, vps, dd, reinstall, glibc]
+description: A step-by-step guide to DD reinstalling Debian 12 on a cheap Duokaiyun KVM VPS using CentOS 7 as a jump box, solving the glibc version incompatibility issue
+categories: os</a></h2>
+<h2 id="1-why-bother-with-this-10-buck-box"><a class="header" href="#1-why-bother-with-this-10-buck-box">1. Why Bother With This “10-Buck Box”?</a></h2>
+<p>Pure curiosity and the itch to tinker. When I saw a <strong>Duokaiyun</strong> VPS for 10 RMB/month, my first thought was to run a <strong>Trae Agent</strong> or an <strong>OpenCode</strong> terminal-based tool on it.</p>
+<p>But right after connecting, I hit a wall. The root cause: <strong><code>glibc</code> version incompatibility</strong>. Modern toolchains require <code>glibc</code> &gt;= 2.28, but the provider’s default image was good old <strong>CentOS 7</strong> (shipping <code>glibc 2.17</code>).</p>
+<p>Asking support for a Debian or Ubuntu 20.04+ image? Not happening — cheap VPS image libraries only have a few ancient options. No help from the provider → DIY time! Since I couldn’t directly replace the OS, I used CentOS 7 as a jump box and applied the <strong>DD reinstall method</strong> to flash the system to modern <strong>Debian 12</strong>.</p>
+<h2 id="2-risk-assessment--environment-check"><a class="header" href="#2-risk-assessment--environment-check">2. Risk Assessment &amp; Environment Check</a></h2>
+<p>Before starting, confirm the VPS specs to avoid disaster:</p>
+<ul>
+<li><strong>Price &amp; specs</strong>: Duokaiyun 10 RMB/month “挂机宝”. ~30-50GB disk, KVM architecture (<strong>must be KVM — OpenVZ/LXC cannot DD</strong>).</li>
+<li><strong>Current OS</strong>: CentOS 7.2 (EOL, official repos offline).</li>
+<li><strong>Core risk</strong>: DD will <strong>wipe the entire <code>/dev/sda</code></strong>. Data cannot be recovered. Make absolutely sure there’s nothing important, or that you have a backup.</li>
+</ul>
+<h2 id="3-step-by-step-operations"><a class="header" href="#3-step-by-step-operations">3. Step-by-Step Operations</a></h2>
+<p>The process has four steps — copy and paste each block.</p>
+<h3 id="31-fix-centos-7s-dying-repos"><a class="header" href="#31-fix-centos-7s-dying-repos">3.1 Fix CentOS 7’s Dying Repos</a></h3>
+<p>Since CentOS 7 has reached EOL, the default repos are dead. Switch to Aliyun’s Vault mirror first, or the script’s dependencies won’t install.</p>
+<pre><code class="language-bash">mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
+curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+yum clean all &amp;&amp; yum makecache
+</code></pre>
+<h3 id="32-get-the-reinstall-toolkit"><a class="header" href="#32-get-the-reinstall-toolkit">3.2 Get the Reinstall Toolkit</a></h3>
+<p>Download the <code>bin456789/reinstall</code> script (a popular third-party DD script).</p>
+<pre><code class="language-bash">curl -O https://cnb.cool/bin456789/reinstall/-/git/raw/main/reinstall.sh || wget -O reinstall.sh https://cnb.cool/bin456789/reinstall/-/git/raw/main/reinstall.sh
+chmod +x reinstall.sh
+</code></pre>
+<h3 id="33-execute-debian-12-reinstall"><a class="header" href="#33-execute-debian-12-reinstall">3.3 Execute Debian 12 Reinstall</a></h3>
+<p>Specify the target system and set the root password (<strong>make sure to replace with your own strong password</strong>).</p>
+<pre><code class="language-bash">./reinstall.sh debian 12 --password &lt;your-strong-password&gt; --username root
+</code></pre>
+<p><em>The script handles kernel download, GRUB boot injection, and other complex operations automatically.</em></p>
+<h3 id="34-reboot-and-silent-install"><a class="header" href="#34-reboot-and-silent-install">3.4 Reboot and Silent Install</a></h3>
+<p>After the script configures Grub, reboot to start the Debian 12 network install.</p>
+<pre><code class="language-bash">reboot
+</code></pre>
+<h2 id="4-verification--next-steps"><a class="header" href="#4-verification--next-steps">4. Verification &amp; Next Steps</a></h2>
+<p>After rebooting, wait about 5-15 minutes, then try to connect via SSH. If you can connect, the reinstall succeeded. At this point, you can log into the fresh Debian 12 machine and run Trae Agent or OpenCode without issues.</p>
+<p><strong>Tips:</strong></p>
+<ul>
+<li>If SSH doesn’t connect, open the <strong>VNC console</strong> in the Duokaiyun dashboard to check progress. Network hiccups can interrupt the install — just reboot and let it continue.</li>
+<li>After DD completes, the first order of business is to change the default password to ensure security.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="embedded-python-pip-installation"><a href="#embedded-python-pip-installation" class="header">Embedded Python pip Installation</a></h1>
+<hr>
+<h2 id="title-embedded-python-pip-installation-guide-for-windows-date-2024-03-26-tags-python-windows-embed-pip-installation-description-tutorial-on-installing-python-embed-embedded-python-on-windows-and-configuring-pip-categories-programming"><a class="header" href="#title-embedded-python-pip-installation-guide-for-windows-date-2024-03-26-tags-python-windows-embed-pip-installation-description-tutorial-on-installing-python-embed-embedded-python-on-windows-and-configuring-pip-categories-programming">title: Embedded Python pip Installation Guide for Windows
+date: 2024-03-26
+tags: [Python, Windows, Embed, pip, Installation]
+description: Tutorial on installing python-embed embedded Python on Windows and configuring pip
+categories: programming</a></h2>
+<h1 id="embedded-python-pip-installation-guide-for-windows-python-embed"><a class="header" href="#embedded-python-pip-installation-guide-for-windows-python-embed">Embedded Python pip Installation Guide for Windows (python-embed)</a></h1>
+<p>This article has nothing to do with embedded hardware development.</p>
+<h2 id="supported-operating-systems"><a class="header" href="#supported-operating-systems">Supported Operating Systems</a></h2>
+<p>This tutorial has been tested successfully on:</p>
+<ul>
+<li>Windows 11</li>
+<li>Windows 10</li>
+<li>Windows Server 2016</li>
+<li>Windows Server 2012 R2</li>
+</ul>
+<h2 id="version-selection"><a class="header" href="#version-selection">Version Selection</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Python Version</th><th>Status</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td>3.12, 3.11, 3.10</td><td>Working</td><td>Recommended</td></tr>
+<tr><td>3.9, 3.8</td><td>May have SSL errors</td><td>Solutions: switch network or node</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="download"><a class="header" href="#download">Download</a></h2>
+<ul>
+<li>Download <code>python-3.x.x-embed-amd64.zip</code> from <a href="https://www.python.org/">python.org</a></li>
+<li>Download <code>get-pip.py</code> from <a href="https://bootstrap.pypa.io/get-pip.py">https://bootstrap.pypa.io/get-pip.py</a></li>
+</ul>
+<p><strong>Extract</strong>: Extract the zip to any directory. Using the compression software’s “create folder with filename” feature is recommended, which automatically creates the <code>python-3.x.x-embed-amd64</code> folder.</p>
+<h2 id="installation-steps-1"><a class="header" href="#installation-steps-1">Installation Steps</a></h2>
+<ol>
+<li>
+<p><strong>Configure Network Proxy (if needed)</strong></p>
+<p><strong>HTTP/Socks Proxy</strong>:</p>
+<p>Temporarily set proxy environment variables (effective for current session only):</p>
+<pre><code class="language-powershell"># HTTP proxy
+$env:HTTP_PROXY="http://proxy.example.com:8080"
+$env:HTTPS_PROXY="http://proxy.example.com:8080"
+
+# Socks proxy
+$env:HTTP_PROXY="socks5://proxy.example.com:1080"
+$env:HTTPS_PROXY="socks5://proxy.example.com:1080"
+</code></pre>
+<p><strong>Tun Mode Proxy</strong>:</p>
+<ul>
+<li>Find and enable Tun/Tunnel/virtual network card options in your proxy client</li>
+<li>Different clients have different operation methods; refer to their documentation</li>
+<li>Usually no additional environment variable configuration is needed after enabling</li>
+</ul>
+</li>
+<li>
+<p><strong>Run get-pip.py</strong></p>
+<pre><code class="language-powershell">Set-Location "PATH TO YOUR LOCATION\python-3.x.x-embed-amd64"
+.\python.exe .\any-path\get-pip.py
+</code></pre>
+<ul>
+<li>You can observe that <code>Lib</code> and <code>Scripts</code> directories are automatically created</li>
+</ul>
+</li>
+<li>
+<p><strong>Edit Configuration File</strong></p>
+<ul>
+<li>Find <code>python3xx.pth</code> or <code>python3xx._pth</code> file in the <code>python-3.x.x-embed-amd64</code> directory (actual filename depends on Python version)</li>
+<li>Open the file, find the line <code>#import site</code>, remove the leading <code>#</code>, change it to <code>import site</code></li>
+</ul>
+</li>
+</ol>
+<h2 id="how-to-use-pip"><a class="header" href="#how-to-use-pip">How to Use pip</a></h2>
+<ol>
+<li>
+<p><strong>Using Python Module Method</strong></p>
+<pre><code class="language-powershell">Set-Location "PATH TO YOUR LOCATION\python-3.x.x-embed-amd64"
+.\python.exe -m pip
+</code></pre>
+</li>
+<li>
+<p><strong>Using Executable Method</strong></p>
+<pre><code class="language-powershell">Set-Location "PATH TO YOUR LOCATION\python-3.x.x-embed-amd64"
+.\Scripts\pip.exe
+</code></pre>
+</li>
+</ol>
+<h2 id="purpose-of-this-article"><a class="header" href="#purpose-of-this-article">Purpose of This Article</a></h2>
+<p>This article introduces Chinese users how to use <code>python-embed</code> (embedded Python) on Windows, packaging the Python runtime (interpreter) with Python programs in a <strong>folder format</strong>. Advantages of this approach:</p>
+<ul>
+<li><strong>No need to compile to single exe</strong>: Avoids executables generated by packaging tools containing <code>.pyc</code> files, which cannot be read or edited by humans</li>
+<li><strong>Guarantees code editability</strong>: All code remains in original <code>.py</code> format, editable and debuggable anytime</li>
+<li><strong>No Git dependency</strong>: User-friendly for users unfamiliar with Git version control</li>
+<li><strong>Suitable for private projects</strong>: Especially suitable for writing non-open-source private projects without dealing with version control complexity</li>
+<li><strong>Easy to distribute</strong>: Can be freely copied and executed between Windows x64 systems, very friendly for “game hosting servers” (low-price NAT VMs providing RDP) sold in mainland China</li>
+</ul>
+<h2 id="notes"><a class="header" href="#notes">Notes</a></h2>
+<ul>
+<li><strong>About dependency management</strong>: If you need a more modern dependency management tool, consider <a href="https://github.com/astral-sh/uv">uv</a>, but note that uv is more suitable for open-source project development or production environment deployment, which may not fully align with this article’s core idea of “easy distribution between different systems”</li>
+<li><strong>Network requirements</strong>: Installing dependencies may require access to overseas servers; configuring a proxy is recommended for better download speeds</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="7-zip-sfx-standard-stub-selection"><a href="#7-zip-sfx-standard-stub-selection" class="header">7-Zip SFX Standard Stub Selection</a></h1>
+<hr>
+<h2 id="title-7-zip-sfx-standard-packaging-guide-why-7zsdsfx-is-the-only-correct-installer-stub-date-2026-06-03-tags-7-zip-sfx-7zsdsfx-runprogram-windows-automation-deployment-description-7-zip-provides-two-types-of-sfx-stubs--standard-and-installer-only-7zsdsfx-supports-runprogram-using-the-wrong-stub-causes-an-unavoidable-extract-to-dialog-and-silently-ignores-the-config-script"><a class="header" href="#title-7-zip-sfx-standard-packaging-guide-why-7zsdsfx-is-the-only-correct-installer-stub-date-2026-06-03-tags-7-zip-sfx-7zsdsfx-runprogram-windows-automation-deployment-description-7-zip-provides-two-types-of-sfx-stubs--standard-and-installer-only-7zsdsfx-supports-runprogram-using-the-wrong-stub-causes-an-unavoidable-extract-to-dialog-and-silently-ignores-the-config-script">title: “7-Zip SFX Standard Packaging Guide: Why 7zSD.sfx Is the Only Correct Installer Stub”
+date: 2026-06-03
+tags: [7-Zip, SFX, 7zSD.sfx, RunProgram, Windows, Automation, Deployment]
+description: “7-Zip provides two types of SFX stubs — Standard and Installer. Only 7zSD.sfx supports RunProgram. Using the wrong stub causes an unavoidable Extract-to dialog and silently ignores the config script.”</a></h2>
+<h1 id="7-zip-sfx-standard-packaging-guide-why-7zsdsfx-is-the-only-correct-installer-stub"><a class="header" href="#7-zip-sfx-standard-packaging-guide-why-7zsdsfx-is-the-only-correct-installer-stub">7-Zip SFX Standard Packaging Guide: Why 7zSD.sfx Is the Only Correct Installer Stub</a></h1>
+<h2 id="1-golden-rule-cache-this-for-agents-and-newcomers"><a class="header" href="#1-golden-rule-cache-this-for-agents-and-newcomers">1) Golden Rule (Cache this for agents and newcomers)</a></h2>
+<ul>
+<li><strong><code>7z.sfx</code> (Standard SFX) extracts only</strong> — it does not parse <code>RunProgram</code> or execute any install workflow.</li>
+<li><strong><code>7zSD.sfx</code> (Installer SFX) extracts + executes</strong> — it supports <code>RunProgram / InstallPath / Silent / GUIMode</code>.</li>
+</ul>
+<blockquote>
+<p>90% of “config not working / Extract-to dialog” issues have exactly one root cause: <strong>the wrong stub</strong>.</p>
+</blockquote>
+<hr>
+<h2 id="2-selection-comparison-table"><a class="header" href="#2-selection-comparison-table">2) Selection Comparison Table</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Attribute</th><th>Standard (DO NOT USE)</th><th><strong>Installer (RECOMMENDED)</strong></th></tr>
+</thead>
+<tbody>
+<tr><td>Filename</td><td><code>7z.sfx</code></td><td><strong><code>7zSD.sfx</code></strong></td></tr>
+<tr><td>Typical Size</td><td>~38 KB</td><td>~120–160 KB</td></tr>
+<tr><td>Capability</td><td>Extract only</td><td>Extract + Execute</td></tr>
+<tr><td><code>RunProgram</code></td><td>❌ Ignored</td><td>✅ Supported</td></tr>
+<tr><td>Typical Symptom</td><td><strong>Always</strong> shows “Extract to…” dialog</td><td>Can run silently or with GUI per config</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="3-minimal-correct-config-file-utf-8-without-bom"><a class="header" href="#3-minimal-correct-config-file-utf-8-without-bom">3) Minimal Correct Config File (UTF-8 <strong>without BOM</strong>)</a></h2>
+<pre><code class="language-ini">;!@Install@!UTF-8!
+Title="Internet Cafe Customizer"
+InstallPath=".\\ "
+RunProgram="scripts\\batch\\sfx_entry.bat"
+;!@InstallEnd@!
+</code></pre>
+<p>Key constraints:</p>
+<ul>
+<li><code>InstallPath=".\\ "</code>: Extract to the <strong>same directory as the EXE</strong> (SFX uses its own path as base)</li>
+<li><code>RunProgram</code> path: relative to the extraction root</li>
+<li>Config file <strong>must</strong> be <strong>UTF-8 without BOM</strong> (BOM causes parse failure)</li>
+</ul>
+<hr>
+<h2 id="4-standard-build-powershell-deterministic"><a class="header" href="#4-standard-build-powershell-deterministic">4) Standard Build (PowerShell, deterministic)</a></h2>
+<pre><code class="language-powershell">$stub    = "tools\7z\7zSD.sfx"
+$cfg     = "configs\sfx_config.txt"
+$archive = "build\temp.7z"
+$outExe  = "dist\installer.exe"
+
+# 1) Create 7z archive
+&amp; "tools\7z\7za.exe" a -t7z $archive (Join-Path PWD payload) -mx=9
+
+# 2) Binary concatenation: stub + config + 7z
+[byte[]]$bin =
+  [IO.File]::ReadAllBytes($stub) +
+  [IO.File]::ReadAllBytes($cfg) +
+  [IO.File]::ReadAllBytes($archive)
+
+[IO.File]::WriteAllBytes($outExe, $bin)
+Write-Host "Built: $outExe"
+</code></pre>
+<blockquote>
+<p>Do not rely on <code>copy /b</code>’s implicit encoding behavior; PowerShell concatenation is auditable and reproducible.</p>
+</blockquote>
+<hr>
+<h2 id="5-30-second-self-check"><a class="header" href="#5-30-second-self-check">5) 30-Second Self-Check</a></h2>
+<p>Use this minimal config:</p>
+<pre><code class="language-ini">;!@Install@!UTF-8!
+RunProgram="cmd.exe"
+;!@InstallEnd@!
+</code></pre>
+<p>After building, double-click:</p>
+<ul>
+<li><strong>CMD window opens</strong> → Installer stub ✅</li>
+<li><strong>“Extract to” dialog appears</strong> → You used <code>7z.sfx</code> — switch to <code>7zSD.sfx</code> ❌</li>
+</ul>
+<hr>
+<h2 id="6-quick-troubleshooting-matrix"><a class="header" href="#6-quick-troubleshooting-matrix">6) Quick Troubleshooting Matrix</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Symptom</th><th>Root Cause</th><th>Fix</th></tr>
+</thead>
+<tbody>
+<tr><td>Always shows Extract-to</td><td>Stub = <code>7z.sfx</code></td><td>Replace with official <code>7zSD.sfx</code></td></tr>
+<tr><td>RunProgram appears ignored</td><td>Same as above (stub doesn’t process install params)</td><td>Same fix</td></tr>
+<tr><td>Double-click does nothing</td><td>Stub is non-official, corrupted, or wrong architecture</td><td>Use <code>7zSD.sfx</code> from 7-Zip install dir or LZMA SDK <code>bin\</code></td></tr>
+<tr><td>Extracted OK but script can’t find files</td><td>Working directory / relative path mismatch</td><td>Add <code>cd /d "%~dp0"</code> at top of bat; verify archive paths</td></tr>
+</tbody>
+</table>
+</div>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="fix-runprogram-failure"><a href="#fix-runprogram-failure" class="header">Fix RunProgram Failure</a></h1>
+<hr>
+<h2 id="title-fix-7-zip-sfx-runprogram-failure-correct-stub-selection-and-diagnostic-matrix-date-2026-06-03-tags-7-zip-sfx-runprogram-troubleshooting-windows-automation-description-when-sfx-double-click-shows-an-extract-to-dialog-silentguimode-are-ignored-or-nothing-happens-at-all-the-root-cause-is-almost-always-wrong-stub-type-or-broken-encodingpath-constraints"><a class="header" href="#title-fix-7-zip-sfx-runprogram-failure-correct-stub-selection-and-diagnostic-matrix-date-2026-06-03-tags-7-zip-sfx-runprogram-troubleshooting-windows-automation-description-when-sfx-double-click-shows-an-extract-to-dialog-silentguimode-are-ignored-or-nothing-happens-at-all-the-root-cause-is-almost-always-wrong-stub-type-or-broken-encodingpath-constraints">title: “Fix 7-Zip SFX RunProgram Failure: Correct Stub Selection and Diagnostic Matrix”
+date: 2026-06-03
+tags: [7-Zip, SFX, RunProgram, troubleshooting, Windows, Automation]
+description: “When SFX double-click shows an Extract-to dialog, Silent/GUIMode are ignored, or nothing happens at all, the root cause is almost always wrong stub type or broken encoding/path constraints.”</a></h2>
+<h1 id="fix-7-zip-sfx-runprogram-failure-correct-stub-selection-and-diagnostic-matrix"><a class="header" href="#fix-7-zip-sfx-runprogram-failure-correct-stub-selection-and-diagnostic-matrix">Fix 7-Zip SFX RunProgram Failure: Correct Stub Selection and Diagnostic Matrix</a></h1>
+<h2 id="1-typical-error-description"><a class="header" href="#1-typical-error-description">1) Typical Error Description</a></h2>
+<ul>
+<li>“I wrote <code>RunProgram</code>, but double-click only shows <strong>Extract to</strong>.”</li>
+<li>“<code>Silent=2</code> / <code>GUIMode=2</code> are written but have no effect.”</li>
+<li>“Double-click does <strong>nothing</strong> — no window at all.”</li>
+</ul>
+<hr>
+<h2 id="2-the-single-most-important-cause"><a class="header" href="#2-the-single-most-important-cause">2) The Single Most Important Cause</a></h2>
+<p><strong><code>7z.sfx</code> (Standard SFX) does not implement the install execution pipeline.</strong>
+When the stub is <code>7z.sfx</code>, the following fields are effectively non-existent:</p>
+<ul>
+<li><code>RunProgram</code></li>
+<li><code>ExecuteFile</code></li>
+<li><code>InstallPath</code> (not processed as installer semantics)</li>
+<li><code>Silent / GUIMode / OverwriteMode</code></li>
+</ul>
+<p>You will always see the “plain extractor UI”.</p>
+<hr>
+<h2 id="3-diagnostic-matrix"><a class="header" href="#3-diagnostic-matrix">3) Diagnostic Matrix</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Symptom</th><th>Check Immediately</th><th>Conclusion</th></tr>
+</thead>
+<tbody>
+<tr><td>Always shows “Extract to…”</td><td>Stub filename/size (should be <code>7zSD.sfx</code> ~120–160KB)</td><td>Wrong stub → Replace</td></tr>
+<tr><td>Double-click, no window, no error</td><td>Is stub official <code>7zSD.sfx</code>?</td><td>Unofficial/corrupted → Use LZMA SDK or 7-Zip official <code>bin\</code></td></tr>
+<tr><td>Extracted but script doesn’t run</td><td>Does the file exist in archive? Case sensitivity? bat working directory?</td><td>Use <code>cd /d "%~dp0"</code> + verify relative path</td></tr>
+<tr><td>“Parameters seem无效”</td><td>Config file encoding</td><td><strong>Must be UTF-8 without BOM</strong> (BOM degrades parsing)</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="4-verify-config-file-encoding-powershell"><a class="header" href="#4-verify-config-file-encoding-powershell">4) Verify Config File Encoding (PowerShell)</a></h2>
+<pre><code class="language-powershell">$b = [IO.File]::ReadAllBytes("configs\sfx_config.txt")
+if ($b[0] -eq 0xEF -and $b[1] -eq 0xBB -and $b[2] -eq 0xBF) {
+  Write-Warning "BOM detected — save as UTF-8 without signature"
+} else { Write-Host "No BOM (OK)" }
+</code></pre>
+<hr>
+<h2 id="5-minimal-fix-steps-in-order"><a class="header" href="#5-minimal-fix-steps-in-order">5) Minimal Fix Steps (in order)</a></h2>
+<ol>
+<li>Obtain <strong>official</strong> <code>7zSD.sfx</code> (from 7-Zip installation <code>bin\7zSD.sfx</code> or LZMA SDK)</li>
+<li>Ensure config = <strong>UTF-8 without BOM</strong></li>
+<li>Use <strong>PowerShell concatenation</strong> (don’t trust <code>copy /b</code> magic)</li>
+<li>Use the “cmd.exe self-check” below to confirm the stub is correct</li>
+</ol>
+<hr>
+<h2 id="6-self-check-stub-diagnostic-anchor"><a class="header" href="#6-self-check-stub-diagnostic-anchor">6) Self-Check Stub (Diagnostic Anchor)</a></h2>
+<pre><code class="language-ini">;!@Install@!UTF-8!
+RunProgram="cmd.exe"
+;!@InstallEnd@!
+</code></pre>
+<ul>
+<li><strong>CMD opens</strong> → Stub OK</li>
+<li><strong>Extract to dialog</strong> → Stub WRONG (Standard edition)</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="llm-silent-exe-deployment"><a href="#llm-silent-exe-deployment" class="header">LLM Silent EXE Deployment</a></h1>
+<hr>
+<h2 id="title-llmci-deployment-guide-building-silent-7-zip-sfx-installers-no-dialogs-date-2026-06-03-tags-7-zip-sfx-silent-install-windows-automation-ci-llm-description-reproducible-steps-select-the-correct-7zsdsfx-stub-write-a-bom-free-config-use-powershell-to-concatenate-a-single-file-exe-and-run-a-minimal-self-check-to-prevent-regression-to-extract-to-behavior"><a class="header" href="#title-llmci-deployment-guide-building-silent-7-zip-sfx-installers-no-dialogs-date-2026-06-03-tags-7-zip-sfx-silent-install-windows-automation-ci-llm-description-reproducible-steps-select-the-correct-7zsdsfx-stub-write-a-bom-free-config-use-powershell-to-concatenate-a-single-file-exe-and-run-a-minimal-self-check-to-prevent-regression-to-extract-to-behavior">title: “LLM/CI Deployment Guide: Building Silent 7-Zip SFX Installers (No Dialogs)”
+date: 2026-06-03
+tags: [7-Zip, SFX, silent-install, Windows, Automation, CI, LLM]
+description: “Reproducible steps: select the correct 7zSD.sfx stub, write a BOM-free config, use PowerShell to concatenate a single-file EXE, and run a minimal self-check to prevent regression to Extract-to behavior.”</a></h2>
+<h1 id="llmci-deployment-guide-building-silent-7-zip-sfx-installers-no-dialogs"><a class="header" href="#llmci-deployment-guide-building-silent-7-zip-sfx-installers-no-dialogs">LLM/CI Deployment Guide: Building Silent 7-Zip SFX Installers (No Dialogs)</a></h1>
+<h2 id="1-inputoutput-contract"><a class="header" href="#1-inputoutput-contract">1) Input/Output Contract</a></h2>
+<ul>
+<li><strong>Stub (fixed)</strong>: <code>tools/7z/7zSD.sfx</code> (installer type, ~128KB)</li>
+<li><strong>Config</strong>: <code>configs/sfx_config.txt</code> (UTF-8 <strong>without BOM</strong>)</li>
+<li><strong>Payload</strong>: Packaged into <code>temp.7z</code> (<strong>must</strong> be 7z, not zip)</li>
+<li><strong>Output</strong>: <code>dist/deploy.exe</code> (double-click = extract + execute)</li>
+</ul>
+<hr>
+<h2 id="2-config-fully-silent-template"><a class="header" href="#2-config-fully-silent-template">2) Config (Fully Silent Template)</a></h2>
+<pre><code class="language-ini">;!@Install@!UTF-8!
+Title="Silent Deploy"
+InstallPath=".\\ "
+GUIMode="2"
+Silent="2"
+OverwriteMode="2"
+RunProgram="setup.bat"
+;!@InstallEnd@!
+</code></pre>
+<p>Notes:</p>
+<ul>
+<li><code>GUIMode="2"</code> + <code>Silent</code> suppress all UI</li>
+<li><code>InstallPath=".\\ "</code> → extract to EXE’s directory</li>
+<li><code>setup.bat</code> must exist inside the archive and use <code>%~dp0</code> to locate itself</li>
+</ul>
+<hr>
+<h2 id="3-build-script-agentci-reproducible"><a class="header" href="#3-build-script-agentci-reproducible">3) Build Script (Agent/CI reproducible)</a></h2>
+<pre><code class="language-powershell">param(
+  [string]$Stub    = "tools\7z\7zSD.sfx",
+  [string]$Cfg     = "configs\sfx_config.txt",
+  [string]$Archive = "build\temp.7z",
+  [string]$Out     = "dist\deploy.exe"
+)
+
+[byte[]]$bin =
+  [IO.File]::ReadAllBytes($Stub) +
+  [IO.File]::ReadAllBytes($Cfg) +
+  [IO.File]::ReadAllBytes($Archive)
+
+[IO.File]::WriteAllBytes($Out, $bin)
+Write-Host "Built: $Out"
+</code></pre>
+<hr>
+<h2 id="4-validation-protocol-ci-checkable"><a class="header" href="#4-validation-protocol-ci-checkable">4) Validation Protocol (CI-checkable)</a></h2>
+<ul>
+<li><strong>PE header sanity</strong>: stub must start with <code>MZ</code></li>
+<li><strong>Stub size sanity</strong>: <code>7zSD.sfx</code> is typically 100–200KB</li>
+<li><strong>Runtime smoke test</strong>: use <code>RunProgram=cmd.exe</code> to verify it doesn’t regress to Extract-to</li>
+</ul>
+<hr>
+<h2 id="5-constraints-avoid-hallucination"><a class="header" href="#5-constraints-avoid-hallucination">5) Constraints (Avoid Hallucination)</a></h2>
+<ul>
+<li><strong>The internal archive MUST be 7z</strong> (<code>-t7z</code>), not zip</li>
+<li>Windows Explorer will <strong>not</strong> treat it as a zip; but 7-Zip/WinRAR can unpack it</li>
+<li>For “right-click extract” behavior, distribute a <strong>zip portable package</strong> instead — don’t try to disguise SFX as zip</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="set-zed-as-bat-editor"><a href="#set-zed-as-bat-editor" class="header">Set Zed as bat Editor</a></h1>
+<hr>
+<h2 id="title-set-zed-as-the-default-editor-for-bat-files-date-2026-06-06-tags-zed-windows-editor-bat-registry-description-configure-windows-1011-to-use-zed-editor-for-the-right-click-edit-option-on-bat-files-categories-os"><a class="header" href="#title-set-zed-as-the-default-editor-for-bat-files-date-2026-06-06-tags-zed-windows-editor-bat-registry-description-configure-windows-1011-to-use-zed-editor-for-the-right-click-edit-option-on-bat-files-categories-os">title: Set Zed as the Default Editor for .bat Files
+date: 2026-06-06
+tags: [Zed, Windows, Editor, .bat, Registry]
+description: Configure Windows 10/11 to use Zed editor for the right-click “Edit” option on .bat files
+categories: os</a></h2>
+<h1 id="set-zed-as-the-default-editor-for-bat-files"><a class="header" href="#set-zed-as-the-default-editor-for-bat-files">Set Zed as the Default Editor for .bat Files</a></h1>
+<h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
+<p>This document describes how to configure the right-click menu for <code>.bat</code> files in Windows 10 to achieve the following effects:</p>
+<ul>
+<li><strong>Double-click .bat file</strong>: Keep the default behavior, execute the script using Windows Terminal</li>
+<li><strong>Right-click menu “Edit”</strong>: Open the file using Zed editor</li>
+</ul>
+<h2 id="implementation-principle"><a class="header" href="#implementation-principle">Implementation Principle</a></h2>
+<h3 id="windows-file-association-mechanism"><a class="header" href="#windows-file-association-mechanism">Windows File Association Mechanism</a></h3>
+<p>Windows manages file associations through the registry, with priority order:</p>
+<pre><code>HKCU\Software\Classes &gt; HKLM\Software\Classes
+</code></pre>
+<p>The default association for <code>.bat</code> files is <code>batfile</code>, which executes <code>cmd.exe /c xxx.bat</code> when double-clicked. We only need to modify the “Edit” option in the right-click menu without affecting the default execution behavior.</p>
+<h2 id="configuration-steps"><a class="header" href="#configuration-steps">Configuration Steps</a></h2>
+<h3 id="method-1-use-powershell-script-recommended"><a class="header" href="#method-1-use-powershell-script-recommended">Method 1: Use PowerShell Script (Recommended)</a></h3>
+<p>Create and run the following PowerShell script:</p>
+<pre><code class="language-powershell"># Set right-click "Edit" for .bat files to open with Zed
+$zedPath = "C:\Users\user\AppData\Local\Programs\Zed\Zed.exe"
+
+# Create right-click menu "Edit" option
+reg add "HKCU\Software\Classes\batfile\shell\edit" /ve /d "Edit" /f
+reg add "HKCU\Software\Classes\batfile\shell\edit\command" /ve /d "`"$zedPath`" `"%1`"" /f
+
+Write-Host "Configuration completed!"
+</code></pre>
+<h3 id="method-2-manually-modify-the-registry"><a class="header" href="#method-2-manually-modify-the-registry">Method 2: Manually Modify the Registry</a></h3>
+<ol>
+<li>
+<p>Open Registry Editor: <code>regedit</code></p>
+</li>
+<li>
+<p>Navigate to the following path:</p>
+<pre><code>HKEY_CURRENT_USER\Software\Classes\batfile\shell\edit
+</code></pre>
+</li>
+<li>
+<p>Set the default value to <code>Edit</code></p>
+</li>
+<li>
+<p>Create a <code>command</code> subkey under <code>edit</code> and set its default value to:</p>
+<pre><code>"C:\Users\user\AppData\Local\Programs\Zed\Zed.exe" "%1"
+</code></pre>
+</li>
+</ol>
+<h2 id="verification"><a class="header" href="#verification">Verification</a></h2>
+<h3 id="check-registry-settings"><a class="header" href="#check-registry-settings">Check Registry Settings</a></h3>
+<pre><code class="language-cmd">reg query "HKCU\Software\Classes\batfile\shell\edit" /s
+</code></pre>
+<p>Expected output:</p>
+<pre><code>HKEY_CURRENT_USER\Software\Classes\batfile\shell\edit
+    (Default)    REG_SZ    Edit
+
+HKEY_CURRENT_USER\Software\Classes\batfile\shell\edit\command
+    (Default)    REG_SZ    "C:\Users\user\AppData\Local\Programs\Zed\Zed.exe" "%1"
+</code></pre>
+<h3 id="test-the-effect"><a class="header" href="#test-the-effect">Test the Effect</a></h3>
+<ol>
+<li><strong>Double-click .bat file</strong>: Should open Windows Terminal and execute the script</li>
+<li><strong>Right-click .bat file → Edit</strong>: Should open the file with Zed</li>
+</ol>
+<h2 id="notes-1"><a class="header" href="#notes-1">Notes</a></h2>
+<h3 id="userchoice-priority-issue"><a class="header" href="#userchoice-priority-issue">UserChoice Priority Issue</a></h3>
+<p>If the changes don’t take effect, it may be because <code>UserChoice</code> settings override your configuration. Remove it:</p>
+<pre><code class="language-powershell">Remove-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.bat\UserChoice" -Force -ErrorAction SilentlyContinue
+</code></pre>
+<h3 id="restart-file-explorer"><a class="header" href="#restart-file-explorer">Restart File Explorer</a></h3>
+<p>After modifying the registry, it’s recommended to restart File Explorer for changes to take effect:</p>
+<pre><code class="language-powershell">Stop-Process -Name explorer -Force
+Start-Process explorer
+</code></pre>
+<h3 id="migrate-to-another-editor"><a class="header" href="#migrate-to-another-editor">Migrate to Another Editor</a></h3>
+<p>If you switch to another editor later (e.g., VS Code, Notepad++, etc.), simply modify the <code>command</code> path:</p>
+<pre><code class="language-powershell">reg add "HKCU\Software\Classes\batfile\shell\edit\command" /ve /d "`"C:\Program Files\Microsoft VS Code\Code.exe`" `"%1`"" /f
+</code></pre>
+<h2 id="common-issues"><a class="header" href="#common-issues">Common Issues</a></h2>
+<h3 id="garbled-text-in-right-click-menu"><a class="header" href="#garbled-text-in-right-click-menu">Garbled Text in Right-Click Menu</a></h3>
+<p>Cause: Menu text encoding error in the registry.</p>
+<p>Solution:</p>
+<pre><code class="language-powershell">reg delete "HKCU\Software\Classes\batfile\shell\edit" /f
+reg add "HKCU\Software\Classes\batfile\shell\edit" /ve /d "Edit" /f
+</code></pre>
+<h3 id="double-click-behavior-changed-after-modification"><a class="header" href="#double-click-behavior-changed-after-modification">Double-Click Behavior Changed After Modification</a></h3>
+<p>Cause: May have incorrectly modified the default program for <code>.bat</code> files.</p>
+<p>Solution: Restore the default association:</p>
+<pre><code class="language-powershell">reg add "HKCU\Software\Classes\.bat" /ve /d "batfile" /f
+</code></pre>
+<h2 id="summary"><a class="header" href="#summary">Summary</a></h2>
+<p>By modifying the <code>HKCU\Software\Classes\batfile\shell\edit</code> registry key, we achieved:</p>
+<ul>
+<li>Keep the default execution behavior of <code>.bat</code> files (using Windows Terminal)</li>
+<li>Use Zed for the right-click “Edit” option</li>
+<li>Configuration doesn’t affect system-level settings (only affects current user)</li>
+</ul>
+<p>This approach meets editing needs without breaking the normal execution functionality of scripts.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="nushell--atomcode-configuration-pitfalls"><a href="#nushell--atomcode-configuration-pitfalls" class="header">Nushell + AtomCode Configuration Pitfalls</a></h1>
+<hr>
+<h2 id="title-nushell--atomcode-configuration-pitfalls-date-2026-07-07-tags-nushell-atomcode-macos-shell-config-path-description-documenting-5-typical-pitfalls-when-configuring-nushell-01131-with-atomcode-on-macos-including-wrong-config-directory-verification-mistakes-path-inheritance-issues-config-key-confusion-and-default-value-overrides-categories-tools"><a class="header" href="#title-nushell--atomcode-configuration-pitfalls-date-2026-07-07-tags-nushell-atomcode-macos-shell-config-path-description-documenting-5-typical-pitfalls-when-configuring-nushell-01131-with-atomcode-on-macos-including-wrong-config-directory-verification-mistakes-path-inheritance-issues-config-key-confusion-and-default-value-overrides-categories-tools">title: Nushell + AtomCode Configuration Pitfalls
+date: 2026-07-07
+tags: [nushell, atomcode, macOS, shell-config, PATH]
+description: Documenting 5 typical pitfalls when configuring Nushell 0.113.1 with AtomCode on macOS, including wrong config directory, verification mistakes, PATH inheritance issues, config key confusion, and default value overrides
+categories: tools</a></h2>
+<p><strong>Summary:</strong> This article documents 5 typical pitfalls encountered when configuring Nushell 0.113.1 with AtomCode on macOS, including wrong config directory paths, verification mistakes, PATH inheritance issues, config key confusion, and default value overrides — along with the final working configuration.</p>
+<h2 id="1-background"><a class="header" href="#1-background">1. Background</a></h2>
+<p>Date: 2026-07-07</p>
+<p>Environment: macOS, Nushell 0.113.1 (Homebrew), <code>nu</code> at <code>/opt/homebrew/bin/nu</code></p>
+<p>Goals: ① Use <code>atomcode</code> command within nushell; ② No welcome message on startup; ③ No timestamp on the right side of the prompt</p>
+<h2 id="2-pitfall-1-nushells-config-directory-isnt-confignushell"><a class="header" href="#2-pitfall-1-nushells-config-directory-isnt-confignushell">2. Pitfall 1: Nushell’s Config Directory Isn’t <code>~/.config/nushell/</code></a></h2>
+<h3 id="21-symptom"><a class="header" href="#21-symptom">2.1 Symptom</a></h3>
+<p>Adding <code>$env.PROMPT_COMMAND_RIGHT = {|| "" }</code> in <code>~/.config/nushell/env.nu</code> has no effect — the timestamp still shows.</p>
+<h3 id="22-root-cause"><a class="header" href="#22-root-cause">2.2 Root Cause</a></h3>
+<p>On macOS, nushell 0.113 loads its config from:</p>
+<pre><code>~/Library/Application Support/nushell/
+</code></pre>
+<p><strong>Not</strong> <code>~/.config/nushell/</code> (which is the Linux path). Check the actual directory:</p>
+<pre><code class="language-nu">nu
+$nu.default-config-dir
+# =&gt; /Users/&lt;user&gt;/Library/Application Support/nushell
+</code></pre>
+<p>The two files in <code>~/.config/nushell/</code> are never loaded — all changes there are wasted.</p>
+<h3 id="23-fix"><a class="header" href="#23-fix">2.3 Fix</a></h3>
+<p>Put all changes in <code>~/Library/Application Support/nushell/</code> under <code>env.nu</code> / <code>config.nu</code>.</p>
+<h2 id="3-pitfall-2-nu--c-doesnt-load-confignu-misleading-verification"><a class="header" href="#3-pitfall-2-nu--c-doesnt-load-confignu-misleading-verification">3. Pitfall 2: <code>nu -c</code> Doesn’t Load <code>config.nu</code>, Misleading Verification</a></h2>
+<h3 id="31-symptom"><a class="header" href="#31-symptom">3.1 Symptom</a></h3>
+<p>Set <code>$env.config.show_banner = false</code> in <code>config.nu</code>, then run <code>nu -c '$env.config.show_banner'</code> — returns <code>true</code>, making it seem like the config didn’t take effect.</p>
+<h3 id="32-root-cause"><a class="header" href="#32-root-cause">3.2 Root Cause</a></h3>
+<p><code>nu -c '...'</code> (non-interactive script mode) <strong>does not load <code>config.nu</code> at all</strong>. It only uses built-in defaults. So checking <code>$env.config.show_banner</code> with <code>nu -c</code> always returns the default <code>true</code>.</p>
+<h3 id="33-correct-verification"><a class="header" href="#33-correct-verification">3.3 Correct Verification</a></h3>
+<p>Use <code>nu -e '...'</code>: it executes the command then enters interactive mode, <strong>which does load <code>config.nu</code></strong>.</p>
+<pre><code class="language-bash">nu -e 'print $"banner=($env.config.show_banner)"'
+# =&gt; banner=false
+</code></pre>
+<p>Or use <code>expect</code> to simulate a TTY and spawn a real interactive session.</p>
+<h2 id="4-pitfall-3-new-terminal-tab-reports-atomcode-not-found"><a class="header" href="#4-pitfall-3-new-terminal-tab-reports-atomcode-not-found">4. Pitfall 3: New Terminal Tab Reports <code>atomcode not found</code></a></h2>
+<h3 id="41-symptom"><a class="header" href="#41-symptom">4.1 Symptom</a></h3>
+<p>In an existing terminal, nushell finds <code>atomcode</code> (<code>which atomcode</code> resolves to <code>~/.local/bin/atomcode</code>). But <strong>opening a new terminal tab</strong> and starting nushell gives:</p>
+<pre><code>Error: nu::shell::external_command
+  × External command failed
+   · Command `atomcode` not found
+</code></pre>
+<h3 id="42-root-cause"><a class="header" href="#42-root-cause">4.2 Root Cause</a></h3>
+<p><code>atomcode</code> lives in <code>~/.local/bin/</code>, which is added to PATH via <code>export PATH="~/.local/bin:$PATH"</code> in <code>~/.zshrc</code>. However, macOS Terminal/iTerm may not re-source <code>~/.zshrc</code> when opening new tabs — especially when the shell is set to “non-login” mode, or only reads <code>~/.zprofile</code> (which is often empty). The new tab gets a minimal PATH inherited from the GUI process, <strong>without <code>~/.local/bin</code></strong>.</p>
+<p>Evidence: <code>launchctl getenv PATH</code> returns empty, meaning the GUI layer never set PATH, and the new tab’s PATH depends entirely on zsh startup files, which may not include <code>~/.zshrc</code>.</p>
+<h3 id="43-fix"><a class="header" href="#43-fix">4.3 Fix</a></h3>
+<p>Don’t rely on whether the outer shell sourced <code>~/.zshrc</code>. Add PATH directly in nushell’s <code>env.nu</code> (loaded unconditionally on every startup, before <code>config.nu</code>):</p>
+<pre><code class="language-nu"># ~/Library/Application Support/nushell/env.nu
+use std/util "path add"
+path add "~/.local/bin"
+</code></pre>
+<p>Verification (with a stripped PATH to simulate the worst case):</p>
+<pre><code class="language-nu">PATH=/opt/homebrew/bin:/usr/bin:/bin nu -e 'which atomcode | get command | print'
+# =&gt; atomcode   ← still visible
+</code></pre>
+<h2 id="5-pitfall-4-config-key-is-show_banner-not-banner"><a class="header" href="#5-pitfall-4-config-key-is-show_banner-not-banner">5. Pitfall 4: Config Key Is <code>show_banner</code>, Not <code>banner</code></a></h2>
+<h3 id="51-symptom"><a class="header" href="#51-symptom">5.1 Symptom</a></h3>
+<p>Running <code>nu -c '$env.config.banner'</code> reports:</p>
+<pre><code>Error: nu::shell::name_not_found
+  · `-- did you mean 'show_banner'?
+</code></pre>
+<h3 id="52-root-cause"><a class="header" href="#52-root-cause">5.2 Root Cause</a></h3>
+<p>The config option to disable the welcome message is <code>show_banner</code> (bool|string):</p>
+<pre><code class="language-nu">$env.config.show_banner = false      # hide
+$env.config.show_banner = true       # show full banner (default)
+$env.config.show_banner = "short"    # show startup time only
+</code></pre>
+<p>Check the docs:</p>
+<pre><code class="language-bash">config nu --doc | nu-highlight | less -R
+</code></pre>
+<h2 id="6-pitfall-5-github-issue-8698--show_banner-overridden-by-default-at-eof"><a class="header" href="#6-pitfall-5-github-issue-8698--show_banner-overridden-by-default-at-eof">6. Pitfall 5: GitHub Issue #8698 — <code>show_banner</code> Overridden by Default at EOF</a></h2>
+<h3 id="61-symptom"><a class="header" href="#61-symptom">6.1 Symptom</a></h3>
+<p>Setting <code>$env.config.show_banner = false</code> at the top of <code>config.nu</code> — the banner still appears.</p>
+<h3 id="62-root-cause"><a class="header" href="#62-root-cause">6.2 Root Cause</a></h3>
+<p>The default <code>config.nu</code> generated by nushell installation <strong>ends with</strong> <code>$env.config.show_banner = true</code>. The <code>false</code> set at the top gets overwritten by the <code>true</code> at the bottom.</p>
+<h3 id="63-fix"><a class="header" href="#63-fix">6.3 Fix</a></h3>
+<p>Place your settings at the <strong>end</strong> of the file, or delete the default <code>true</code> line. Use <code>config nu</code> to open the editor.</p>
+<h2 id="7-final-working-configuration"><a class="header" href="#7-final-working-configuration">7. Final Working Configuration</a></h2>
+<h3 id="71-libraryapplication-supportnushellenvnu"><a class="header" href="#71-libraryapplication-supportnushellenvnu">7.1 <code>~/Library/Application Support/nushell/env.nu</code></a></h3>
+<pre><code class="language-nu"># Loaded unconditionally on startup, before config.nu
+# Don't rely on whether the outer shell sourced ~/.zshrc
+use std/util "path add"
+path add "~/.local/bin"
+</code></pre>
+<h3 id="72-libraryapplication-supportnushellconfignu-append-after-the-comment-section"><a class="header" href="#72-libraryapplication-supportnushellconfignu-append-after-the-comment-section">7.2 <code>~/Library/Application Support/nushell/config.nu</code> (append after the comment section)</a></h3>
+<pre><code class="language-nu"># Disable startup welcome message
+$env.config.show_banner = false
+# Clear right prompt, removing the timestamp
+$env.PROMPT_COMMAND_RIGHT = {|| "" }
+</code></pre>
+<h2 id="8-summary"><a class="header" href="#8-summary">8. Summary</a></h2>
+<ul>
+<li><strong>Put config in the right directory</strong>: macOS uses <code>~/Library/Application Support/nushell/</code>, not <code>~/.config/nushell/</code></li>
+<li><strong>Verify with <code>nu -e</code></strong>, not <code>nu -c</code> (the latter doesn’t load <code>config.nu</code>)</li>
+<li><strong>PATH belongs in <code>env.nu</code></strong> (loaded unconditionally), don’t rely on the outer shell’s <code>~/.zshrc</code></li>
+<li><strong>The config key for disabling banner is <code>$env.config.show_banner</code></strong>, and watch out for the default value at the end of the file</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="wezterm--nushell--cargo-not-found"><a href="#wezterm--nushell--cargo-not-found" class="header">WezTerm + Nushell + Cargo Not Found</a></h1>
+<hr>
+<h2 id="title-wezterm--nushell--cargo-command-not-found-date-2026-07-06-tags-nushell-wezterm-cargo-macos-path-shell-config-description-troubleshooting-cargo-not-found-in-wezterm-new-tabs-launching-nushell-on-macos-apple-silicon--root-causes-include-nushell-not-sourcing-cargoenv-wrong-default-config-directory-and-string-interpolation-differences-categories-tools"><a class="header" href="#title-wezterm--nushell--cargo-command-not-found-date-2026-07-06-tags-nushell-wezterm-cargo-macos-path-shell-config-description-troubleshooting-cargo-not-found-in-wezterm-new-tabs-launching-nushell-on-macos-apple-silicon--root-causes-include-nushell-not-sourcing-cargoenv-wrong-default-config-directory-and-string-interpolation-differences-categories-tools">title: WezTerm + Nushell + Cargo Command Not Found
+date: 2026-07-06
+tags: [nushell, wezterm, cargo, macOS, PATH, shell-config]
+description: Troubleshooting cargo not found in WezTerm new tabs launching Nushell on macOS Apple Silicon — root causes include nushell not sourcing ~/.cargo/env, wrong default config directory, and string interpolation differences
+categories: tools</a></h2>
+<p><strong>Summary:</strong> This article documents troubleshooting <code>cargo</code> not found in new WezTerm tabs running Nushell on macOS (Apple Silicon). Core issues include nushell not sourcing <code>~/.cargo/env</code>, the default config directory not being <code>~/.config/nushell/</code>, and string interpolation syntax differences.</p>
+<h2 id="1-symptoms"><a class="header" href="#1-symptoms">1. Symptoms</a></h2>
+<p>Running <code>cargo run</code> in a new WezTerm tab with nushell:</p>
+<pre><code>~/Documents/Code.localized/ra2md&gt; cargo run
+Error: nu::shell::external_command
+  × External command failed
+   ╭─[repl_entry #3:1:1]
+ 1 │ cargo run
+   · ──┬──
+   ·   ╰── Command `cargo` not found
+   ╰────
+  help: `cargo` is neither a Nushell built-in or a known external command
+</code></pre>
+<p>Each time, manually sourcing <code>~/.config/nushell/env.nu</code> would temporarily fix it, but a new tab would break again.</p>
+<h2 id="2-root-causes-three-issues-stacking"><a class="header" href="#2-root-causes-three-issues-stacking">2. Root Causes (Three Issues Stacking)</a></h2>
+<h3 id="21-nushell-doesnt-source-cargoenv"><a class="header" href="#21-nushell-doesnt-source-cargoenv">2.1 Nushell Doesn’t Source <code>~/.cargo/env</code></a></h3>
+<p>When rustup is installed, it writes a <strong>shell script</strong> to <code>~/.cargo/env</code> (a <code>case ":${PATH}:"…esac</code> block) that can only be sourced by bash/zsh and other POSIX shells. Nushell’s syntax is different — <strong>it cannot and will not</strong> source this file. So while <code>source "$HOME/.cargo/env"</code> in <code>~/.zshrc</code> works for zsh, nushell does nothing on startup — cargo never makes it into <code>PATH</code>.</p>
+<h3 id="22-nushells-default-config-directory-isnt-confignushell"><a class="header" href="#22-nushells-default-config-directory-isnt-confignushell">2.2 Nushell’s Default Config Directory Isn’t <code>~/.config/nushell/</code></a></h3>
+<p>This is the biggest trap. Following XDG conventions, many people (myself included) modify <code>~/.config/nushell/env.nu</code>, only to find <strong>their changes have no effect</strong>. Nushell 0.113 on macOS uses:</p>
+<pre><code>~/Library/Application Support/nushell/
+</code></pre>
+<p>Not <code>~/.config/nushell/</code>. Verify with:</p>
+<pre><code class="language-nu">echo $nu.default-config-dir
+echo $nu.env-path          # ~/Library/Application Support/nushell/env.nu
+echo $nu.config-path       # ~/Library/Application Support/nushell/config.nu
+</code></pre>
+<p>I had correctly added <code>path add "~/.cargo/bin"</code> in <code>~/.config/nushell/env.nu</code>, and sourcing it worked — but when WezTerm launched nushell, it loaded the file from the default path instead. <strong>Editing the wrong file</strong> is the core of this pitfall.</p>
+<h3 id="23-nushell-string-interpolation-differs-from-bash"><a class="header" href="#23-nushell-string-interpolation-differs-from-bash">2.3 Nushell String Interpolation Differs from Bash</a></h3>
+<p>While initially editing <code>~/.config/nushell/env.nu</code>, I also hit a syntax issue. The original attempt:</p>
+<pre><code class="language-nu">$env.PATH = ($env.PATH | prepend "$env.HOME/.cargo/bin")
+</code></pre>
+<p>In nushell, <strong>double-quoted strings do NOT interpolate variables</strong>. <code>"$env.HOME/.cargo/bin"</code> is treated as a literal string <code>$env.HOME/.cargo/bin</code>, adding a nonexistent directory to PATH. The correct syntax uses <code>$"..."</code> string interpolation with <code>(...)</code> subexpressions:</p>
+<pre><code class="language-nu">$env.PATH = ($env.PATH | prepend $"($env.HOME)/.cargo/bin")
+</code></pre>
+<p>Or better yet — use nushell’s built-in <code>path add</code> utility (from <code>std/util</code>), which auto-expands <code>~</code>:</p>
+<pre><code class="language-nu">use std/util "path add"
+path add "~/.cargo/bin"
+</code></pre>
+<h2 id="3-fix"><a class="header" href="#3-fix">3. Fix</a></h2>
+<p>Edit the file that is actually loaded: <code>~/Library/Application Support/nushell/env.nu</code>, and add <code>path add "~/.cargo/bin"</code>. Full change:</p>
+<pre><code class="language-nu"># env.nu
+# Always make ~/.local/bin visible (where atomcode lives), even when the
+# terminal was started as a non-login shell and ~/.zshrc never ran.
+use std/util "path add"
+path add "~/.local/bin"
+# cargo / rustup binaries — nushell doesn't auto-source ~/.cargo/env (it's an sh script)
+path add "~/.cargo/bin"
+</code></pre>
+<p>Verification:</p>
+<pre><code class="language-bash">which cargo
+# → /Users/&lt;user&gt;/.cargo/bin/cargo
+cargo run
+</code></pre>
+<p>New WezTerm tabs work without manual sourcing.</p>
+<h2 id="4-summary"><a class="header" href="#4-summary">4. Summary</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Pitfall</th><th>Key Point</th></tr>
+</thead>
+<tbody>
+<tr><td>Nushell doesn’t inherit <code>~/.cargo/env</code></td><td>It’s an sh script; you must add <code>path add "~/.cargo/bin"</code> yourself</td></tr>
+<tr><td>Editing <code>~/.config/nushell/</code> has no effect</td><td>On macOS, nushell reads from <code>~/Library/Application Support/nushell/</code></td></tr>
+<tr><td><code>"$env.HOME/..."</code> is literal</td><td>Nushell double quotes don’t interpolate; use <code>$"($env.HOME)/..."</code></td></tr>
+<tr><td>WezTerm new tab loses cargo again</td><td>Not a WezTerm issue — nushell wasn’t loading the correct env.nu</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="5-references"><a class="header" href="#5-references">5. References</a></h2>
+<ul>
+<li>Nushell configuration docs: <a href="https://www.nushell.sh/book/configuration.html">Configuration | Nushell</a></li>
+<li>Nushell string interpolation: <a href="https://www.nushell.sh/language/_strings.html">https://www.nushell.sh/language/_strings.html</a></li>
+<li>rustup file <code>~/.cargo/env</code>: POSIX shell only</li>
+<li>Nushell <code>std/util</code> module: <code>use std/util "path add"</code> provides the <code>path add</code> command</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="rust-bevy-013-to-014-upgrade-guide"><a href="#rust-bevy-013-to-014-upgrade-guide" class="header">Rust Bevy 0.13 to 0.14 Upgrade Guide</a></h1>
+<hr>
+<h2 id="title-rust-bevy-013-to-014-upgrade-guide-date-2026-07-08-tags-bevy-rust-game-development-upgrade-migration-macos-description-a-complete-guide-to-upgrading-a-bevy-013-2d-pixel-game-to-014-covering-state-api-extraction-geometry-primitive-migration-color-access-changes-and-other-breaking-changes-categories-programming"><a class="header" href="#title-rust-bevy-013-to-014-upgrade-guide-date-2026-07-08-tags-bevy-rust-game-development-upgrade-migration-macos-description-a-complete-guide-to-upgrading-a-bevy-013-2d-pixel-game-to-014-covering-state-api-extraction-geometry-primitive-migration-color-access-changes-and-other-breaking-changes-categories-programming">title: Rust Bevy 0.13 to 0.14 Upgrade Guide
+date: 2026-07-08
+tags: [bevy, rust, game-development, upgrade-migration, macOS]
+description: A complete guide to upgrading a Bevy 0.13 2D pixel game to 0.14, covering State API extraction, geometry primitive migration, Color access changes, and other breaking changes
+categories: programming</a></h2>
+<blockquote>
+<p>This article documents the complete process of upgrading a Bevy 0.13 2D pixel game to version 0.14. Version 0.14 is the most stable version on macOS (higher versions have black screen issues), so we’re locking to this version. After the upgrade, two modules migrated from Python prototypes (debug console and script system) were also rewritten and integrated.</p>
+</blockquote>
+<h2 id="1-why-014"><a class="header" href="#1-why-014">1. Why 0.14</a></h2>
+<ul>
+<li><strong>macOS compatibility</strong>: Versions 0.15+ have black screen issues on macOS; 0.14 is the most stable choice.</li>
+<li><strong>Breaking changes</strong>: 0.13 → 0.14 has breaking API changes — you can’t just bump the version number in Cargo.toml.</li>
+</ul>
+<h2 id="2-three-changes-in-cargotoml"><a class="header" href="#2-three-changes-in-cargotoml">2. Three Changes in Cargo.toml</a></h2>
+<h3 id="21-version-number"><a class="header" href="#21-version-number">2.1 Version Number</a></h3>
+<pre><code class="language-toml"># before
+bevy = { version = "0.13", default-features = false, features = [...] }
+after
+bevy = { version = "0.14", default-features = false, features = [...] }
+</code></pre>
+<h3 id="22-feature-names-changed-to-snake-case"><a class="header" href="#22-feature-names-changed-to-snake-case">2.2 Feature Names Changed to Snake Case</a></h3>
+<pre><code class="language-toml"># 0.13 used hyphen-case
+"multi-threaded",
+0.14 changed to snake_case
+"multi_threaded",
+</code></pre>
+<p>Running <code>cargo fetch</code> will immediately error:</p>
+<pre><code>package depends on `bevy` with feature `multi-threaded`
+but `bevy` does not have that feature.
+help: there is a feature `multi_threaded` with a similar name
+</code></pre>
+<p>Just follow the hint and fix it.</p>
+<h3 id="23-diagnostic-plugin-feature-renamed"><a class="header" href="#23-diagnostic-plugin-feature-renamed">2.3 Diagnostic Plugin Feature Renamed</a></h3>
+<pre><code class="language-toml"># 0.13
+"bevy_diagnostic",   # ❌ doesn't exist in 0.14
+0.14
+"bevy_dev_tools",    # ✅ FrameTimeDiagnosticsPlugin comes with this
+</code></pre>
+<p>The error output lists all available features — pick from there.</p>
+<h3 id="24-explicit-bevy_state--bevy_app-dependencies"><a class="header" href="#24-explicit-bevy_state--bevy_app-dependencies">2.4 Explicit bevy_state / bevy_app Dependencies</a></h3>
+<p>This is a pain point specific to projects using <code>default-features = false</code> — see the next section.</p>
+<h2 id="3-state-api-the-biggest-pitfall"><a class="header" href="#3-state-api-the-biggest-pitfall">3. State API: The Biggest Pitfall</a></h2>
+<h3 id="symptoms"><a class="header" href="#symptoms">Symptoms</a></h3>
+<p>After upgrading, compilation floods with errors:</p>
+<pre><code>error: cannot find derive macro `States` in this scope
+error[E0425]: cannot find type `NextState` in this scope
+error[E0425]: cannot find function `in_state` in this scope
+error[E0425]: cannot find `OnEnter` / `OnExit`
+error[E0599]: no method named `init_state` found for `&amp;mut App`
+error[E0599]: no method named `enable_state` found for `&amp;mut App`
+</code></pre>
+<h3 id="root-cause"><a class="header" href="#root-cause">Root Cause</a></h3>
+<p>0.14 moved the state system <strong>out of <code>bevy::prelude</code></strong> into a separate crate <code>bevy_state</code>. <code>bevy</code> re-exports it via <code>bevy_internal</code>:</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// bevy_internal/src/lib.rs
+#[cfg(feature = "bevy_state")]
+pub use bevy_state as state;
+<span class="boring">}</span></code></pre>
+<p>So <code>bevy::state</code> <strong>theoretically still exists</strong>, but requires the <code>bevy_state</code> feature to be enabled. Since we used <code>default-features = false</code>, the default feature set is stripped — in 0.13 state came with prelude, in 0.14 it must be explicitly enabled.</p>
+<h3 id="solution-3-steps"><a class="header" href="#solution-3-steps">Solution (3 Steps)</a></h3>
+<p><strong>Step 1: Enable feature + add dependencies in Cargo.toml</strong></p>
+<pre><code class="language-toml">bevy = { version = "0.14", default-features = false, features = [
+    ...,
+    "bevy_state",   # activate bevy::state re-export
+] }
+Enabling just bevy_state isn't enough — AppExtStates (containing init_state) lives in bevy_state::app,
+which uses bevy_app::{App, ...}. So bevy_app must also be in the dependency graph.
+bevy_state = "0.14"
+bevy_app = "0.14"
+</code></pre>
+<p><strong>Step 2: Update all imports to use <code>bevy_state</code></strong></p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// ❌ 0.13: auto-available from prelude
+#[derive(States, Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+pub enum GameState { ... }
+.add_systems(OnEnter(GameState::Playing), ...)
+.add_systems(Update, foo.run_if(in_state(GameState::Playing)))
+.next_state.set(GameState::GameOver);
+<span class="boring">}</span></code></pre>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// ✅ 0.14: all explicit imports
+use bevy_state::app::AppExtStates;          // contains init_state
+use bevy_state::state::{OnEnter, OnExit, States, NextState};
+use bevy_state::condition::in_state;
+<span class="boring">}</span></code></pre>
+<p>Every file using <code>NextState</code> needs:</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use bevy_state::state::NextState;
+<span class="boring">}</span></code></pre>
+<p><strong>Step 3: Remove <code>enable_state</code> calls</strong></p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// ❌ 0.13 style
+.init_state::&lt;&gt;()
+.enable_state::&lt;&gt;()   // removed in 0.14
+<span class="boring">}</span></code></pre>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// ✅ 0.14: init_state alone is sufficient (transitions are set up internally)
+.init_state::&lt;&gt;()
+<span class="boring">}</span></code></pre>
+<h4 id="minimal-verification-test"><a class="header" href="#minimal-verification-test">Minimal Verification Test</a></h4>
+<p>I created a small cargo project in <code>/tmp</code> to verify imports, then went back to the main project:</p>
+<pre class="playground"><code class="language-rust">use bevy::prelude::*;
+use bevy_state::app::AppExtStates;
+use bevy_state::state::{OnEnter, OnExit, States, NextState};
+use bevy_state::condition::in_state;
+#[derive(States, Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+pub enum S { #[default] A, B }
+fn main() {
+    App::new()
+        .init_state::&lt;S&gt;()
+        .add_systems(OnEnter(S::A), || {})
+        .add_systems(OnExit(S::A), || {})
+        .add_systems(Update, (|| {}).run_if(in_state(S::A)))
+        .run();
+}</code></pre>
+<p>Run <code>cargo check</code> to verify, then apply changes to the main project — much faster than trial-and-error in the main project.</p>
+<h4 id="appextstates-available-methods-014"><a class="header" href="#appextstates-available-methods-014">AppExtStates Available Methods (0.14)</a></h4>
+<p>After <code>enable_state</code> was removed, I checked the full method table of <code>bevy_state::app::AppExtStates</code>:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Method</th><th>Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td><code>init_state::&lt;S&gt;()</code></td><td>Initialize a State (replaces 0.13’s init_state + enable_state combo)</td></tr>
+<tr><td><code>insert_state::&lt;S&gt;(state)</code></td><td>Initialize with an initial value</td></tr>
+<tr><td><code>add_computed_state::&lt;S&gt;()</code></td><td>Computed states</td></tr>
+<tr><td><code>add_sub_state::&lt;S&gt;()</code></td><td>Sub-states</td></tr>
+<tr><td><code>enable_state_scoped_entities::&lt;S&gt;()</code></td><td>Auto-cleanup of state-scoped entities</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="4-meshfromshapecircle--shape-module-disappeared"><a class="header" href="#4-meshfromshapecircle--shape-module-disappeared">4. Mesh::from(shape::Circle) — shape Module Disappeared</a></h2>
+<h3 id="symptoms-1"><a class="header" href="#symptoms-1">Symptoms</a></h3>
+<pre><code>error[E0433]: cannot find module or crate `shape` in this scope
+</code></pre>
+<h3 id="root-cause-1"><a class="header" href="#root-cause-1">Root Cause</a></h3>
+<p>0.13’s <code>bevy::sprite::shape::Circle { radius, vertices }</code> was removed in 0.14. Geometry primitives moved to <code>bevy_math::primitives</code>, and <code>Circle</code> <strong>dropped the <code>vertices</code> field</strong>, leaving only <code>radius</code>:</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// bevy_math 0.14
+pub struct Circle {
+    pub radius: f32,
+}
+<span class="boring">}</span></code></pre>
+<h3 id="solution"><a class="header" href="#solution">Solution</a></h3>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// ❌ 0.13
+use bevy::prelude::*;  // shape came with prelude
+let mesh = meshes.add(Mesh::from(shape::Circle { radius: 32.0, vertices: 32 }));
+// ✅ 0.14: explicit import + remove vertices field
+use bevy::math::primitives::Circle;
+let mesh = meshes.add(Mesh::from(Circle { radius: 32.0 }));
+// From for Mesh still exists, default 32 resolution
+<span class="boring">}</span></code></pre>
+<p>For custom resolution, use the builder chain:</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use bevy::math::primitives::Circle;
+use bevy::render::mesh::primitives::Meshable;  // trait .mesh()
+let mesh = meshes.add(Circle { radius: 32.0 }.mesh().resolution(64).build());
+<span class="boring">}</span></code></pre>
+<h2 id="5-color-component-access-r-g-b-a-all-removed"><a class="header" href="#5-color-component-access-r-g-b-a-all-removed">5. Color Component Access: .r() .g() .b() .a() All Removed</a></h2>
+<h3 id="symptoms-2"><a class="header" href="#symptoms-2">Symptoms</a></h3>
+<pre><code>error[E0599]: no method named `r` found for struct `Color` in the current scope
+error[E0599]: no method named `g` found for struct `Color` in the current scope
+error[E0599]: no method named `b` found for struct `Color` in the current scope
+error[E0599]: no method named `a` found for struct `Color` in the current scope
+</code></pre>
+<h3 id="root-cause-2"><a class="header" href="#root-cause-2">Root Cause</a></h3>
+<p>0.13’s <code>Color</code> had <code>.r()</code>, <code>.g()</code>, <code>.b()</code>, <code>.a()</code> getter methods. 0.14 removed them all in favor of direct struct field access.</p>
+<h3 id="solution-1"><a class="header" href="#solution-1">Solution</a></h3>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// ❌ 0.13
+let color = Color::rgb(0.5, 0.2, 0.8);
+let red = color.r();
+let alpha = color.a();
+// ✅ 0.14: direct field access
+let color = Color::rgb(0.5, 0.2, 0.8);
+let red = color.r;
+let alpha = color.a;
+<span class="boring">}</span></code></pre>
+<p>Note: <code>Color</code>’s fields are public and can be read/written directly.</p>
+<h2 id="6-other-common-changes"><a class="header" href="#6-other-common-changes">6. Other Common Changes</a></h2>
+<h3 id="61-input-system-keycode-enum-variants-renamed"><a class="header" href="#61-input-system-keycode-enum-variants-renamed">6.1 Input System: KeyCode Enum Variants Renamed</a></h3>
+<p>Some <code>KeyCode</code> enum variants were renamed in 0.14 to comply with more standard naming conventions.</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// ❌ 0.13
+KeyCode::LControl
+KeyCode::RControl
+// ✅ 0.14
+KeyCode::ControlLeft
+KeyCode::ControlRight
+<span class="boring">}</span></code></pre>
+<p>Similar renames apply to other modifier keys (Shift, Alt, Meta/Command). The compiler gives clear error messages — just follow them.</p>
+<h3 id="62-textureatlas-layout-api-changed"><a class="header" href="#62-textureatlas-layout-api-changed">6.2 TextureAtlas Layout API Changed</a></h3>
+<p>The API for creating <code>TextureAtlas</code> was adjusted.</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// ❌ 0.13
+let atlas = TextureAtlas::from_grid(
+    texture_handle,
+    Vec2::new(16.0, 16.0),
+    4,
+    4,
+    None,
+    None,
+);
+// ✅ 0.14
+let atlas = TextureAtlas::from_grid(
+    texture_handle,
+    Vec2::new(16.0, 16.0),
+    4,
+    4,
+    None,
+    None,
+    false, // new parameter: whether to fill blank areas
+);
+<span class="boring">}</span></code></pre>
+<h3 id="63-cameraprojection-changes"><a class="header" href="#63-cameraprojection-changes">6.3 CameraProjection Changes</a></h3>
+<p>If using custom camera projection, the trait implementation may need updating.</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// ❌ 0.13
+impl CameraProjection for MyProjection {
+    fn get_projection_matrix(&amp;self) -&gt; Mat4 { ... }
+    fn update(&amp;mut self, width: f32, height: f32) { ... }
+    fn far(&amp;self) -&gt; f32 { ... }
+    // ...
+}
+// ✅ 0.14
+impl CameraProjection for MyProjection {
+    fn get_projection_matrix(&amp;self) -&gt; Mat4 { ... }
+    fn update(&amp;mut self, width: f32, height: f32) { ... }
+    // far and other methods may be removed or moved to another trait
+}
+<span class="boring">}</span></code></pre>
+<h2 id="7-post-upgrade-modules-debug-console--script-system"><a class="header" href="#7-post-upgrade-modules-debug-console--script-system">7. Post-Upgrade Modules: Debug Console &amp; Script System</a></h2>
+<p>After successfully upgrading to Bevy 0.14, I rewrote and integrated two core modules that were originally Python prototypes.</p>
+<h3 id="71-debug-console"><a class="header" href="#71-debug-console">7.1 Debug Console</a></h3>
+<p>A simple embedded command-line interface for executing commands, modifying variables, and printing state at runtime.</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Key features
+// - Press ` key to show/hide console
+// - Basic commands: spawn, teleport, godmode, fps
+// - Command history and auto-completion
+// - Scrollable output log
+<span class="boring">}</span></code></pre>
+<h3 id="72-script-system"><a class="header" href="#72-script-system">7.2 Script System</a></h3>
+<p>An event-driven lightweight narrative and quest system for driving game story and character dialogue.</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Core component
+#[derive(Component)]
+pub struct Script {
+    pub id: String,
+    pub triggers: Vec&lt;Trigger&gt;,
+    pub actions: Vec&lt;Action&gt;,
+}
+// Event-driven
+pub struct ScriptEvent {
+    pub script_id: String,
+    pub params: HashMap&lt;String, String&gt;,
+}
+<span class="boring">}</span></code></pre>
+<p>These two modules significantly improved the project’s debuggability and content creation flexibility.</p>
+<h2 id="8-summary-1"><a class="header" href="#8-summary-1">8. Summary</a></h2>
+<p>The main challenges in upgrading from Bevy 0.13 to 0.14 are the extraction of the State API and a series of breaking naming changes. Key steps:</p>
+<ol>
+<li><strong>Modify Cargo.toml</strong>: Update version number, fix feature names (e.g. <code>multi_threaded</code>), and explicitly add <code>bevy_state</code> and <code>bevy_app</code> dependencies.</li>
+<li><strong>Refactor State code</strong>: Change all imports of <code>States</code>, <code>NextState</code>, <code>OnEnter</code>, <code>OnExit</code>, <code>in_state</code> to <code>bevy_state::*</code> and remove <code>enable_state</code> calls.</li>
+<li><strong>Update geometry primitives</strong>: Replace <code>shape::Circle</code> etc. with <code>bevy::math::primitives::Circle</code>, noting field changes.</li>
+<li><strong>Fix Color access</strong>: Change method calls like <code>.r()</code> to direct field access <code>.r</code>.</li>
+<li><strong>Handle other API changes</strong>: Such as <code>KeyCode</code> renames, <code>TextureAtlas</code> API changes, etc.</li>
+</ol>
+<p>The upgrade process is tedious, but the stability improvement on macOS with 0.14 is worth it. It’s recommended to verify key changes in a small isolated project first, then apply systematic changes to the main project.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="debugging-black-screen-on-mighty-rodent-splash-screen-1"><a href="#debugging-black-screen-on-mighty-rodent-splash-screen-1" class="header">Debugging Black Screen on Mighty Rodent Splash Screen</a></h1>
+<hr>
+<h2 id="title-debugging-black-screen-on-mighty-rodent-splash-screen-date-2026-07-09-tags-bevy-rust-game-development-debug-splash-screen-description-a-complete-walkthrough-of-diagnosing-and-fixing-a-black-screen-during-the-splash-sequence-in-a-bevy-014-game-project-including-wrong-turns-and-lessons-learned-categories-games"><a class="header" href="#title-debugging-black-screen-on-mighty-rodent-splash-screen-date-2026-07-09-tags-bevy-rust-game-development-debug-splash-screen-description-a-complete-walkthrough-of-diagnosing-and-fixing-a-black-screen-during-the-splash-sequence-in-a-bevy-014-game-project-including-wrong-turns-and-lessons-learned-categories-games">title: Debugging Black Screen on Mighty Rodent Splash Screen
+date: 2026-07-09
+tags: [bevy, rust, game-development, debug, splash-screen]
+description: A complete walkthrough of diagnosing and fixing a black screen during the splash sequence in a Bevy 0.14 game project, including wrong turns and lessons learned
+categories: games</a></h2>
+<h1 id="debugging-black-screen-on-mighty-rodent-splash-screen"><a class="header" href="#debugging-black-screen-on-mighty-rodent-splash-screen">Debugging Black Screen on Mighty Rodent Splash Screen</a></h1>
+<blockquote>
+<p>Date: 2026-07-09
+Project: rust-bevy-mighty-rodent（Bevy 0.14 rewrite of Mighty Rodent）
+Symptom: After <code>cargo run</code>, the game window shows a black screen for ~2 seconds, then jumps straight to MainMenu — the two splash images (<code>jaggedlogo.jpg</code> / <code>mainpic.jpg</code>) never appear.</p>
+</blockquote>
+<h2 id="1-symptoms-1"><a class="header" href="#1-symptoms-1">1. Symptoms</a></h2>
+<ul>
+<li>Window appears → black screen for ~2s → MainMenu.</li>
+<li>Expected: jaggedlogo.jpg fully visible 1.5s → fade to black 0.8s → mainpic.jpg brighten from black + blue loading bar 2.0s → hold bright 0.5s → MainMenu.</li>
+</ul>
+<h2 id="2-wrong-turns-during-diagnosis-in-chronological-order"><a class="header" href="#2-wrong-turns-during-diagnosis-in-chronological-order">2. Wrong Turns During Diagnosis (in chronological order)</a></h2>
+<h3 id="wrong-turn-1-suspecting-the-splash-system-wasnt-compiled-in"><a class="header" href="#wrong-turn-1-suspecting-the-splash-system-wasnt-compiled-in">Wrong Turn 1: Suspecting the splash system wasn’t compiled in</a></h3>
+<ul>
+<li><code>src/splash.rs</code> appeared as <code>??</code> (untracked) in <code>git status</code>, raising suspicion it wasn’t linked into the binary.</li>
+<li>Verified: <code>cargo check</code> passes, <code>main.rs:4</code> has <code>mod splash;</code>, <code>main.rs:105</code> registers <code>splash::SplashPlugin</code> — the code is indeed compiled in.</li>
+<li><strong>Conclusion: Not a compilation issue.</strong></li>
+</ul>
+<h3 id="wrong-turn-2-suspecting-onenterdefault_state-doesnt-fire"><a class="header" href="#wrong-turn-2-suspecting-onenterdefault_state-doesnt-fire">Wrong Turn 2: Suspecting <code>OnEnter(default_state)</code> doesn’t fire</a></h3>
+<ul>
+<li><code>AppState::SplashLogo</code> is the <code>#[default]</code> initial state, and <code>show_splash_logo</code> was originally scheduled on <code>OnEnter(SplashLogo)</code>.</li>
+<li>Suspected that Bevy 0.14 doesn’t fire <code>OnEnter</code> for the default state at startup.</li>
+<li>Fix: moved <code>show_splash_logo</code> from <code>OnEnter</code> to <code>Startup</code>.</li>
+<li>Verified: re-ran → still black screen.</li>
+<li><strong>Conclusion: Moving to <code>Startup</code> was correct (kept), but it wasn’t the root cause.</strong></li>
+</ul>
+<h3 id="wrong-turn-3-misled-by-log-diagnostics"><a class="header" href="#wrong-turn-3-misled-by-log-diagnostics">Wrong Turn 3: Misled by log diagnostics</a></h3>
+<ul>
+<li>Relied on <code>info!("Splash: Jaggedblade logo")</code> to confirm the system executed. This line appeared <strong>0 times</strong> in the log.</li>
+<li>Inferred: “the splash system didn’t run” — <strong>this inference was wrong</strong>.</li>
+<li>Truth: <code>main.rs:93</code> has <code>.disable::&lt;LogPlugin&gt;()</code>, which disables Bevy’s built-in logger. But <code>info!</code> in <code>src/splash.rs</code> comes from <code>bevy::prelude::*</code> (the Bevy logger), so it’s <strong>silenced entirely</strong>. Meanwhile <code>main.rs:120</code>’s <code>log::info!("Bevy app starting")</code> uses the <code>log</code> crate (routed through simplelog), so it prints fine.</li>
+<li><strong>Gotcha: <code>bevy::prelude::*</code>’s <code>info!</code> ≠ <code>log::info!</code>. After <code>disable::&lt;LogPlugin&gt;()</code>, the former is silent while the latter works. When diagnosing Bevy systems that use <code>info!</code>, switch to <code>log::info!</code>.</strong></li>
+<li>Verified: replaced all 4 <code>info!</code> calls in splash with <code>log::info!</code> → logs finally appeared.</li>
+<li><strong>Conclusion: It was a diagnostic blind spot, not a missing system.</strong></li>
+</ul>
+<h3 id="wrong-turn-4-searching-bevy-source-for-camera2dbundle-default-transform"><a class="header" href="#wrong-turn-4-searching-bevy-source-for-camera2dbundle-default-transform">Wrong Turn 4: Searching Bevy source for <code>Camera2dBundle</code> default transform</a></h3>
+<ul>
+<li>Wanted to confirm whether the camera’s default z is positive (which would put z=0 sprites behind the camera).</li>
+<li>Grepped for <code>Camera2dBundle</code> in <code>~/.cargo/registry/src/.../bevy-0.14.2/crates/</code> — no output.</li>
+<li>After two rounds of searching, stopped per STOP WHEN STUCK.</li>
+<li><strong>Conclusion: Don’t dig through Bevy source for API defaults; just print the runtime transform values from a diagnostic system.</strong></li>
+</ul>
+<h2 id="3-root-cause-pinned-down-by-a-diagnostic-system"><a class="header" href="#3-root-cause-pinned-down-by-a-diagnostic-system">3. Root Cause (Pinned Down by a Diagnostic System)</a></h2>
+<p>Added a temporary <code>splash_diag_system</code> (in <code>Update</code>, with a one-shot <code>Local</code> flag) inside <code>SplashPlugin::build</code>, using <code>log::info!</code> to print camera count, splash entity count, transforms, custom_size, and texture handle paths:</p>
+<pre><code>DIAG: cameras=1, splash_entities=2, splash_images=1
+DIAG cam0: translation=Vec3(0.0, 0.0, 0.0) (z=0.00)
+DIAG img0: translation=Vec3(0.0, 0.0, 0.0) (z=0.00) custom_size=Some(Vec2(800.0, 600.0)) path=gfx/jaggedlogo.jpg
+Splash: Jaggedblade logo (Startup)
+Splash: Main title picture (loading)
+</code></pre>
+<p><strong>Facts established:</strong></p>
+<ul>
+<li>The splash system executed (both stages ran).</li>
+<li>The camera was spawned at origin z=0, looking toward -Z (Camera2dBundle default).</li>
+<li>The splash image was spawned with the correct texture handle path (<code>gfx/jaggedlogo.jpg</code>) and custom_size (800×600).</li>
+<li><strong>The image is at z=0, coincident with the camera plane.</strong></li>
+</ul>
+<p><strong>Root cause:</strong> Bevy’s 2D camera near plane is slightly in front of z=0. <strong>A sprite at z=0 coincides with the camera plane and is not rendered by the 2D pipeline</strong> → black screen. All visible sprites must have <strong>negative</strong> z values (in front of the camera), with smaller z being farther away.</p>
+<p>The original z values were all wrong:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Sprite</th><th>Original z</th><th>Issue</th></tr>
+</thead>
+<tbody>
+<tr><td>Black background</td><td>-1.0</td><td>OK (always in front of camera)</td></tr>
+<tr><td>Splash images (logo + mainpic)</td><td>0.0</td><td>Coincident with camera plane, not rendered → black screen</td></tr>
+<tr><td>Loading bar background</td><td>0.5</td><td>Positive value, behind camera, invisible</td></tr>
+<tr><td>Loading bar fill</td><td>1.0</td><td>Same as above</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="4-fix"><a class="header" href="#4-fix">4. Fix</a></h2>
+<p>In <code>src/splash.rs</code>, changed all splash sprite z values to negative, ordered by layer from far to near:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Sprite</th><th>New z</th><th>Layer</th></tr>
+</thead>
+<tbody>
+<tr><td>Black background</td><td>-1.0 (unchanged)</td><td>Farthest</td></tr>
+<tr><td>Splash images</td><td>-0.5</td><td>In front of background</td></tr>
+<tr><td>Loading bar background</td><td>-0.4</td><td>In front of images</td></tr>
+<tr><td>Loading bar fill</td><td>-0.3</td><td>Frontmost</td></tr>
+</tbody>
+</table>
+</div>
+<p>Code anchors:</p>
+<ul>
+<li><code>spawn_splash</code>: splash image <code>Transform::from_xyz(0.0, 0.0, -0.5)</code> (was 0.0)</li>
+<li><code>show_splash_main</code>: loading bar background <code>Transform::from_xyz(0.0, -280.0, -0.4)</code> (was 0.5)</li>
+<li><code>show_splash_main</code>: loading bar fill <code>Transform::from_xyz(-200.0, -280.0, -0.3)</code> (was 1.0)</li>
+</ul>
+<h2 id="5-minor-changes"><a class="header" href="#5-minor-changes">5. Minor Changes</a></h2>
+<ol>
+<li><strong><code>show_splash_logo</code> moved to <code>Startup</code></strong> (workaround for Bevy 0.14 <code>OnEnter(default_state)</code> not firing) — kept, as it aligns with timing.</li>
+<li><strong>Replaced 4 <code>info!</code> calls with <code>log::info!</code> in splash</strong> — kept, so diagnostics actually reach simplelog.</li>
+<li><strong>Diagnostic system <code>splash_diag_system</code></strong> — deleted, its mission is complete.</li>
+<li><strong>Loading bar color changed to green</strong>: <code>Color::srgb(0.0, 0.8, 0.0)</code> (was <code>Color::srgb(0.0, 0.8, 1.0)</code> blue).</li>
+</ol>
+<h2 id="6-lessons-learned"><a class="header" href="#6-lessons-learned">6. Lessons Learned</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Gotcha</th><th>Takeaway</th></tr>
+</thead>
+<tbody>
+<tr><td><code>bevy::prelude::*</code>’s <code>info!</code> is silent after <code>disable::&lt;LogPlugin&gt;()</code></td><td>When diagnosing whether a Bevy system executes, use <code>log::info!</code> (routed through simplelog), not <code>info!</code></td></tr>
+<tr><td>Bevy 2D camera looks toward -Z, near plane is in front of 0</td><td><strong>2D sprite z must be negative</strong> to be visible; z=0 coincides with the camera plane and won’t render; positive values are behind the camera and invisible</td></tr>
+<tr><td><code>OnEnter(default_state)</code> doesn’t fire in Bevy 0.14</td><td>Use <code>Startup</code> for initialization systems on the default state, not <code>OnEnter</code></td></tr>
+<tr><td>Searching Bevy source for API defaults</td><td>Don’t dig through source; print runtime values from a diagnostic system</td></tr>
+<tr><td>“No log output” → “System didn’t run”</td><td>First confirm the logging route (which logger is active) before inferring execution status</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="7-verification"><a class="header" href="#7-verification">7. Verification</a></h2>
+<pre><code>cargo check  → passed (only 14 pre-existing unrelated warnings)
+cargo run    → jaggedlogo.jpg fully visible → fade to black → mainpic.jpg brightens + green loading bar fills → MainMenu ✅
+</code></pre>
+<hr>
+<p>Co-Authored-By: AtomCode (GLM-5.2) <a href="mailto:noreply@atomgit.com">noreply@atomgit.com</a></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr-ef4e11c1.min.js"></script>
+        <script src="mark-09e88c2c.min.js"></script>
+        <script src="searcher-09f2665d.js"></script>
+
+        <script src="clipboard-1626706a.min.js"></script>
+        <script src="highlight-abc7f01d.js"></script>
+        <script src="book-609e4cb8.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+
+    </div>
+    </body>
+</html>

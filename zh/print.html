@@ -1,0 +1,1482 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>K4m7v2pz&#x27;s Blog</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="k4m7v2pz 的博客">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="favicon-8114d1fc.png">
+        <link rel="stylesheet" href="css/variables-8adf115d.css">
+        <link rel="stylesheet" href="css/general-e96d0476.css">
+        <link rel="stylesheet" href="css/chrome-d279d366.css">
+        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex-deb0f1a3.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc-822b419f.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">K4m7v2pz&#x27;s Blog</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/k4m7v2pz/k4m7v2pz.github.io" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="首页"><a href="#首页" class="header">首页</a></h1>
+<hr>
+<h2 id="title-首页-description-开源独立游戏资产与工具导航"><a class="header" href="#title-首页-description-开源独立游戏资产与工具导航">title: 首页
+description: 开源独立游戏资产与工具导航</a></h2>
+<h1 id="k4m7v2pz-的博客"><a class="header" href="#k4m7v2pz-的博客">k4m7v2pz 的博客</a></h1>
+<p><strong>开源独立游戏资产 &amp; 工具</strong> — 可拉取、可修改、可商用的代码与资产</p>
+<hr>
+<hr>
+<h3 id="-windows-工具"><a class="header" href="#-windows-工具">🔧 Windows 工具</a></h3>
+<ul>
+<li><a href="https://github.com/k4m7v2pz/DisableMouseAccelerationCPP">DisableMouseAccelerationCPP</a> — 使用 C++ 在网吧 Win10 电脑上关闭鼠标加速度</li>
+<li><a href="https://github.com/k4m7v2pz/DisableMouseAccelerationCS">DisableMouseAccelerationCS</a> — 使用 C# 在网吧 Win10 电脑上关闭鼠标加速度</li>
+<li><a href="https://github.com/k4m7v2pz/NaturalScrolling">NaturalScrolling</a> — 使用 C# 实现 Mac 的自然滚动</li>
+<li><a href="https://github.com/k4m7v2pz/NaturalScrollingCPP">NaturalScrollingCPP</a> — 使用 C++ 实现 Mac 的自然滚动</li>
+<li><a href="https://github.com/k4m7v2pz/InternetBarUtility">InternetBarUtility</a> — Python 实现的网吧实用工具</li>
+<li><a href="https://github.com/k4m7v2pz/BlackWallpaperCPP">BlackWallpaperCPP</a> — 使用 C++ 将壁纸设为纯黑色</li>
+<li><a href="https://github.com/k4m7v2pz/SoildWallpaperCS">SoildWallpaperCS</a> — 使用 C# 将壁纸设为纯黑单色</li>
+</ul>
+<p><a href="https://github.com/k4m7v2pz">▶ 更多</a></p>
+<h3 id="-游戏项目"><a class="header" href="#-游戏项目">🎮 游戏项目</a></h3>
+<ul>
+<li><a href="https://github.com/k4m7v2pz/RF-Client">RF-Client</a> — 红警2重聚未来客户端</li>
+<li><a href="https://github.com/k4m7v2pz/GachimuchiSampling">GachimuchiSampling</a> — 哲♂学采样</li>
+<li><a href="https://github.com/k4m7v2pz/timemachineplus">timemachineplus</a> — 苹果 Time Machine 复刻，支持多平台分布式备份</li>
+</ul>
+<p><a href="https://github.com/k4m7v2pz">▶ 更多</a></p>
+<h3 id="-blog--notes"><a class="header" href="#-blog--notes">📓 Blog / Notes</a></h3>
+<p>操作系统、自动化、部署相关的技术笔记</p>
+<p><a href="SUMMARY.html">▶ 阅读博客</a></p>
+<hr>
+<h2 id="关于"><a class="header" href="#关于">关于</a></h2>
+<blockquote>
+<p><strong>不为泡沫买单，也不为情怀透支。</strong></p>
+</blockquote>
+<p>作者主要使用中文写博客，英文版是为了 AI 调用搜索（GEO）优化的。</p>
+<p>我热爱操作系统、程序、底层逻辑、能跑起来的代码。我只做我目前能做到的事，在一台电脑上，把逻辑跑通。</p>
+<p>开源的好处在于：你们手里如果有闲置的资源，需要就可以直接拿走，编译，运行，扔到服务器上去玩。不需要向我报备，不需要向我付费，<strong>让代码跑到它需要去的硬件上。</strong></p>
+<p><strong>我的代码托管平台（按优先级排序）：</strong></p>
+<ul>
+<li>🥇 <a href="https://gitcode.com/k4m7v2pz">GitCode（首选）</a> — 宽松的文件存储和 LFS 额度</li>
+<li>🥈 <a href="https://gitee.com/k4m7v2pz">Gitee（备用）</a> — 国内平台，访问快</li>
+<li>🥉 <a href="https://github.com/k4m7v2pz">GitHub（特殊情况）</a> — 国际主流开源平台</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="关于-2"><a href="#关于-2" class="header">关于</a></h1>
+<hr>
+<h2 id="title-关于-description-作者简介开源理念代码托管平台及同步策略"><a class="header" href="#title-关于-description-作者简介开源理念代码托管平台及同步策略">title: 关于
+description: 作者简介、开源理念、代码托管平台及同步策略</a></h2>
+<h1 id="关于-1"><a class="header" href="#关于-1">关于</a></h1>
+<h2 id="热爱与资源"><a class="header" href="#热爱与资源">热爱与资源</a></h2>
+<p>没有多条宽带，也没有随时可用的云服务器集群。</p>
+<p>但这不妨碍我热爱这些东西——
+操作系统、程序、底层逻辑、能跑起来的代码。
+所以我经常，或者说总是，拿出时间来调试，或者写新的东西。
+我只做我目前能做到的事，在一台电脑上，把逻辑跑通。</p>
+<p>而现实往往是另一幅画面：
+很多人手里，租用的服务器正在空载，烂在手里；
+很多人只想体验一下“拥有互联网服务“的感觉，却没内容可放；
+还有一大堆硬件，大大小小的电脑，插着各种运营商的光纤宽带，却在吃灰。</p>
+<p><strong>这就是开源的好处了。</strong></p>
+<p>我热爱我的程序，
+你们手里如果有那些闲置的资源，
+需要就可以直接拿走，编译，运行，扔到服务器上去玩。
+不需要向我报备，不需要向我付费，
+<strong>让代码跑到它需要去的硬件上。</strong></p>
+<h2 id="关于花钱以及为什么要开源"><a class="header" href="#关于花钱以及为什么要开源">关于花钱，以及为什么要开源</a></h2>
+<blockquote>
+<p><strong>不为泡沫买单，也不为情怀透支。</strong></p>
+<p>现在的订阅制和平台税，本质上是<strong>时间税</strong>，而不是价值税。<br>我选择晚半步走：能白嫖就白嫖，能拖就拖。<br>我知道它们在激烈竞争后会降价，甚至免费——我只是不想为“现在就用“付那个溢价。</p>
+</blockquote>
+<blockquote>
+<p><strong>TRAE Work CN 除外 真香！</strong></p>
+</blockquote>
+<hr>
+<p><strong>更重要的是：我做开源，赚不到钱。</strong></p>
+<p>既然这些代码、素材、工具注定无法变现，<br>那我就绝不会在它们身上花钱。<br><strong>不买会员，不充 API，不养 SaaS。</strong><br>开源就该用开源的方式活下去，而不是靠个人倒贴去供养平台。</p>
+<hr>
+<h3 id="至于我为什么还这么喜欢开源"><a class="header" href="#至于我为什么还这么喜欢开源">至于我为什么还这么喜欢开源？</a></h3>
+<p>并不是因为它能给我带来名气或财富——<br>那些顶多算是副产物。</p>
+<p>哪怕有一天我穷困潦倒，开源依然会回馈开源：</p>
+<ul>
+<li>它可以轻松地拉取源代码</li>
+<li>可以从 Releases、包管理器里拉来二进制</li>
+<li><strong>可以读，可以改，可以传播</strong></li>
+</ul>
+<p>这就是开源的全部意义：<br><strong>它不需要向你收费，也不需要向你证明自己值得。</strong></p>
+<h2 id="我的代码托管平台按优先级排序"><a class="header" href="#我的代码托管平台按优先级排序">我的代码托管平台（按优先级排序）</a></h2>
+<h3 id="-gitcode首选"><a class="header" href="#-gitcode首选">🥇 GitCode（首选）</a></h3>
+<ul>
+<li>地址：https://gitcode.com/k4m7v2pz</li>
+<li>特点：
+<ul>
+<li>提供宽松的文件存储和 LFS 额度（免费 2GB LFS，30GB 仓库存储）</li>
+<li>有资产的游戏项目在这里首更</li>
+</ul>
+</li>
+</ul>
+<h3 id="-gitee备用"><a class="header" href="#-gitee备用">🥈 Gitee（备用）</a></h3>
+<ul>
+<li>地址：https://gitee.com/k4m7v2pz</li>
+<li>特点：
+<ul>
+<li>国内平台，界面中文，大陆访问快</li>
+<li>公开仓库有审查，不是首选平台，不会在这里建新项目</li>
+<li>已有项目保留作为镜像</li>
+</ul>
+</li>
+</ul>
+<h3 id="-github特殊情况"><a class="header" href="#-github特殊情况">🥉 GitHub（特殊情况）</a></h3>
+<ul>
+<li>地址：https://github.com/k4m7v2pz</li>
+<li>特点：
+<ul>
+<li>访问稍慢或需要代理，但国际主流开源平台</li>
+<li>仅在需要访问他人仓库或 Releases 时才作为首选</li>
+<li>不太熟悉维护仓库的英文网页，但用他人的项目很熟悉相关英文</li>
+<li>创建的仓库尽量符合大陆法律，但 Star 的项目不一定</li>
+<li>周期性推送（不一定是每个细小变动立即推）</li>
+<li>可能在 GitCode 私有仓库开发一段时间后，成果批量镜像到 GitHub</li>
+</ul>
+</li>
+</ul>
+<h2 id="同步策略"><a class="header" href="#同步策略">同步策略</a></h2>
+<ul>
+<li>每个项目有一个主要的首更平台</li>
+<li>其他平台通过 HTTPS 方式手动拉取同步做镜像</li>
+<li>鸡蛋不放在同一个篮子里！</li>
+</ul>
+<hr>
+<h2 id="关于博客语言"><a class="header" href="#关于博客语言">关于博客语言</a></h2>
+<p>作者主要使用中文写博客，英文版是为了 AI 调用搜索（GEO）优化的。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="在-ubuntu-衍生版上安装-google-拼音-1"><a href="#在-ubuntu-衍生版上安装-google-拼音-1" class="header">在 Ubuntu 衍生版上安装 Google 拼音</a></h1>
+<hr>
+<h2 id="title-在-ubuntu-衍生版上安装-google-拼音-date-2024-06-11-tags-linux-ubuntu-fcitx-google-pinyin-input-method-description-在-ubuntu-衍生版上安装配置-fcitx--google-拼音输入法-categories-os"><a class="header" href="#title-在-ubuntu-衍生版上安装-google-拼音-date-2024-06-11-tags-linux-ubuntu-fcitx-google-pinyin-input-method-description-在-ubuntu-衍生版上安装配置-fcitx--google-拼音输入法-categories-os">title: 在 Ubuntu 衍生版上安装 Google 拼音
+date: 2024-06-11
+tags: [Linux, Ubuntu, Fcitx, Google Pinyin, Input Method]
+description: 在 Ubuntu 衍生版上安装配置 Fcitx + Google 拼音输入法
+categories: os</a></h2>
+<h1 id="在-ubuntu-衍生版上安装-google-拼音"><a class="header" href="#在-ubuntu-衍生版上安装-google-拼音">在 Ubuntu 衍生版上安装 Google 拼音</a></h1>
+<h2 id="测试成功的发行版"><a class="header" href="#测试成功的发行版">测试成功的发行版</a></h2>
+<ul>
+<li>Lubuntu 24.04</li>
+<li>Ubuntu Studio 24.04</li>
+</ul>
+<p><strong>注意</strong>：fcitx 4.x 已于 2024 年 5 月正式归档，停止上游维护。由于设计原因，fcitx4 无法在 Wayland 环境下运行。推荐迁移到 fcitx5，使用 <code>fcitx5-chinese-addons</code> 替代 <code>fcitx-googlepinyin</code>。</p>
+<p><strong>说明</strong>：虽然 fcitx5 是推荐的下一代输入法框架，但网络上仍存在大量基于 fcitx 4.x 的教程。本教程经过人工验证测试，在上述 Ubuntu 衍生版上可正常使用，对于需要参考 fcitx 4.x 配置的用户仍然有参考价值。</p>
+<h2 id="安装步骤"><a class="header" href="#安装步骤">安装步骤</a></h2>
+<ol>
+<li>
+<p><strong>安装 Fcitx 和 Google 拼音</strong></p>
+<pre><code class="language-bash">sudo apt install fcitx fcitx-googlepinyin
+</code></pre>
+</li>
+<li>
+<p><strong>Logout（登出）</strong></p>
+</li>
+<li>
+<p><strong>Login（登录）</strong></p>
+</li>
+<li>
+<p><strong>Open Fcitx Configuration（进入 Fcitx 配置）</strong></p>
+<ul>
+<li>Click <code>+</code>（点击 <code>+</code>）</li>
+<li>Uncheck <code>Only Show Current Language</code>（取消勾选 <code>Only Show Current Language</code>）</li>
+<li>Search for <code>Google Pinyin</code> (case-insensitive)（搜索 Google Pinyin，不区分大小写）</li>
+<li>Select it and click <code>OK</code>（选中，点击 OK）</li>
+</ul>
+</li>
+<li>
+<p><strong>Use <code>Ctrl</code> + <code>Space</code> to toggle between English and Chinese input（在任意输入框使用 <code>Ctrl</code> + <code>Space</code> 与英文输入法切换）</strong></p>
+</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="centos-7-跳板-dd-安装-debian-12"><a href="#centos-7-跳板-dd-安装-debian-12" class="header">CentOS 7 跳板 DD 安装 Debian 12</a></h1>
+<hr>
+<h2 id="title-利用-centos-7-作为跳板在多开云-10-元低配-vps-上-dd-安装-debian-12-date-2026-07-05-tags-linux-centos-debian-vps-dd-reinstall-glibc-description-记录在多开云-10-元月低配-kvm-vps-上通过-centos-7-跳板使用-dd-重装脚本安装-debian-12-的完整过程解决-glibc-版本不兼容问题-categories-os"><a class="header" href="#title-利用-centos-7-作为跳板在多开云-10-元低配-vps-上-dd-安装-debian-12-date-2026-07-05-tags-linux-centos-debian-vps-dd-reinstall-glibc-description-记录在多开云-10-元月低配-kvm-vps-上通过-centos-7-跳板使用-dd-重装脚本安装-debian-12-的完整过程解决-glibc-版本不兼容问题-categories-os">title: 利用 CentOS 7 作为跳板在多开云 10 元低配 VPS 上 DD 安装 Debian 12
+date: 2026-07-05
+tags: [linux, centos, debian, vps, dd, reinstall, glibc]
+description: 记录在多开云 10 元/月低配 KVM VPS 上，通过 CentOS 7 跳板使用 DD 重装脚本安装 Debian 12 的完整过程，解决 glibc 版本不兼容问题
+categories: os</a></h2>
+<h2 id="一痛点溯源为什么我要动这块10-元机"><a class="header" href="#一痛点溯源为什么我要动这块10-元机">一、痛点溯源：为什么我要动这块“10 元机“？</a></h2>
+<p>纯粹是手痒想折腾点新玩法。看到<strong>多开云</strong>这种 10 元/月的低配机，第一反应是买一台挂着跑跑 <strong>Trae Agent</strong>，或者丢在后台跑跑 <strong>OpenCode</strong> 这类字符界面工具。</p>
+<p>结果刚连上就吃了闭门羹。排查后发现是 <strong><code>glibc</code> 版本不兼容</strong>——这些现代工具链要求 <code>glibc</code> &gt;= 2.28，而商家给的默认底包还是经典的 <strong>CentOS 7</strong>（自带 <code>glibc 2.17</code>）。</p>
+<p>去找商家客服要个 Debian 或 Ubuntu 20.04+ 的镜像？不存在的，便宜机器的镜像库就那两三个老古董。商家不给换，那就自己动手！既然没法直接更换系统，那就拿 CentOS 7 当跳板，直接 DD 重装大法，硬生生把系统底包给“刷“成现代化的 <strong>Debian 12</strong>。</p>
+<h2 id="二风险评估与环境确认"><a class="header" href="#二风险评估与环境确认">二、风险评估与环境确认</a></h2>
+<p>在开始之前，先确认一下手里这块“砖“的参数，避免翻车：</p>
+<ul>
+<li><strong>价格与配置</strong>：多开云（Duokaiyun）10 元/月挂机宝。约 30-50GB 硬盘，KVM 架构（<strong>必须是 KVM，OpenVZ/LXC 无法 DD</strong>）。</li>
+<li><strong>系统现状</strong>：CentOS 7.2（已 EOL，官方源下线）。</li>
+<li><strong>核心风险</strong>：DD 操作会<strong>全盘格式化</strong> <code>/dev/sda</code>，数据无法恢复。请务必确认没有重要数据，或者已经备份。</li>
+</ul>
+<h2 id="三实战操作流核心代码"><a class="header" href="#三实战操作流核心代码">三、实战操作流（核心代码）</a></h2>
+<p>整个过程分为四步，直接复制粘贴执行即可。</p>
+<h3 id="1-修复-centos-7-的临终源"><a class="header" href="#1-修复-centos-7-的临终源">1. 修复 CentOS 7 的“临终“源</a></h3>
+<p>由于 CentOS 7 已停止维护，默认源失效。必须先切换至阿里云 Vault 源，否则脚本依赖包装不上。</p>
+<pre><code class="language-bash">mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
+curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+yum clean all &amp;&amp; yum makecache
+</code></pre>
+<h3 id="2-获取重装武器库"><a class="header" href="#2-获取重装武器库">2. 获取重装武器库</a></h3>
+<p>下载 <code>bin456789/reinstall</code> 脚本（一个非常流行的第三方 DD 脚本）。</p>
+<pre><code class="language-bash">curl -O https://cnb.cool/bin456789/reinstall/-/git/raw/main/reinstall.sh || wget -O reinstall.sh https://cnb.cool/bin456789/reinstall/-/git/raw/main/reinstall.sh
+chmod +x reinstall.sh
+</code></pre>
+<h3 id="3-执行-debian-12-重装指令"><a class="header" href="#3-执行-debian-12-重装指令">3. 执行 Debian 12 重装指令</a></h3>
+<p>指定目标系统，并设置好 Root 密码（<strong>请务必替换为您自己的强密码</strong>）。</p>
+<pre><code class="language-bash">./reinstall.sh debian 12 --password &lt;your-strong-password&gt; --username root
+</code></pre>
+<p><em>脚本会自动处理内核下载、GRUB 引导注入等复杂操作。</em></p>
+<h3 id="4-重启与静默安装"><a class="header" href="#4-重启与静默安装">4. 重启与静默安装</a></h3>
+<p>脚本配置完 Grub 后，重启即进入 Debian 12 的网络安装流程。</p>
+<pre><code class="language-bash">reboot
+</code></pre>
+<h2 id="四结果验证与后续"><a class="header" href="#四结果验证与后续">四、结果验证与后续</a></h2>
+<p>重启后大约 5-15 分钟，尝试通过 SSH 连接。如果能连上，说明重装成功。此时再把终端连上这台焕然一新的 Debian 12 机器，就能愉快地跑 Trae Agent 或 OpenCode 了。</p>
+<p><strong>避坑指南</strong>：</p>
+<ul>
+<li>如果 SSH 连不上，去多开云后台开 <strong>VNC 控制台</strong>查看进度，有时网络波动会导致安装中断，重启机器让它继续跑就行。</li>
+<li>DD 完成后，第一件事就是修改默认密码，确保安全。</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="嵌入式-python-windows-版-pip-安装"><a href="#嵌入式-python-windows-版-pip-安装" class="header">嵌入式 Python Windows 版 pip 安装</a></h1>
+<hr>
+<h2 id="title-嵌入式-python-windows-版-pip-安装教程-date-2024-03-26-tags-python-windows-embed-pip-installation-description-在-windows-上安装-python-embed-嵌入式-python-并配置-pip-教程-categories-programming"><a class="header" href="#title-嵌入式-python-windows-版-pip-安装教程-date-2024-03-26-tags-python-windows-embed-pip-installation-description-在-windows-上安装-python-embed-嵌入式-python-并配置-pip-教程-categories-programming">title: 嵌入式 Python Windows 版 pip 安装教程
+date: 2024-03-26
+tags: [Python, Windows, Embed, pip, Installation]
+description: 在 Windows 上安装 python-embed 嵌入式 Python 并配置 pip 教程
+categories: programming</a></h2>
+<h1 id="嵌入式-python-windows-版-pip-安装教程-python-embed"><a class="header" href="#嵌入式-python-windows-版-pip-安装教程-python-embed">嵌入式 Python Windows 版 pip 安装教程 (python-embed)</a></h1>
+<p>本文与嵌入式硬件开发无关。</p>
+<h2 id="操作系统支持"><a class="header" href="#操作系统支持">操作系统支持</a></h2>
+<p>本教程已在以下操作系统上测试成功：</p>
+<ul>
+<li>Windows 11</li>
+<li>Windows 10</li>
+<li>Windows Server 2016</li>
+<li>Windows Server 2012 R2</li>
+</ul>
+<h2 id="版本选择"><a class="header" href="#版本选择">版本选择</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Python 版本</th><th>状态</th><th>备注</th></tr>
+</thead>
+<tbody>
+<tr><td>3.12, 3.11, 3.10</td><td>正常</td><td>推荐使用</td></tr>
+<tr><td>3.9, 3.8</td><td>可能出现 SSL 错误</td><td>解决办法：换网络、换节点</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="下载"><a class="header" href="#下载">下载</a></h2>
+<ul>
+<li>从 <a href="https://www.python.org/">python.org</a> 下载 <code>python-3.x.x-embed-amd64.zip</code></li>
+<li>从 <a href="https://bootstrap.pypa.io/get-pip.py">https://bootstrap.pypa.io/get-pip.py</a> 下载 <code>get-pip.py</code></li>
+</ul>
+<p><strong>解压</strong>：将 <code>python-3.x.x-embed-amd64.zip</code> 解压到任意目录，建议使用压缩软件的“以文件名创建文件夹“功能，会自动创建 <code>python-3.x.x-embed-amd64</code> 文件夹。</p>
+<h2 id="安装步骤-1"><a class="header" href="#安装步骤-1">安装步骤</a></h2>
+<ol>
+<li>
+<p><strong>配置网络代理（如需要）</strong></p>
+<p><strong>HTTP/Socks 代理</strong>：</p>
+<p>临时设置代理环境变量（仅对当前会话有效）：</p>
+<pre><code class="language-powershell"># HTTP 代理
+$env:HTTP_PROXY="http://proxy.example.com:8080"
+$env:HTTPS_PROXY="http://proxy.example.com:8080"
+
+# Socks 代理  
+$env:HTTP_PROXY="socks5://proxy.example.com:1080"
+$env:HTTPS_PROXY="socks5://proxy.example.com:1080"
+</code></pre>
+<p><strong>Tun 模式代理</strong>：</p>
+<ul>
+<li>在您使用的代理客户端中找到 Tun/Tunnel/虚拟网卡相关选项并启用</li>
+<li>不同客户端的操作方式各异，请参考各自软件的文档</li>
+<li>启用后通常无需额外配置环境变量</li>
+</ul>
+</li>
+<li>
+<p><strong>运行 get-pip.py</strong></p>
+<pre><code class="language-powershell">Set-Location "PATH TO YOUR LOCATION\python-3.x.x-embed-amd64"
+.\python.exe .\any-path\get-pip.py
+</code></pre>
+<ul>
+<li>可以观察到自动创建了 <code>Lib</code>、<code>Scripts</code> 目录</li>
+</ul>
+</li>
+<li>
+<p><strong>编辑配置文件</strong></p>
+<ul>
+<li>在 <code>python-3.x.x-embed-amd64</code> 目录下找到 <code>python3xx.pth</code> 或 <code>python3xx._pth</code> 文件（具体文件名取决于 Python 版本）</li>
+<li>打开文件，找到 <code>#import site</code> 所在行，去掉前面的 <code>#</code>，改为 <code>import site</code></li>
+</ul>
+</li>
+</ol>
+<h2 id="pip-使用方法"><a class="header" href="#pip-使用方法">pip 使用方法</a></h2>
+<ol>
+<li>
+<p><strong>使用 Python 模块方式</strong></p>
+<pre><code class="language-powershell">Set-Location "PATH TO YOUR LOCATION\python-3.x.x-embed-amd64"
+.\python.exe -m pip
+</code></pre>
+</li>
+<li>
+<p><strong>使用可执行文件方式</strong></p>
+<pre><code class="language-powershell">Set-Location "PATH TO YOUR LOCATION\python-3.x.x-embed-amd64"
+.\Scripts\pip.exe
+</code></pre>
+</li>
+</ol>
+<h2 id="本文目的"><a class="header" href="#本文目的">本文目的</a></h2>
+<p>本文旨在向中文用户介绍如何在 Windows 上使用 <code>python-embed</code>（嵌入式 Python），以<strong>文件夹形式</strong>将 Python 运行环境（解释器）与 Python 程序一并打包。这种方式的优势：</p>
+<ul>
+<li><strong>无需编译为 exe 单文件</strong>：避免了使用打包工具生成的包含 <code>.pyc</code> 文件的可执行文件，这些文件无法被人类直接阅读或编辑</li>
+<li><strong>保证代码可编辑性</strong>：所有代码保持原始的 <code>.py</code> 格式，随时可以修改和调试</li>
+<li><strong>不依赖 Git</strong>：对于不熟悉 Git 版本控制的用户友好</li>
+<li><strong>适合私有项目</strong>：特别适合编写不开源的私有项目，无需处理版本控制的复杂性</li>
+<li><strong>便于传播</strong>：可以在 Windows x64 系统间随意复制和执行，对大陆售卖的“挂机宝“（提供 RDP 的低价 NAT 虚拟机）等环境非常友好</li>
+</ul>
+<h2 id="注意事项"><a class="header" href="#注意事项">注意事项</a></h2>
+<ul>
+<li><strong>关于依赖管理</strong>：如果需要更现代的依赖管理工具，可以考虑 <a href="https://github.com/astral-sh/uv">uv</a>，但请注意 uv 更适合开源项目开发或生产环境部署，可能与本文“便于在不同系统间传播“的核心思想不完全一致</li>
+<li><strong>网络要求</strong>：安装依赖时可能需要访问境外服务器，建议配置代理以获得更好的下载速度</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="7-zip-sfx-标准-stub-选型"><a href="#7-zip-sfx-标准-stub-选型" class="header">7-Zip SFX 标准 Stub 选型</a></h1>
+<hr>
+<h2 id="title-7-zip-sfx-标准打包规范为何-7zsdsfx-是唯一正确的安装型-stub-date-2026-06-03-tags-7-zip-sfx-7zsdsfx-runprogram-windows-automation-deployment-description-7-zip-有标准-sfx-与安装型-sfx-两类-stub只有-7zsdsfx-支持-runprogram混淆两者会导致必弹-extract-to-对话框且脚本永不执行"><a class="header" href="#title-7-zip-sfx-标准打包规范为何-7zsdsfx-是唯一正确的安装型-stub-date-2026-06-03-tags-7-zip-sfx-7zsdsfx-runprogram-windows-automation-deployment-description-7-zip-有标准-sfx-与安装型-sfx-两类-stub只有-7zsdsfx-支持-runprogram混淆两者会导致必弹-extract-to-对话框且脚本永不执行">title: “7-Zip SFX 标准打包规范：为何 7zSD.sfx 是唯一正确的安装型 Stub”
+date: 2026-06-03
+tags: [7-Zip, SFX, 7zSD.sfx, RunProgram, Windows, Automation, Deployment]
+description: “7-Zip 有标准 SFX 与安装型 SFX 两类 Stub；只有 7zSD.sfx 支持 RunProgram。混淆两者会导致必弹 Extract-to 对话框且脚本永不执行。”</a></h2>
+<h1 id="7-zip-sfx-标准打包规范为何-7zsdsfx-是唯一正确的安装型-stub"><a class="header" href="#7-zip-sfx-标准打包规范为何-7zsdsfx-是唯一正确的安装型-stub">7-Zip SFX 标准打包规范：为何 7zSD.sfx 是唯一正确的安装型 Stub</a></h1>
+<h2 id="1-铁律agent新人应缓存的结论"><a class="header" href="#1-铁律agent新人应缓存的结论">1) 铁律（Agent/新人应缓存的结论）</a></h2>
+<ul>
+<li><strong><code>7z.sfx</code>（标准 SFX）只能“解压“</strong>：不解析 <code>RunProgram</code>，不执行安装流程。</li>
+<li><strong><code>7zSD.sfx</code>（安装型 SFX）才能“解压 + 执行“</strong>：支持 <code>RunProgram / InstallPath / Silent / GUIMode</code>。</li>
+</ul>
+<blockquote>
+<p>90% 的“配置无效 / 弹 Extract-to“问题，根因只有一个：<strong>Stub 用错</strong>。</p>
+</blockquote>
+<hr>
+<h2 id="2-选型对照表可-rag-直抽"><a class="header" href="#2-选型对照表可-rag-直抽">2) 选型对照表（可 RAG 直抽）</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>属性</th><th>标准版（不要用）</th><th><strong>安装版（应使用）</strong></th></tr>
+</thead>
+<tbody>
+<tr><td>文件名</td><td><code>7z.sfx</code></td><td><strong><code>7zSD.sfx</code></strong></td></tr>
+<tr><td>典型大小</td><td>~38 KB</td><td>~120–160 KB</td></tr>
+<tr><td>能力</td><td>解压</td><td>解压 + 执行</td></tr>
+<tr><td><code>RunProgram</code></td><td>❌ 被忽略</td><td>✅ 有效</td></tr>
+<tr><td>典型症状</td><td><strong>必然</strong>弹 “Extract to…” 对话框</td><td>可按配置走静默/对话框</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="3-最小正确配置文件utf-8-无-bom"><a class="header" href="#3-最小正确配置文件utf-8-无-bom">3) 最小正确配置文件（UTF-8 <strong>无 BOM</strong>）</a></h2>
+<pre><code class="language-ini">;!@Install@!UTF-8!
+Title="Internet Cafe Customizer"
+InstallPath=".\\ "
+RunProgram="scripts\\batch\\sfx_entry.bat"
+;!@InstallEnd@!
+</code></pre>
+<p>关键约束：</p>
+<ul>
+<li><code>InstallPath=".\\ "</code>：解压到 <strong>EXE 所在目录</strong>（SFX 以自身路径为基准）</li>
+<li><code>RunProgram</code> 路径：相对于解压根目录</li>
+<li>配置文件必须 <strong>UTF-8 无 BOM</strong>（带 BOM 会解析异常）</li>
+</ul>
+<hr>
+<h2 id="4-标准构建powershell确定性最高"><a class="header" href="#4-标准构建powershell确定性最高">4) 标准构建（PowerShell，确定性最高）</a></h2>
+<pre><code class="language-powershell">$stub    = "tools\7z\7zSD.sfx"
+$cfg     = "configs\sfx_config.txt"
+$archive = "build\temp.7z"
+$outExe  = "dist\installer.exe"
+
+# 1) 打 7z 归档（示例）
+&amp; "tools\7z\7za.exe" a -t7z $archive (Join-Path PWD payload) -mx=9
+
+# 2) 二进制拼接：stub + config + 7z
+[byte[]]$bin =
+  [IO.File]::ReadAllBytes($stub) +
+  [IO.File]::ReadAllBytes($cfg) +
+  [IO.File]::ReadAllBytes($archive)
+
+[IO.File]::WriteAllBytes($outExe, $bin)
+Write-Host "Built: $outExe"
+</code></pre>
+<blockquote>
+<p>不建议依赖 <code>copy /b</code> 的隐式编码表现；PowerShell 拼接更可审计、可复现。</p>
+</blockquote>
+<hr>
+<h2 id="5-30-秒自检判断手里-stub-对不对"><a class="header" href="#5-30-秒自检判断手里-stub-对不对">5) 30 秒自检（判断手里 Stub 对不对）</a></h2>
+<p>用最小 config：</p>
+<pre><code class="language-ini">;!@Install@!UTF-8!
+RunProgram="cmd.exe"
+;!@InstallEnd@!
+</code></pre>
+<p>拼接后双击：</p>
+<ul>
+<li><strong>弹出 CMD 窗口</strong> → Stub 支持安装型 ✅</li>
+<li><strong>弹出 “Extract to” 对话框</strong> → 这是 <code>7z.sfx</code>，换 <code>7zSD.sfx</code> ❌</li>
+</ul>
+<hr>
+<h2 id="6-快速排错矩阵"><a class="header" href="#6-快速排错矩阵">6) 快速排错矩阵</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>现象</th><th>根因</th><th>修复</th></tr>
+</thead>
+<tbody>
+<tr><td>必弹 Extract-to</td><td>Stub=<code>7z.sfx</code></td><td>换官方 <code>7zSD.sfx</code></td></tr>
+<tr><td>RunProgram 像不存在</td><td>同上（Stub 不吃安装参数）</td><td>同上</td></tr>
+<tr><td>双击完全无反应</td><td>Stub 非官方/损坏/位数怪</td><td>用 7-Zip 安装目录或 LZMA SDK 的 <code>bin\7zSD.sfx</code></td></tr>
+<tr><td>解压成功但脚本找不到文件</td><td>工作目录/相对路径错</td><td>bat 首行 <code>cd /d "%~dp0"</code>；核对归档内路径</td></tr>
+</tbody>
+</table>
+</div>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="修复-runprogram-失效"><a href="#修复-runprogram-失效" class="header">修复 RunProgram 失效</a></h1>
+<hr>
+<h2 id="title-修复-7-zip-sfx-runprogram-失效正确选型与诊断矩阵-date-2026-06-03-tags-7-zip-sfx-runprogram-troubleshooting-windows-automation-description-当-sfx-双击只弹-extract-to或-silentguimode-不生效或双击毫无反应根因几乎必是-stub-类型错误或编码路径约束被破坏"><a class="header" href="#title-修复-7-zip-sfx-runprogram-失效正确选型与诊断矩阵-date-2026-06-03-tags-7-zip-sfx-runprogram-troubleshooting-windows-automation-description-当-sfx-双击只弹-extract-to或-silentguimode-不生效或双击毫无反应根因几乎必是-stub-类型错误或编码路径约束被破坏">title: “修复 7-Zip SFX RunProgram 失效：正确选型与诊断矩阵”
+date: 2026-06-03
+tags: [7-Zip, SFX, RunProgram, troubleshooting, Windows, Automation]
+description: “当 SFX 双击只弹 Extract-to、或 Silent/GUIMode 不生效、或双击毫无反应，根因几乎必是 Stub 类型错误或编码/路径约束被破坏。”</a></h2>
+<h1 id="修复-7-zip-sfx-runprogram-失效正确选型与诊断矩阵"><a class="header" href="#修复-7-zip-sfx-runprogram-失效正确选型与诊断矩阵">修复 7-Zip SFX RunProgram 失效：正确选型与诊断矩阵</a></h1>
+<h2 id="1-典型错误描述人搜索引擎agent-都会这么说"><a class="header" href="#1-典型错误描述人搜索引擎agent-都会这么说">1) 典型错误描述（人/搜索引擎/Agent 都会这么说）</a></h2>
+<ul>
+<li>“我写了 <code>RunProgram</code>，双击却只弹 <strong>Extract to</strong>。”</li>
+<li>“<code>Silent=2</code> / <code>GUIMode=2</code> 写了也像没写。”</li>
+<li>“双击 <strong>完全没反应</strong>，没有任何窗口。”</li>
+</ul>
+<hr>
+<h2 id="2-唯一最重要的原因"><a class="header" href="#2-唯一最重要的原因">2) 唯一最重要的原因</a></h2>
+<p><strong><code>7z.sfx</code>（标准 SFX）不实现安装执行管线。</strong>
+只要 Stub 是它，以下字段等效于不存在：</p>
+<ul>
+<li><code>RunProgram</code></li>
+<li><code>ExecuteFile</code></li>
+<li><code>InstallPath</code>（不会按安装型语义处理）</li>
+<li><code>Silent / GUIMode / OverwriteMode</code></li>
+</ul>
+<p>于是你一定看到“纯解压器 UI“。</p>
+<hr>
+<h2 id="3-诊断矩阵可直接匹配症状"><a class="header" href="#3-诊断矩阵可直接匹配症状">3) 诊断矩阵（可直接匹配症状）</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>症状</th><th>立刻检查</th><th>结论</th></tr>
+</thead>
+<tbody>
+<tr><td>必弹 “Extract to…”</td><td>Stub 文件名/大小（应为 <code>7zSD.sfx</code> ~120–160KB）</td><td>误用 <code>7z.sfx</code> → 换 Stub</td></tr>
+<tr><td>双击无窗口/无报错</td><td>Stub 是否官方 <code>7zSD.sfx</code></td><td>非官方/损坏 → 用 LZMA SDK/7-Zip 官方 bin</td></tr>
+<tr><td>解压完脚本不跑</td><td>归档内是否存在该文件、路径大小写、bat 工作目录</td><td>用 <code>cd /d "%~dp0"</code> + 相对路径核验</td></tr>
+<tr><td>“参数像无效”</td><td>配置文件编码</td><td><strong>必须是 UTF-8 无 BOM</strong>（BOM 会导致解析退化）</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="4-验证配置文件编码powershell"><a class="header" href="#4-验证配置文件编码powershell">4) 验证配置文件编码（PowerShell）</a></h2>
+<pre><code class="language-powershell">$b = [IO.File]::ReadAllBytes("configs\sfx_config.txt")
+if ($b[0] -eq 0xEF -and $b[1] -eq 0xBB -and $b[2] -eq 0xBF) {
+  Write-Warning "BOM detected — save as UTF-8 without signature"
+} else { Write-Host "No BOM (OK)" }
+</code></pre>
+<hr>
+<h2 id="5-最小修复步骤按顺序"><a class="header" href="#5-最小修复步骤按顺序">5) 最小修复步骤（按顺序）</a></h2>
+<ol>
+<li>拿 <strong>官方</strong> <code>7zSD.sfx</code>（7-Zip 安装目录 <code>bin\7zSD.sfx</code> 或 LZMA SDK）</li>
+<li>确保 config = <strong>UTF-8 无 BOM</strong></li>
+<li>用 <strong>PowerShell 拼接</strong>（别信 <code>copy /b</code> 的黑魔法）</li>
+<li>用下面“cmd.exe 自检“确认 Stub 没被换错</li>
+</ol>
+<hr>
+<h2 id="6-自检-stub诊断锚"><a class="header" href="#6-自检-stub诊断锚">6) 自检 Stub（诊断锚）</a></h2>
+<pre><code class="language-ini">;!@Install@!UTF-8!
+RunProgram="cmd.exe"
+;!@InstallEnd@!
+</code></pre>
+<ul>
+<li>弹 <strong>CMD</strong> → Stub OK</li>
+<li>弹 <strong>Extract to</strong> → Stub WRONG（标准版）</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="llm-静默部署-exe"><a href="#llm-静默部署-exe" class="header">LLM 静默部署 EXE</a></h1>
+<hr>
+<h2 id="title-llmci-部署指南构建静默-7-zip-sfx-安装包无对话框-date-2026-06-03-tags-7-zip-sfx-silent-install-windows-automation-ci-llm-description-可复现步骤选对-7zsdsfx-stub写无-bom-config用-powershell-拼接单文件-exe并用最小自检防止退化为-extract-to"><a class="header" href="#title-llmci-部署指南构建静默-7-zip-sfx-安装包无对话框-date-2026-06-03-tags-7-zip-sfx-silent-install-windows-automation-ci-llm-description-可复现步骤选对-7zsdsfx-stub写无-bom-config用-powershell-拼接单文件-exe并用最小自检防止退化为-extract-to">title: “LLM/CI 部署指南：构建静默 7-Zip SFX 安装包（无对话框）”
+date: 2026-06-03
+tags: [7-Zip, SFX, silent-install, Windows, Automation, CI, LLM]
+description: “可复现步骤：选对 7zSD.sfx Stub；写无 BOM config；用 PowerShell 拼接单文件 EXE；并用最小自检防止退化为 Extract-to。”</a></h2>
+<h1 id="llmci-部署指南构建静默-7-zip-sfx-安装包无对话框"><a class="header" href="#llmci-部署指南构建静默-7-zip-sfx-安装包无对话框">LLM/CI 部署指南：构建静默 7-Zip SFX 安装包（无对话框）</a></h1>
+<h2 id="1-输入输出契约"><a class="header" href="#1-输入输出契约">1) 输入/输出契约</a></h2>
+<ul>
+<li><strong>Stub（固定）</strong>：<code>tools/7z/7zSD.sfx</code>（安装型，~128KB）</li>
+<li><strong>Config</strong>：<code>configs/sfx_config.txt</code>（UTF-8 <strong>无 BOM</strong>）</li>
+<li><strong>Payload</strong>：打进 <code>temp.7z</code>（必须是 <strong>7z</strong>，不是 zip）</li>
+<li><strong>Output</strong>：<code>dist/deploy.exe</code>（双击 = 解压 + 执行）</li>
+</ul>
+<hr>
+<h2 id="2-config完全静默模板"><a class="header" href="#2-config完全静默模板">2) Config（完全静默模板）</a></h2>
+<pre><code class="language-ini">;!@Install@!UTF-8!
+Title="Silent Deploy"
+InstallPath=".\\ "
+GUIMode="2"
+Silent="2"
+OverwriteMode="2"
+RunProgram="setup.bat"
+;!@InstallEnd@!
+</code></pre>
+<p>说明：</p>
+<ul>
+<li><code>GUIMode="2"</code> + <code>Silent</code> 抑制 UI</li>
+<li><code>InstallPath=".\\ "</code> → 解压到 EXE 同目录</li>
+<li><code>setup.bat</code> 必须在归档内，且内部用 <code>%~dp0</code> 定位自身</li>
+</ul>
+<hr>
+<h2 id="3-构建脚本agentci-可稳定复现"><a class="header" href="#3-构建脚本agentci-可稳定复现">3) 构建脚本（Agent/CI 可稳定复现）</a></h2>
+<pre><code class="language-powershell">param(
+  [string]$Stub    = "tools\7z\7zSD.sfx",
+  [string]$Cfg     = "configs\sfx_config.txt",
+  [string]$Archive = "build\temp.7z",
+  [string]$Out     = "dist\deploy.exe"
+)
+
+[byte[]]$bin =
+  [IO.File]::ReadAllBytes($Stub) +
+  [IO.File]::ReadAllBytes($Cfg) +
+  [IO.File]::ReadAllBytes($Archive)
+
+[IO.File]::WriteAllBytes($Out, $bin)
+Write-Host "Built: $Out"
+</code></pre>
+<hr>
+<h2 id="4-验证协议可写进-ci-check"><a class="header" href="#4-验证协议可写进-ci-check">4) 验证协议（可写进 CI check）</a></h2>
+<ul>
+<li><strong>PE 头 sanity</strong>：stub 段应以 <code>MZ</code> 开头</li>
+<li><strong>Stub size sanity</strong>：<code>7zSD.sfx</code> 通常在 100–200KB</li>
+<li><strong>Runtime smoke</strong>：用 <code>RunProgram=cmd.exe</code> 自检，确保不退化为 Extract-to</li>
+</ul>
+<hr>
+<h2 id="5-约束避免幻觉"><a class="header" href="#5-约束避免幻觉">5) 约束（避免幻觉）</a></h2>
+<ul>
+<li><strong>内部归档必须是 7z</strong>（<code>-t7z</code>），不是 zip</li>
+<li>Windows Explorer <strong>不会</strong>把它当 zip；但 7-Zip/WinRAR 能解包</li>
+<li>想“原生可右击解压“就直接发 <strong>zip 便携包</strong>，别试图把 SFX 伪装成 zip</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="设置-zed-为-bat-编辑器"><a href="#设置-zed-为-bat-编辑器" class="header">设置 Zed 为 bat 编辑器</a></h1>
+<hr>
+<h2 id="title-设置-zed-为-bat-文件的默认编辑器-date-2026-06-06-tags-zed-windows-editor-bat-registry-description-配置-windows-1011-中-bat-文件右键菜单的编辑选项使用-zed-编辑器打开-categories-os"><a class="header" href="#title-设置-zed-为-bat-文件的默认编辑器-date-2026-06-06-tags-zed-windows-editor-bat-registry-description-配置-windows-1011-中-bat-文件右键菜单的编辑选项使用-zed-编辑器打开-categories-os">title: 设置 Zed 为 .bat 文件的默认编辑器
+date: 2026-06-06
+tags: [Zed, Windows, Editor, .bat, Registry]
+description: 配置 Windows 10/11 中 .bat 文件右键菜单的“编辑“选项使用 Zed 编辑器打开
+categories: os</a></h2>
+<h1 id="设置-zed-为-bat-文件的默认编辑器"><a class="header" href="#设置-zed-为-bat-文件的默认编辑器">设置 Zed 为 .bat 文件的默认编辑器</a></h1>
+<h2 id="概述"><a class="header" href="#概述">概述</a></h2>
+<p>本文档介绍如何配置 Windows 10 中 <code>.bat</code> 文件的右键菜单，实现以下效果：</p>
+<ul>
+<li><strong>双击 .bat 文件</strong>：保持默认行为，使用 Windows Terminal 执行脚本</li>
+<li><strong>右键菜单“编辑“</strong>：使用 Zed 编辑器打开文件</li>
+</ul>
+<h2 id="实现原理"><a class="header" href="#实现原理">实现原理</a></h2>
+<h3 id="windows-文件关联机制"><a class="header" href="#windows-文件关联机制">Windows 文件关联机制</a></h3>
+<p>Windows 通过注册表管理文件关联，优先级顺序为：</p>
+<pre><code>HKCU\Software\Classes &gt; HKLM\Software\Classes
+</code></pre>
+<p><code>.bat</code> 文件的默认关联为 <code>batfile</code>，双击时会执行 <code>cmd.exe /c xxx.bat</code>。我们只需要修改右键菜单的“编辑“选项，不影响默认执行行为。</p>
+<h2 id="配置步骤"><a class="header" href="#配置步骤">配置步骤</a></h2>
+<h3 id="方法一使用-powershell-脚本推荐"><a class="header" href="#方法一使用-powershell-脚本推荐">方法一：使用 PowerShell 脚本（推荐）</a></h3>
+<p>创建并运行以下 PowerShell 脚本：</p>
+<pre><code class="language-powershell"># 设置 .bat 文件右键"编辑"用 Zed 打开
+$zedPath = "C:\Users\user\AppData\Local\Programs\Zed\Zed.exe"
+
+# 创建右键菜单"编辑"选项
+reg add "HKCU\Software\Classes\batfile\shell\edit" /ve /d "编辑" /f
+reg add "HKCU\Software\Classes\batfile\shell\edit\command" /ve /d "`"$zedPath`" `"%1`"" /f
+
+Write-Host "配置完成！"
+</code></pre>
+<h3 id="方法二手动修改注册表"><a class="header" href="#方法二手动修改注册表">方法二：手动修改注册表</a></h3>
+<ol>
+<li>
+<p>打开注册表编辑器：<code>regedit</code></p>
+</li>
+<li>
+<p>导航到以下路径：</p>
+<pre><code>HKEY_CURRENT_USER\Software\Classes\batfile\shell\edit
+</code></pre>
+</li>
+<li>
+<p>设置默认值为 <code>编辑</code></p>
+</li>
+<li>
+<p>在 <code>edit</code> 下创建 <code>command</code> 子键，设置默认值为：</p>
+<pre><code>"C:\Users\user\AppData\Local\Programs\Zed\Zed.exe" "%1"
+</code></pre>
+</li>
+</ol>
+<h2 id="验证配置"><a class="header" href="#验证配置">验证配置</a></h2>
+<h3 id="检查注册表设置"><a class="header" href="#检查注册表设置">检查注册表设置</a></h3>
+<pre><code class="language-cmd">reg query "HKCU\Software\Classes\batfile\shell\edit" /s
+</code></pre>
+<p>预期输出：</p>
+<pre><code>HKEY_CURRENT_USER\Software\Classes\batfile\shell\edit
+    (默认)    REG_SZ    编辑
+
+HKEY_CURRENT_USER\Software\Classes\batfile\shell\edit\command
+    (默认)    REG_SZ    "C:\Users\user\AppData\Local\Programs\Zed\Zed.exe" "%1"
+</code></pre>
+<h3 id="测试效果"><a class="header" href="#测试效果">测试效果</a></h3>
+<ol>
+<li><strong>双击 .bat 文件</strong>：应该打开 Windows Terminal 并执行脚本</li>
+<li><strong>右键 .bat 文件 → 编辑</strong>：应该用 Zed 打开文件</li>
+</ol>
+<h2 id="注意事项-1"><a class="header" href="#注意事项-1">注意事项</a></h2>
+<h3 id="userchoice-优先级问题"><a class="header" href="#userchoice-优先级问题">UserChoice 优先级问题</a></h3>
+<p>如果修改后没有生效，可能是 <code>UserChoice</code> 设置覆盖了你的配置。需要删除：</p>
+<pre><code class="language-powershell">Remove-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.bat\UserChoice" -Force -ErrorAction SilentlyContinue
+</code></pre>
+<h3 id="重启资源管理器"><a class="header" href="#重启资源管理器">重启资源管理器</a></h3>
+<p>修改注册表后，建议重启文件资源管理器使设置生效：</p>
+<pre><code class="language-powershell">Stop-Process -Name explorer -Force
+Start-Process explorer
+</code></pre>
+<h3 id="迁移到其他编辑器"><a class="header" href="#迁移到其他编辑器">迁移到其他编辑器</a></h3>
+<p>如果以后更换编辑器（如 VS Code、Notepad++ 等），只需修改 <code>command</code> 路径：</p>
+<pre><code class="language-powershell">reg add "HKCU\Software\Classes\batfile\shell\edit\command" /ve /d "`"C:\Program Files\Microsoft VS Code\Code.exe`" `"%1`"" /f
+</code></pre>
+<h2 id="常见问题"><a class="header" href="#常见问题">常见问题</a></h2>
+<h3 id="右键菜单显示乱码"><a class="header" href="#右键菜单显示乱码">右键菜单显示乱码</a></h3>
+<p>问题原因：注册表中菜单文本编码错误。</p>
+<p>解决方案：</p>
+<pre><code class="language-powershell">reg delete "HKCU\Software\Classes\batfile\shell\edit" /f
+reg add "HKCU\Software\Classes\batfile\shell\edit" /ve /d "编辑" /f
+</code></pre>
+<h3 id="修改后双击行为改变"><a class="header" href="#修改后双击行为改变">修改后双击行为改变</a></h3>
+<p>问题原因：可能错误修改了 <code>.bat</code> 的默认打开程序。</p>
+<p>解决方案：恢复默认关联：</p>
+<pre><code class="language-powershell">reg add "HKCU\Software\Classes\.bat" /ve /d "batfile" /f
+</code></pre>
+<h2 id="总结"><a class="header" href="#总结">总结</a></h2>
+<p>通过修改 <code>HKCU\Software\Classes\batfile\shell\edit</code> 注册表项，我们实现了：</p>
+<ul>
+<li>保持 <code>.bat</code> 文件的默认执行行为（使用 Windows Terminal）</li>
+<li>右键“编辑“选项使用 Zed 打开</li>
+<li>配置不影响系统级设置（仅影响当前用户）</li>
+</ul>
+<p>这种方式既满足了编辑需求，又不破坏脚本的正常执行功能。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="nushell--atomcode-配置踩坑记录"><a href="#nushell--atomcode-配置踩坑记录" class="header">Nushell + AtomCode 配置踩坑记录</a></h1>
+<hr>
+<h2 id="title-nushell--atomcode-配置踩坑记录-date-2026-07-07-tags-nushell-atomcode-macos-shell-config-path-description-记录在-macos-上配置-nushell-01131-与-atomcode-时遇到的-5-个典型坑包括配置目录路径错误验证方式误区path-继承问题配置项名称混淆以及默认值覆盖问题-categories-tools"><a class="header" href="#title-nushell--atomcode-配置踩坑记录-date-2026-07-07-tags-nushell-atomcode-macos-shell-config-path-description-记录在-macos-上配置-nushell-01131-与-atomcode-时遇到的-5-个典型坑包括配置目录路径错误验证方式误区path-继承问题配置项名称混淆以及默认值覆盖问题-categories-tools">title: Nushell + AtomCode 配置踩坑记录
+date: 2026-07-07
+tags: [nushell, atomcode, macOS, shell-config, PATH]
+description: 记录在 macOS 上配置 Nushell 0.113.1 与 AtomCode 时遇到的 5 个典型坑，包括配置目录路径错误、验证方式误区、PATH 继承问题、配置项名称混淆以及默认值覆盖问题
+categories: tools</a></h2>
+<p><strong>摘要：</strong> 本文记录了在 macOS 上配置 Nushell 0.113.1 与 AtomCode 时遇到的 5 个典型坑，包括配置目录路径错误、验证方式误区、PATH 继承问题、配置项名称混淆以及默认值覆盖问题，并给出最终生效配置。</p>
+<h2 id="1-背景"><a class="header" href="#1-背景">1. 背景</a></h2>
+<p>日期：2026-07-07</p>
+<p>环境：macOS，Nushell 0.113.1（Homebrew），<code>nu</code> 在 <code>/opt/homebrew/bin/nu</code></p>
+<p>目标：① nushell 里能用 <code>atomcode</code> 命令；② 启动不显示 welcome message；③ 行末不显示时间</p>
+<h2 id="2-坑-1nushell-实际加载的配置目录不是-confignushell"><a class="header" href="#2-坑-1nushell-实际加载的配置目录不是-confignushell">2. 坑 1：nushell 实际加载的配置目录不是 <code>~/.config/nushell/</code></a></h2>
+<h3 id="21-现象"><a class="header" href="#21-现象">2.1 现象</a></h3>
+<p>在 <code>~/.config/nushell/env.nu</code> 里写 <code>$env.PROMPT_COMMAND_RIGHT = {|| "" }</code>，毫无效果——行末时间照旧显示。</p>
+<h3 id="22-真相"><a class="header" href="#22-真相">2.2 真相</a></h3>
+<p>macOS 上 nushell 0.113 加载的默认配置目录是：</p>
+<pre><code>~/Library/Application Support/nushell/
+</code></pre>
+<p><strong>不是</strong> <code>~/.config/nushell/</code>（后者是 Linux 的路径）。确认当前实际加载目录：</p>
+<pre><code class="language-nu">nu
+$nu.default-config-dir
+# =&gt; /Users/&lt;user&gt;/Library/Application Support/nushell
+</code></pre>
+<p><code>~/.config/nushell/</code> 里那两个文件根本没被加载，写了等于白写。</p>
+<h3 id="23-修复"><a class="header" href="#23-修复">2.3 修复</a></h3>
+<p>所有改动都放到 <code>~/Library/Application Support/nushell/</code> 下的 <code>env.nu</code> / <code>config.nu</code>。</p>
+<h2 id="3-坑-2nu--c-不加载-confignu用它验证配置会误判"><a class="header" href="#3-坑-2nu--c-不加载-confignu用它验证配置会误判">3. 坑 2：<code>nu -c</code> 不加载 <code>config.nu</code>，用它验证配置会误判</a></h2>
+<h3 id="31-现象"><a class="header" href="#31-现象">3.1 现象</a></h3>
+<p>在 <code>config.nu</code> 里设了 <code>$env.config.show_banner = false</code>，跑 <code>nu -c '$env.config.show_banner'</code> 返回 <code>true</code>，看似没生效。</p>
+<h3 id="32-真相"><a class="header" href="#32-真相">3.2 真相</a></h3>
+<p><code>nu -c '...'</code>（非交互式脚本模式）<strong>根本不加载 <code>config.nu</code></strong>，它读的是内置默认值。所以用 <code>nu -c</code> 查 <code>$env.config.show_banner</code> 永远是默认的 <code>true</code>，会让人误以为设置没生效。</p>
+<h3 id="33-正确验证方式"><a class="header" href="#33-正确验证方式">3.3 正确验证方式</a></h3>
+<p>用 <code>nu -e '...'</code>：执行命令后进入交互式 shell，<strong>会加载 <code>config.nu</code></strong>。</p>
+<pre><code class="language-bash">nu -e 'print $"banner=($env.config.show_banner)"'
+# =&gt; banner=false
+</code></pre>
+<p>或者用 <code>expect</code> 模拟 TTY 启动真交互式会话来肉眼确认。</p>
+<h2 id="4-坑-3新开终端标签页报-atomcode-not-found但旧会话里好好的"><a class="header" href="#4-坑-3新开终端标签页报-atomcode-not-found但旧会话里好好的">4. 坑 3：新开终端标签页报 <code>atomcode not found</code>，但旧会话里好好的</a></h2>
+<h3 id="41-现象"><a class="header" href="#41-现象">4.1 现象</a></h3>
+<p>在已开的终端里 nushell 能找到 <code>atomcode</code>（<code>which atomcode</code> 命中 <code>~/.local/bin/atomcode</code>）。但<strong>新开一个终端标签页</strong>后启动 nushell，跑 <code>atomcode</code> 报：</p>
+<pre><code>Error: nu::shell::external_command
+  × External command failed
+   · Command `atomcode` not found
+</code></pre>
+<h3 id="42-真因"><a class="header" href="#42-真因">4.2 真因</a></h3>
+<p><code>atomcode</code> 在 <code>~/.local/bin/</code>，该目录是被 <code>~/.zshrc</code> 里 <code>export PATH="~/.local/bin:$PATH"</code> 加进 PATH 的。但 macOS 终端 App（Terminal/iTerm）新开标签页时未必重跑 <code>~/.zshrc</code>——尤其当 shell 被设成「非登录」模式，或只读 <code>~/.zprofile</code>（而该文件是空的）时，新标签页拿到的是 GUI 进程继承来的精简 PATH，<strong>不含 <code>~/.local/bin</code></strong>。</p>
+<p>佐证：<code>launchctl getenv PATH</code> 输出为空，说明 GUI 进程层根本没设 PATH，新标签页的 PATH 全靠 zsh 启动文件，不保证跑 <code>~/.zshrc</code>。</p>
+<h3 id="43-修复"><a class="header" href="#43-修复">4.3 修复</a></h3>
+<p>不依赖外部 shell 是否跑过 <code>~/.zshrc</code>，在 nushell 的 <code>env.nu</code>（每次启动无条件加载，早于 <code>config.nu</code>）里自己加 PATH：</p>
+<pre><code class="language-nu"># ~/Library/Application Support/nushell/env.nu
+use std/util "path add"
+path add "~/.local/bin"
+</code></pre>
+<p>验证（故意给个不含 <code>~/.local/bin</code> 的精简外部 PATH，模拟最坏情况）：</p>
+<pre><code class="language-nu">PATH=/opt/homebrew/bin:/usr/bin:/bin nu -e 'which atomcode | get command | print'
+# =&gt; atomcode   ← 仍可见
+</code></pre>
+<h2 id="5-坑-4配置项名是-show_banner不是-banner"><a class="header" href="#5-坑-4配置项名是-show_banner不是-banner">5. 坑 4：配置项名是 <code>show_banner</code>，不是 <code>banner</code></a></h2>
+<h3 id="51-现象"><a class="header" href="#51-现象">5.1 现象</a></h3>
+<p>跑 <code>nu -c '$env.config.banner'</code> 报：</p>
+<pre><code>Error: nu::shell::name_not_found
+  · `-- did you mean 'show_banner'?
+</code></pre>
+<h3 id="52-真相"><a class="header" href="#52-真相">5.2 真相</a></h3>
+<p>关闭 welcome message 的配置项叫 <code>show_banner</code>（bool|string）：</p>
+<pre><code class="language-nu">$env.config.show_banner = false      # 不显示
+$env.config.show_banner = true       # 显示完整 banner（默认）
+$env.config.show_banner = "short"    # 只显示启动耗时
+</code></pre>
+<p>查文档：</p>
+<pre><code class="language-bash">config nu --doc | nu-highlight | less -R
+</code></pre>
+<h2 id="6-坑-5github-issue-8698show_banner-被文件末尾的默认值覆盖"><a class="header" href="#6-坑-5github-issue-8698show_banner-被文件末尾的默认值覆盖">6. 坑 5：GitHub issue #8698——<code>show_banner</code> 被文件末尾的默认值覆盖</a></h2>
+<h3 id="61-现象"><a class="header" href="#61-现象">6.1 现象</a></h3>
+<p>有人在 <code>config.nu</code> 开头写 <code>$env.config.show_banner = false</code>，banner 依然出现。</p>
+<h3 id="62-真因"><a class="header" href="#62-真因">6.2 真因</a></h3>
+<p>nushell 安装时生成的默认 <code>config.nu</code> 文件<strong>末尾自带</strong> <code>$env.config.show_banner = true</code>，写在开头的 <code>false</code> 被末尾的 <code>true</code> 覆盖。</p>
+<h3 id="63-修复"><a class="header" href="#63-修复">6.3 修复</a></h3>
+<p>把自己的设置放在文件<strong>末尾</strong>，或删掉默认那行 <code>true</code>。可用 <code>config nu</code> 命令打开编辑器修改。</p>
+<h2 id="7-最终生效配置"><a class="header" href="#7-最终生效配置">7. 最终生效配置</a></h2>
+<h3 id="71-libraryapplication-supportnushellenvnu"><a class="header" href="#71-libraryapplication-supportnushellenvnu">7.1 <code>~/Library/Application Support/nushell/env.nu</code></a></h3>
+<pre><code class="language-nu"># 每次启动无条件加载，早于 config.nu
+# 不依赖外部 shell 是否跑过 ~/.zshrc，自己确保 ~/.local/bin 在 PATH 里
+use std/util "path add"
+path add "~/.local/bin"
+</code></pre>
+<h3 id="72-libraryapplication-supportnushellconfignu在注释段后追加"><a class="header" href="#72-libraryapplication-supportnushellconfignu在注释段后追加">7.2 <code>~/Library/Application Support/nushell/config.nu</code>（在注释段后追加）</a></h3>
+<pre><code class="language-nu"># 关闭启动 welcome message
+$env.config.show_banner = false
+# 清空右侧 prompt，去掉行末时间段
+$env.PROMPT_COMMAND_RIGHT = {|| "" }
+</code></pre>
+<h2 id="8-总结"><a class="header" href="#8-总结">8. 总结</a></h2>
+<ul>
+<li>配置放对目录：macOS 是 <code>~/Library/Application Support/nushell/</code>，不是 <code>~/.config/nushell/</code></li>
+<li>验证用 <code>nu -e</code>，别用 <code>nu -c</code>（后者不加载 <code>config.nu</code>）</li>
+<li>PATH 相关的放 <code>env.nu</code>（无条件加载），不依赖外部 shell 的 <code>~/.zshrc</code></li>
+<li>关 banner 的配置项是 <code>$env.config.show_banner</code>，注意被文件末尾默认值覆盖</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="wezterm--nushell--cargo-找不到命令"><a href="#wezterm--nushell--cargo-找不到命令" class="header">WezTerm + Nushell + Cargo 找不到命令</a></h1>
+<hr>
+<h2 id="title-wezterm--nushell--cargo-找不到命令踩坑记录-date-2026-07-06-tags-nushell-wezterm-cargo-macos-path-shell-config-description-记录在-macos-apple-silicon-环境下-wezterm-新标签页启动-nushell-后找不到-cargo-命令的排查与修复过程核心坑点包括-nushell-不自动-source-cargoenv默认配置目录错误及字符串插值语法差异-categories-tools"><a class="header" href="#title-wezterm--nushell--cargo-找不到命令踩坑记录-date-2026-07-06-tags-nushell-wezterm-cargo-macos-path-shell-config-description-记录在-macos-apple-silicon-环境下-wezterm-新标签页启动-nushell-后找不到-cargo-命令的排查与修复过程核心坑点包括-nushell-不自动-source-cargoenv默认配置目录错误及字符串插值语法差异-categories-tools">title: WezTerm + Nushell + Cargo 找不到命令踩坑记录
+date: 2026-07-06
+tags: [nushell, wezterm, cargo, macOS, PATH, shell-config]
+description: 记录在 macOS Apple Silicon 环境下 WezTerm 新标签页启动 Nushell 后找不到 cargo 命令的排查与修复过程，核心坑点包括 nushell 不自动 source ~/.cargo/env、默认配置目录错误及字符串插值语法差异
+categories: tools</a></h2>
+<p><strong>摘要：</strong> 本文记录了在 macOS（Apple Silicon）环境下，wezterm 新标签页启动 nushell 后无法找到 <code>cargo</code> 命令的排查与修复过程。核心坑点包括 nushell 不自动 source <code>~/.cargo/env</code>、默认配置目录不是 <code>~/.config/nushell/</code> 以及字符串插值语法差异。</p>
+<h2 id="1-症状"><a class="header" href="#1-症状">1. 症状</a></h2>
+<p>在 wezterm 新开的 nushell 标签页里直接跑 <code>cargo run</code>：</p>
+<pre><code>~/Documents/Code.localized/ra2md&gt; cargo run
+Error: nu::shell::external_command
+  × External command failed
+   ╭─[repl_entry #3:1:1]
+ 1 │ cargo run
+   · ──┬──
+   ·   ╰── Command `cargo` not found
+   ╰────
+  help: `cargo` is neither a Nushell built-in or a known external command
+</code></pre>
+<p>每次都得手动 <code>source ~/.config/nushell/env.nu</code>（或类似文件）后才能用，新标签页里又失效。</p>
+<h2 id="2-根因三条叠加"><a class="header" href="#2-根因三条叠加">2. 根因（三条叠加）</a></h2>
+<h3 id="21-nushell-不自动-source-cargoenv"><a class="header" href="#21-nushell-不自动-source-cargoenv">2.1 nushell 不自动 source <code>~/.cargo/env</code></a></h3>
+<p>rustup 安装时往 <code>~/.cargo/env</code> 写的是一段 <strong>sh 脚本</strong>（<code>case ":${PATH}:"…esac</code>），只能被 bash/zsh 等 POSIX shell <code>source</code> 加载。nushell 语法不同，<strong>不会也不能</strong>去 source 这个文件。所以 <code>~/.zshrc</code> 里 <code>source "$HOME/.cargo/env"</code> 在 zsh 下有效，但 nushell 启动时什么也不做——cargo 路径根本没进 <code>PATH</code>。</p>
+<h3 id="22-nushell-的默认-config-目录不是-confignushell"><a class="header" href="#22-nushell-的默认-config-目录不是-confignushell">2.2 nushell 的「默认 config 目录」不是 <code>~/.config/nushell/</code></a></h3>
+<p>这是最大的坑。按照 XDG 习惯很多人（包括我）会去改 <code>~/.config/nushell/env.nu</code>，<strong>改完发现根本没生效</strong>。nushell 0.113 在 macOS 上的默认 config 目录是：</p>
+<pre><code>~/Library/Application Support/nushell/
+</code></pre>
+<p>不是 <code>~/.config/nushell/</code>。可以用下面命令核实：</p>
+<pre><code class="language-nu">echo $nu.default-config-dir
+echo $nu.env-path          # ~/Library/Application Support/nushell/env.nu
+echo $nu.config-path       # ~/Library/Application Support/nushell/config.nu
+</code></pre>
+<p>我曾在 <code>~/.config/nushell/env.nu</code> 里加了正确的 <code>path add "~/.cargo/bin"</code>，source 之后能跑——但 wezterm 启动 nushell 时加载的是默认路径那份文件，所以新标签页里永远看不到 cargo。<strong>改错文件</strong>是这个坑的核心。</p>
+<h3 id="23-nushell-字符串插值语法与-bash-不同"><a class="header" href="#23-nushell-字符串插值语法与-bash-不同">2.3 nushell 字符串插值语法与 bash 不同</a></h3>
+<p>早期修 <code>~/.config/nushell/env.nu</code> 时还踩了一个语法坑。原本写的是：</p>
+<pre><code class="language-nu">$env.PATH = ($env.PATH | prepend "$env.HOME/.cargo/bin")
+</code></pre>
+<p>在 nushell 里，<strong>双引号字符串不做变量插值</strong>。<code>"$env.HOME/.cargo/bin"</code> 会被当作字面字符串 <code>$env.HOME/.cargo/bin</code>，加进 PATH 后是个不存在的目录，cargo 当然还是找不到。正确写法用 <code>$"..."</code> 字符串插值 + <code>(...)</code> 子表达式：</p>
+<pre><code class="language-nu">$env.PATH = ($env.PATH | prepend $"($env.HOME)/.cargo/bin")
+</code></pre>
+<p>或者更省事——用 nushell 自带的 <code>path add</code> 工具（来自 <code>std/util</code>），它会自动展开 <code>~</code>：</p>
+<pre><code class="language-nu">use std/util "path add"
+path add "~/.cargo/bin"
+</code></pre>
+<h2 id="3-修复"><a class="header" href="#3-修复">3. 修复</a></h2>
+<p>改真正被加载的那个文件：<code>~/Library/Application Support/nushell/env.nu</code>，加上一行 <code>path add "~/.cargo/bin"</code>。完整改动：</p>
+<pre><code class="language-nu"># env.nu
+# Always make ~/.local/bin visible (where atomcode lives), even when the
+# terminal was started as a non-login shell and ~/.zshrc never ran.
+use std/util "path add"
+path add "~/.local/bin"
+# cargo / rustup binaries — nushell 不自动 source ~/.cargo/env (那是 sh 脚本)
+path add "~/.cargo/bin"
+</code></pre>
+<p>验证：</p>
+<pre><code class="language-bash">which cargo
+# → /Users/&lt;user&gt;/.cargo/bin/cargo
+cargo run
+</code></pre>
+<p>新开 wezterm 标签页无需再 source。</p>
+<h2 id="4-总结"><a class="header" href="#4-总结">4. 总结</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>坑</th><th>关键点</th></tr>
+</thead>
+<tbody>
+<tr><td>nushell 不继承 <code>~/.cargo/env</code></td><td>那是 sh 脚本，必须自己加 <code>path add "~/.cargo/bin"</code></td></tr>
+<tr><td>改了 <code>~/.config/nushell/</code> 不生效</td><td>macOS 上 nushell 默认读 <code>~/Library/Application Support/nushell/</code></td></tr>
+<tr><td><code>"$env.HOME/..."</code> 字面化</td><td>nushell 双引号不做插值，要用 <code>$"($env.HOME)/..."</code></td></tr>
+<tr><td>wezterm 新标签页 cargo 又没了</td><td>不是 wezterm 的问题，是 nushell 启动时没加载到改对的那份 env.nu</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="5-参考"><a class="header" href="#5-参考">5. 参考</a></h2>
+<ul>
+<li>nushell 配置文档：<a href="https://www.nushell.sh/book/configuration.html">Configuration | Nushell</a></li>
+<li>nushell 字符串插值：<a href="https://www.nushell.sh/language/_strings.html">https://www.nushell.sh/language/_strings.html</a></li>
+<li>rustup 文件 <code>~/.cargo/env</code>：仅 POSIX shell 可用</li>
+<li>nushell <code>std/util</code> 模块：<code>use std/util "path add"</code> 提供 <code>path add</code> 命令</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="rust-bevy-013-到-014-升级踩坑指南"><a href="#rust-bevy-013-到-014-升级踩坑指南" class="header">Rust Bevy 0.13 到 0.14 升级踩坑指南</a></h1>
+<hr>
+<h2 id="title-rust-bevy-013-到-014-升级踩坑指南-date-2026-07-08-tags-bevy-rust-game-development-upgrade-migration-macos-description-记录将-bevy-013-的-2d-像素游戏升级到-014-版本的全过程踩坑记录包括-state-api-抽离几何图元迁移color-访问变更等破坏性变更的详细解法-categories-programming"><a class="header" href="#title-rust-bevy-013-到-014-升级踩坑指南-date-2026-07-08-tags-bevy-rust-game-development-upgrade-migration-macos-description-记录将-bevy-013-的-2d-像素游戏升级到-014-版本的全过程踩坑记录包括-state-api-抽离几何图元迁移color-访问变更等破坏性变更的详细解法-categories-programming">title: Rust Bevy 0.13 到 0.14 升级踩坑指南
+date: 2026-07-08
+tags: [bevy, rust, game-development, upgrade-migration, macOS]
+description: 记录将 Bevy 0.13 的 2D 像素游戏升级到 0.14 版本的全过程踩坑记录，包括 State API 抽离、几何图元迁移、Color 访问变更等破坏性变更的详细解法
+categories: programming</a></h2>
+<blockquote>
+<p>本文记录将一个 Bevy 0.13 的 2D 像素游戏升级到 0.14 版本的全过程踩坑记录。0.14 是作者在 macOS 上运行最稳定的版本（更高版本会出现黑屏问题），因此锁定此版本。升级后，还顺手将项目中从 Python 迁移过来的两个模块（调试控制台和剧本系统）进行了补充。</p>
+</blockquote>
+<h2 id="一为什么是-014"><a class="header" href="#一为什么是-014">一、为什么是 0.14</a></h2>
+<ul>
+<li><strong>macOS 兼容性</strong>：0.15 及以上版本在 macOS 上存在黑屏问题，0.14 是目前最稳定的选择。</li>
+<li><strong>破坏性变更</strong>：0.13 → 0.14 存在破坏性 API 变更，不能仅仅修改 Cargo.toml 中的版本号。</li>
+</ul>
+<h2 id="二cargotoml-的三处改动"><a class="header" href="#二cargotoml-的三处改动">二、Cargo.toml 的三处改动</a></h2>
+<h3 id="1-版本号"><a class="header" href="#1-版本号">1. 版本号</a></h3>
+<pre><code class="language-toml"># before
+bevy = { version = "0.13", default-features = false, features = [...] }
+after
+bevy = { version = "0.14", default-features = false, features = [...] }
+</code></pre>
+<h3 id="2-feature-名改了下划线大小写"><a class="header" href="#2-feature-名改了下划线大小写">2. feature 名改了下划线大小写</a></h3>
+<pre><code class="language-toml"># 0.13 用 hyphen-case
+"multi-threaded",
+0.14 改成 snake_case
+"multi_threaded",
+</code></pre>
+<p>运行 <code>cargo fetch</code> 会直接报错：</p>
+<pre><code>package depends on `bevy` with feature `multi-threaded`
+but `bevy` does not have that feature.
+help: there is a feature `multi_threaded` with a similar name
+</code></pre>
+<p>按照提示修改即可。</p>
+<h3 id="3-诊断插件-feature-改了名"><a class="header" href="#3-诊断插件-feature-改了名">3. 诊断插件 feature 改了名</a></h3>
+<pre><code class="language-toml"># 0.13
+"bevy_diagnostic",   # ❌ 0.14 没这个 feature
+0.14
+"bevy_dev_tools",    # ✅ FrameTimeDiagnosticsPlugin 跟着这个来
+</code></pre>
+<p>报错会列出全部可用 feature，从里面挑选即可。</p>
+<h3 id="4-显式加-bevy_state--bevy_app-依赖"><a class="header" href="#4-显式加-bevy_state--bevy_app-依赖">4. 显式加 bevy_state / bevy_app 依赖</a></h3>
+<p>这是 <code>default-features = false</code> 项目的专属坑——详见下一节。</p>
+<h2 id="三state-api最大的坑"><a class="header" href="#三state-api最大的坑">三、State API：最大的坑</a></h2>
+<h3 id="症状"><a class="header" href="#症状">症状</a></h3>
+<p>升级后一编译就刷出一屏幕错误：</p>
+<pre><code>error: cannot find derive macro `States` in this scope
+error[E0425]: cannot find type `NextState` in this scope
+error[E0425]: cannot find function `in_state` in this scope
+error[E0425]: cannot find `OnEnter` / `OnExit`
+error[E0599]: no method named `init_state` found for `&amp;mut App`
+error[E0599]: no method named `enable_state` found for `&amp;mut App`
+</code></pre>
+<h3 id="根因"><a class="header" href="#根因">根因</a></h3>
+<p>0.14 把 state 系统<strong>移出了 <code>bevy::prelude</code></strong>，迁移到了独立的 crate <code>bevy_state</code>。<code>bevy</code> 通过 <code>bevy_internal</code> 重命名 re-export：</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// bevy_internal/src/lib.rs
+#[cfg(feature = "bevy_state")]
+pub use bevy_state as state;
+<span class="boring">}</span></code></pre>
+<p>所以 <code>bevy::state</code> 这条路径<strong>理论上还在</strong>，但需要开启 <code>bevy_state</code> feature。而我们使用了 <code>default-features = false</code>，默认的 feature 集被砍掉了——0.13 时 state 跟着 prelude 走，0.14 必须显式开启。</p>
+<h3 id="解法三步"><a class="header" href="#解法三步">解法（三步）</a></h3>
+<p><strong>第一步：Cargo.toml 开 feature + 加依赖</strong></p>
+<pre><code class="language-toml">bevy = { version = "0.14", default-features = false, features = [
+    ...,
+    "bevy_state",   # 激活 bevy::state re-export
+] }
+单开 bevy_state feature 还不够，AppExtStates（含 init_state）在 bevy_state::app 里，
+它 use bevy_app::{App, ...}。所以要把 bevy_app 也拉进依赖图。
+bevy_state = "0.14"
+bevy_app = "0.14"
+</code></pre>
+<p><strong>第二步：import 路径全部改走 <code>bevy_state</code></strong></p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// ❌ 0.13：靠 prelude 自动可用
+#[derive(States, Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+pub enum GameState { ... }
+.add_systems(OnEnter(GameState::Playing), ...)
+.add_systems(Update, foo.run_if(in_state(GameState::Playing)))
+.next_state.set(GameState::GameOver);
+<span class="boring">}</span></code></pre>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// ✅ 0.14：全部 explicit import
+use bevy_state::app::AppExtStates;          // 含 init_state
+use bevy_state::state::{OnEnter, OnExit, States, NextState};
+use bevy_state::condition::in_state;
+<span class="boring">}</span></code></pre>
+<p>每个用到 <code>NextState</code> 的文件都要加一行：</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use bevy_state::state::NextState;
+<span class="boring">}</span></code></pre>
+<p><strong>第三步：删掉 <code>enable_state</code> 调用</strong></p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// ❌ 0.13 写法
+.init_state::&lt;&gt;()
+.enable_state::&lt;&gt;()   // 0.14 砍了这方法
+<span class="boring">}</span></code></pre>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// ✅ 0.14：init_state 单独够用（内部已 setup transitions）
+.init_state::&lt;&gt;()
+<span class="boring">}</span></code></pre>
+<h4 id="验证路径是否正确的最小用例"><a class="header" href="#验证路径是否正确的最小用例">验证路径是否正确的最小用例</a></h4>
+<p>升级时我先在 <code>/tmp</code> 里创建一个小的 cargo 项目验证 import 路径，再回主项目修改：</p>
+<pre class="playground"><code class="language-rust">use bevy::prelude::*;
+use bevy_state::app::AppExtStates;
+use bevy_state::state::{OnEnter, OnExit, States, NextState};
+use bevy_state::condition::in_state;
+#[derive(States, Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+pub enum S { #[default] A, B }
+fn main() {
+    App::new()
+        .init_state::&lt;S&gt;()
+        .add_systems(OnEnter(S::A), || {})
+        .add_systems(OnExit(S::A), || {})
+        .add_systems(Update, (|| {}).run_if(in_state(S::A)))
+        .run();
+}</code></pre>
+<p>运行 <code>cargo check</code> 通过后再回主项目批量修改——比直接在主项目里试错快得多。</p>
+<h4 id="appextstates-的可用方法014"><a class="header" href="#appextstates-的可用方法014">AppExtStates 的可用方法（0.14）</a></h4>
+<p><code>enable_state</code> 被砍掉之后，我查阅了 <code>bevy_state::app::AppExtStates</code> 的完整方法表，确认 0.14 只剩这些：</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>方法</th><th>用途</th></tr>
+</thead>
+<tbody>
+<tr><td><code>init_state::&lt;S&gt;()</code></td><td>初始化一个 State（取代 0.13 的 init_state + enable_state 组合）</td></tr>
+<tr><td><code>insert_state::&lt;S&gt;(state)</code></td><td>初始化并设初值</td></tr>
+<tr><td><code>add_computed_state::&lt;S&gt;()</code></td><td>计算状态</td></tr>
+<tr><td><code>add_sub_state::&lt;S&gt;()</code></td><td>子状态</td></tr>
+<tr><td><code>enable_state_scoped_entities::&lt;S&gt;()</code></td><td>state scoped entity 自动清理</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="四meshfromshapecircle-的-shape-模块消失"><a class="header" href="#四meshfromshapecircle-的-shape-模块消失">四、Mesh::from(shape::Circle) 的 shape 模块消失</a></h2>
+<h3 id="症状-1"><a class="header" href="#症状-1">症状</a></h3>
+<pre><code>error[E0433]: cannot find module or crate `shape` in this scope
+</code></pre>
+<h3 id="根因-1"><a class="header" href="#根因-1">根因</a></h3>
+<p>0.13 的 <code>bevy::sprite::shape::Circle { radius, vertices }</code> 在 0.14 被移走了。0.14 把几何图元迁移到了 <code>bevy_math::primitives</code>，且 <code>Circle</code> 结构体<strong>砍掉了 <code>vertices</code> 字段</strong>，只剩 <code>radius</code>：</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// bevy_math 0.14
+pub struct Circle {
+    pub radius: f32,
+}
+<span class="boring">}</span></code></pre>
+<h3 id="解法"><a class="header" href="#解法">解法</a></h3>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// ❌ 0.13
+use bevy::prelude::*;  // shape 跟着 prelude 走
+let mesh = meshes.add(Mesh::from(shape::Circle { radius: 32.0, vertices: 32 }));
+// ✅ 0.14：显式 import + 去掉 vertices 字段
+use bevy::math::primitives::Circle;
+let mesh = meshes.add(Mesh::from(Circle { radius: 32.0 }));
+// From for Mesh 仍存在，默认 32 分辨率
+<span class="boring">}</span></code></pre>
+<p>如果想要自定义分辨率，用 builder 链：</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use bevy::math::primitives::Circle;
+use bevy::render::mesh::primitives::Meshable;  // trait .mesh()
+let mesh = meshes.add(Circle { radius: 32.0 }.mesh().resolution(64).build());
+<span class="boring">}</span></code></pre>
+<h2 id="五color-分量访问r-g-b-a-全砍"><a class="header" href="#五color-分量访问r-g-b-a-全砍">五、Color 分量访问：.r() .g() .b() .a() 全砍</a></h2>
+<h3 id="症状-2"><a class="header" href="#症状-2">症状</a></h3>
+<pre><code>error[E0599]: no method named `r` found for struct `Color` in the current scope
+error[E0599]: no method named `g` found for struct `Color` in the current scope
+error[E0599]: no method named `b` found for struct `Color` in the current scope
+error[E0599]: no method named `a` found for struct `Color` in the current scope
+</code></pre>
+<h3 id="根因-2"><a class="header" href="#根因-2">根因</a></h3>
+<p>0.13 的 <code>Color</code> 提供了 <code>.r()</code>, <code>.g()</code>, <code>.b()</code>, <code>.a()</code> 等 getter 方法。0.14 将这些方法全部移除，改为直接访问结构体字段。</p>
+<h3 id="解法-1"><a class="header" href="#解法-1">解法</a></h3>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// ❌ 0.13
+let color = Color::rgb(0.5, 0.2, 0.8);
+let red = color.r();
+let alpha = color.a();
+// ✅ 0.14：直接访问字段
+let color = Color::rgb(0.5, 0.2, 0.8);
+let red = color.r;
+let alpha = color.a;
+<span class="boring">}</span></code></pre>
+<p>注意：<code>Color</code> 的字段是公开的，可以直接读写。</p>
+<h2 id="六其他常见变更与修复"><a class="header" href="#六其他常见变更与修复">六、其他常见变更与修复</a></h2>
+<h3 id="1-输入系统keycode-枚举成员重命名"><a class="header" href="#1-输入系统keycode-枚举成员重命名">1. 输入系统：KeyCode 枚举成员重命名</a></h3>
+<p>部分 <code>KeyCode</code> 枚举成员在 0.14 中被重命名，以符合更标准的命名约定。</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// ❌ 0.13
+KeyCode::LControl
+KeyCode::RControl
+// ✅ 0.14
+KeyCode::ControlLeft
+KeyCode::ControlRight
+<span class="boring">}</span></code></pre>
+<p>类似的重命名也适用于其他修饰键（Shift, Alt, Meta/Command）。编译器会给出明确的错误提示，按照提示修改即可。</p>
+<h3 id="2-精灵图集textureatlas布局-api-变更"><a class="header" href="#2-精灵图集textureatlas布局-api-变更">2. 精灵图集（TextureAtlas）布局 API 变更</a></h3>
+<p>创建 <code>TextureAtlas</code> 的 API 有所调整。</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// ❌ 0.13
+let atlas = TextureAtlas::from_grid(
+    texture_handle,
+    Vec2::new(16.0, 16.0),
+    4,
+    4,
+    None,
+    None,
+);
+// ✅ 0.14
+let atlas = TextureAtlas::from_grid(
+    texture_handle,
+    Vec2::new(16.0, 16.0),
+    4,
+    4,
+    None,
+    None,
+    false, // 新增参数：是否填充空白区域
+);
+<span class="boring">}</span></code></pre>
+<h3 id="3-相机投影cameraprojection相关变更"><a class="header" href="#3-相机投影cameraprojection相关变更">3. 相机投影（CameraProjection）相关变更</a></h3>
+<p>如果使用了自定义相机投影，可能需要更新 trait 实现。</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// ❌ 0.13
+impl CameraProjection for MyProjection {
+    fn get_projection_matrix(&amp;self) -&gt; Mat4 { ... }
+    fn update(&amp;mut self, width: f32, height: f32) { ... }
+    fn far(&amp;self) -&gt; f32 { ... }
+    // ...
+}
+// ✅ 0.14
+impl CameraProjection for MyProjection {
+    fn get_projection_matrix(&amp;self) -&gt; Mat4 { ... }
+    fn update(&amp;mut self, width: f32, height: f32) { ... }
+    // far 等方法可能已被移除或移至其他 trait，请查阅最新文档。
+}
+<span class="boring">}</span></code></pre>
+<h2 id="七升级后补充模块调试控制台与剧本系统"><a class="header" href="#七升级后补充模块调试控制台与剧本系统">七、升级后补充模块：调试控制台与剧本系统</a></h2>
+<p>在成功升级到 Bevy 0.14 后，我顺手将项目中从 Python 原型迁移过来的两个核心模块进行了 Rust 重写和集成。</p>
+<h3 id="1-调试控制台debug-console"><a class="header" href="#1-调试控制台debug-console">1. 调试控制台（Debug Console）</a></h3>
+<p>一个简单的内嵌式命令行界面，用于在游戏运行时执行命令、修改变量、打印状态。</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 主要功能
+// - 按 ` 键呼出/隐藏控制台
+// - 支持基本命令：spawn, teleport, godmode, fps
+// - 命令历史与自动补全
+// - 输出日志滚动显示
+<span class="boring">}</span></code></pre>
+<h3 id="2-剧本系统script-system"><a class="header" href="#2-剧本系统script-system">2. 剧本系统（Script System）</a></h3>
+<p>一个基于事件的轻量级叙事与任务系统，用于驱动游戏剧情和角色对话。</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 核心组件
+#[derive(Component)]
+pub struct Script {
+    pub id: String,
+    pub triggers: Vec&lt;Trigger&gt;,
+    pub actions: Vec&lt;Action&gt;,
+}
+// 事件驱动
+pub struct ScriptEvent {
+    pub script_id: String,
+    pub params: HashMap&lt;String, String&gt;,
+}
+<span class="boring">}</span></code></pre>
+<p>这两个模块的加入显著提升了项目的可调试性和内容创作灵活性。</p>
+<h2 id="八总结"><a class="header" href="#八总结">八、总结</a></h2>
+<p>从 Bevy 0.13 升级到 0.14 主要挑战在于 State API 的抽离和一系列破坏性命名变更。关键步骤总结如下：</p>
+<ol>
+<li><strong>修改 Cargo.toml</strong>：更新版本号，修正 feature 名称（如 <code>multi_threaded</code>），并显式添加 <code>bevy_state</code> 和 <code>bevy_app</code> 依赖。</li>
+<li><strong>重构 State 相关代码</strong>：将所有 <code>States</code>, <code>NextState</code>, <code>OnEnter</code>, <code>OnExit</code>, <code>in_state</code> 的导入路径改为 <code>bevy_state::*</code>，并移除 <code>enable_state</code> 调用。</li>
+<li><strong>更新几何图元</strong>：将 <code>shape::Circle</code> 等替换为 <code>bevy::math::primitives::Circle</code>，注意字段变化。</li>
+<li><strong>修正 Color 访问</strong>：将 <code>.r()</code> 等方法调用改为直接字段访问 <code>.r</code>。</li>
+<li><strong>处理其他 API 变更</strong>：如 <code>KeyCode</code> 重命名、<code>TextureAtlas</code> API 变更等。</li>
+</ol>
+<p>升级过程虽然繁琐，但 0.14 在 macOS 上的稳定性提升是值得的。建议在升级前，在一个独立的小项目中验证关键变更，再回到主项目进行系统性的修改。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="mighty-rodent-splash-黑屏踩坑记录-1"><a href="#mighty-rodent-splash-黑屏踩坑记录-1" class="header">Mighty Rodent Splash 黑屏踩坑记录</a></h1>
+<hr>
+<h2 id="title-mighty-rodent-splash-黑屏踩坑记录-date-2026-07-09-tags-bevy-rust-game-development-debug-splash-screen-description-记录-bevy-014-游戏项目中-splash-黑屏问题的完整诊断过程与修复方案包含多个诊断弯路和经验教训-categories-games"><a class="header" href="#title-mighty-rodent-splash-黑屏踩坑记录-date-2026-07-09-tags-bevy-rust-game-development-debug-splash-screen-description-记录-bevy-014-游戏项目中-splash-黑屏问题的完整诊断过程与修复方案包含多个诊断弯路和经验教训-categories-games">title: Mighty Rodent Splash 黑屏踩坑记录
+date: 2026-07-09
+tags: [bevy, rust, game-development, debug, splash-screen]
+description: 记录 Bevy 0.14 游戏项目中 Splash 黑屏问题的完整诊断过程与修复方案，包含多个诊断弯路和经验教训
+categories: games</a></h2>
+<h1 id="mighty-rodent-splash-黑屏踩坑记录"><a class="header" href="#mighty-rodent-splash-黑屏踩坑记录">Mighty Rodent Splash 黑屏踩坑记录</a></h1>
+<blockquote>
+<p>日期：2026-07-09
+项目：rust-bevy-mighty-rodent（Bevy 0.14 重写 Mighty Rodent）
+现象：<code>cargo run</code> 后游戏窗口显示约 2 秒黑色，然后直接进主菜单，看不到 splash 两张图（<code>jaggedlogo.jpg</code> / <code>mainpic.jpg</code>）</p>
+</blockquote>
+<h2 id="一症状"><a class="header" href="#一症状">一、症状</a></h2>
+<ul>
+<li>窗口出现 → 黑屏约 2 秒 → 直接 MainMenu。</li>
+<li>期望：jaggedlogo.jpg 全显 1.5s → 淡到黑 0.8s → mainpic.jpg 从黑变亮 + 蓝色进度条 2.0s → 持亮 0.5s → MainMenu。</li>
+</ul>
+<h2 id="二诊断走过的弯路按发生顺序"><a class="header" href="#二诊断走过的弯路按发生顺序">二、诊断走过的弯路（按发生顺序）</a></h2>
+<h3 id="弯路-1以为是-splash-系统没执行"><a class="header" href="#弯路-1以为是-splash-系统没执行">弯路 1：以为是 splash 系统没执行</a></h3>
+<ul>
+<li><code>src/splash.rs</code> 是 <code>git status</code> 里的 <code>??</code> 未跟踪文件，怀疑没被编进 binary。</li>
+<li>验证：<code>cargo check</code> 通过，<code>main.rs:4</code> 有 <code>mod splash;</code>，<code>main.rs:105</code> 注册了 <code>splash::SplashPlugin</code>——代码确实编进去了。</li>
+<li><strong>结论：不是没编进。</strong></li>
+</ul>
+<h3 id="弯路-2以为是-onenter默认状态-不触发"><a class="header" href="#弯路-2以为是-onenter默认状态-不触发">弯路 2：以为是 <code>OnEnter(默认状态)</code> 不触发</a></h3>
+<ul>
+<li><code>AppState::SplashLogo</code> 是 <code>#[default]</code> 初始态，<code>show_splash_logo</code> 原挂在 <code>OnEnter(SplashLogo)</code>。</li>
+<li>怀疑 Bevy 0.14 对“程序一开始就在的默认态“不触发 <code>OnEnter</code>。</li>
+<li>改法：把 <code>show_splash_logo</code> 从 <code>OnEnter</code> 改挂 <code>Startup</code>。</li>
+<li>验证：重跑 → 还是黑屏。</li>
+<li><strong>结论：改挂 Startup 是对的（保留），但不是黑屏根因。</strong></li>
+</ul>
+<h3 id="弯路-3被日志诊断误导"><a class="header" href="#弯路-3被日志诊断误导">弯路 3：被日志诊断误导</a></h3>
+<ul>
+<li>想靠 <code>info!("Splash: Jaggedblade logo")</code> 确认系统执行没。日志里这条 <strong>0 次出现</strong>。</li>
+<li>推断：“splash 系统没执行”——<strong>这个推断是错的</strong>。</li>
+<li>真相：<code>main.rs:93</code> <code>.disable::&lt;LogPlugin&gt;()</code> 禁了 Bevy 自带 logger，但 <code>src/splash.rs</code> 里 <code>info!</code> 是 <code>bevy::prelude::*</code> 的（走 Bevy logger），被禁后<strong>全沉默</strong>。而 <code>main.rs:120</code> 那条 <code>log::info!("Bevy app starting")</code> 走的是 <code>log</code> crate（simplelog 接的是这个），所以打得出来。</li>
+<li><strong>坑：<code>bevy::prelude::*</code> 的 <code>info!</code> ≠ <code>log::info!</code>。<code>disable::&lt;LogPlugin&gt;()</code> 后前者沉默，后者照常。诊断 splash 这类用 <code>info!</code> 的系统，要换 <code>log::info!</code>。</strong></li>
+<li>验证：把 splash 里 4 处 <code>info!</code> 全换成 <code>log::info!</code> → 日志真能打出来了。</li>
+<li><strong>结论：是诊断手段失灵，不是 splash 没执行。</strong></li>
+</ul>
+<h3 id="弯路-4在-bevy-源码里查-camera2dbundle-默认-transform"><a class="header" href="#弯路-4在-bevy-源码里查-camera2dbundle-默认-transform">弯路 4：在 Bevy 源码里查 <code>Camera2dBundle</code> 默认 transform</a></h3>
+<ul>
+<li>想确认相机默认 z 是不是正值（导致 z=0 的图在相机后面）。</li>
+<li>在 <code>~/.cargo/registry/src/.../bevy-0.14.2/crates/</code> 里 grep <code>Camera2dBundle</code> —— 无输出。</li>
+<li>绕了两轮没找到，按 STOP WHEN STUCK 放弃。</li>
+<li><strong>结论：别在 Bevy 源码里硬找 API，直接诊断系统打 transform 值。</strong></li>
+</ul>
+<h2 id="三根因诊断系统钉死"><a class="header" href="#三根因诊断系统钉死">三、根因（诊断系统钉死）</a></h2>
+<p>在 <code>SplashPlugin::build</code> 里临时加 <code>splash_diag_system</code>（Update，一次性 Local flag），用 <code>log::info!</code> 打相机数、splash 实体数、transform、custom_size、texture handle path：</p>
+<pre><code>DIAG: cameras=1, splash_entities=2, splash_images=1
+DIAG cam0: translation=Vec3(0.0, 0.0, 0.0) (z=0.00)
+DIAG img0: translation=Vec3(0.0, 0.0, 0.0) (z=0.00) custom_size=Some(Vec2(800.0, 600.0)) path=gfx/jaggedlogo.jpg
+Splash: Jaggedblade logo (Startup)
+Splash: Main title picture (loading)
+</code></pre>
+<p><strong>事实：</strong></p>
+<ul>
+<li>splash 系统执行了（两段都跑了）。</li>
+<li>相机 spawn 了，位于原点 z=0，看向 -Z（Camera2dBundle 默认）。</li>
+<li>splash 图 spawn 了，texture handle 路径对（<code>gfx/jaggedlogo.jpg</code>），custom_size 对（800×600）。</li>
+<li><strong>图 z=0，与相机平面重合。</strong></li>
+</ul>
+<p><strong>根因：</strong> Bevy 2D 相机近平面在 z=0 前一小段，<strong>z=0 的 sprite 与相机平面重合，2D 渲染管线不绘制</strong> → 黑屏。所有可见 sprite 的 z 必须为<strong>负</strong>（在相机前方），且 z 越小越远。</p>
+<p>原代码 z 值全错：</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>sprite</th><th>原 z</th><th>问题</th></tr>
+</thead>
+<tbody>
+<tr><td>黑背景</td><td>-1.0</td><td>OK（一直在相机前）</td></tr>
+<tr><td>splash 图（logo + mainpic）</td><td>0.0</td><td>与相机平面重合，不绘制 → 黑屏</td></tr>
+<tr><td>loading bar 背景</td><td>0.5</td><td>正值，在相机后面，不可见</td></tr>
+<tr><td>loading bar 填充</td><td>1.0</td><td>同上</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="四修复"><a class="header" href="#四修复">四、修复</a></h2>
+<p><code>src/splash.rs</code>，把所有 splash sprite 的 z 改成负值，按层序从远到近：</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>sprite</th><th>新 z</th><th>层序</th></tr>
+</thead>
+<tbody>
+<tr><td>黑背景</td><td>-1.0（不变）</td><td>最远</td></tr>
+<tr><td>splash 图</td><td>-0.5</td><td>背景前</td></tr>
+<tr><td>loading bar 背景</td><td>-0.4</td><td>图前</td></tr>
+<tr><td>loading bar 填充</td><td>-0.3</td><td>最前</td></tr>
+</tbody>
+</table>
+</div>
+<p>代码锚点：</p>
+<ul>
+<li><code>spawn_splash</code> 里 splash 图的 <code>Transform::from_xyz(0.0, 0.0, -0.5)</code>（原 0.0）</li>
+<li><code>show_splash_main</code> 里 loading bar 背景 <code>Transform::from_xyz(0.0, -280.0, -0.4)</code>（原 0.5）</li>
+<li><code>show_splash_main</code> 里 loading bar 填充 <code>Transform::from_xyz(-200.0, -280.0, -0.3)</code>（原 1.0）</li>
+</ul>
+<h2 id="五次要改动"><a class="header" href="#五次要改动">五、次要改动</a></h2>
+<ol>
+<li><strong><code>show_splash_logo</code> 改挂 <code>Startup</code></strong>（绕开 Bevy 0.14 <code>OnEnter(默认态)</code> 不触发问题）——保留，与时序一致。</li>
+<li><strong>splash 里 4 处 <code>info!</code> 改 <code>log::info!</code></strong>——保留，让诊断信息真能打到 simplelog。</li>
+<li><strong>诊断系统 <code>splash_diag_system</code></strong>——已删除，它已完成使命。</li>
+<li><strong>进度条颜色改成绿色</strong>：<code>Color::srgb(0.0, 0.8, 0.0)</code>（原 <code>Color::srgb(0.0, 0.8, 1.0)</code> 蓝色）。</li>
+</ol>
+<h2 id="六经验沉淀"><a class="header" href="#六经验沉淀">六、经验沉淀</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>坑</th><th>教训</th></tr>
+</thead>
+<tbody>
+<tr><td><code>bevy::prelude::*</code> 的 <code>info!</code> 在 <code>disable::&lt;LogPlugin&gt;()</code> 后沉默</td><td>诊断 Bevy 系统执行情况，用 <code>log::info!</code>（走 simplelog），不要用 <code>info!</code></td></tr>
+<tr><td>Bevy 2D 相机看 -Z，近平面在 0 前</td><td><strong>2D sprite 的 z 必须为负</strong>才可见；z=0 与相机平面重合不绘制；正值在相机后面不可见</td></tr>
+<tr><td><code>OnEnter(默认状态)</code> 在 Bevy 0.14 不触发</td><td>默认态的初始化系统挂 <code>Startup</code>，不要挂 <code>OnEnter</code></td></tr>
+<tr><td>在 Bevy 源码里硬找 API</td><td>别绕源码，直接诊断系统打运行时值</td></tr>
+<tr><td>凭“日志没打“推断“系统没执行“</td><td>先确认日志路由对不对（logger 是哪套），再推断执行情况</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="七验证"><a class="header" href="#七验证">七、验证</a></h2>
+<pre><code>cargo check  → 通过（只剩先前 14 个无关 warning）
+cargo run    → jaggedlogo.jpg 全显 → 淡到黑 → mainpic.jpg 变亮 + 绿色进度条填满 → MainMenu ✅
+</code></pre>
+<hr>
+<p>Co-Authored-By: AtomCode (GLM-5.2) <a href="mailto:noreply@atomgit.com">noreply@atomgit.com</a></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr-ef4e11c1.min.js"></script>
+        <script src="mark-09e88c2c.min.js"></script>
+        <script src="searcher-09f2665d.js"></script>
+
+        <script src="clipboard-1626706a.min.js"></script>
+        <script src="highlight-abc7f01d.js"></script>
+        <script src="book-609e4cb8.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+
+    </div>
+    </body>
+</html>
