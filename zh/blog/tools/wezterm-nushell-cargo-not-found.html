@@ -35,7 +35,7 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-deb0f1a3.js";
+            window.path_to_searchindex_js = "../../searchindex-c7c316a0.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../../toc-822b419f.js"></script>
@@ -180,13 +180,7 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <hr>
-<h2 id="title-wezterm--nushell--cargo-找不到命令踩坑记录-date-2026-07-06-tags-nushell-wezterm-cargo-macos-path-shell-config-description-记录在-macos-apple-silicon-环境下-wezterm-新标签页启动-nushell-后找不到-cargo-命令的排查与修复过程核心坑点包括-nushell-不自动-source-cargoenv默认配置目录错误及字符串插值语法差异-categories-tools"><a class="header" href="#title-wezterm--nushell--cargo-找不到命令踩坑记录-date-2026-07-06-tags-nushell-wezterm-cargo-macos-path-shell-config-description-记录在-macos-apple-silicon-环境下-wezterm-新标签页启动-nushell-后找不到-cargo-命令的排查与修复过程核心坑点包括-nushell-不自动-source-cargoenv默认配置目录错误及字符串插值语法差异-categories-tools">title: WezTerm + Nushell + Cargo 找不到命令踩坑记录
-date: 2026-07-06
-tags: [nushell, wezterm, cargo, macOS, PATH, shell-config]
-description: 记录在 macOS Apple Silicon 环境下 WezTerm 新标签页启动 Nushell 后找不到 cargo 命令的排查与修复过程，核心坑点包括 nushell 不自动 source ~/.cargo/env、默认配置目录错误及字符串插值语法差异
-categories: tools</a></h2>
-<p><strong>摘要：</strong> 本文记录了在 macOS（Apple Silicon）环境下，wezterm 新标签页启动 nushell 后无法找到 <code>cargo</code> 命令的排查与修复过程。核心坑点包括 nushell 不自动 source <code>~/.cargo/env</code>、默认配置目录不是 <code>~/.config/nushell/</code> 以及字符串插值语法差异。</p>
+                        <p><strong>摘要：</strong> 本文记录了在 macOS（Apple Silicon）环境下，wezterm 新标签页启动 nushell 后无法找到 <code>cargo</code> 命令的排查与修复过程。核心坑点包括 nushell 不自动 source <code>~/.cargo/env</code>、默认配置目录不是 <code>~/.config/nushell/</code> 以及字符串插值语法差异。</p>
 <h2 id="1-症状"><a class="header" href="#1-症状">1. 症状</a></h2>
 <p>在 wezterm 新开的 nushell 标签页里直接跑 <code>cargo run</code>：</p>
 <pre><code>~/Documents/Code.localized/ra2md&gt; cargo run

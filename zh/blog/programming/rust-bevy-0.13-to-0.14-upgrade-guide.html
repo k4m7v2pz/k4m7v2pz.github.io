@@ -35,7 +35,7 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-deb0f1a3.js";
+            window.path_to_searchindex_js = "../../searchindex-c7c316a0.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../../toc-822b419f.js"></script>
@@ -180,13 +180,7 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <hr>
-<h2 id="title-rust-bevy-013-到-014-升级踩坑指南-date-2026-07-08-tags-bevy-rust-game-development-upgrade-migration-macos-description-记录将-bevy-013-的-2d-像素游戏升级到-014-版本的全过程踩坑记录包括-state-api-抽离几何图元迁移color-访问变更等破坏性变更的详细解法-categories-programming"><a class="header" href="#title-rust-bevy-013-到-014-升级踩坑指南-date-2026-07-08-tags-bevy-rust-game-development-upgrade-migration-macos-description-记录将-bevy-013-的-2d-像素游戏升级到-014-版本的全过程踩坑记录包括-state-api-抽离几何图元迁移color-访问变更等破坏性变更的详细解法-categories-programming">title: Rust Bevy 0.13 到 0.14 升级踩坑指南
-date: 2026-07-08
-tags: [bevy, rust, game-development, upgrade-migration, macOS]
-description: 记录将 Bevy 0.13 的 2D 像素游戏升级到 0.14 版本的全过程踩坑记录，包括 State API 抽离、几何图元迁移、Color 访问变更等破坏性变更的详细解法
-categories: programming</a></h2>
-<blockquote>
+                        <blockquote>
 <p>本文记录将一个 Bevy 0.13 的 2D 像素游戏升级到 0.14 版本的全过程踩坑记录。0.14 是作者在 macOS 上运行最稳定的版本（更高版本会出现黑屏问题），因此锁定此版本。升级后，还顺手将项目中从 Python 迁移过来的两个模块（调试控制台和剧本系统）进行了补充。</p>
 </blockquote>
 <h2 id="一为什么是-014"><a class="header" href="#一为什么是-014">一、为什么是 0.14</a></h2>

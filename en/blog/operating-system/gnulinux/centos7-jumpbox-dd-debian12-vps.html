@@ -35,7 +35,7 @@
             const path_to_root = "../../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../../searchindex-4f9e0874.js";
+            window.path_to_searchindex_js = "../../../searchindex-ae5f0cbd.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../../../toc-95a8ccf1.js"></script>
@@ -180,13 +180,7 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <hr>
-<h2 id="title-dd-install-debian-12-on-a-cheap-vps-using-centos-7-as-a-jump-box-date-2026-07-05-tags-linux-centos-debian-vps-dd-reinstall-glibc-description-a-step-by-step-guide-to-dd-reinstalling-debian-12-on-a-cheap-duokaiyun-kvm-vps-using-centos-7-as-a-jump-box-solving-the-glibc-version-incompatibility-issue-categories-os"><a class="header" href="#title-dd-install-debian-12-on-a-cheap-vps-using-centos-7-as-a-jump-box-date-2026-07-05-tags-linux-centos-debian-vps-dd-reinstall-glibc-description-a-step-by-step-guide-to-dd-reinstalling-debian-12-on-a-cheap-duokaiyun-kvm-vps-using-centos-7-as-a-jump-box-solving-the-glibc-version-incompatibility-issue-categories-os">title: DD Install Debian 12 on a Cheap VPS Using CentOS 7 as a Jump Box
-date: 2026-07-05
-tags: [linux, centos, debian, vps, dd, reinstall, glibc]
-description: A step-by-step guide to DD reinstalling Debian 12 on a cheap Duokaiyun KVM VPS using CentOS 7 as a jump box, solving the glibc version incompatibility issue
-categories: os</a></h2>
-<h2 id="1-why-bother-with-this-10-buck-box"><a class="header" href="#1-why-bother-with-this-10-buck-box">1. Why Bother With This “10-Buck Box”?</a></h2>
+                        <h2 id="1-why-bother-with-this-10-buck-box"><a class="header" href="#1-why-bother-with-this-10-buck-box">1. Why Bother With This “10-Buck Box”?</a></h2>
 <p>Pure curiosity and the itch to tinker. When I saw a <strong>Duokaiyun</strong> VPS for 10 RMB/month, my first thought was to run a <strong>Trae Agent</strong> or an <strong>OpenCode</strong> terminal-based tool on it.</p>
 <p>But right after connecting, I hit a wall. The root cause: <strong><code>glibc</code> version incompatibility</strong>. Modern toolchains require <code>glibc</code> &gt;= 2.28, but the provider’s default image was good old <strong>CentOS 7</strong> (shipping <code>glibc 2.17</code>).</p>
 <p>Asking support for a Debian or Ubuntu 20.04+ image? Not happening — cheap VPS image libraries only have a few ancient options. No help from the provider → DIY time! Since I couldn’t directly replace the OS, I used CentOS 7 as a jump box and applied the <strong>DD reinstall method</strong> to flash the system to modern <strong>Debian 12</strong>.</p>
