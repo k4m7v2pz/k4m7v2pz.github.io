@@ -85,7 +85,8 @@ plugins:
                     - LLM 静默部署 EXE: zh/blog/operating-system/windows/llm-deploy-silent-7zip-sfx.md
                     - 设置 Zed 为 bat 编辑器: zh/blog/operating-system/windows/set-zed-as-bat-editor.md
             - 工具: zh/blog/tools/
-            - 游戏: zh/blog/games/
+            - 游戏:
+                - Mighty Rodent Splash 黑屏踩坑记录: zh/blog/games/mighty-rodent-splash-black-screen-debug.md
             - 关于: zh/about.md
         - locale: en
           name: English
@@ -104,5 +105,6 @@ plugins:
                     - LLM Silent EXE Deployment: en/blog/operating-system/windows/llm-deploy-silent-7zip-sfx.md
                     - Set Zed as bat Editor: en/blog/operating-system/windows/set-zed-as-bat-editor.md
             - Tools: en/blog/tools/
-            - Games: en/blog/games/
+            - Games:
+                - Debugging Black Screen on Mighty Rodent Splash Screen: en/blog/games/mighty-rodent-splash-black-screen-debug.md
             - About: en/about.md
