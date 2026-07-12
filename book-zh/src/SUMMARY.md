@@ -27,3 +27,6 @@
 
 # 游戏
 - [Mighty Rodent Splash 黑屏踩坑记录](blog/games/mighty-rodent-splash-black-screen-debug.md)
+
+# Suno AI
+- [红警 2 黄色警戒 主菜单音乐 Suno AI 风格提示词](blog/sunoai/yellow-alert-suno-style-prompt.md)

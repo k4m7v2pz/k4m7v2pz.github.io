@@ -27,3 +27,6 @@
 
 # Games
 - [Debugging Black Screen on Mighty Rodent Splash Screen](blog/games/mighty-rodent-splash-black-screen-debug.md)
+
+# Suno AI
+- [Red Alert 2 Yellow Alert Main Menu Music — Suno AI Style Prompt](blog/sunoai/yellow-alert-suno-style-prompt.md)

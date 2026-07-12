@@ -92,6 +92,8 @@ plugins:
                 - Rust Bevy 0.13 到 0.14 升级踩坑指南: zh/blog/programming/rust-bevy-0.13-to-0.14-upgrade-guide.md
             - 游戏:
                 - Mighty Rodent Splash 黑屏踩坑记录: zh/blog/games/mighty-rodent-splash-black-screen-debug.md
+            - Suno AI:
+                - 红警 2 黄色警戒 主菜单音乐 Suno AI 风格提示词: zh/blog/sunoai/yellow-alert-suno-style-prompt.md
             - 关于: zh/about.md
         - locale: en
           name: English
@@ -117,4 +119,6 @@ plugins:
                 - Rust Bevy 0.13 to 0.14 Upgrade Guide: en/blog/programming/rust-bevy-0.13-to-0.14-upgrade-guide.md
             - Games:
                 - Debugging Black Screen on Mighty Rodent Splash Screen: en/blog/games/mighty-rodent-splash-black-screen-debug.md
+            - Suno AI:
+                - Red Alert 2 Yellow Alert Main Menu Music — Suno AI Style Prompt: en/blog/sunoai/yellow-alert-suno-style-prompt.md
             - About: en/about.md
