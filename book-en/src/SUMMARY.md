@@ -21,6 +21,7 @@
 - [LLM Silent EXE Deployment](blog/operating-system/windows/llm-deploy-silent-7zip-sfx.md)
 - [Set Zed as bat Editor](blog/operating-system/windows/set-zed-as-bat-editor.md)
 - [Windows Terminal Ultimate Overhaul](blog/operating-system/windows/windows-terminal-overhaul.md)
+- [Remote Management of Windows 10 LTSB in Restricted Networks](blog/operating-system/windows/windows-ltsb-winrm-remote-management.md)
 - [Install Nushell via Scoop on Windows](blog/operating-system/windows/scoop-install-nushell-windows.md)
 - [System Management Scripts Archive](blog/operating-system/windows/system-management-scripts.md)
 

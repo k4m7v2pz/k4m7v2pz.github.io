@@ -21,6 +21,7 @@
 - [LLM 静默部署 EXE](blog/operating-system/windows/llm-deploy-silent-7zip-sfx.md)
 - [设置 Zed 为 bat 编辑器](blog/operating-system/windows/set-zed-as-bat-editor.md)
 - [Windows 终端环境终极改造](blog/operating-system/windows/windows-terminal-overhaul.md)
+- [受限网络下 Windows 10 LTSB 远程管理踩坑实录](blog/operating-system/windows/windows-ltsb-winrm-remote-management.md)
 - [Windows 下通过 Scoop 安装 Nushell](blog/operating-system/windows/scoop-install-nushell-windows.md)
 - [System Management 核心脚本存档](blog/operating-system/windows/system-management-scripts.md)
 
