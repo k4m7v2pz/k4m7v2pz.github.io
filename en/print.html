@@ -36,10 +36,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-13bd17c5.js";
+            window.path_to_searchindex_js = "searchindex-add949fb.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-6090cd47.js"></script>
+        <script src="toc-b27714e6.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -1018,6 +1018,188 @@ C:\Program Files\Git\usr\bin\
 <p>Set to RemoteSigned to load your profile:</p>
 <pre><code class="language-powershell">Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 </code></pre>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="remote-management-of-windows-10-ltsb-in-restricted-networks-when-openssh-fails-winrm-to-the-rescue"><a class="header" href="#remote-management-of-windows-10-ltsb-in-restricted-networks-when-openssh-fails-winrm-to-the-rescue">Remote Management of Windows 10 LTSB in Restricted Networks: When OpenSSH Fails, WinRM to the Rescue</a></h1>
+<h2 id="1-scenario--constraints"><a class="header" href="#1-scenario--constraints">1. Scenario &amp; Constraints</a></h2>
+<p>A Windows 10 Enterprise 2016 LTSB (Build 14393) instance deployed in the cloud as a QEMU/KVM VM, with a static internal IP of <code>10.178.16.44</code>. The platform has port forwarding configured:</p>
+<pre><code>Public &lt;public-ip&gt;:&lt;nat-port&gt;  →  Internal 10.178.16.44:22
+</code></pre>
+<p><strong>Hard constraints</strong> (dictating every technical decision):</p>
+<ol>
+<li><strong>No third-party proxy/tunnel software allowed</strong>: Tailscale / ZeroTier / frp / nps / WireGuard are all forbidden — violation leads to account suspension</li>
+<li><strong>Restricted outbound access</strong>: The machine can reach very few resources; GitHub, 7-zip.org, SourceForge, and other mainstream download sources are all unreachable</li>
+<li><strong>Unstable RDP file transfer</strong>: Transfers &gt;1MB frequently fail with “Internal Error”, only suitable for text/small files of a few hundred KB</li>
+<li><strong>Aged system</strong>: LTSB 14393 has many optional components stripped by the vendor (no Telnet Server, no OpenSSH Capability)</li>
+<li><strong>Workstation environment</strong>: macOS with nushell + uv — prefer a “just paste” workflow with minimal global dependencies</li>
+</ol>
+<p>Goal: Enable the Mac to connect to Windows and execute PowerShell commands directly, as easily as <code>ssh win10</code>.</p>
+<hr>
+<h2 id="2-failed-attempts"><a class="header" href="#2-failed-attempts">2. Failed Attempts</a></h2>
+<h3 id="-attempt-1-windows-native-openssh-server"><a class="header" href="#-attempt-1-windows-native-openssh-server">❌ Attempt 1: Windows Native OpenSSH Server</a></h3>
+<p>LTSB 14393’s <code>Get-WindowsCapability</code> has no <code>OpenSSH.Server</code> entry at all, and DISM cannot find the corresponding capability. The only option was manual ZIP/MSI download.</p>
+<p><strong>Mirror attempts within China</strong>:</p>
+<ul>
+<li><code>cyberlite.com.cn</code> MSI → 404</li>
+<li><code>cnblogs.com</code> <code>OpenSSH-Win64.7z</code> → <strong>Downloaded successfully (5MB)</strong></li>
+<li>GitHub official ZIP → Connection timed out</li>
+</ul>
+<p><strong>Dead end</strong>: <code>.7z</code> requires 7-Zip to extract, but the system doesn’t have 7-Zip installed, and the 7-Zip website as well as all major mirror sites (Alibaba Cloud, Huawei Cloud, Tencent Cloud) are <strong>all unreachable</strong>. Windows 10 LTSB 14393 also <strong>does not have <code>tar.exe</code></strong> (it was added in 1803).</p>
+<blockquote>
+<p>⚠️ <strong>Gotcha 1</strong>: In a closed environment, “download an extraction tool” — a one-minute task in a normal environment — becomes an infinite loop: extraction needs a tool, the tool needs network access, and the network is blocked.</p>
+</blockquote>
+<h3 id="-attempt-2-windows-native-telnet-server"><a class="header" href="#-attempt-2-windows-native-telnet-server">❌ Attempt 2: Windows Native Telnet Server</a></h3>
+<p>DISM enable <code>TelnetServer</code> feature → <strong>Feature does not exist</strong>. The Windows 10 series only has Telnet <strong>Client</strong>; the Server component has been completely removed.</p>
+<h3 id="-attempt-3-breaking-the-deadlock-by-transferring-files"><a class="header" href="#-attempt-3-breaking-the-deadlock-by-transferring-files">❌ Attempt 3: Breaking the Deadlock by Transferring Files</a></h3>
+<p>Transferring <code>7za.exe</code> or other files from the Mac would break the “just paste” workflow and violates the principle of “no extra files provided to the old system”. This path was a dead end.</p>
+<hr>
+<h2 id="3-winrm-the-native-lifeline"><a class="header" href="#3-winrm-the-native-lifeline">3. WinRM: The Native Lifeline</a></h2>
+<p>The turning point: <strong>WinRM (WS-Management) is a native Windows component, included in LTSB 14393, disabled by default but requiring no downloads whatsoever</strong>.</p>
+<p>Key insight:</p>
+<ul>
+<li>WinRM listens on port 5985 by default, but we can <strong>change the listening port to 22</strong>, perfectly reusing the existing NAT mapping <code>&lt;nat-port&gt;→22</code></li>
+<li>Enabling it requires only PowerShell commands — no network downloads needed</li>
+<li>On the Mac side, connect via Python <code>pywinrm</code> with <code>uv run --with pywinrm</code> for a temporary environment, leaving no global footprint</li>
+</ul>
+<h3 id="31-windows-side-enablement-script-plain-ascii-to-avoid-powershell-51-encoding-issues"><a class="header" href="#31-windows-side-enablement-script-plain-ascii-to-avoid-powershell-51-encoding-issues">3.1 Windows-Side Enablement Script (Plain ASCII to Avoid PowerShell 5.1 Encoding Issues)</a></h3>
+<pre><code class="language-powershell"># Requires -RunAsAdministrator
+
+# 1. Start WinRM service and set to auto-start
+sc config winrm start= auto
+net start winrm
+
+# 2. Delete the default 5985 listener and create one on port 22
+winrm delete winrm/config/listener?Address=*+Transport=HTTP
+winrm create winrm/config/listener?Address=*+Transport=HTTP `@Port=22
+
+# 3. Allow Basic authentication (for Mac client compatibility)
+winrm set winrm/config/service/auth `@Basic="true"
+winrm set winrm/config/service `@AllowUnencrypted="true"
+winrm set winrm/config/client `@TrustedHosts="*"
+
+# 4. Open port 22 in the firewall
+New-NetFirewallRule -Name "WinRM-Server-In-TCP" `
+    -DisplayName "WinRM Server" `
+    -Direction Inbound -Protocol TCP `
+    -LocalPort 22 -Action Allow -Profile Any
+
+# 5. Disable UAC remote restrictions (allow local admin remote login)
+$reg = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System"
+New-ItemProperty -Path $reg -Name "LocalAccountTokenFilterPolicy" `
+    -Value 1 -PropertyType DWord -Force
+</code></pre>
+<blockquote>
+<p>💡 <strong>Gotcha 2</strong>: In PowerShell, the <code>@{...}</code> syntax in <code>winrm set</code> commands must be written as <code>`@{...}</code> (backtick-escaped); otherwise PowerShell treats <code>@</code> as the array operator and throws a syntax error. This is the most common pitfall in WinRM configuration scripts.</p>
+</blockquote>
+<blockquote>
+<p>⚠️ <strong>Gotcha 3</strong>: If the network profile is detected as Public (LTSB default), <code>winrm quickconfig</code> will fail: “WinRM firewall exception will not run because one of the network connection types on this computer is set to Public.” You must either switch to a private network with <code>Set-NetConnectionProfile -NetworkCategory Private</code> or bypass it by creating the firewall rule manually as shown above.</p>
+</blockquote>
+<h3 id="32-verify-on-windows-side"><a class="header" href="#32-verify-on-windows-side">3.2 Verify on Windows Side</a></h3>
+<pre><code class="language-powershell">Get-Service winrm          # Should show Running, Automatic
+Get-NetTCPConnection -LocalPort 22   # Should show LISTENING
+winrm enumerate winrm/config/listener  # Should show Port=22 HTTP listener
+</code></pre>
+<h3 id="33-mac-side-connection-uv--pywinrm-zero-global-installation"><a class="header" href="#33-mac-side-connection-uv--pywinrm-zero-global-installation">3.3 Mac-Side Connection (uv + pywinrm, Zero Global Installation)</a></h3>
+<pre><code class="language-bash">uv run --with pywinrm python -c '
+import winrm
+s = winrm.Session("http://&lt;public-ip&gt;:&lt;nat-port&gt;",
+                  auth=("Administrator", "your_password"))
+print(s.run_cmd("powershell Get-Service winrm").std_out.decode())
+'
+</code></pre>
+<p><strong>Output</strong>:</p>
+<pre><code>Status   Name               DisplayName
+------   ----               -----------
+Running  winrm              Windows Remote Management (WS-Manag...
+</code></pre>
+<p>✅ <strong>Full chain is working</strong>.</p>
+<h3 id="34-interactive-powershell-closest-to-the-ssh-experience"><a class="header" href="#34-interactive-powershell-closest-to-the-ssh-experience">3.4 Interactive PowerShell (Closest to the SSH Experience)</a></h3>
+<p>Save as <code>winrm_sh.py</code>:</p>
+<pre><code class="language-python">#!/usr/bin/env python3
+"""Use uv to temporarily load pywinrm and enter an interactive shell"""
+
+import winrm
+import sys
+
+s = winrm.Session("http://&lt;public-ip&gt;:&lt;nat-port&gt;",
+                  auth=("Administrator", "your_password"))
+print("Connected to Windows via WinRM. Type exit to quit.")
+
+def decode(b):
+    if not b:
+        return ""
+    for enc in ("utf-8", "gbk", "latin-1"):
+        try:
+            return b.decode(enc)
+        except Exception:
+            continue
+    return b.decode("utf-8", errors="replace")
+
+while True:
+    try:
+        cmd = input("PS&gt; ")
+        if cmd.lower() == "exit":
+            break
+        r = s.run_cmd(f"powershell -Command \"{cmd}\"")
+        if r.std_out:
+            print(decode(r.std_out).rstrip())
+        if r.std_err:
+            print(decode(r.std_err).rstrip(), file=sys.stderr)
+    except KeyboardInterrupt:
+        break
+    except Exception as e:
+        print(f"Error: {e}")
+</code></pre>
+<p>Run it: <code>uv run --with pywinrm python winrm_sh.py</code></p>
+<blockquote>
+<p>💡 <strong>Gotcha 4</strong>: The pywinrm Response object’s error attribute is <code>std_err</code> (with underscore), not <code>stderr</code>. Also, Chinese output from Windows uses GBK encoding — you must attempt decoding in GBK→UTF-8 order, otherwise Chinese characters become <code>?</code>.</p>
+</blockquote>
+<hr>
+<h2 id="4-complete-gotcha-summary"><a class="header" href="#4-complete-gotcha-summary">4. Complete Gotcha Summary</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>#</th><th>Symptom</th><th>Root Cause</th><th>Solution</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td>Can’t extract OpenSSH.7z</td><td>Outbound network fully blocked, only cnblogs reachable</td><td>Abandon OpenSSH, use native WinRM</td></tr>
+<tr><td>2</td><td><code>winrm set</code> throws syntax error</td><td>PowerShell interprets <code>@{</code> as array operator</td><td>Backtick-escape: <code>`@{</code></td></tr>
+<tr><td>3</td><td>WinRM firewall rule doesn’t apply</td><td>Network profile is Public</td><td>Create rule manually with <code>New-NetFirewallRule</code></td></tr>
+<tr><td>4</td><td>Chinese output shows as <code>?</code></td><td>Windows uses GBK, Python defaults to UTF-8</td><td>Decode in <code>utf-8→gbk→latin-1</code> order</td></tr>
+<tr><td>5</td><td><code>response.stderr</code> attribute error</td><td>pywinrm API uses <code>std_err</code></td><td>Use <code>r.std_err</code> instead</td></tr>
+<tr><td>6</td><td>Telnet Server doesn’t exist</td><td>Win10 series removed this component</td><td>Use WinRM instead</td></tr>
+<tr><td>7</td><td><code>tar.exe</code> not found</td><td>Command added in 1803</td><td>Skip tar, use WinRM directly</td></tr>
+<tr><td>8</td><td><code>pip3 install</code> rejected</td><td>macOS PEP 668 externally managed environment</td><td>Use <code>uv run --with pywinrm</code> temporary environment</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="5-why-winrm-is-the-optimal-solution-for-this-scenario"><a class="header" href="#5-why-winrm-is-the-optimal-solution-for-this-scenario">5. Why WinRM Is the Optimal Solution for This Scenario</a></h2>
+<ol>
+<li><strong>Compliance</strong>: WinRM is a native Windows management component — not a “proxy/tunnel” tool — and won’t trigger platform risk controls</li>
+<li><strong>Zero file transfer</strong>: Enabled purely via PowerShell commands, no files need to be transferred from the Mac</li>
+<li><strong>Reuses existing NAT</strong>: Change the listening port to 22, directly leveraging the platform’s configured <code>&lt;nat-port&gt;→22</code> mapping</li>
+<li><strong>Zero pollution on Mac</strong>: <code>uv run --with pywinrm</code> creates a temporary isolated environment without touching global site-packages</li>
+<li><strong>Full PowerShell experience</strong>: Execute PS 5.1 cmdlets remotely with capabilities equivalent to local access</li>
+<li><strong>Stability</strong>: System service-level component, auto-starts on reboot</li>
+</ol>
+<hr>
+<h2 id="6-security-recommendations"><a class="header" href="#6-security-recommendations">6. Security Recommendations</a></h2>
+<blockquote>
+<p>⚠️ The current configuration prioritizes quick connectivity — <strong>Basic authentication and unencrypted traffic are enabled</strong>. For production environments:</p>
+<ol>
+<li>On Windows, use <code>winrm set</code> to disable <code>AllowUnencrypted</code> and configure an HTTPS listener with a self-signed certificate</li>
+<li>Narrow the firewall rule’s <code>RemoteAddress</code> to the Mac’s subnet</li>
+<li>Rotate the Administrator password regularly</li>
+<li>Stop the service when not in use: <code>Stop-Service winrm</code></li>
+</ol>
+</blockquote>
+<hr>
+<h2 id="7-conclusion"><a class="header" href="#7-conclusion">7. Conclusion</a></h2>
+<p>When managing remote systems in a restricted network environment, <strong>the biggest mindset shift is: let go of the obsession with “downloading a better tool” and return to the system’s native capabilities</strong>. OpenSSH is great, but in this environment it simply couldn’t be installed; Telnet is old, but the component has been removed; only WinRM, a standard component since Windows Vista, sits quietly waiting to be enabled.</p>
+<p>Paired with <code>uv</code> — the modern Python package manager on macOS — the “temporarily pull dependencies, execute, and clean up” model perfectly balances <strong>capability</strong> and <strong>tidiness</strong>. From Windows enablement to Mac connection, the entire solution <strong>transferred zero files, installed zero global packages, and touched zero third-party proxy software</strong> — this is the proper technical posture for a restricted network.</p>
+<blockquote>
+<p>📌 Applicable scenarios: Windows 7/8/10/11 all series (WinRM native support), environments where third-party networking software is prohibited, isolated networks with restricted outbound access, and any situation requiring remote management through existing port mappings.</p>
+</blockquote>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="installing-nushell-on-windows-via-scoop-complete-guide"><a class="header" href="#installing-nushell-on-windows-via-scoop-complete-guide">Installing Nushell on Windows via Scoop: Complete Guide</a></h1>
 <h2 id="1-environment-baseline"><a class="header" href="#1-environment-baseline">1. Environment Baseline</a></h2>
