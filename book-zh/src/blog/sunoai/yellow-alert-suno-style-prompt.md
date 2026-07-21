@@ -21,6 +21,12 @@ Dance-pop at 124 BPM with a tight four-on-the-floor kick and smooth, steady club
 - **适用场景**：游戏主菜单、界面背景音乐
 - **AI 工具**：Suno AI（v4.5-all，免费模型），填入 Style Prompt 或类似字段
 
+## 许可说明
+
+> ⚠️ **Suno AI 非商用授权提醒**
+>
+> 本仓库中由 Suno AI 生成的音乐内容受 Suno AI 许可协议约束，**仅限非商用用途**。请勿将生成的音乐文件用于商业场景（包括但不限于商业化游戏发布、商业广告、付费订阅内容等）。具体许可条款以 Suno AI 官方许可协议为准。
+
 ---
 
 Co-Authored-By: AtomCode (deepseek-v4-flash) <noreply@atomgit.com>

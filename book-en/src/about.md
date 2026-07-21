@@ -1,100 +1,65 @@
-
 # About
 
-## Passion & Resources
+## Background
 
-I'll be honest — I don't have much money.
-No racks of x86 motherboards, no collection of mini PCs,
-no multiple broadband lines, no cloud server cluster on standby.
+- **Independent developer**, focused on operating systems, low-level logic, programming language toolchains, and game development.
+- Primarily develops on a single machine with limited hardware.
+- Content targets three reader types: human developers, conversational AI (Tencent Yuanbao, Doubao, etc.), and code agents (Copilot, Trae, AtomCode, etc.).
 
-But that doesn't stop me from loving this stuff —
-operating systems, programs, low-level logic, code that actually runs.
-So I often, or rather always, spend my time debugging or writing something new.
-I do what I can with what I have — one computer, one working logic at a time.
+## Open Source Position
 
-The reality often looks different:
-People rent servers that sit idle, wasting away.
-People just want to feel what it's like to "own an internet service" but have nothing to host.
-There's hardware everywhere — big and small computers, fiber broadband from various ISPs — all gathering dust.
+- Code, assets, and tools do not generate direct income; therefore no paid subscriptions or API purchases are made for them.
+- Open source content is freely available for cloning, compiling, deploying, and modifying — no reporting or payment required.
+- Idle hardware resources are encouraged to be used for running open source projects.
 
-**That's the beauty of open source.**
+## Code Hosting Platforms
 
-I love my programs.
-If you have idle resources sitting around,
-take my code, compile it, run it, throw it on a server and play with it.
-No need to report back, no need to pay me.
-**Let the code run on the hardware that needs it.**
+### Primary: AtomGit (GitCode)
 
-## On Spending Money & Why Open Source
+| Item | Description |
+|------|-------------|
+| URL | https://gitcode.com/k4m7v2pz |
+| Features | Generous storage and LFS quotas (free 2GB LFS, 30GB repo storage) |
+| Use | Game projects with assets are first-published here |
 
-> **Not paying for hype, not overdrawing on sentiment.**
->
-> The current subscription model and platform tax are essentially **a tax on time**, not on value.
-> I choose to walk half a step behind: freeload when I can, procrastinate when I can.
-> I know they'll drop prices — even go free — after fierce competition.
-> I just don't want to pay the premium for "having it now."
+### Mirror: Gitee
 
----
+| Item | Description |
+|------|-------------|
+| URL | https://gitee.com/k4m7v2pz |
+| Features | Domestic platform, fast access in mainland China |
+| Use | Existing projects mirrored here; no new projects created on this platform |
 
-**More importantly: I don't make money from open source.**
+### Mirror: GitHub
 
-Since these code, assets, and tools are never going to be monetized,
-I will never spend money on them.
-**No memberships, no API credits, no SaaS subscriptions.**
-Open source should survive the open-source way — not by individuals subsidizing platforms.
+| Item | Description |
+|------|-------------|
+| URL | https://github.com/k4m7v2pz |
+| Features | Global mainstream platform, requires proxy for access |
+| Use | Accessing others' repos or Releases; periodic batch mirroring |
 
----
+## Multi-Platform Publishing Strategy
 
-### So why do I still love open source?
+Content is published across multiple platforms, each serving a distinct role:
 
-Not because it brings me fame or fortune —
-those are at best byproducts.
-
-Even if I end up broke one day, open source will still give back to open source:
-
-- You can freely pull the source code
-- You can grab binaries from Releases or package managers
-- **You can read it, modify it, share it**
-
-That's the whole point of open source:
-**It doesn't need to charge you, and it doesn't need to prove itself worthy.**
-
-## My Code Hosting Platforms (by priority)
-
-### 🥇 GitCode (Primary)
-
-- URL: https://gitcode.com/k4m7v2pz
-- Features:
-  - Generous file storage and LFS quotas (free 2GB LFS, 30GB repo storage)
-  - Game projects with assets are first-published here
-
-### 🥈 Gitee (Backup)
-
-- URL: https://gitee.com/k4m7v2pz
-- Features:
-  - Domestic platform, Chinese UI, fast access in mainland China
-  - Public repos are subject to review, not the primary platform for new projects
-  - Existing projects are kept as mirrors
-
-### 🥉 GitHub (Special Cases)
-
-- URL: https://github.com/k4m7v2pz
-- Features:
-  - Slower access or requires proxy, but the global mainstream platform
-  - Only preferred when accessing others' repos or Releases
-  - Less familiar with maintaining repos in English UI, but comfortable with English when using others' projects
-  - Created repos comply with mainland Chinese law as much as possible; starred repos may not
-  - Periodic pushes (not every minor change pushed immediately)
-  - May develop in GitCode private repos first, then batch-mirror results to GitHub
+| Platform | Role | Description |
+|----------|------|-------------|
+| CSDN | Search entry point | Leverages CSDN's strong SEO / GEO (Generative Engine Optimization) so conversational AI (Tencent Yuanbao, Doubao, etc.) and search engines can index the articles — providing direct answers in AI reasoning chains and reducing unnecessary detours. |
+| GitHub Pages | Clean archive | Ad-free, no login wall, no paywall, no keyword censorship. Serves as a backup for CSDN content, avoiding future paywalls, page ads, or censorship that could make content inaccessible on CSDN. |
+| AtomGit / Gitee / GitHub | Code hosting | Primary and mirror platforms for code repositories. See the "Code Hosting Platforms" section for details. |
 
 ## Sync Strategy
 
-- Each project has one primary platform where it's first published
-- Other platforms are manually synced via HTTPS as mirrors
-- **Don't put all eggs in one basket!**
+- Each project has one primary platform where it is first published.
+- Other platforms are manually synced via HTTPS as mirrors.
+- Real-time sync across all platforms is not guaranteed.
 
----
+## Blog Language
 
-## About Blog Language
+- Chinese is the primary writing language. English versions are optimized for AI search indexing (GEO).
 
-The author primarily writes in Chinese. The English version is optimized for AI search indexing (GEO).
+## License Notes
+
+- Code in this repository follows the `LICENSE` file (UNLICENSE / CC0) declaration.
+- Referenced/republished content is attributed to the original author.
+- Music generated with Suno AI is subject to the Suno AI license agreement — **non-commercial use only**. Do not use for commercial purposes.
