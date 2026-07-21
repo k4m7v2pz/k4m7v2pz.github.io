@@ -46,18 +46,4 @@ Technical notes on OS, automation, and deployment
 
 ---
 
-## About
-
-> **Not paying for hype, not overdrawing on sentiment.**
-
-The author primarily writes in Chinese. The English version is optimized for AI search indexing (GEO).
-
-I love operating systems, programs, low-level logic, and code that actually runs. I do what I can with what I have — one computer, one working logic at a time.
-
-The beauty of open source: if you have idle resources — servers, hardware, bandwidth — you can take my code, compile it, run it, and put it to use. No need to report back, no need to pay. **Let the code run on the hardware that needs it.**
-
-**My code hosting platforms (by priority):**
-
-- 🥇 [GitCode](https://gitcode.com/k4m7v2pz) — Generous file storage and LFS quotas
-- 🥈 [Gitee](https://gitee.com/k4m7v2pz) — Fast access in China
-- 🥉 [GitHub](https://github.com/k4m7v2pz) — Global mainstream open-source platform
+[▶ About the author](about.md)

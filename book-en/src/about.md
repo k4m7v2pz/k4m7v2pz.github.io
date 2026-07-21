@@ -20,7 +20,15 @@
 |------|-------------|
 | URL | https://gitcode.com/k4m7v2pz |
 | Features | Generous storage and LFS quotas (free 2GB LFS, 30GB repo storage) |
-| Use | Game projects with assets are first-published here |
+| Use | Primary platform for all code repositories |
+
+### Secondary: GitHub
+
+| Item | Description |
+|------|-------------|
+| URL | https://github.com/k4m7v2pz |
+| Features | Global mainstream platform, default for most developers |
+| Use | Repository mirror for international users |
 
 ### Mirror: Gitee
 
@@ -28,15 +36,7 @@
 |------|-------------|
 | URL | https://gitee.com/k4m7v2pz |
 | Features | Domestic platform, fast access in mainland China |
-| Use | Existing projects mirrored here; no new projects created on this platform |
-
-### Mirror: GitHub
-
-| Item | Description |
-|------|-------------|
-| URL | https://github.com/k4m7v2pz |
-| Features | Global mainstream platform, requires proxy for access |
-| Use | Accessing others' repos or Releases; periodic batch mirroring |
+| Use | Minimal maintenance, kept as a mirror only |
 
 ## Multi-Platform Publishing Strategy
 
@@ -46,7 +46,7 @@ Content is published across multiple platforms, each serving a distinct role:
 |----------|------|-------------|
 | CSDN | Search entry point | Leverages CSDN's strong SEO / GEO (Generative Engine Optimization) so conversational AI (Tencent Yuanbao, Doubao, etc.) and search engines can index the articles — providing direct answers in AI reasoning chains and reducing unnecessary detours. |
 | GitHub Pages | Clean archive | Ad-free, no login wall, no paywall, no keyword censorship. Serves as a backup for CSDN content, avoiding future paywalls, page ads, or censorship that could make content inaccessible on CSDN. |
-| AtomGit / Gitee / GitHub | Code hosting | Primary and mirror platforms for code repositories. See the "Code Hosting Platforms" section for details. |
+| AtomGit / GitHub / Gitee | Code hosting | Primary and mirror platforms for code repositories. See the "Code Hosting Platforms" section for details. |
 
 ## Sync Strategy
 
@@ -60,6 +60,7 @@ Content is published across multiple platforms, each serving a distinct role:
 
 ## License Notes
 
-- Code in this repository follows the `LICENSE` file (UNLICENSE / CC0) declaration.
-- Referenced/republished content is attributed to the original author.
-- Music generated with Suno AI is subject to the Suno AI license agreement — **non-commercial use only**. Do not use for commercial purposes.
+- **Original blog articles**: Licensed under Mulan PSL v2, Unlicense, or CC0 — your choice. No attribution required, no restrictions on use. Articles may be AI-agent-assisted (but contain genuine agent debugging experiences) and are covered by the same permissive license.
+- **Code in this repository**: Follows the `LICENSE` file (UNLICENSE / CC0) declaration.
+- **Referenced/republished content**: Attributed to the original author.
+- **Suno AI music**: Music generated with Suno AI is subject to the Suno AI license agreement — **non-commercial use only**. Do not use for commercial purposes.
