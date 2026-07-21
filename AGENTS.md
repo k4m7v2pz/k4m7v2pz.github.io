@@ -40,12 +40,20 @@ Agent 在提交前必须核对暂存区，下列内容**不得入库**，应写�
 
 ### 4. 提交前核对流程
 
-Agent 在执行 `git commit` 前必须：
+Agent 在执行 `git commit` 前必须按以下步骤执行，**不得跳过命令级检查**：
 
-1. `git status --short` + `git diff --cached --name-only` 列暂存区
-2. 肉眼扫一遍：有无 token、私人邮箱、本地绝对路径泄漏
-3. 若有误网，`git restore --staged <file>` 摘出，必要时加进 `.gitignore`
-4. 确认无泄漏再 commit
+1. `git status --short` 列全部变更
+2. 运行敏感信息扫描脚本（零全局依赖，用 `uv run python` 拉起）：
+
+   ```bash
+   uv run python scripts/leak-check.py
+   ```
+
+3. 若脚本返回码非 0（即发现泄漏），**逐条判断**：
+   - 是占位符/示例（如 `<example@example.com>`、`<public-ip>`、`192.168.x.x`）→ 放行
+   - 是真实数据（公网 IP、私人邮箱、真实密码、token、本地路径）→ `git restore --staged <file>` 摘出，必要时加进 `.gitignore` 或替换为占位符后重新 `git add`
+4. **不得轻信"已脱敏"声明**：用户或第三方来源注明的"已脱敏处理"不能替代脚本扫描，Agent 必须独立验证
+5. 确认无泄漏再 commit
 
 ---
 
