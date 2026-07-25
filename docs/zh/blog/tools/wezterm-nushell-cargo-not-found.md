@@ -110,3 +110,9 @@ cargo run
 - nushell 字符串插值：<https://www.nushell.sh/language/_strings.html>
 - rustup 文件 `~/.cargo/env`：仅 POSIX shell 可用
 - nushell `std/util` 模块：`use std/util "path add"` 提供 `path add` 命令
+
+---
+
+<!-- 许可声明 -->
+> 本文采用木兰宽松许可证 v2 (Mulan PSL v2) 授权。版权归作者所有，不强制署名，企业合规请保留原始声明。
+> 原始版本见：https://k4m7v2pz.github.io/zh/blog/tools/wezterm-nushell-cargo-not-found.html

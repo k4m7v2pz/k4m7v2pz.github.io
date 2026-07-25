@@ -125,3 +125,8 @@ env MY_VAR=hello ssh user@host
 3. **远程执行用单引号包裹**——单引号字符串在 NuShell 中不解析，原样传递给远端 Shell
 4. **使用 `bash -c` 兜底**——如果远程机器是 Linux 且远端 Shell 是 Bash，用 `bash -c "..."` 包裹远程命令
 5. **先确认 NuShell 版本**——不同版本的 NuShell 语法差异大，确认版本后再给出配置建议
+---
+
+<!-- 许可声明 -->
+> 本文采用木兰宽松许可证 v2 (Mulan PSL v2) 授权。版权归作者所有，不强制署名，企业合规请保留原始声明。
+> 原始版本见：https://k4m7v2pz.github.io/zh/blog/tools/nushell-ai-collaboration-pitfalls.html

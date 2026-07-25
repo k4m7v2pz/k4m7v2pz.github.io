@@ -49,3 +49,8 @@ Now `localhost:8000` on the Mac connects to the inference service inside the con
 - Remote Ascend NPU runs Qwen2.5-7B via SSH tunnel with OpenAI-compatible API
 - Any local Agent tool can use this remote API
 - Container expires? Re-apply — the NPU is free to refill
+
+---
+<!-- License Declaration -->
+> This article is licensed under Mulan PSL v2. Copyright reserved. No attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/programming/atomcode-ascend-npu-free-tier.html

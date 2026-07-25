@@ -58,3 +58,8 @@ echo $nu.config-path | path expand
 - `$nu.config-path` is the authoritative source for config file location
 - Cross-platform tools have different default paths on different OSes
 - Always verify the config path on first setup
+
+---
+<!-- License Declaration -->
+> This article is licensed under Mulan PSL v2. Copyright reserved. No attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/tools/macos-nushell-config-path-pitfall.html

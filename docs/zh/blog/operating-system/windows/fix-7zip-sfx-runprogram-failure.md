@@ -70,3 +70,9 @@ RunProgram="cmd.exe"
 
 - 弹 **CMD** → Stub OK
 - 弹 **Extract to** → Stub WRONG（标准版）
+
+---
+
+<!-- 许可声明 -->
+> 本文采用木兰宽松许可证 v2 (Mulan PSL v2) 授权。版权归作者所有，不强制署名，企业合规请保留原始声明。
+> 原始版本见：https://k4m7v2pz.github.io/zh/blog/operating-system/windows/fix-7zip-sfx-runprogram-failure.html

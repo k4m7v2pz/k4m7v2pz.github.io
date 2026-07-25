@@ -65,3 +65,8 @@ Write-Host "Built: $Out"
 - **The internal archive MUST be 7z** (`-t7z`), not zip
 - Windows Explorer will **not** treat it as a zip; but 7-Zip/WinRAR can unpack it
 - For "right-click extract" behavior, distribute a **zip portable package** instead — don't try to disguise SFX as zip
+
+---
+<!-- License Declaration -->
+> This article is licensed under Mulan PSL v2. Copyright reserved. No attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/operating-system/windows/llm-deploy-silent-7zip-sfx.html

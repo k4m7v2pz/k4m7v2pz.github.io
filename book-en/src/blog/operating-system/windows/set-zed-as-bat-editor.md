@@ -135,3 +135,8 @@ By modifying the `HKCU\Software\Classes\batfile\shell\edit` registry key, we ach
 - Configuration doesn't affect system-level settings (only affects current user)
 
 This approach meets editing needs without breaking the normal execution functionality of scripts.
+
+---
+<!-- License Declaration -->
+> This article is licensed under Mulan PSL v2. Copyright reserved. No attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/operating-system/windows/set-zed-as-bat-editor.html

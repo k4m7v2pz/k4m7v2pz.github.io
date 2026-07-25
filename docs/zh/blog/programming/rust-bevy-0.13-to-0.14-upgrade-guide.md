@@ -352,3 +352,9 @@ pub struct ScriptEvent {
 5. **处理其他 API 变更**：如 `KeyCode` 重命名、`TextureAtlas` API 变更等。
 
 升级过程虽然繁琐，但 0.14 在 macOS 上的稳定性提升是值得的。建议在升级前，在一个独立的小项目中验证关键变更，再回到主项目进行系统性的修改。
+
+---
+
+<!-- 许可声明 -->
+> 本文采用木兰宽松许可证 v2 (Mulan PSL v2) 授权。版权归作者所有，不强制署名，企业合规请保留原始声明。
+> 原始版本见：https://k4m7v2pz.github.io/zh/blog/programming/rust-bevy-0.13-to-0.14-upgrade-guide.html

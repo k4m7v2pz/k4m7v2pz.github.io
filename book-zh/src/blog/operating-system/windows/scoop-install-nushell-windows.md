@@ -107,3 +107,10 @@ nu --version
 ```
 
 如果一切正常，Nushell 就成功安装并可以通过 `nu` 命令启动了。
+
+
+---
+
+<!-- 许可声明 -->
+> 本文采用木兰宽松许可证 v2 (Mulan PSL v2) 授权。版权归作者所有，不强制署名，企业合规请保留原始声明。
+> 原始版本见：https://k4m7v2pz.github.io/zh/blog/operating-system/windows/scoop-install-nushell-windows.html

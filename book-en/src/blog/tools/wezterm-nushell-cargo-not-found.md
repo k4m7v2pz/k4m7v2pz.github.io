@@ -103,3 +103,8 @@ New WezTerm tabs work without manual sourcing.
 - Nushell string interpolation: <https://www.nushell.sh/language/_strings.html>
 - rustup file `~/.cargo/env`: POSIX shell only
 - Nushell `std/util` module: `use std/util "path add"` provides the `path add` command
+
+---
+<!-- License Declaration -->
+> This article is licensed under Mulan PSL v2. Copyright reserved. No attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/tools/wezterm-nushell-cargo-not-found.html

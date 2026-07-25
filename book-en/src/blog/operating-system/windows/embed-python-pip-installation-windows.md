@@ -87,3 +87,8 @@ This article introduces Chinese users how to use `python-embed` (embedded Python
 
 - **About dependency management**: If you need a more modern dependency management tool, consider [uv](https://github.com/astral-sh/uv), but note that uv is more suitable for open-source project development or production environment deployment, which may not fully align with this article's core idea of "easy distribution between different systems"
 - **Network requirements**: Installing dependencies may require access to overseas servers; configuring a proxy is recommended for better download speeds
+
+---
+<!-- License Declaration -->
+> This article is licensed under Mulan PSL v2. Copyright reserved. No attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/operating-system/windows/embed-python-pip-installation-windows.html

@@ -88,3 +88,8 @@ env MY_VAR=hello ssh user@host
 3. **Use single quotes for remote execution** — single-quoted strings are passed literally to the remote shell
 4. **Use `bash -c` as fallback** — if the remote machine runs Bash, wrap commands in `bash -c "..."` 
 5. **Check NuShell version first** — syntax varies significantly between versions
+
+---
+<!-- License Declaration -->
+> This article is licensed under Mulan PSL v2. Copyright reserved. No attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/tools/nushell-ai-collaboration-pitfalls.html

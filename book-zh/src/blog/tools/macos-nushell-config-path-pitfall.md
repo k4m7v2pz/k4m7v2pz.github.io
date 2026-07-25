@@ -81,3 +81,8 @@ echo $nu.config-path | path expand
 - 对 nushell 来说，`$nu.config-path` 是最权威的配置路径来源
 - `source` 命令只能"临时加载"，不能"永久改变默认读取路径"
 - 跨平台工具链（nushell 是跨平台的）在不同 OS 上的默认路径不同，第一次配置时需要确认
+---
+
+<!-- 许可声明 -->
+> 本文采用木兰宽松许可证 v2 (Mulan PSL v2) 授权。版权归作者所有，不强制署名，企业合规请保留原始声明。
+> 原始版本见：https://k4m7v2pz.github.io/zh/blog/tools/macos-nushell-config-path-pitfall.html

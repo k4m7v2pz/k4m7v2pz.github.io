@@ -160,3 +160,9 @@ $env.PROMPT_COMMAND_RIGHT = {|| "" }
 - 验证用 `nu -e`，别用 `nu -c`（后者不加载 `config.nu`）
 - PATH 相关的放 `env.nu`（无条件加载），不依赖外部 shell 的 `~/.zshrc`
 - 关 banner 的配置项是 `$env.config.show_banner`，注意被文件末尾默认值覆盖
+
+---
+
+<!-- 许可声明 -->
+> 本文采用木兰宽松许可证 v2 (Mulan PSL v2) 授权。版权归作者所有，不强制署名，企业合规请保留原始声明。
+> 原始版本见：https://k4m7v2pz.github.io/zh/blog/tools/nushell-atomcode-config-pitfalls.html

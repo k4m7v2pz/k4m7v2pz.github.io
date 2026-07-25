@@ -64,3 +64,8 @@ After rebooting, wait about 5-15 minutes, then try to connect via SSH. If you ca
 
 - If SSH doesn't connect, open the **VNC console** in the Duokaiyun dashboard to check progress. Network hiccups can interrupt the install — just reboot and let it continue.
 - After DD completes, the first order of business is to change the default password to ensure security.
+
+---
+<!-- License Declaration -->
+> This article is licensed under Mulan PSL v2. Copyright reserved. No attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/operating-system/gnulinux/centos7-jumpbox-dd-debian12-vps.html

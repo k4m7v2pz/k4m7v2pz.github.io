@@ -71,3 +71,9 @@ reboot
 
 - 如果 SSH 连不上，去多开云后台开 **VNC 控制台**查看进度，有时网络波动会导致安装中断，重启机器让它继续跑就行。
 - DD 完成后，第一件事就是修改默认密码，确保安全。
+
+---
+
+<!-- 许可声明 -->
+> 本文采用木兰宽松许可证 v2 (Mulan PSL v2) 授权。版权归作者所有，不强制署名，企业合规请保留原始声明。
+> 原始版本见：https://k4m7v2pz.github.io/zh/blog/operating-system/gnulinux/centos7-jumpbox-dd-debian12-vps.html

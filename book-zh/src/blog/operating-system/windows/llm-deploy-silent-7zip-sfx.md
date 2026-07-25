@@ -65,3 +65,10 @@ Write-Host "Built: $Out"
 - **内部归档必须是 7z**（`-t7z`），不是 zip
 - Windows Explorer **不会**把它当 zip；但 7-Zip/WinRAR 能解包
 - 想"原生可右击解压"就直接发 **zip 便携包**，别试图把 SFX 伪装成 zip
+
+
+---
+
+<!-- 许可声明 -->
+> 本文采用木兰宽松许可证 v2 (Mulan PSL v2) 授权。版权归作者所有，不强制署名，企业合规请保留原始声明。
+> 原始版本见：https://k4m7v2pz.github.io/zh/blog/operating-system/windows/llm-deploy-silent-7zip-sfx.html

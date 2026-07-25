@@ -209,3 +209,10 @@ while True:
 配合 Mac 上 `uv` 这个现代 Python 包管理器，"临时拉取依赖 + 执行 + 清理"的模式，完美兼顾了**能力**与**整洁**。整套方案从 Windows 启用到 Mac 连接，**没有传一个文件，没有装一个全局包，没有碰任何第三方代理软件**——这才是受限网络下该有的技术姿态。
 
 > 📌 适用场景：Windows 7/8/10/11 全系列（WinRM 原生支持）、禁止第三方组网软件的环境、外网受限的隔离网络、需要通过已有端口映射做远程管理的所有情况。
+
+
+---
+
+<!-- 许可声明 -->
+> 本文采用木兰宽松许可证 v2 (Mulan PSL v2) 授权。版权归作者所有，不强制署名，企业合规请保留原始声明。
+> 原始版本见：https://k4m7v2pz.github.io/zh/blog/operating-system/windows/windows-ltsb-winrm-remote-management.html

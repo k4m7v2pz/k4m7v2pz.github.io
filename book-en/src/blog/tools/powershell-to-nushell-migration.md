@@ -76,3 +76,8 @@ Key benefits of migrating from PowerShell 7 to Nushell:
 - **Intuitive data processing:** structured data pipelines
 - **Better cross-platform consistency:** identical experience on macOS and Windows
 - **Modular configuration:** load on demand, no bloat
+
+---
+<!-- License Declaration -->
+> This article is licensed under Mulan PSL v2. Copyright reserved. No attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/tools/powershell-to-nushell-migration.html

@@ -90,3 +90,8 @@ func evalInputExpression(node *ast.InputExpression, ctx *EvalContext) object.Obj
 3. 对照 `ast/ast.go` 中的节点定义，检查哪些节点有对应的处理分支
 4. 发现缺失 `InputExpression` → 补充 `case` 分支
 5. 验证：`xtli 主函数.xt` 不再报错，`输()` 正常工作
+---
+
+<!-- 许可声明 -->
+> 本文采用木兰宽松许可证 v2 (Mulan PSL v2) 授权。版权归作者所有，不强制署名，企业合规请保留原始声明。
+> 原始版本见：https://k4m7v2pz.github.io/zh/blog/programming/xuantie-input-expression-bug.html

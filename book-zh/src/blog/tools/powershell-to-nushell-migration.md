@@ -111,3 +111,8 @@ let config_dir = if ($nu.os-info.name == "windows") {
 - **模块化配置**：按需加载，不再臃肿
 
 如果你也在为 PowerShell 的启动速度烦恼，且主要工作是数据处理和开发而非系统管理，Nushell 是一个值得尝试的替代方案。
+---
+
+<!-- 许可声明 -->
+> 本文采用木兰宽松许可证 v2 (Mulan PSL v2) 授权。版权归作者所有，不强制署名，企业合规请保留原始声明。
+> 原始版本见：https://k4m7v2pz.github.io/zh/blog/tools/powershell-to-nushell-migration.html

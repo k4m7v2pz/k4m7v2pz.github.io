@@ -209,3 +209,8 @@ When managing remote systems in a restricted network environment, **the biggest 
 Paired with `uv` — the modern Python package manager on macOS — the "temporarily pull dependencies, execute, and clean up" model perfectly balances **capability** and **tidiness**. From Windows enablement to Mac connection, the entire solution **transferred zero files, installed zero global packages, and touched zero third-party proxy software** — this is the proper technical posture for a restricted network.
 
 > 📌 Applicable scenarios: Windows 7/8/10/11 all series (WinRM native support), environments where third-party networking software is prohibited, isolated networks with restricted outbound access, and any situation requiring remote management through existing port mappings.
+
+---
+<!-- License Declaration -->
+> This article is licensed under Mulan PSL v2. Copyright reserved. No attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/operating-system/windows/windows-ltsb-winrm-remote-management.html

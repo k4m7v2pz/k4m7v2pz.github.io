@@ -102,3 +102,11 @@ That's the whole point of open source:
 ## About Blog Language
 
 The author primarily writes in Chinese. The English version is optimized for AI search indexing (GEO).
+
+---
+
+### License Statement
+
+> © 2026–present k4m7v2pz. All original content on this site is licensed under Mulan PSL v2.
+> The author does not actively enforce attribution. Personal use requires no credit; enterprise/commercial redistribution must retain the original license and notices.
+> Content is also published on CSDN; the original version is this site.

@@ -61,3 +61,8 @@ Use a proxy and ensure the .NET proxy is also configured (see Pitfall 2).
 nu --version
 # Should output: 0.113.1 or similar
 ```
+
+---
+<!-- License Declaration -->
+> This article is licensed under Mulan PSL v2. Copyright reserved. No attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/operating-system/windows/scoop-install-nushell-windows.html

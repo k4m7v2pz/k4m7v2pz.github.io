@@ -167,3 +167,9 @@ $env.PROMPT_COMMAND_RIGHT = {|| "" }
 - **Verify with `nu -e`**, not `nu -c` (the latter doesn't load `config.nu`)
 - **PATH belongs in `env.nu`** (loaded unconditionally), don't rely on the outer shell's `~/.zshrc`
 - **The config key for disabling banner is `$env.config.show_banner`**, and watch out for the default value at the end of the file
+
+---
+
+<!-- License Declaration -->
+> This article is licensed under Mulan PSL v2. Copyright reserved. No attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/tools/nushell-atomcode-config-pitfalls.html

@@ -70,3 +70,8 @@ Stop-Process -Name explorer -Force; Start-Sleep 2; Start-Process explorer.exe
 - Set execution policy: `Set-ExecutionPolicy RemoteSigned -Scope CurrentUser`
 - Modify `$zedPath` to match your Zed installation path
 - Registry modifications carry risk — back up before editing
+
+---
+<!-- License Declaration -->
+> This article is licensed under Mulan PSL v2. Copyright reserved. No attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/operating-system/windows/system-management-scripts.html

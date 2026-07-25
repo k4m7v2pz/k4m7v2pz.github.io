@@ -74,3 +74,8 @@ style.top = Val::Px(event.position.y / scale);
 | 3 | Position stuck | Not updating UI Style | Update `Style.left`/`top` |
 | 4 | Retina offset | Physical vs logical pixels | Divide by `scale_factor` |
 | 5 | Lost on scene switch | Scene despawns entities | Re-spawn or keep global |
+
+---
+<!-- License Declaration -->
+> This article is licensed under Mulan PSL v2. Copyright reserved. No attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/programming/bevy-0.14-cursor-pitfalls.html

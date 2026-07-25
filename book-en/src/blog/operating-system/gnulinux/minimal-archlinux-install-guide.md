@@ -76,3 +76,8 @@ Power → UEFI text POST (0.5s) → GRUB (1s timeout) → Kernel init → Black 
 ```
 
 No images, no logos — just black text on white background from power-on to workspace.
+
+---
+<!-- License Declaration -->
+> This article is licensed under Mulan PSL v2. Copyright reserved. No attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/operating-system/gnulinux/minimal-archlinux-install-guide.html

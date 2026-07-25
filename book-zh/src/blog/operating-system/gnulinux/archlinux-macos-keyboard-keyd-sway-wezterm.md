@@ -122,3 +122,10 @@ return { keys = keys }
 - alt 键帽 = Alt（macOS 的 opt 键，在 WezTerm 中通过 `send_composed_key_when_alt_is_pressed` 使用）
 
 这套配置在 ThinkPad E490 上实测通过，让 macOS 用户切换到 Arch Linux + Sway 后几乎零适应成本。
+
+
+---
+
+<!-- 许可声明 -->
+> 本文采用木兰宽松许可证 v2 (Mulan PSL v2) 授权。版权归作者所有，不强制署名，企业合规请保留原始声明。
+> 原始版本见：https://k4m7v2pz.github.io/zh/blog/operating-system/gnulinux/archlinux-macos-keyboard-keyd-sway-wezterm.html

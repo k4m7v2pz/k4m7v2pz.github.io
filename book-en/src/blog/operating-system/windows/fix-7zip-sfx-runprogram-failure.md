@@ -64,3 +64,8 @@ RunProgram="cmd.exe"
 
 - **CMD opens** → Stub OK
 - **Extract to dialog** → Stub WRONG (Standard edition)
+
+---
+<!-- License Declaration -->
+> This article is licensed under Mulan PSL v2. Copyright reserved. No attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/operating-system/windows/fix-7zip-sfx-runprogram-failure.html

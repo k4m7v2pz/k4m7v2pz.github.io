@@ -28,3 +28,8 @@
    - Select it and click `OK`
 
 5. **Use `Ctrl` + `Space` to toggle between English and Chinese input**
+
+---
+<!-- License Declaration -->
+> This article is licensed under Mulan PSL v2. Copyright reserved. No attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/operating-system/gnulinux/google-pinyin-installation-ubuntu-derivatives.html

@@ -90,3 +90,10 @@ RunProgram="cmd.exe"
 | RunProgram 像不存在 | 同上（Stub 不吃安装参数） | 同上 |
 | 双击完全无反应 | Stub 非官方/损坏/位数怪 | 用 7-Zip 安装目录或 LZMA SDK 的 `bin\7zSD.sfx` |
 | 解压成功但脚本找不到文件 | 工作目录/相对路径错 | bat 首行 `cd /d "%~dp0"`；核对归档内路径 |
+
+
+---
+
+<!-- 许可声明 -->
+> 本文采用木兰宽松许可证 v2 (Mulan PSL v2) 授权。版权归作者所有，不强制署名，企业合规请保留原始声明。
+> 原始版本见：https://k4m7v2pz.github.io/zh/blog/operating-system/windows/7zip-sfx-stub-selection.html

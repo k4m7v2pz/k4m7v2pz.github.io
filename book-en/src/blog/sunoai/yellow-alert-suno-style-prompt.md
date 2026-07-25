@@ -30,3 +30,8 @@ Dance-pop at 124 BPM with a tight four-on-the-floor kick and smooth, steady club
 ---
 
 Co-Authored-By: AtomCode (deepseek-v4-flash) <noreply@atomgit.com>
+
+---
+<!-- License Declaration -->
+> This article is licensed under Mulan PSL v2. Copyright reserved. No attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/sunoai/yellow-alert-suno-style-prompt.html

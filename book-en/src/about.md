@@ -60,7 +60,16 @@ Content is published across multiple platforms, each serving a distinct role:
 
 ## License Notes
 
-- **Original blog articles**: Licensed under Mulan PSL v2, Unlicense, or CC0 — your choice. No attribution required, no restrictions on use. Articles may be AI-agent-assisted (but contain genuine agent debugging experiences) and are covered by the same permissive license.
-- **Code in this repository**: Follows the `LICENSE` file (UNLICENSE / CC0) declaration.
+- **Original blog articles**: All original content on this blog is licensed under **Mulan PSL v2**.
+- **Code in this repository**: Follows the `LICENSE` file (Mulan PSL v2) in the repository root.
+- **Author's position**: The author does not actively enforce attribution. Personal use does not require attribution; enterprise/commercial redistribution must retain the original license and notices.
 - **Referenced/republished content**: Attributed to the original author.
 - **Suno AI music**: Music generated with Suno AI is subject to the Suno AI license agreement — **non-commercial use only**. Do not use for commercial purposes.
+
+### Multi-Platform License Statement
+
+The original version hosted on GitHub Pages carries this license notice:
+
+> © 2026–present k4m7v2pz. All original content on this site is licensed under Mulan PSL v2.
+> The author does not actively enforce attribution. Personal use requires no credit; enterprise/commercial redistribution must retain the original license and notices.
+> Content is also published on CSDN; the original version is this site.

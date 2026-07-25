@@ -55,3 +55,8 @@ func evalInputExpression(node *ast.InputExpression, ctx *EvalContext) object.Obj
 3. Compare against `ast/ast.go` node definitions
 4. Find missing `InputExpression` → add `case` branch
 5. Verify: `xtli` no longer crashes on `输()`
+
+---
+<!-- License Declaration -->
+> This article is licensed under Mulan PSL v2. Copyright reserved. No attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/programming/xuantie-input-expression-bug.html

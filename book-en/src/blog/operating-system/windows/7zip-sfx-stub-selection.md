@@ -90,3 +90,8 @@ After building, double-click:
 | RunProgram appears ignored | Same as above (stub doesn't process install params) | Same fix |
 | Double-click does nothing | Stub is non-official, corrupted, or wrong architecture | Use `7zSD.sfx` from 7-Zip install dir or LZMA SDK `bin\` |
 | Extracted OK but script can't find files | Working directory / relative path mismatch | Add `cd /d "%~dp0"` at top of bat; verify archive paths |
+
+---
+<!-- License Declaration -->
+> This article is licensed under Mulan PSL v2. Copyright reserved. No attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/operating-system/windows/7zip-sfx-stub-selection.html

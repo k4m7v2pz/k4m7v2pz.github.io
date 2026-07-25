@@ -35,3 +35,9 @@ categories: os
 
 5. **Use `Ctrl` + `Space` to toggle between English and Chinese input（在任意输入框使用 `Ctrl` + `Space` 与英文输入法切换）**
 
+---
+
+<!-- 许可声明 -->
+> 本文采用木兰宽松许可证 v2 (Mulan PSL v2) 授权。版权归作者所有，不强制署名，企业合规请保留原始声明。
+> 原始版本见：https://k4m7v2pz.github.io/zh/blog/operating-system/gnulinux/google-pinyin-installation-ubuntu-derivatives.html
+

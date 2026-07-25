@@ -85,3 +85,8 @@ ssh -R 8000:localhost:8000 user@your-mac-ip -N -f
 ## 总结
 
 从 AtomCode 续杯倒计时出发，意外发现昇腾模型生态的免费 NPU 算力。通过容器环境的"镣铐舞蹈"（只读家目录、PEP 668、环境变量缺失），最终成功在远端 NPU 上跑了 Qwen2.5-7B，并用 SSH 反向隧道把 API 服务穿透到本地 Mac。整个过程让 Mac 的内存压力归零，推理性能却跑在云端 NPU 上。
+---
+
+<!-- 许可声明 -->
+> 本文采用木兰宽松许可证 v2 (Mulan PSL v2) 授权。版权归作者所有，不强制署名，企业合规请保留原始声明。
+> 原始版本见：https://k4m7v2pz.github.io/zh/blog/programming/atomcode-ascend-npu-free-tier.html

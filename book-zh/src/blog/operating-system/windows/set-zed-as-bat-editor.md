@@ -135,3 +135,10 @@ reg add "HKCU\Software\Classes\.bat" /ve /d "batfile" /f
 - 配置不影响系统级设置（仅影响当前用户）
 
 这种方式既满足了编辑需求，又不破坏脚本的正常执行功能。
+
+
+---
+
+<!-- 许可声明 -->
+> 本文采用木兰宽松许可证 v2 (Mulan PSL v2) 授权。版权归作者所有，不强制署名，企业合规请保留原始声明。
+> 原始版本见：https://k4m7v2pz.github.io/zh/blog/operating-system/windows/set-zed-as-bat-editor.html

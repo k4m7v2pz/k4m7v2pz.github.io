@@ -74,3 +74,8 @@ The **Divining... 5m2s** format is assembled in `format_spinner_label` in `crate
 
 ### Misconception 3: "Verbose mode can backtrack"
 **Reality:** Verbose mode (Ctrl+O) must be enabled **before** the reasoning phase. Switching it on mid-task only shows subsequent reasoning, not past output.
+
+---
+<!-- License Declaration -->
+> This article is licensed under Mulan PSL v2. Copyright reserved. No attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/programming/atomcode-spinner-thinking-labels.html

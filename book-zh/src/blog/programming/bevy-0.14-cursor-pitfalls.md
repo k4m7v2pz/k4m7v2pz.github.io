@@ -116,3 +116,8 @@ fn update_cursor(
 | 3 | 光标位置不动 | 用了 `CursorMoved` 但没更新 UI Style | 更新 `Style.left` / `Style.top` |
 | 4 | Retina 上位置偏移 | 物理像素 vs 逻辑像素 | 除以 `scale_factor` |
 | 5 | 切场景后光标消失 | 场景 despawn 实体 | 跨场景保留或重新 spawn |
+---
+
+<!-- 许可声明 -->
+> 本文采用木兰宽松许可证 v2 (Mulan PSL v2) 授权。版权归作者所有，不强制署名，企业合规请保留原始声明。
+> 原始版本见：https://k4m7v2pz.github.io/zh/blog/programming/bevy-0.14-cursor-pitfalls.html

@@ -76,3 +76,8 @@ fn button_handler(
     }
 }
 ```
+
+---
+<!-- License Declaration -->
+> This article is licensed under Mulan PSL v2. Copyright reserved. No attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/programming/bevy-0.14-fps-camera-pitfalls.html

@@ -121,3 +121,9 @@ cargo run    → jaggedlogo.jpg fully visible → fade to black → mainpic.jpg 
 ---
 
 Co-Authored-By: AtomCode (GLM-5.2) <noreply@atomgit.com>
+
+---
+
+<!-- License Declaration -->
+> This article is licensed under Mulan PSL v2. Copyright reserved. No attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/games/mighty-rodent-splash-black-screen-debug.html

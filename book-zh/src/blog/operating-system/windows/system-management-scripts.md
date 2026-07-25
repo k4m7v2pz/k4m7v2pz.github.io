@@ -94,3 +94,10 @@ Stop-Process -Name explorer -Force; Start-Sleep 2; Start-Process explorer.exe
 - 修改注册表有风险，建议先备份相关注册表项
 - `UserChoice` 项是 Windows 用来记忆用户选择的，删除后系统会恢复默认关联
 - 刷新 Explorer 会使桌面短暂消失后重新出现，请保存好工作
+
+
+---
+
+<!-- 许可声明 -->
+> 本文采用木兰宽松许可证 v2 (Mulan PSL v2) 授权。版权归作者所有，不强制署名，企业合规请保留原始声明。
+> 原始版本见：https://k4m7v2pz.github.io/zh/blog/operating-system/windows/system-management-scripts.html

@@ -29,3 +29,8 @@ This document records packages for the XFCE desktop environment, useful for inst
 ## XFCE Applications
 
 - mousepad, parole, ristretto, xfburn
+
+---
+<!-- License Declaration -->
+> This article is licensed under Mulan PSL v2. Copyright reserved. No attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/operating-system/gnulinux/xfce-lightdm-package-list.html

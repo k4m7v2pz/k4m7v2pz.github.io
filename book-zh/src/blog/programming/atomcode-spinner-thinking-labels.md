@@ -83,3 +83,8 @@ AtomCode 的 spinner 逻辑集中在 `crates/atomcode-tuix` 终端渲染模块�
 ### 误解 3："Verbose 模式可以回溯"
 
 **实际：** Verbose 模式需要提前打开（Ctrl+O），中途切换无法回溯之前已经执行完毕的推理过程。如果任务已经执行到中间阶段才打开 Verbose，只能看到后续的推理过程。
+---
+
+<!-- 许可声明 -->
+> 本文采用木兰宽松许可证 v2 (Mulan PSL v2) 授权。版权归作者所有，不强制署名，企业合规请保留原始声明。
+> 原始版本见：https://k4m7v2pz.github.io/zh/blog/programming/atomcode-spinner-thinking-labels.html

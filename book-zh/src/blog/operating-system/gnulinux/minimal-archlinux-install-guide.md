@@ -125,3 +125,10 @@ font-name=Sans 10
 ```
 
 从按电源键到进入 Sway，全程没有一张图片、没有一个大 Logo，只有黑底白字。
+
+
+---
+
+<!-- 许可声明 -->
+> 本文采用木兰宽松许可证 v2 (Mulan PSL v2) 授权。版权归作者所有，不强制署名，企业合规请保留原始声明。
+> 原始版本见：https://k4m7v2pz.github.io/zh/blog/operating-system/gnulinux/minimal-archlinux-install-guide.html

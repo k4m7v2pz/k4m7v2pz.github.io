@@ -86,3 +86,10 @@
 
 - **关于依赖管理**：如果需要更现代的依赖管理工具，可以考虑 [uv](https://github.com/astral-sh/uv)，但请注意 uv 更适合开源项目开发或生产环境部署，可能与本文"便于在不同系统间传播"的核心思想不完全一致
 - **网络要求**：安装依赖时可能需要访问境外服务器，建议配置代理以获得更好的下载速度
+
+
+---
+
+<!-- 许可声明 -->
+> 本文采用木兰宽松许可证 v2 (Mulan PSL v2) 授权。版权归作者所有，不强制署名，企业合规请保留原始声明。
+> 原始版本见：https://k4m7v2pz.github.io/zh/blog/operating-system/windows/embed-python-pip-installation-windows.html
