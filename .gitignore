@@ -8,4 +8,5 @@ reference/*
 !reference/README.md
 
 # AtomCode local-scope configs (machine-specific)
+.atomcode/
 .atomcode/local/
