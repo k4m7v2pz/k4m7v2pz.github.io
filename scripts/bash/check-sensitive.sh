@@ -46,20 +46,14 @@ fi
 # 这些文件引用密钥文件名、IP 等词是必要的「规则描述」，不是真实资产：
 #   AGENTS.md                    脱敏政策（禁例示例）
 #   scripts/bash/check-sensitive.sh / hooks/pre-commit   守卫自身（正则与说明）
-# 另豁免已公开博客文章（ThinkPad 为产品名正常使用，非机器清单泄露）：
-exempt_files=(
-  "AGENTS.md"
-  "scripts/bash/check-sensitive.sh"
-  "hooks/pre-commit"
-  "book-en/src/blog/operating-system/gnulinux/archlinux-macos-keyboard-keyd-sway-wezterm.md"
-  "book-zh/src/blog/operating-system/gnulinux/archlinux-macos-keyboard-keyd-sway-wezterm.md"
-  "book-zh/src/blog/operating-system/gnulinux/minimal-archlinux-install-guide.md"
-)
+exempt_files=("AGENTS.md" "scripts/bash/check-sensitive.sh" "hooks/pre-commit")
 filtered=()
 for f in "${files[@]}"; do
   skip=0
   for e in "${exempt_files[@]}"; do
     [[ "$f" == "$e" ]] && { skip=1; break; }
+    # 目录级豁免：条目以 / 结尾时按前缀匹配（如 vendor/ 豁免整个第三方目录）
+    [[ "$e" == */ && "$f" == "$e"* ]] && { skip=1; break; }
   done
   (( skip == 0 )) && filtered+=("$f")
 done
@@ -115,32 +109,32 @@ for f in "${files[@]}"; do
   # 1) 公网 IPv4
   while IFS= read -r hit; do
     n="${hit%%:*}"; content="${hit#*:}"
-    for ip in $(grep -oE '[0-9]{1,3}(\.[0-9]{1,3}){3}' <<< "$content"); do
+    for ip in $(grep -IoE '[0-9]{1,3}(\.[0-9]{1,3}){3}' <<< "$content"); do
       if ! is_private_v4 "$ip"; then
         report "$f" "公网IPv4" "$n: $content"
       fi
     done
-  done < <(grep -nE '[0-9]{1,3}(\.[0-9]{1,3}){3}' "$f" 2>/dev/null)
+  done < <(grep -InE '[0-9]{1,3}(\.[0-9]{1,3}){3}' "$f" 2>/dev/null)
 
   # 2) 公网 IPv6（全形式，如 2001:19f0:...）
   while IFS= read -r hit; do
     n="${hit%%:*}"; content="${hit#*:}"
-    for addr in $(grep -oE '[0-9a-fA-F]{1,4}(:[0-9a-fA-F]{1,4}){3,7}' <<< "$content"); do
+    for addr in $(grep -IoE '[0-9a-fA-F]{1,4}(:[0-9a-fA-F]{1,4}){3,7}' <<< "$content"); do
       if ! is_private_v6 "$addr"; then
         report "$f" "公网IPv6" "$n: $content"
       fi
     done
-  done < <(grep -nE '[0-9a-fA-F]{1,4}(:[0-9a-fA-F]{1,4}){3,7}' "$f" 2>/dev/null)
+  done < <(grep -InE '[0-9a-fA-F]{1,4}(:[0-9a-fA-F]{1,4}){3,7}' "$f" 2>/dev/null)
 
   # 3) SSH 密钥文件名
   while IFS= read -r hit; do
     report "$f" "密钥文件名" "$hit"
-  done < <(grep -nE 'id_(ed25519|rsa|ecdsa|dsa|ed448)[A-Za-z0-9_.-]*' "$f" 2>/dev/null)
+  done < <(grep -InE 'id_(ed25519|rsa|ecdsa|dsa|ed448)[A-Za-z0-9_.-]*' "$f" 2>/dev/null)
 
   # 4) 私钥内容头
   while IFS= read -r hit; do
     report "$f" "私钥内容" "$hit"
-  done < <(grep -nE 'BEGIN (RSA |EC |OPENSSH |DSA )?PRIVATE KEY' "$f" 2>/dev/null)
+  done < <(grep -InE 'BEGIN (RSA |EC |OPENSSH |DSA )?PRIVATE KEY' "$f" 2>/dev/null)
 
   # 5) 疑似私人邮箱（放行占位符与 trailer；放行 SSH URL 形式 git@host:path）
   while IFS= read -r hit; do
@@ -153,7 +147,7 @@ for f in "${files[@]}"; do
         fi
         report "$f" "邮箱" "$hit" ;;
     esac
-  done < <(grep -nE '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}' "$f" 2>/dev/null)
+  done < <(grep -InE '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}' "$f" 2>/dev/null)
 
   # 6) 机器别名 / 云平台名 / 型号黑名单
   # 用户要求：连「有几台机器、什么平台」都不能暴露。以下词是真实机器标识，
@@ -161,7 +155,7 @@ for f in "${files[@]}"; do
   # 注意：只列「独特词」——printer/arch/ubuntu 等通用词不拦（可能误伤正常语义）。
   while IFS= read -r hit; do
     report "$f" "机器标识" "$hit"
-  done < <(grep -nEi 'vultr|thinkpad|tp-e490' "$f" 2>/dev/null)
+  done < <(grep -InEi 'vultr|thinkpad|tp-e490' "$f" 2>/dev/null)
 done
 
 if (( violations > 0 )); then
