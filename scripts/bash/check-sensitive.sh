@@ -46,7 +46,15 @@ fi
 # 这些文件引用密钥文件名、IP 等词是必要的「规则描述」，不是真实资产：
 #   AGENTS.md                    脱敏政策（禁例示例）
 #   scripts/bash/check-sensitive.sh / hooks/pre-commit   守卫自身（正则与说明）
-exempt_files=("AGENTS.md" "scripts/bash/check-sensitive.sh" "hooks/pre-commit")
+# 另豁免已公开博客文章（ThinkPad 为产品名正常使用，非机器清单泄露）：
+exempt_files=(
+  "AGENTS.md"
+  "scripts/bash/check-sensitive.sh"
+  "hooks/pre-commit"
+  "book-en/src/blog/operating-system/gnulinux/archlinux-macos-keyboard-keyd-sway-wezterm.md"
+  "book-zh/src/blog/operating-system/gnulinux/archlinux-macos-keyboard-keyd-sway-wezterm.md"
+  "book-zh/src/blog/operating-system/gnulinux/minimal-archlinux-install-guide.md"
+)
 filtered=()
 for f in "${files[@]}"; do
   skip=0
@@ -134,11 +142,16 @@ for f in "${files[@]}"; do
     report "$f" "私钥内容" "$hit"
   done < <(grep -nE 'BEGIN (RSA |EC |OPENSSH |DSA )?PRIVATE KEY' "$f" 2>/dev/null)
 
-  # 5) 疑似私人邮箱（放行占位符与 trailer）
+  # 5) 疑似私人邮箱（放行占位符与 trailer；放行 SSH URL 形式 git@host:path）
   while IFS= read -r hit; do
     case "$hit" in
       *example.com*|*example.org*|*example.net*|*noreply@atomgit.com*) ;;
-      *) report "$f" "邮箱" "$hit" ;;
+      *)
+        # SSH 克隆地址 `git@host:path` 不是邮箱（git@ 后跟域名+冒号路径）
+        if [[ "$hit" =~ git@[A-Za-z0-9.-]+\.[A-Za-z]{2,}: ]]; then
+          continue
+        fi
+        report "$f" "邮箱" "$hit" ;;
     esac
   done < <(grep -nE '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}' "$f" 2>/dev/null)
 
