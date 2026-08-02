@@ -132,6 +132,10 @@ Agent 在执行 `git commit` 前必须按以下步骤执行，**不得跳过命�
 | 游戏相关 | `book-zh/src/blog/games/` | `book-en/src/blog/games/` |
 
 4. **中英文需保持同步更新**，对应目录结构一致。
+5. **CSDN 备份同步工作流**：`reference/gitcode_knowledge/CSDN博文备份/` 是文章备份源，可替代 `inbox/`（inbox 很少用）：
+   - 文章从 `reference/gitcode_knowledge/CSDN博文备份/` 直接取用，按上面第 2 条的处理步骤走（识别语言 → front matter → 分类 → 中英翻译 → 更新 SUMMARY.md）
+   - **处理完成后**：删除 `CSDN博文备份/` 中已处理的原 `.md` 文件，并在 `reference/gitcode_knowledge` 仓库内 commit + push（`git push origin main`）同步远端备份
+   - 注意：`reference/gitcode_knowledge` 是独立 git 仓库（被主仓库 `.gitignore` 忽略），其提交推送在其自身目录内执行
 
 ### D. 注意事项
 
@@ -177,6 +181,7 @@ book-en/                   # 英文 mdBook 项目
 
 build.nu                  # 本地构建脚本（Nushell）
 index.html                # 根语言选择页
-inbox/                    # 文章草稿收件箱
+inbox/                    # 文章草稿收件箱（很少用，见 C 节第 5 条）
+reference/gitcode_knowledge/  # CSDN 博文备份（文章源，独立 git 仓库，被忽略）
 .github/workflows/deploy.yml  # CI/CD
 ```
