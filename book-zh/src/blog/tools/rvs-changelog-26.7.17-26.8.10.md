@@ -50,7 +50,7 @@
 
 #### 部署
 
-rvs 已部署到 <lan-host> / 局域网打印机 / Ubuntu VPS / 远程 Windows 四台机器，并全部把默认 shell 切换为 rvs（Linux 用 usermod + /etc/shells，Windows 用 OpenSSH DefaultShell 注册表）。跨机器统一 verb-noun 语法 + `--json` 输出，不再有 shell 方言差异。
+rvs 已部署到 `<lan-host>` / 局域网打印机 / Ubuntu VPS / 远程 Windows 四台机器，并全部把默认 shell 切换为 rvs（Linux 用 usermod + /etc/shells，Windows 用 OpenSSH DefaultShell 注册表）。跨机器统一 verb-noun 语法 + `--json` 输出，不再有 shell 方言差异。
 
 #### 人类开发者
 

@@ -49,7 +49,7 @@ Also:
 
 #### Deployment
 
-rvs has been deployed to four machines — <lan-host> / LAN printer / Ubuntu VPS / remote Windows — and the default shell was switched to rvs on all of them (usermod + /etc/shells on Linux, OpenSSH DefaultShell registry on Windows). Unified verb-noun syntax + `--json` output across machines; no more shell dialect differences.
+rvs has been deployed to four machines — `<lan-host>` / LAN printer / Ubuntu VPS / remote Windows — and the default shell was switched to rvs on all of them (usermod + /etc/shells on Linux, OpenSSH DefaultShell registry on Windows). Unified verb-noun syntax + `--json` output across machines; no more shell dialect differences.
 
 #### Human Developers
 

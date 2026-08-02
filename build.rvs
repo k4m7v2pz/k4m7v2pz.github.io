@@ -1,0 +1,32 @@
+#!/usr/bin/env rvs
+# build.rvs —— 构建 + 本地预览
+#
+# 用法：
+#   rvs build.rvs            构建中英文
+#   ./build.rvs              同 rvs build.rvs（需 chmod +x）
+#
+# 预览（rvs 脚本层暂不支持 flag 解析，serve 拆成两步）：
+#   rvs build.rvs                       # 1. 构建
+#   uv run python -m http.server 8080 --directory site   # 2. 启动预览
+#
+# 说明：rvs 脚本为线性命令序列 + 控制流（for/if/while），
+#       暂不支持 --serve / --serve-only 这类 flag 解析。
+
+# 获取脚本所在目录
+get-location
+
+# 构建中文版
+write-output "=== Building Chinese (zh) ==="
+mdbook build book-zh --dest-dir site/zh
+
+# 构建英文版
+write-output "=== Building English (en) ==="
+mdbook build book-en --dest-dir site/en
+
+# 复制根目录 index.html
+write-output "=== Copying root index.html ==="
+cp index.html site/index.html
+
+write-output "=== Done ==="
+write-output ""
+write-output "  预览： cd site && python -m http.server 8080"

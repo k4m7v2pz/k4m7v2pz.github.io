@@ -102,7 +102,7 @@ Agent 在执行 `git commit` 前必须按以下步骤执行，**不得跳过命�
 
 - **静态站生成器：mdBook v0.5.x**（Rust 编写，单二进制）。不再使用 MkDocs / Python / uv。
 - **双语言分目录构建**：中文在 `book-zh/`，英文在 `book-en/`，各自有独立的 `book.toml` 和 `src/`。
-- **构建产物**：`nu build.nu` 同时构建中英文到 `site/zh/` 和 `site/en/`，根 `index.html` 提供语言选择页。
+- **构建产物**：`rvs build.rvs` 同时构建中英文到 `site/zh/` 和 `site/en/`，根 `index.html` 提供语言选择页。
 - **CI/CD**：GitHub Actions（`.github/workflows/deploy.yml`）在 push 到 `dev` 分支时自动构建并部署到 GitHub Pages。
 - **mdBook 不需额外依赖**，只需安装 mdBook 二进制本身。
 
@@ -144,7 +144,7 @@ Agent 在执行 `git commit` 前必须按以下步骤执行，**不得跳过命�
 
 ### E. 工作流锚点
 
-- **改动验证**：每次改动后 `nu build.nu` 验证构建，不要跳过。
+- **改动验证**：每次改动后 `rvs build.rvs` 验证构建，不要跳过。
 - **本地预览**：构建后直接用浏览器打开 `site/zh/index.html` 或 `site/en/index.html`。
 - **commit 前核对暂存区**：按本文件"脱敏政策"第 4 条执行。
 
@@ -179,7 +179,7 @@ book-en/                   # 英文 mdBook 项目
         ├── programming/
         └── games/
 
-build.nu                  # 本地构建脚本（Nushell）
+build.rvs                 # 本地构建脚本（rvs）
 index.html                # 根语言选择页
 inbox/                    # 文章草稿收件箱（很少用，见 C 节第 5 条）
 reference/gitcode_knowledge/  # CSDN 博文备份（文章源，独立 git 仓库，被忽略）
