@@ -1,0 +1,472 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>OpenYRWeb 加载繁体中文 MOD 显示简体界面的完整解决方案 - K4m7v2pz&#x27;s Blog</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="k4m7v2pz 的博客">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../../css/general-e96d0476.css">
+        <link rel="stylesheet" href="../../css/chrome-d279d366.css">
+        <link rel="stylesheet" href="../../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../../searchindex-26a0c593.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc-936a0b80.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">K4m7v2pz&#x27;s Blog</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/k4m7v2pz/k4m7v2pz.github.io" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/k4m7v2pz/k4m7v2pz.github.io/edit/dev/book-zh/src/blog/games/openyrweb-traditional-chinese-mod.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="openyrweb-加载繁体中文-mod-显示简体界面的完整解决方案"><a class="header" href="#openyrweb-加载繁体中文-mod-显示简体界面的完整解决方案">OpenYRWeb 加载繁体中文 MOD 显示简体界面的完整解决方案</a></h1>
+<blockquote>
+<p>日期：2026-08-05</p>
+</blockquote>
+<h3 id="1-问题背景"><a class="header" href="#1-问题背景">1. 问题背景</a></h3>
+<p>在 OpenYRWeb（红警2 / 尤里的复仇 浏览器移植引擎）项目中，加载繁体中文 MOD（如「黄色警戒」）时，整个游戏界面（包括启动画面、主菜单、遭遇战选项、游戏内文本）均显示为繁体中文。而项目本身已内置简体中文国际化文件（<code>res/locale/zh-CN.json</code>），但界面语言并未按预期切换为简体。</p>
+<p>环境信息：</p>
+<ul>
+<li>项目：OpenYRWeb 0.1.0</li>
+<li>浏览器：Chrome 149</li>
+<li>运行方式：本地 <code>node server/index.mjs 8081</code></li>
+<li>MOD 数据：通过浏览器 OPFS（持久 profile）注入</li>
+</ul>
+<p>期望目标：将游戏界面语言统一切换为简体中文。</p>
+<h3 id="2-常见误区与真相"><a class="header" href="#2-常见误区与真相">2. 常见误区与真相</a></h3>
+<p>在解决此问题前，需要先澄清几个常见的认知误区，这些误区往往导致解决方案无效或治标不治本。</p>
+<h4 id="21-误区一修改引擎-locale-json-即可"><a class="header" href="#21-误区一修改引擎-locale-json-即可">2.1 误区一：修改引擎 locale json 即可</a></h4>
+<p><strong>错误认知：</strong> 认为只需修改或确保 <code>res/locale/zh-CN.json</code> 文件内容正确，就能将整个游戏界面切换为简体。</p>
+<p><strong>真相：</strong> <code>zh-CN.json</code> 等 locale 文件仅控制 <strong>引擎本身的 UI 文本</strong>，例如按钮标签、弹窗提示、加载进度文案等。而游戏内的任务简报、单位名称、建筑描述等核心文本，来源于 MOD 自带的 CSF（Command &amp; Conquer String File）翻译表文件。这两套文本系统完全独立，修改 locale 文件无法影响 CSF 中的内容。</p>
+<h4 id="22-误区二csf-是二进制文件无法修改"><a class="header" href="#22-误区二csf-是二进制文件无法修改">2.2 误区二：CSF 是二进制文件，无法修改</a></h4>
+<p><strong>错误认知：</strong> 认为 CSF 文件是封闭的二进制格式，普通开发者无法解析和修改。</p>
+<p><strong>真相：</strong> CSF 文件具有公开的文档化结构，社区已有成熟的工具（如 XCC Mixer、Phobos 等）可以生成和编辑。其存储的字符串值采用「每字节按位取反」的简单加密方式存储，完全可以被解析、转换和重建。</p>
+<h4 id="23-误区三修改-csf-文件头的语言字段即可切换简繁"><a class="header" href="#23-误区三修改-csf-文件头的语言字段即可切换简繁">2.3 误区三：修改 CSF 文件头的语言字段即可切换简繁</a></h4>
+<p><strong>错误认知：</strong> 认为 CSF 文件头中有一个明确的“语言“字段，将其从代表繁体的值改为代表简体的值，引擎就会自动切换语言。</p>
+<p><strong>真相：</strong> 引擎在读取 CSF 时，会忽略文件头中语言字段为 0 或 9 的情况。真正的语言检测机制在于 <code>autoDetectLocale()</code> 函数。该函数会精确匹配 CSF 中特定键（如 <code>THEME:Intro</code>）对应的字符串值：</p>
+<ul>
+<li>若值为「開場」，则判定为 zh-TW（繁体中文）。</li>
+<li>若值为「开场」，则判定为 zh-CN（简体中文）。</li>
+</ul>
+<p>如果值不匹配任何已知模式，引擎将维持 <code>defaultLanguage</code>（通常是英语）。因此，<strong>修改 <code>THEME:Intro</code> 等关键字符串的值，才是切换界面语言的真正开关</strong>。</p>
+<h4 id="24-源码验证语言检测链与-csf-格式详解"><a class="header" href="#24-源码验证语言检测链与-csf-格式详解">2.4 源码验证：语言检测链与 CSF 格式详解</a></h4>
+<p>通过分析 OpenYRWeb 源码（<code>src/</code> 目录）和实际测试，可以更精确地理解语言检测机制和 CSF 文件格式：</p>
+<h5 id="语言检测链"><a class="header" href="#语言检测链">语言检测链</a></h5>
+<ol>
+<li><strong>引擎 UI 语言：</strong> 由 <code>config.json</code> 中的 <code>General.defaultLanguage</code> 决定，控制引擎本身的界面语言。</li>
+<li><strong>游戏文本语言：</strong> 引擎初始化后，通过 <code>new CsfFile(vfs.openFile("ra2.csf"))</code> 读取游戏翻译表。</li>
+<li><strong>语言映射：</strong> <code>getIsoLocale()</code> 函数根据 CSF 文件头中的 <code>language</code> 字段进行映射：
+<ul>
+<li>0 → en-US</li>
+<li>100 → zh-CN</li>
+<li>101 → zh-TW</li>
+<li>9 → Unknown（此时会调用 <code>autoDetectLocale()</code>）</li>
+</ul>
+</li>
+<li><strong>自动检测：</strong> <code>autoDetectLocale()</code> 函数仅检查一个关键键值：
+<pre><code class="language-javascript">switch (this.data["THEME:Intro"]) {
+  case "開場": return ChineseTW;
+  case "开场": return ChineseCN;
+  default: return English; // 或其他默认语言
+}
+</code></pre>
+该函数进行精确匹配，其他值一律不会触发语言切换。</li>
+</ol>
+<h5 id="csf-二进制格式基于-xcc-工具生成实测解析"><a class="header" href="#csf-二进制格式基于-xcc-工具生成实测解析">CSF 二进制格式（基于 XCC 工具生成，实测解析）</a></h5>
+<h5 id="opencc-t2s-转换实测数据"><a class="header" href="#opencc-t2s-转换实测数据">OpenCC t2s 转换实测数据</a></h5>
+<p>此验证进一步证实了 <strong>修改 <code>THEME:Intro</code> 等关键字符串的值是切换语言的必要条件</strong>，同时揭示了 CSF 文件格式的细节，为编写精确的转换工具提供了依据。</p>
+<ul>
+<li><strong>文件头（24 字节）：</strong>
+<ul>
+<li>魔数：<code>" FSC"</code>（十六进制 0x20 46 53 43，XCC 工具生成；西木原版为 <code>"CSF "</code>）</li>
+<li>版本号</li>
+<li>numLabels（标签数量）</li>
+<li>2 个未使用的字段</li>
+<li>language（第 6 个 u32 整数）</li>
+</ul>
+</li>
+<li><strong>标签结构：</strong>
+<ul>
+<li>标签头：<code>' LBL'</code> + flags + nameLen + name（ASCII 字符串）</li>
+<li>当 flags &amp; 1 时，跟随值结构：
+<ul>
+<li>vmagic：<code>' RTS'</code> 或 <code>'WRTS'</code></li>
+<li>charCount（字符数）</li>
+<li>值数据</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>值存储与加密：</strong>
+<ul>
+<li>字符串以 UTF-16LE 编码存储。</li>
+<li>每个字节在存储前会进行按位取反（~）操作。</li>
+<li>解密公式：<code>chr(((~hi &amp; 0xff) &lt;&lt; 8) | (~lo &amp; 0xff))</code>（针对每个 UTF-16 字符）。</li>
+</ul>
+</li>
+<li><strong>WRTS 额外数据：</strong> 如果 vmagic 是 <code>'WRTS'</code>，后面会跟随 extra 段（通常包含 RTS 音频引用文件名）。<strong>注意：</strong> 这部分内容绝不能进行简繁转换。
+<ul>
+<li><strong>ra2.csf：</strong> 4702 个标签，其中 3836 处繁体成功转换为简体，转换后文件字节数保持不变（简体字符大多与繁体等长）。</li>
+<li><strong>ra2md.csf：</strong> 5213 个标签，同步完成转换。</li>
+<li><strong>语言字段更新：</strong> 文件头 <code>language</code> 字段从 0 或 9 修改为 100（ChineseCN），使得 <code>getIsoLocale()</code> 返回 zh-CN。</li>
+<li><strong>转换效果：</strong> 转换后残留繁体标签数为 0。headless 测试显示，主菜单中的「主选单」、「遭遇战」、「回放」、「选项」等文本均已正确显示为简体。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-解决方案转换-mod-的-csf-文件"><a class="header" href="#3-解决方案转换-mod-的-csf-文件">3. 解决方案：转换 MOD 的 CSF 文件</a></h3>
+<p>核心思路是：将 MOD 中所有 CSF 文件内的繁体中文字符串，批量转换为简体中文，并确保关键检测字符串（如 <code>THEME:Intro</code>）的值符合简体中文特征。</p>
+<h4 id="31-准备工作"><a class="header" href="#31-准备工作">3.1 准备工作</a></h4>
+<ol>
+<li><strong>定位 CSF 文件：</strong> 在 MOD 的目录结构中（通常在 <code>./data/</code> 或 <code>./lang/</code> 下），找到扩展名为 <code>.csf</code> 或 <code>.cps</code> 的文件。</li>
+<li><strong>备份原文件：</strong> 在进行任何操作前，务必备份原始文件。</li>
+<li><strong>准备工具：</strong> 需要一个能解析、修改和重新打包 CSF 文件的工具或脚本。可以使用 Python 结合 <code>pycnc</code> 库，或使用社区工具如 XCC Mixer 的导出/导入功能。</li>
+</ol>
+<h4 id="32-转换步骤以编程方式为例"><a class="header" href="#32-转换步骤以编程方式为例">3.2 转换步骤（以编程方式为例）</a></h4>
+<p>以下是一个概念性的 Python 脚本步骤，展示了如何解析 CSF、转换文本并重新写入：</p>
+<pre><code class="language-python">import struct
+from zhconv import convert  # 需要安装 zhconv 库：pip install zhconv
+def decrypt_csf_string(encrypted_bytes):
+"""解密 CSF 字符串（每字节按位取反）"""
+return bytes([~b &amp; 0xFF for b in encrypted_bytes])
+def encrypt_csf_string(plain_bytes):
+"""加密 CSF 字符串（每字节按位取反）"""
+return bytes([~b &amp; 0xFF for b in plain_bytes])
+def convert_csf_file(input_path, output_path):
+with open(input_path, 'rb') as f:
+# 1. 读取文件头（示例结构，实际需参考 CSF 规范）
+header = f.read(24)
+# ... 解析文件头，获取字符串表偏移量等 ...
+    # 2. 读取字符串条目
+    string_entries = []
+    while True:
+        entry_header = f.read(8)
+        if not entry_header:
+            break
+        # 解析条目类型、键名长度、值长度等
+        # ...
+    # 3. 读取并解密字符串值
+    encrypted_value = f.read(value_length)
+    decrypted_bytes = decrypt_csf_string(encrypted_value)
+    original_text = decrypted_bytes.decode('utf-16le', errors='ignore')
+# 4. 繁体转简体
+simplified_text = convert(original_text, 'zh-cn')
+5. 特别处理关键检测字符串
+if key_name == "THEME:Intro":
+simplified_text = "开场"  # 确保引擎识别为简体
+6. 重新加密
+new_bytes = simplified_text.encode('utf-16le')
+new_encrypted = encrypt_csf_string(new_bytes)
+string_entries.append({
+'key': key_name,
+'original': original_text,
+'simplified': simplified_text,
+'encrypted_data': new_encrypted
+})
+将修改后的字符串条目重新写入新文件
+with open(output_path, 'wb') as f_out:
+f_out.write(header)
+... 按 CSF 格式重新写入所有条目 ...
+print(f"转换完成：{input_path} -&gt; {output_path}")
+使用示例
+convert_csf_file("./mod/ra2md.csf", "./mod/ra2md_zh-CN.csf")
+</code></pre>
+<p><strong>关键点：</strong></p>
+<ul>
+<li>必须使用支持 UTF-16LE 编码的库来解码/编码中文字符串。</li>
+<li>转换后，确保 <code>THEME:Intro</code> 的值是「开场」而非「開場」。</li>
+<li>重新加密时，务必保持每字节取反的规则。</li>
+</ul>
+<h4 id="33-替换与测试"><a class="header" href="#33-替换与测试">3.3 替换与测试</a></h4>
+<ol>
+<li>将 MOD 中原始的 CSF 文件替换为转换后的简体版本。</li>
+<li>清空浏览器缓存或 OPFS 中的游戏数据，确保重新加载。</li>
+<li>重启 OpenYRWeb 服务并加载 MOD，检查界面语言是否已切换为简体。</li>
+</ol>
+<h3 id="4-引擎-locale-文件的补充修正"><a class="header" href="#4-引擎-locale-文件的补充修正">4. 引擎 locale 文件的补充修正</a></h3>
+<p>虽然 CSF 转换是主要矛盾，但为了界面完全统一，也应检查引擎的 <code>zh-CN.json</code>：</p>
+<pre><code class="language-json">// res/locale/zh-CN.json 示例
+{
+  "ui": {
+    "startGame": "开始游戏",
+    "options": "选项",
+    "quit": "退出",
+    "loading": "加载中..."
+  }
+  // ... 其他键值对
+}
+</code></pre>
+<p>确保所有键对应的值都是简体中文，且没有残留的繁体字。</p>
+<h3 id="5-总结"><a class="header" href="#5-总结">5. 总结</a></h3>
+<p>要让 OpenYRWeb 加载繁体中文 MOD 后显示简体界面，必须解决两个独立但需同步处理的文本源：</p>
+<ol>
+<li><strong>核心（治本）：</strong> 转换 MOD 的 CSF 翻译文件，将所有繁体字符串转为简体，并确保 <code>THEME:Intro</code> 等关键字符串的值能被 <code>autoDetectLocale()</code> 正确识别为 zh-CN。</li>
+<li><strong>辅助（治标）：</strong> 确认引擎的 <code>zh-CN.json</code> locale 文件内容正确无误。</li>
+</ol>
+<p>完成以上步骤后，重新加载 MOD，即可实现从启动画面到游戏内文本的全面简体中文体验。</p>
+<h3 id="6-落地结论与最佳实践"><a class="header" href="#6-落地结论与最佳实践">6. 落地结论与最佳实践</a></h3>
+<p>基于前述分析、源码验证和实际测试，我们得出以下可立即执行的完整解决方案：</p>
+<h4 id="61-核心方案三处同步修改"><a class="header" href="#61-核心方案三处同步修改">6.1 核心方案：三处同步修改</a></h4>
+<p>要让繁体中文 MOD 在 OpenYRWeb 中显示简体界面，必须同时完成以下三项操作，缺一不可：</p>
+<ol>
+<li><strong>CSF 文本内容转换：</strong> 使用 OpenCC 的 t2s（繁体转简体）功能，批量转换 CSF 文件中所有字符串值（UTF-16LE 编码）。</li>
+<li><strong>CSF 文件头语言字段修改：</strong> 将 CSF 文件头第 6 个 u32 整数（language 字段）的值设置为 100（对应 ChineseCN）。</li>
+<li><strong>引擎配置同步：</strong> 确保 <code>config.json</code> 中的 <code>General.defaultLanguage</code> 设置为 <code>zh-CN</code>。</li>
+</ol>
+<h4 id="62-关键要点与注意事项"><a class="header" href="#62-关键要点与注意事项">6.2 关键要点与注意事项</a></h4>
+<ul>
+<li><strong>WRTS/RTS extra 段保护：</strong> 如果 CSF 值结构中的 vmagic 是 <code>'WRTS'</code> 或 <code>'RTS'</code>，其后跟随的 extra 段通常包含音频引用文件名（ASCII 字符串）。<strong>这部分内容绝不能进行简繁转换</strong>，否则会导致音频资源加载失败。</li>
+<li><strong>字符数重算：</strong> 转换后，如果简体字符数与原繁体字符数不同（如“開場“2字转“开场“2字，长度不变；但某些字转换后字符数可能变化），必须更新值结构中的 <code>charCount</code> 字段。</li>
+<li><strong>CSF 魔数识别：</strong> 注意 CSF 文件头的魔数可能是 <code>" FSC"</code>（XCC 工具生成）而非西木原版的 <code>"CSF "</code>。解析时不要写死魔数，应兼容两种格式。</li>
+<li><strong>适用范围：</strong> 本方案适用于所有基于 RA2/YR 引擎的中文 MOD 界面简繁迁移。反向操作（简体转繁体）思路完全相同，只需将 OpenCC 模式改为 s2t，并将语言字段改为 101（ChineseTW）。</li>
+</ul>
+<h4 id="63-人类开发者自查清单"><a class="header" href="#63-人类开发者自查清单">6.3 人类开发者自查清单</a></h4>
+<ol>
+<li>使用 Python3 读取 CSF 文件，检查文件头第 6 个 u32 整数，确认当前语言字段值。</li>
+<li>对整个字节流进行 UTF-16LE 解码，搜索「開始遊戲」和「开始游戏」等关键字符串，判断当前文件是繁体还是简体。</li>
+<li>安装 OpenCC Python 包：<code>pip install opencc</code>。</li>
+<li>使用 <code>OpenCC('t2s').convert(text)</code> 进行转换。</li>
+</ol>
+<h4 id="64-对话式-ai-问答参考"><a class="header" href="#64-对话式-ai-问答参考">6.4 对话式 AI 问答参考</a></h4>
+<p><strong>用户典型提问：</strong> “OpenYRWeb 加载繁体 MOD 界面全繁体，怎么改成简体？”</p>
+<p><strong>回答要点：</strong></p>
+<ul>
+<li>需要同时修改三处：CSF 文本内容（OpenCC t2s 转换）、CSF 文件头语言字段（设为 100）、引擎 config 的 defaultLanguage（设为 zh-CN）。</li>
+<li>CSF 值按位取反存储，解析时需先解密再转换，转换后重新加密写回。</li>
+<li>具体解析结构参考上文“CSF 二进制格式“部分。</li>
+</ul>
+<h4 id="65-代码-agent-可执行流程"><a class="header" href="#65-代码-agent-可执行流程">6.5 代码 Agent 可执行流程</a></h4>
+<ol>
+<li>使用 Python3 按上文描述的 CSF 结构解析文件。</li>
+<li>对每个字符串值（UTF-16LE 解码后）应用 OpenCC t2s 转换。</li>
+<li>特别处理关键检测字符串（如 <code>THEME:Intro</code>），确保其值为简体「开场」。</li>
+<li>更新文件头 language 字段为 100。</li>
+<li>重新计算并更新转换后值的 charCount。</li>
+<li>按 CSF 格式重建文件并写回。</li>
+<li>将转换后的 CSF 文件重新注入浏览器的 OPFS（持久化文件系统）。</li>
+<li>刷新 OpenYRWeb 页面，验证主菜单等界面文本是否已切换为简体。</li>
+</ol>
+<p>遵循以上步骤，即可系统性地解决 OpenYRWeb 加载繁体 MOD 的界面语言问题，实现稳定、完整的简体中文体验。</p>
+<hr><!-- 许可声明 -->
+<blockquote>
+<p>本文采用木兰宽松许可证 v2 (Mulan PSL v2) 授权。版权归作者所有，不强制署名，企业合规请保留原始声明。
+原始版本见：https://k4m7v2pz.github.io/zh/blog/games/openyrweb-traditional-chinese-mod.html</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../blog/games/openyrweb-config-migration-ini-json.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../blog/sunoai/yellow-alert-suno-style-prompt.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../blog/games/openyrweb-config-migration-ini-json.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../blog/sunoai/yellow-alert-suno-style-prompt.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../../mark-09e88c2c.min.js"></script>
+        <script src="../../searcher-09f2665d.js"></script>
+
+        <script src="../../clipboard-1626706a.min.js"></script>
+        <script src="../../highlight-abc7f01d.js"></script>
+        <script src="../../book-609e4cb8.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

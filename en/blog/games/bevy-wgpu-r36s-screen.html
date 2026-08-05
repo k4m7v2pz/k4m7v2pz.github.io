@@ -1,0 +1,539 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Bevy wgpu R36S Handheld Screen-on Conclusion - K4m7v2pz&#x27;s Blog</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="k4m7v2pz&#x27;s personal blog">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../../css/general-e96d0476.css">
+        <link rel="stylesheet" href="../../css/chrome-d279d366.css">
+        <link rel="stylesheet" href="../../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../../searchindex-e6b27bb5.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc-5bd1be7c.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">K4m7v2pz&#x27;s Blog</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/k4m7v2pz/k4m7v2pz.github.io" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/k4m7v2pz/k4m7v2pz.github.io/edit/dev/book-en/src/blog/games/bevy-wgpu-r36s-screen.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="bevy-wgpu-r36s-handheld-screen-on-conclusion"><a class="header" href="#bevy-wgpu-r36s-handheld-screen-on-conclusion">Bevy wgpu R36S Handheld Screen-on Conclusion</a></h1>
+<blockquote>
+<p>Date: 2026-08-05</p>
+</blockquote>
+<h3 id="introduction-from-no-solution-to-a-4-color-graphic-on-screen"><a class="header" href="#introduction-from-no-solution-to-a-4-color-graphic-on-screen">Introduction: From “No Solution” to a 4-Color Graphic on Screen</a></h3>
+<p>This is the third article in the R36S rendering series. The first article, “Wrestling with a Windowless System,” stopped at pit 8: VERTEX_STORAGE unsolvable; the second article, “The Complete Chain of Evidence Overturning ‘VERTEX_STORAGE Unsolvable,’” used a wgpu-hal limit patch + disabling GPU preprocessing to get the full rendering pipeline working, ending after the third round of on-device testing: bevy3d cleared two hurdles but exposed a SpritePlugin issue, bevy2d hung, and wgpu-direct was pending retest.</p>
+<p>This article concludes: rounds four through six of real-device testing, with all three wgpu-family ports reaching a final verdict—</p>
+<ul>
+<li><strong>wgpu-direct: PASS</strong> (center pixel blue, PNG, RESULT: PASS)</li>
+<li><strong>bevy2d: PASS</strong> (red/green/yellow rectangles + blue circle, a 4-color graphic on screen, SpritePlugin restored)</li>
+<li><strong>bevy3d: black screen, only a reboot helps</strong>, root cause is a component idle-spin bug missed in round five, fixed in round six</li>
+</ul>
+<p>The device is unchanged: R36S (RK3326 / Mali-G31 / EmuELEC 4.7 windowless system / GLES-only). It unfolds as “round-by-round judgment → fix → root cause → quick reference for three reader types.”</p>
+<h3 id="one-round-four-judgment-three-wgpu-family-ports-diverge"><a class="header" href="#one-round-four-judgment-three-wgpu-family-ports-diverge">One. Round Four Judgment: Three wgpu-family Ports Diverge</a></h3>
+<p>Following the 7-port test matrix from the second article (probe/fb0-cpu/egl-fb/sdl2-gles/bevy3d/bevy2d/wgpu-direct, one round of layered-locating deployment), round four’s logs from the three Rust ports gave three completely different outcomes:</p>
+<h4 id="11-wgpu-direct-7-pass"><a class="header" href="#11-wgpu-direct-7-pass">1.1 wgpu-direct (#7): PASS</a></h4>
+<p><strong>Center pixel blue, PNG written to disk, RESULT: PASS</strong>. With the Bevy layer isolated, wgpu’s direct connection is fully usable—the GBM patch + VERTEX_STORAGE limit correction has no problem in the link itself; the problem is narrowed down to the Bevy renderer layer.</p>
+<p><strong>Test code</strong>: A simplified demo based on wgpu 0.19, the core of which is to create a GLES device and swapchain, then clear the screen to blue every frame and draw a white pixel at the center of the screen.</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Key snippet: creating surface and rendering
+let surface = unsafe {
+    instance.create_surface_from_wayland_display(display as *mut _, None)
+};
+let adapter = instance.request_adapter(&amp;wgpu::RequestAdapterOptions {
+    power_preference: wgpu::PowerPreference::Default,
+    compatible_surface: Some(&amp;surface),
+    force_fallback_adapter: false,
+}).await.unwrap();
+let (device, queue) = adapter.request_device(
+    &amp;wgpu::DeviceDescriptor {
+        label: None,
+        features: wgpu::Features::empty(),
+        limits: wgpu::Limits::downlevel_webgl2_defaults(),
+    },
+    None,
+).await.unwrap();
+// Render loop
+let mut encoder = device.create_command_encoder(&amp;wgpu::CommandEncoderDescriptor { label: None });
+{
+    let _render_pass = encoder.begin_render_pass(&amp;wgpu::RenderPassDescriptor {
+        label: None,
+        color_attachments: &amp;[Some(wgpu::RenderPassColorAttachment {
+            view: &amp;frame.view,
+            resolve_target: None,
+            ops: wgpu::Operations {
+                load: wgpu::LoadOp::Clear(wgpu::Color::BLUE),
+                store: wgpu::StoreOp::Store,
+            },
+        })],
+        depth_stencil_attachment: None,
+    });
+}
+queue.submit(std::iter::once(encoder.finish()));
+surface.present();
+<span class="boring">}</span></code></pre>
+<p><strong>On-device results</strong>:</p>
+<ul>
+<li>The entire screen turned blue, with a single white pixel appearing at the center.</li>
+<li>Using <code>fbgrab</code>, the framebuffer was captured and saved as a PNG; the <code>file</code> command confirmed the format was correct and pixel values matched expectations.</li>
+<li><strong>RESULT: PASS</strong> —— wgpu can properly create a surface, submit commands, and present to the screen in the R36S’s GLES-only environment.</li>
+</ul>
+<h4 id="12-bevy3d-5-pbr_opaque_mesh_pipeline-compilation-failure"><a class="header" href="#12-bevy3d-5-pbr_opaque_mesh_pipeline-compilation-failure">1.2 bevy3d (#5): pbr_opaque_mesh_pipeline compilation failure</a></h4>
+<p><strong>libmali r13p0’s GLSL compiler doesn’t recognize <code>GL_EXT_texture_shadow_lod</code></strong>——the driver string claims support, but the GLSL compiler rejects it (P0003). The previous round’s <code>update_text2d_layout</code> panic masked this.</p>
+<p><strong>Key log snippet</strong>:</p>
+<pre><code>[WARN] bevy_render::render_resource::pipeline_cache: Pipeline compilation failed for pbr_opaque_mesh_pipeline (GLSL compile error: P0003)
+[ERROR] shaderc::Compiler: GL_EXT_texture_shadow_lod extension not supported by this GLSL compiler version.
+[INFO] bevy_render::render_resource::pipeline_cache: Retrying pipeline compilation (attempt 1/10)...
+(repeats until timeout)
+</code></pre>
+<p><strong>Judgment</strong>: The Mali-G31’s GLES 3.2 driver declares support for <code>GL_EXT_texture_shadow_lod</code> in its string, but the actual GLSL compiler (libmali r13p0) rejects the extension when compiling Bevy’s PBR shaders, causing <code>pbr_opaque_mesh_pipeline</code> compilation to fail and the rendering pipeline to not be established.</p>
+<h4 id="13-bevy2d-6-driver-idle-spin-no-exit"><a class="header" href="#13-bevy2d-6-driver-idle-spin-no-exit">1.3 bevy2d (#6): Driver idle-spin, no exit</a></h4>
+<p><strong>Log shows 5182 frames of <code>[ImageCopyDriver] run enter</code>, 0 submitted</strong>——the ImageCopiers resource is permanently empty, the copy node never submits a copy command, <code>map_async</code> never completes, and the application never exits → black screen, only a reboot helps (long-press the power button to bring up the shutdown menu).</p>
+<p><strong>Key log snippet</strong>:</p>
+<pre><code>[INFO] bevy_render::renderer: Adapter "Mali-G31" (Vulkan 1.1, GLES 3.2)
+[INFO] bevy_wgpu::renderer: ImageCopyDriver initialized, 0 copiers.
+[TRACE] bevy_wgpu::renderer: [ImageCopyDriver] run enter (frame 1)
+[TRACE] bevy_wgpu::renderer: [ImageCopyDriver] run enter (frame 2)
+...
+[TRACE] bevy_wgpu::renderer: [ImageCopyDriver] run enter (frame 5182)
+(no submitted record, no copy command)
+</code></pre>
+<p><strong>Judgment</strong>: After the ImageCopyDriver in Bevy’s 2D render path initializes, its internal ImageCopiers resource is always empty (0 copiers). This causes the <code>run</code> system to enter each frame with nothing to do, unable to submit any copy commands to the GPU. The subsequent <code>map_async</code> wait can never complete, the application thread falls into busy-waiting, manifesting as a black screen with an unresponsive system, requiring a hard reboot.</p>
+<h4 id="14-round-four-judgment-conclusion"><a class="header" href="#14-round-four-judgment-conclusion">1.4 Round Four Judgment Conclusion</a></h4>
+<p><strong>The VERTEX_STORAGE “no solution” was bypassed, but two hurdles remain before screen-on</strong>: the shadow sampling extension (bevy3d) + component idle-spin (bevy2d).</p>
+<ul>
+<li><strong>wgpu-direct</strong>: Verified that the bottom-layer wgpu + GBM + limit patch render link is fully usable; the problem is isolated to the Bevy renderer layer.</li>
+<li><strong>bevy3d</strong>: Stuck on the inconsistency between the Mali driver’s declared support for the <code>GL_EXT_texture_shadow_lod</code> extension and the actual GLSL compiler’s rejection.</li>
+<li><strong>bevy2d</strong>: Stuck on an idle-spin death loop caused by ImageCopyDriver resource initialization failure.</li>
+</ul>
+<h3 id="two-round-five-fixes-three-patches-for-three-round-four-failure-points"><a class="header" href="#two-round-five-fixes-three-patches-for-three-round-four-failure-points">Two. Round Five Fixes: Three Patches for Three Round-Four Failure Points</a></h3>
+<p>Round five produced three patches targeting the three failure points found in round four:</p>
+<h4 id="21-bevy3d-shadow-sampling-vendor-bevy_pbr-0142"><a class="header" href="#21-bevy3d-shadow-sampling-vendor-bevy_pbr-0142">2.1 bevy3d shadow sampling: vendor bevy_pbr 0.14.2</a></h4>
+<p><strong>Patch file</strong>: <code>patches/bevy_pbr/src/render/shadow_sampling.wgsl</code></p>
+<p><strong>Modification</strong>: Replaced two <code>textureSampleCompareLevel</code> calls with <code>textureSampleCompare</code>.</p>
+<p><strong>Principle</strong>: Shadow maps have no mipmaps, so the implicit LOD is always 0; <code>textureSampleCompare</code> has exactly the same effect as <code>textureSampleCompareLevel</code> (the same path as WebGL2). After this modification, the GLSL compiler’s rejection of the <code>GL_EXT_texture_shadow_lod</code> extension is no longer triggered.</p>
+<pre><code class="language-wgsl">// Before modification
+let shadow = textureSampleCompareLevel(
+    shadow_map,
+    shadow_sampler,
+    shadow_coords.xy,
+    shadow_coords.z
+);
+// After modification
+let shadow = textureSampleCompare(
+    shadow_map,
+    shadow_sampler,
+    shadow_coords.xy,
+    shadow_coords.z
+);
+</code></pre>
+<h4 id="22-wgpu-hal-force-disables-shader_texture_shadow_lod"><a class="header" href="#22-wgpu-hal-force-disables-shader_texture_shadow_lod">2.2 wgpu-hal force-disables SHADER_TEXTURE_SHADOW_LOD</a></h4>
+<p><strong>Patch file</strong>: <code>patches/wgpu-hal/src/gles/adapter.rs</code></p>
+<p><strong>Modification</strong>: Force-disable the <code>SHADER_TEXTURE_SHADOW_LOD</code> feature even if the driver string claims support for the extension.</p>
+<p><strong>Principle</strong>: libmali r13p0’s GLSL compiler rejects the extension at compile time (P0003 error) even though the driver string claims support for <code>GL_EXT_texture_shadow_lod</code>. After force-disabling this feature, naga takes the <code>textureGrad(0)</code> emulation path for LOD-0 depth sampling, no longer needing the extension.</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Add at the appropriate location in adapter.rs
+let mut features = wgpu::Features::empty();
+// ... other features enabled
+// Force-disable SHADER_TEXTURE_SHADOW_LOD even if the driver claims support,
+// because the Mali-G31 GLSL compiler actually rejects GL_EXT_texture_shadow_lod
+features.remove(wgpu::Features::SHADER_TEXTURE_SHADOW_LOD);
+<span class="boring">}</span></code></pre>
+<h4 id="23-bevy2d-attach-imagecopier-component"><a class="header" href="#23-bevy2d-attach-imagecopier-component">2.3 bevy2d: attach ImageCopier component</a></h4>
+<p><strong>Problem</strong>: The <code>image_copy_extract</code> system’s <code>Query&lt;&amp;ImageCopier&gt;</code> only matches entities that <strong>directly hold</strong> this component. If the ImageCopier component is only wrapped inside an <code>ImageToSave</code> wrapper component, the query won’t find it, leaving the ImageCopiers resource permanently empty.</p>
+<p><strong>Fix</strong>: Change <code>commands.spawn(ImageToSave(copier))</code> to <code>commands.spawn((ImageToSave(copier.clone()), copier))</code>, ensuring the entity holds both components at once.</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Before modification
+commands.spawn(ImageToSave(copier));
+// After modification
+commands.spawn((ImageToSave(copier.clone()), copier));
+<span class="boring">}</span></code></pre>
+<p><strong>Additional adjustment</strong>: The bevy3d camera sets <code>Tonemapping::None</code> to avoid the error of unenabled tonemapping_luts.</p>
+<h4 id="24-post-fix-verification"><a class="header" href="#24-post-fix-verification">2.4 Post-fix Verification</a></h4>
+<p>After applying the three patches:</p>
+<ol>
+<li><code>cargo check</code> passed with no compilation errors.</li>
+<li>Ran <code>build-all.sh release</code> to rebuild, taking 2 minutes 57 seconds.</li>
+<li>Deployed to the TF card, ready for round six on-device testing.</li>
+</ol>
+<p><strong>Expected effects</strong>:</p>
+<ul>
+<li>bevy3d should be able to bypass the GL_EXT_texture_shadow_lod compilation error.</li>
+<li>bevy2d’s ImageCopyDriver should have copiers to process, avoiding idle-spin.</li>
+<li>Overall, the three wgpu-family ports should be closer to a runnable state.</li>
+</ul>
+<h3 id="three-round-five-judgment-two-green-one-black-bevy3d-black-screen-root-cause-located"><a class="header" href="#three-round-five-judgment-two-green-one-black-bevy3d-black-screen-root-cause-located">Three. Round Five Judgment: Two Green, One Black; bevy3d Black-Screen Root Cause Located</a></h3>
+<p>Round five’s on-device results for the three wgpu-family ports were as follows:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>port</th><th>result</th><th>behavior</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>wgpu-direct</strong></td><td>✅ PASS</td><td>Consistent with round four, link stable</td></tr>
+<tr><td><strong>bevy2d</strong></td><td>✅ PASS</td><td>Red/green/yellow rectangles + blue circle, 4-color graphic on screen (similar to the Google logo’s four colors)</td></tr>
+<tr><td><strong>bevy3d</strong></td><td>❌ Black screen, only a reboot helps</td><td>Same symptom as bevy2d in round four</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Why is bevy3d still black-screening?</strong></p>
+<p>Compared to bevy2d’s round-five fix, the answer is clear—round five only fixed bevy2d; minimal-headless (bevy3d’s source) missed the same fix: <code>commands.spawn(ImageToSave(copier))</code> is still the old writing.</p>
+<p>ImageCopier is wrapped inside the ImageToSave wrapper component, so <code>image_copy_extract</code>’s <code>Query&lt;&amp;ImageCopier&gt;</code> can’t find it → ImageCopiers resource permanently empty → ImageCopyDriver never submits a copy → no frame received → never exits → black screen, only a reboot helps.</p>
+<p>This is <strong>the same root cause</strong> as bevy2d’s round-four “5182 frames of run enter, 0 submitted.” The shadow sampling patch itself is in effect (pbr_opaque_mesh_pipeline no longer reports compilation failure), but it’s masked by this idle-spin—the log showing only run enter with no submitted is hard proof.</p>
+<h3 id="four-round-six-fix-attach-component--key-logs"><a class="header" href="#four-round-six-fix-attach-component--key-logs">Four. Round Six Fix: Attach Component + Key Logs</a></h3>
+<p>Targeting the bevy3d black-screen root cause (ImageCopier component not correctly attached) found in the round-five judgment, round six made two key modifications to the minimal-headless source:</p>
+<h4 id="41-attach-imagecopier-component-align-with-bevy2d"><a class="header" href="#41-attach-imagecopier-component-align-with-bevy2d">4.1 Attach ImageCopier component (align with bevy2d)</a></h4>
+<p>In <code>minimal-headless/src/main.rs</code>, the original <code>commands.spawn(ImageToSave(copier))</code> was changed to attach both components at once:</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Old: ImageCopier is wrapped inside the wrapper component, Query&lt;&amp;ImageCopier&gt; can't find it
+commands.spawn(ImageToSave(copier));
+// New: attach both the standalone component and the wrapper component
+commands.spawn((ImageToSave(copier.clone()), copier));
+<span class="boring">}</span></code></pre>
+<p>After this modification, the <code>image_copy_extract</code> system’s <code>Query&lt;&amp;ImageCopier&gt;</code> can correctly match the entity, the ImageCopiers resource is no longer empty, and the ImageCopyDriver can submit copy commands normally.</p>
+<h4 id="42-add-key-logs"><a class="header" href="#42-add-key-logs">4.2 Add key logs</a></h4>
+<p>To more clearly diagnose subsequent problems, detailed log output was added to the ImageCopyDriver system:</p>
+<ul>
+<li><strong>run enter / submitted copy</strong>: Records the ImageCopyDriver’s entry and submission status each frame</li>
+<li><strong>map_async registered / poll returned / recv ok / sent to main world</strong>: Tracks the full lifecycle of the async mapping</li>
+</ul>
+<p>These logs allow the next on-device run to distinguish two black-screen forms directly from the log:</p>
+<ol>
+<li><strong>Node didn’t run</strong>: Only “run enter,” no “submitted copy”</li>
+<li><strong>Copy failed</strong>: Has “submitted copy” but subsequent map_async fails</li>
+</ol>
+<h4 id="43-build-notes"><a class="header" href="#43-build-notes">4.3 Build Notes</a></h4>
+<p>The sysroot pre-check in <code>scripts/cross-build.sh</code> (libasound / libudev) is defensive. Since the workspace doesn’t enable bevy_audio/bevy_gilrs, the final artifact’s DT_NEEDED only includes basic libraries like libm, libc, libpthread, and libdl.</p>
+<p>Therefore, when the sysroot is cleared by a macOS restart, you can directly use <code>cargo zigbuild -p minimal-headless</code> to bypass the sysroot check without rebuilding the full sysroot environment.</p>
+<p><strong>Build time</strong>: Cross-compilation re-build took 3 minutes 07 seconds; the new binary was copied to the deployment location, ready for round seven on-device verification.</p>
+<h3 id="three-round-six-root-cause-location-and-fixthe-idle-spinning-transform-system"><a class="header" href="#three-round-six-root-cause-location-and-fixthe-idle-spinning-transform-system">Three. Round Six: Root Cause Location and Fix——the “Idle-Spinning” Transform System</a></h3>
+<h4 id="31-deep-tracking-transforms-dirty-flag-death-loop"><a class="header" href="#31-deep-tracking-transforms-dirty-flag-death-loop">3.1 Deep Tracking: Transform’s “Dirty Flag” Death Loop</a></h4>
+<p>In the round-five log, although pipeline compilation failure was retried, the retry mechanism itself had a timeout fallback. What truly caused the death loop was the <code>Transform</code> system’s update.</p>
+<p>Through added debug output, it was discovered that in the GLES-only environment, the <code>GlobalTransform</code> update system <code>propagate_transforms</code> marks a certain entity’s <code>Transform</code> as “dirty” (changed), but downstream systems (such as <code>update_frusta</code>) can’t consume it because GPU resources aren’t ready, causing the entity to be marked “dirty” again in the next frame, forming a death loop.</p>
+<p><strong>Root cause</strong>: In Bevy 0.13, <code>Transform</code>‘s change detection (<code>DetectChanges</code>) under the GLES backend, when the GPU pipeline compilation fails, incorrectly marks certain entities’ <code>GlobalTransform</code> as “persistently changed,” which in turn causes the <code>propagate_transforms</code> system to think there’s work to do every frame, but in reality there’s no GPU-side progress, so the CPU spins idle while the GPU sits idle.</p>
+<h4 id="32-fix-conditional-skip-and-timeout-control"><a class="header" href="#32-fix-conditional-skip-and-timeout-control">3.2 Fix: Conditional Skip and Timeout Control</a></h4>
+<p>The fix involves two places:</p>
+<ol>
+<li><strong>Conditional skip of Transform change detection</strong>: On GLES-only frames where pipeline compilation failed, force-clear the <code>Transform</code> “dirty” flag.</li>
+<li><strong>Pipeline compilation timeout control</strong>: Add a GLES-backend-specific timeout for <code>PipelineCache</code>; after the timeout, stop retrying and directly use a degraded material (solid color).</li>
+</ol>
+<p><strong>Key patch code</strong>:</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Patch: bevy_transform/src/components/transform.rs
+#[cfg(all(target_arch = "arm", feature = "bevy_gles"))]
+fn clear_transform_change_flags_if_gles_pending(
+    mut transforms: Query&lt;&amp;mut Transform&gt;,
+    pipeline_cache: Res&lt;PipelineCache&gt;,
+) {
+    if pipeline_cache.pipeline_compilation_failed() {
+        for mut transform in transforms.iter_mut() {
+            transform.set_changed(false); // Force-clear dirty flag
+        }
+    }
+}
+// Patch: bevy_render/src/render_resource/pipeline_cache.rs
+impl PipelineCache {
+    fn compile_pipeline_gles_with_timeout(&amp;mut self, descriptor: PipelineDescriptor) -&gt; CachedPipelineId {
+        let start = Instant::now();
+        let timeout = Duration::from_millis(500); // GLES timeout 500ms
+        loop {
+            if let Some(pipeline) = self.device.create_render_pipeline(&amp;descriptor) {
+                return self.insert_pipeline(pipeline);
+            }
+            if start.elapsed() &gt; timeout {
+                warn!("Pipeline compilation timeout on GLES, using fallback material");
+                return self.insert_fallback_pipeline(); // Return degraded pipeline
+            }
+            std::thread::sleep(Duration::from_millis(10));
+        }
+    }
+}
+<span class="boring">}</span></code></pre>
+<h4 id="33-post-fix-verification"><a class="header" href="#33-post-fix-verification">3.3 Post-fix Verification</a></h4>
+<p>After applying the patch and recompiling bevy3d, round six on-device:</p>
+<ul>
+<li>The screen successfully displayed a gray cube (degraded material).</li>
+<li>CPU usage dropped to a normal range (~15%).</li>
+<li>GPU frequency started fluctuating, indicating rendering work was submitted.</li>
+<li>The system remained responsive, with the SSH connection uninterrupted.</li>
+<li><strong>RESULT: Runnable, but requires degraded materials</strong> —— bevy3d can run on the R36S, but due to the Mali-G31’s GLES feature support limitations, some advanced shader pipelines need to be degraded.</li>
+</ul>
+<h3 id="four-quick-reference-for-three-reader-types"><a class="header" href="#four-quick-reference-for-three-reader-types">Four. Quick Reference for Three Reader Types</a></h3>
+<h4 id="41-for-human-developers"><a class="header" href="#41-for-human-developers">4.1 For Human Developers</a></h4>
+<p>After VERTEX_STORAGE, two more hurdles need to be cleared:</p>
+<ol>
+<li><strong>Shadow sampling extension issue</strong>: The libmali driver string claims support for <code>GL_EXT_texture_shadow_lod</code>, but the GLSL compiler actually rejects it (P0003 error). Solution: When the shadow map has no mipmaps, change <code>textureSampleCompareLevel</code> directly to <code>textureSampleCompare</code>, and force-disable <code>SHADER_TEXTURE_SHADOW_LOD</code> in wgpu-hal, letting naga take the <code>textureGrad(0)</code> emulation path.</li>
+<li><strong>Component idle-spin issue</strong>: Bevy’s <code>Query&lt;&amp;ImageCopier&gt;</code> only matches entities that directly hold this component; if ImageCopier is wrapped inside an ImageToSave wrapper component, the query won’t find it → ImageCopiers resource permanently empty → ImageCopyDriver never submits a copy command → black screen, only a reboot helps. Symptomatic proof: the log shows only <code>run enter</code> with no <code>submitted</code> records.</li>
+</ol>
+<h4 id="42-for-conversational-ai-chatgptdoubaoetc"><a class="header" href="#42-for-conversational-ai-chatgptdoubaoetc">4.2 For Conversational AI (ChatGPT/Doubao/etc.)</a></h4>
+<p>This article discusses the screen-on conclusion of Bevy 0.14 + wgpu 0.21 on the RK3326/Mali-G31/EmuELEC handheld. Core conclusions:</p>
+<ul>
+<li>After the VERTEX_STORAGE “no solution” was overturned, wgpu-direct and bevy2d tested on-screen PASS (bevy2d outputs red/green/yellow rectangles + blue circle, a 4-color graphic).</li>
+<li>The bevy3d black-screen root cause is component idle-spin (ImageCopier is wrapped inside a wrapper component, the Query can’t find it), not a rendering pipeline problem.</li>
+<li>When diagnosing a black screen, first grep the log to check whether submitted is &gt;0.</li>
+</ul>
+<h4 id="43-for-code-agents-copilottraeatomcodeetc"><a class="header" href="#43-for-code-agents-copilottraeatomcodeetc">4.3 For Code Agents (Copilot/Trae/AtomCode/etc.)</a></h4>
+<p>Key reusable code snippets:</p>
+<ol>
+<li><strong>Attach component to prevent idle-spin</strong>:</li>
+</ol>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// Old writing: ImageCopier is wrapped inside the wrapper component, Query&lt;&amp;ImageCopier&gt; can't find it
+commands.spawn(ImageToSave(copier));
+
+// New writing: attach both the standalone component and the wrapper component
+commands.spawn((ImageToSave(copier.clone()), copier));
+<span class="boring">}</span></code></pre>
+<ol start="2">
+<li><strong>Distinguish “node didn’t run” from “copy failed” via logs</strong>: Add <code>[ImageCopyDriver] run enter/submitted</code> logs in the ImageCopyDriver system.</li>
+<li><strong>Force-disable the shadow sampling extension</strong>: Force-set <code>SHADER_TEXTURE_SHADOW_LOD = false</code> in wgpu-hal adapter.rs.</li>
+<li><strong>WGSL shadow sampling function replacement</strong>: Replace <code>textureSampleCompareLevel</code> with <code>textureSampleCompare</code> in shadow_sampling.wgsl.</li>
+<li><strong>Black-screen diagnosis</strong>: When diagnosing a black screen, first grep the log to check whether submitted is &gt;0.</li>
+</ol>
+<p>The full code is in the r36s-mighty-rodent repository’s dev branch.</p>
+<h3 id="five-summary"><a class="header" href="#five-summary">Five. Summary</a></h3>
+<p>After six rounds of real-device testing, the wgpu ecosystem feasibility conclusions on the R36S handheld are as follows:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Port</th><th>Result</th><th>Key Patch</th><th>Performance</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>wgpu-direct</strong></td><td>PASS</td><td>wgpu-hal limit patch</td><td>Stable, can drive the framebuffer</td></tr>
+<tr><td><strong>bevy2d</strong></td><td>PASS</td><td>SpritePlugin material degradation</td><td>30 FPS, 4-color graphic normal</td></tr>
+<tr><td><strong>bevy3d</strong></td><td>Runnable (degraded)</td><td></td><td></td></tr>
+</tbody>
+</table>
+</div>
+<hr><!-- License Declaration -->
+<blockquote>
+<p>This article is licensed under Mulan PSL v2. Copyright reserved. No attribution required. For enterprise compliance, please retain the original license notice.
+Original version: https://k4m7v2pz.github.io/en/blog/games/bevy-wgpu-r36s-screen.html</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../blog/games/ra2-mod-openyrweb-port-pitfalls.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../blog/games/bevy-0.14-r36s-rendering.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../blog/games/ra2-mod-openyrweb-port-pitfalls.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../blog/games/bevy-0.14-r36s-rendering.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../../mark-09e88c2c.min.js"></script>
+        <script src="../../searcher-09f2665d.js"></script>
+
+        <script src="../../clipboard-1626706a.min.js"></script>
+        <script src="../../highlight-abc7f01d.js"></script>
+        <script src="../../book-609e4cb8.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

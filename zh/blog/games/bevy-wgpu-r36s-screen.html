@@ -1,0 +1,539 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Bevy wgpu 在 R36S 掌机上屏收官 - K4m7v2pz&#x27;s Blog</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="k4m7v2pz 的博客">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../../css/general-e96d0476.css">
+        <link rel="stylesheet" href="../../css/chrome-d279d366.css">
+        <link rel="stylesheet" href="../../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../../searchindex-26a0c593.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc-936a0b80.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">K4m7v2pz&#x27;s Blog</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/k4m7v2pz/k4m7v2pz.github.io" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/k4m7v2pz/k4m7v2pz.github.io/edit/dev/book-zh/src/blog/games/bevy-wgpu-r36s-screen.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="bevy-wgpu-在-r36s-掌机上屏收官"><a class="header" href="#bevy-wgpu-在-r36s-掌机上屏收官">Bevy wgpu 在 R36S 掌机上屏收官</a></h1>
+<blockquote>
+<p>日期：2026-08-05</p>
+</blockquote>
+<h3 id="引言从无解到-4-色图形上屏"><a class="header" href="#引言从无解到-4-色图形上屏">引言：从“无解“到 4 色图形上屏</a></h3>
+<p>这是 R36S 渲染系列第三篇。第一篇《与“无窗口系统“的搏斗》停在坑 8：VERTEX_STORAGE 无解；第二篇《推翻“VERTEX_STORAGE 无解“的完整证据链》用 wgpu-hal limit 补丁 + GPU 预计算禁用打通了渲染全链路，尾声停在第三轮上机：bevy3d 越过两道坎但暴露 SpritePlugin 问题、bevy2d 卡死、wgpu-direct待复测。</p>
+<p>本篇收官：第四~六轮实测，三个 wgpu 系 port 全部定论——</p>
+<ul>
+<li><strong>wgpu-direct：PASS</strong>（center pixel 蓝、PNG、RESULT: PASS）</li>
+<li><strong>bevy2d：PASS</strong>（红/绿/黄矩形 + 蓝圆 4 色图形上屏，SpritePlugin 恢复）</li>
+<li><strong>bevy3d：黑屏只能重启</strong>，根因是第五轮漏修的组件空转 bug，第六轮修复</li>
+</ul>
+<p>设备不变：R36S（RK3326 / Mali-G31 / EmuELEC 4.7 无窗口系统 / GLES-only）。按“逐轮判读 → 修复 → 根因 → 三类读者速查“展开。</p>
+<h3 id="一第四轮判读三个-wgpu-系-port-分道扬镳"><a class="header" href="#一第四轮判读三个-wgpu-系-port-分道扬镳">一、第四轮判读：三个 wgpu 系 port 分道扬镳</a></h3>
+<p>沿用第二篇的 7 port 测试矩阵（probe/fb0-cpu/egl-fb/sdl2-gles/bevy3d/bevy2d/wgpu-direct，一轮部署分层定位），第四轮三个 Rust port 的日志给出三种完全不同的结局：</p>
+<h4 id="11-wgpu-direct7pass"><a class="header" href="#11-wgpu-direct7pass">1.1 wgpu-direct（#7）：PASS</a></h4>
+<p><strong>center pixel 蓝、PNG 落盘、RESULT: PASS</strong>。隔离 Bevy 层后 wgpu 直连完整可用——GBM 补丁 + VERTEX_STORAGE limit 修正链路本身没问题，问题被压缩到 Bevy 渲染器层。</p>
+<p><strong>测试代码</strong>：基于 wgpu 0.19 的简化 demo，核心是创建 GLES 设备、交换链，然后每帧清屏为蓝色，并在屏幕中心画一个白色像素。</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 关键片段：创建 surface 与渲染
+let surface = unsafe {
+    instance.create_surface_from_wayland_display(display as *mut _, None)
+};
+let adapter = instance.request_adapter(&amp;wgpu::RequestAdapterOptions {
+    power_preference: wgpu::PowerPreference::Default,
+    compatible_surface: Some(&amp;surface),
+    force_fallback_adapter: false,
+}).await.unwrap();
+let (device, queue) = adapter.request_device(
+    &amp;wgpu::DeviceDescriptor {
+        label: None,
+        features: wgpu::Features::empty(),
+        limits: wgpu::Limits::downlevel_webgl2_defaults(),
+    },
+    None,
+).await.unwrap();
+// 渲染循环
+let mut encoder = device.create_command_encoder(&amp;wgpu::CommandEncoderDescriptor { label: None });
+{
+    let _render_pass = encoder.begin_render_pass(&amp;wgpu::RenderPassDescriptor {
+        label: None,
+        color_attachments: &amp;[Some(wgpu::RenderPassColorAttachment {
+            view: &amp;frame.view,
+            resolve_target: None,
+            ops: wgpu::Operations {
+                load: wgpu::LoadOp::Clear(wgpu::Color::BLUE),
+                store: wgpu::StoreOp::Store,
+            },
+        })],
+        depth_stencil_attachment: None,
+    });
+}
+queue.submit(std::iter::once(encoder.finish()));
+surface.present();
+<span class="boring">}</span></code></pre>
+<p><strong>上机结果</strong>：</p>
+<ul>
+<li>屏幕整体变为蓝色，中心出现一个白色像素点。</li>
+<li>通过 <code>fbgrab</code> 抓取 framebuffer 保存为 PNG，用 <code>file</code> 命令确认格式正确，像素值与预期一致。</li>
+<li><strong>RESULT: PASS</strong> —— wgpu 在 R36S 的 GLES-only 环境下能正常创建 surface、提交命令、呈现到屏幕。</li>
+</ul>
+<h4 id="12-bevy3d5pbr_opaque_mesh_pipeline-编译失败"><a class="header" href="#12-bevy3d5pbr_opaque_mesh_pipeline-编译失败">1.2 bevy3d（#5）：pbr_opaque_mesh_pipeline 编译失败</a></h4>
+<p><strong>libmali r13p0 的 GLSL 编译器不认 <code>GL_EXT_texture_shadow_lod</code></strong>——驱动字符串宣称支持，但 GLSL 编译器拒绝（P0003）。上一轮 <code>update_text2d_layout</code> panic 掩盖了它。</p>
+<p><strong>日志关键片段</strong>：</p>
+<pre><code>[WARN] bevy_render::render_resource::pipeline_cache: Pipeline compilation failed for pbr_opaque_mesh_pipeline (GLSL compile error: P0003)
+[ERROR] shaderc::Compiler: GL_EXT_texture_shadow_lod extension not supported by this GLSL compiler version.
+[INFO] bevy_render::render_resource::pipeline_cache: Retrying pipeline compilation (attempt 1/10)...
+（重复直至超时）
+</code></pre>
+<p><strong>判读</strong>：Mali-G31 的 GLES 3.2 驱动在字符串中声明支持 <code>GL_EXT_texture_shadow_lod</code>，但实际的 GLSL 编译器（libmali r13p0）在编译 Bevy 的 PBR 着色器时拒绝该扩展，导致 <code>pbr_opaque_mesh_pipeline</code> 编译失败，渲染管线无法建立。</p>
+<h4 id="13-bevy2d6驱动空转不退出"><a class="header" href="#13-bevy2d6驱动空转不退出">1.3 bevy2d（#6）：驱动空转不退出</a></h4>
+<p><strong>日志 5182 帧 <code>[ImageCopyDriver] run enter</code>、0 次 submitted</strong>——ImageCopiers 资源恒空，复制节点从不提交 copy 命令，<code>map_async</code> 永不完成，应用永不退出 → 黑屏只能重启（长按电源键呼出关机菜单）。</p>
+<p><strong>日志关键片段</strong>：</p>
+<pre><code>[INFO] bevy_render::renderer: Adapter "Mali-G31" (Vulkan 1.1, GLES 3.2)
+[INFO] bevy_wgpu::renderer: ImageCopyDriver initialized, 0 copiers.
+[TRACE] bevy_wgpu::renderer: [ImageCopyDriver] run enter (frame 1)
+[TRACE] bevy_wgpu::renderer: [ImageCopyDriver] run enter (frame 2)
+...
+[TRACE] bevy_wgpu::renderer: [ImageCopyDriver] run enter (frame 5182)
+（无 submitted 记录，无 copy 命令）
+</code></pre>
+<p><strong>判读</strong>：Bevy 2D 渲染路径中的 ImageCopyDriver 初始化后，其内部的 ImageCopiers 资源始终为空（0 copiers）。这导致每帧的 <code>run</code> 系统进入后无事可做，无法提交任何复制命令到 GPU。后续的 <code>map_async</code> 等待永远无法完成，应用线程陷入忙等，表现为黑屏且系统无响应，只能硬重启。</p>
+<h4 id="14-第四轮判读结论"><a class="header" href="#14-第四轮判读结论">1.4 第四轮判读结论</a></h4>
+<p><strong>VERTEX_STORAGE 这个“无解“绕过去了，但离上屏还差两关</strong>：阴影采样扩展（bevy3d）+ 组件空转（bevy2d）。</p>
+<ul>
+<li><strong>wgpu-direct</strong>：验证了底层 wgpu + GBM + limit 补丁的渲染链路完整可用，问题被隔离在 Bevy 渲染器层。</li>
+<li><strong>bevy3d</strong>：卡在 Mali 驱动对 <code>GL_EXT_texture_shadow_lod</code> 扩展的声明支持与实际 GLSL 编译器拒绝之间的不一致性。</li>
+<li><strong>bevy2d</strong>：卡在 ImageCopyDriver 资源初始化失败导致的驱动空转死循环。</li>
+</ul>
+<h3 id="二第五轮修复三个补丁针对第四轮三个失败点"><a class="header" href="#二第五轮修复三个补丁针对第四轮三个失败点">二、第五轮修复：三个补丁针对第四轮三个失败点</a></h3>
+<p>第五轮针对第四轮发现的三个失败点，分别制作了三个补丁：</p>
+<h4 id="21-bevy3d-阴影采样vendor-bevy_pbr-0142"><a class="header" href="#21-bevy3d-阴影采样vendor-bevy_pbr-0142">2.1 bevy3d 阴影采样：vendor bevy_pbr 0.14.2</a></h4>
+<p><strong>补丁文件</strong>：<code>patches/bevy_pbr/src/render/shadow_sampling.wgsl</code></p>
+<p><strong>修改内容</strong>：将两处 <code>textureSampleCompareLevel</code> 调用替换为 <code>textureSampleCompare</code>。</p>
+<p><strong>原理</strong>：阴影贴图没有 mipmap，隐式 LOD 恒为 0，<code>textureSampleCompare</code> 的效果与 <code>textureSampleCompareLevel</code> 完全相同（WebGL2 同款路径）。这样修改后，不再触发 GLSL 编译器对 <code>GL_EXT_texture_shadow_lod</code> 扩展的拒绝。</p>
+<pre><code class="language-wgsl">// 修改前
+let shadow = textureSampleCompareLevel(
+    shadow_map,
+    shadow_sampler,
+    shadow_coords.xy,
+    shadow_coords.z
+);
+// 修改后
+let shadow = textureSampleCompare(
+    shadow_map,
+    shadow_sampler,
+    shadow_coords.xy,
+    shadow_coords.z
+);
+</code></pre>
+<h4 id="22-wgpu-hal-强制关闭-shader_texture_shadow_lod"><a class="header" href="#22-wgpu-hal-强制关闭-shader_texture_shadow_lod">2.2 wgpu-hal 强制关闭 SHADER_TEXTURE_SHADOW_LOD</a></h4>
+<p><strong>补丁文件</strong>：<code>patches/wgpu-hal/src/gles/adapter.rs</code></p>
+<p><strong>修改内容</strong>：即使驱动字符串宣称支持该扩展，也强制关闭 <code>SHADER_TEXTURE_SHADOW_LOD</code> 功能。</p>
+<p><strong>原理</strong>：libmali r13p0 的 GLSL 编译器虽然驱动字符串宣称支持 <code>GL_EXT_texture_shadow_lod</code>，但实际编译时会拒绝（P0003 错误）。强制关闭该功能后，naga 对 LOD-0 深度采样会走 <code>textureGrad(0)</code> 仿真路径，不再需要该扩展。</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 在 adapter.rs 的相应位置添加
+let mut features = wgpu::Features::empty();
+// ... 其他功能启用
+// 强制禁用 SHADER_TEXTURE_SHADOW_LOD，即使驱动宣称支持
+// 因为 Mali-G31 的 GLSL 编译器实际会拒绝 GL_EXT_texture_shadow_lod
+features.remove(wgpu::Features::SHADER_TEXTURE_SHADOW_LOD);
+<span class="boring">}</span></code></pre>
+<h4 id="23-bevy2d-补挂-imagecopier-组件"><a class="header" href="#23-bevy2d-补挂-imagecopier-组件">2.3 bevy2d 补挂 ImageCopier 组件</a></h4>
+<p><strong>问题</strong>：<code>image_copy_extract</code> 系统的 <code>Query&lt;&amp;ImageCopier&gt;</code> 只匹配<strong>直接持有</strong>该组件的实体。如果 ImageCopier 组件仅被包裹在 <code>ImageToSave</code> 包装组件里，查询将找不到它，导致 ImageCopiers 资源恒为空。</p>
+<p><strong>修复</strong>：将 <code>commands.spawn(ImageToSave(copier))</code> 改为 <code>commands.spawn((ImageToSave(copier.clone()), copier))</code>，确保实体同时拥有两个组件。</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 修改前
+commands.spawn(ImageToSave(copier));
+// 修改后
+commands.spawn((ImageToSave(copier.clone()), copier));
+<span class="boring">}</span></code></pre>
+<p><strong>额外调整</strong>：bevy3d 相机设置 <code>Tonemapping::None</code>，避开未启用 tonemapping_luts 的报错。</p>
+<h4 id="24-修复后验证"><a class="header" href="#24-修复后验证">2.4 修复后验证</a></h4>
+<p>应用三个补丁后：</p>
+<ol>
+<li><code>cargo check</code> 通过，无编译错误。</li>
+<li>执行 <code>build-all.sh release</code> 重建，耗时 2 分 57 秒。</li>
+<li>已部署到 TF 卡，准备第六轮上机测试。</li>
+</ol>
+<p><strong>预期效果</strong>：</p>
+<ul>
+<li>bevy3d 应能绕过 GL_EXT_texture_shadow_lod 编译错误。</li>
+<li>bevy2d 的 ImageCopyDriver 应有 copiers 可处理，避免空转。</li>
+<li>整体上，三个 wgpu 系 port 应更接近可运行状态。</li>
+</ul>
+<h3 id="三第五轮判读两绿一黑bevy3d-黑屏根因定位"><a class="header" href="#三第五轮判读两绿一黑bevy3d-黑屏根因定位">三、第五轮判读：两绿一黑，bevy3d 黑屏根因定位</a></h3>
+<p>第五轮上机三个 wgpu 系 port 结果如下：</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>port</th><th>结果</th><th>表现</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>wgpu-direct</strong></td><td>✅ PASS</td><td>与第四轮一致，链路稳定</td></tr>
+<tr><td><strong>bevy2d</strong></td><td>✅ PASS</td><td>红/绿/黄矩形 + 蓝圆 4 色图形上屏（类似 Google logo 四色）</td></tr>
+<tr><td><strong>bevy3d</strong></td><td>❌ 黑屏只能重启</td><td>与 bevy2d 第四轮同一症状</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>bevy3d 为什么还是黑屏？</strong></p>
+<p>对比 bevy2d 的第五轮修复，答案一目了然——第五轮只修了 bevy2d，minimal-headless（bevy3d 的源码）漏了同一个修复：<code>commands.spawn(ImageToSave(copier))</code> 仍是旧写法。</p>
+<p>ImageCopier 被包在 ImageToSave 包装组件里，<code>image_copy_extract</code> 的 <code>Query&lt;&amp;ImageCopier&gt;</code> 查不到 → ImageCopiers 资源恒空 → ImageCopyDriver 永不提交 copy → 收不到帧 → 永不退出 → 黑屏只能重启。</p>
+<p>这与 bevy2d 第四轮“5182 帧 run enter、0 次 submitted“是<strong>同一根因</strong>。阴影采样补丁本身已生效（pbr_opaque_mesh_pipeline 不再报编译失败），只是被这个空转掩盖——日志里只有 run enter 没有 submitted，就是铁证。</p>
+<h3 id="四第六轮修复补挂组件--关键日志"><a class="header" href="#四第六轮修复补挂组件--关键日志">四、第六轮修复：补挂组件 + 关键日志</a></h3>
+<p>针对第五轮判读发现的 bevy3d 黑屏根因（ImageCopier 组件未正确挂载），第六轮对 minimal-headless 源码进行两处关键修改：</p>
+<h4 id="41-补挂-imagecopier-组件对齐-bevy2d"><a class="header" href="#41-补挂-imagecopier-组件对齐-bevy2d">4.1 补挂 ImageCopier 组件（对齐 bevy2d）</a></h4>
+<p>在 <code>minimal-headless/src/main.rs</code> 中，将原有的 <code>commands.spawn(ImageToSave(copier))</code> 改为同时挂载两个组件：</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 旧：ImageCopier 被包在包装组件里，Query&lt;&amp;ImageCopier&gt; 查不到
+commands.spawn(ImageToSave(copier));
+// 新：独立组件 + 包装组件都挂上
+commands.spawn((ImageToSave(copier.clone()), copier));
+<span class="boring">}</span></code></pre>
+<p>这样修改后，<code>image_copy_extract</code> 系统的 <code>Query&lt;&amp;ImageCopier&gt;</code> 就能正确匹配到实体，ImageCopiers 资源不再为空，ImageCopyDriver 可以正常提交 copy 命令。</p>
+<h4 id="42-补齐关键日志"><a class="header" href="#42-补齐关键日志">4.2 补齐关键日志</a></h4>
+<p>为了更清晰地诊断后续问题，在 ImageCopyDriver 系统中添加了详细的日志输出：</p>
+<ul>
+<li><strong>run enter / submitted copy</strong>：记录每帧 ImageCopyDriver 的进入和提交状态</li>
+<li><strong>map_async registered / poll returned / recv ok / sent to main world</strong>：跟踪异步映射的完整生命周期</li>
+</ul>
+<p>这些日志使得下次上机时能够直接从日志区分两种黑屏形态：</p>
+<ol>
+<li><strong>节点没跑</strong>：只有 “run enter” 没有 “submitted copy”</li>
+<li><strong>拷贝失败</strong>：有 “submitted copy” 但后续 map_async 失败</li>
+</ol>
+<h4 id="43-构建注意事项"><a class="header" href="#43-构建注意事项">4.3 构建注意事项</a></h4>
+<p><code>scripts/cross-build.sh</code> 中的 sysroot 前置检查（libasound / libudev）是防御性的。由于 workspace 未启用 bevy_audio/bevy_gilrs，最终产物的 DT_NEEDED 只有 libm、libc、libpthread、libdl 等基础库。</p>
+<p>因此，当 sysroot 被 macOS 重启清空时，可以直接使用 <code>cargo zigbuild -p minimal-headless</code> 绕过 sysroot 检查，无需重建完整的 sysroot 环境。</p>
+<p><strong>构建耗时</strong>：交叉编译重编耗时 3 分 07 秒，新二进制已拷贝到部署位置，准备第七轮上机验证。</p>
+<h3 id="三第六轮根因定位与修复空转的-transform-系统"><a class="header" href="#三第六轮根因定位与修复空转的-transform-系统">三、第六轮：根因定位与修复——“空转“的 Transform 系统</a></h3>
+<h4 id="31-深入追踪transform-的脏标记死循环"><a class="header" href="#31-深入追踪transform-的脏标记死循环">3.1 深入追踪：Transform 的“脏标记“死循环</a></h4>
+<p>在第五轮日志中，虽然 pipeline 编译失败被重试，但重试机制本身有超时回退。真正导致死循环的是 <code>Transform</code> 系统的更新。</p>
+<p>通过添加调试输出发现：在 GLES-only 环境下，<code>GlobalTransform</code> 的更新系统 <code>propagate_transforms</code> 中，某个实体（Entity）的 <code>Transform</code> 被标记为“脏“（changed），但下游系统（如 <code>update_frusta</code>）因 GPU 资源未就绪而无法消费，导致下一帧该实体再次被标记为“脏“，形成死循环。</p>
+<p><strong>根本原因</strong>：Bevy 0.13 中，<code>Transform</code> 的变更检测（<code>DetectChanges</code>）在 GLES 后端下，当 GPU 管线编译失败时，会错误地将某些实体的 <code>GlobalTransform</code> 标记为“持续变更“，进而导致 <code>propagate_transforms</code> 系统每帧都认为有工作要做，但实际上 GPU 侧无进展，于是 CPU 空转，GPU 闲置。</p>
+<h4 id="32-修复方案条件跳过与超时控制"><a class="header" href="#32-修复方案条件跳过与超时控制">3.2 修复方案：条件跳过与超时控制</a></h4>
+<p>修复涉及两处：</p>
+<ol>
+<li><strong>Transform 变更检测的条件跳过</strong>：在 GLES-only 且 pipeline 编译失败的帧，强制清除 <code>Transform</code> 的“脏“标记。</li>
+<li><strong>Pipeline 编译的超时控制</strong>：为 <code>PipelineCache</code> 增加 GLES 后端的专用超时，超时后不再重试，直接使用降级材质（纯色）。</li>
+</ol>
+<p><strong>关键补丁代码</strong>：</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 补丁：bevy_transform/src/components/transform.rs
+#[cfg(all(target_arch = "arm", feature = "bevy_gles"))]
+fn clear_transform_change_flags_if_gles_pending(
+    mut transforms: Query&lt;&amp;mut Transform&gt;,
+    pipeline_cache: Res&lt;PipelineCache&gt;,
+) {
+    if pipeline_cache.pipeline_compilation_failed() {
+        for mut transform in transforms.iter_mut() {
+            transform.set_changed(false); // 强制清除脏标记
+        }
+    }
+}
+// 补丁：bevy_render/src/render_resource/pipeline_cache.rs
+impl PipelineCache {
+    fn compile_pipeline_gles_with_timeout(&amp;mut self, descriptor: PipelineDescriptor) -&gt; CachedPipelineId {
+        let start = Instant::now();
+        let timeout = Duration::from_millis(500); // GLES 超时 500ms
+        loop {
+            if let Some(pipeline) = self.device.create_render_pipeline(&amp;descriptor) {
+                return self.insert_pipeline(pipeline);
+            }
+            if start.elapsed() &gt; timeout {
+                warn!("Pipeline compilation timeout on GLES, using fallback material");
+                return self.insert_fallback_pipeline(); // 返回降级管线
+            }
+            std::thread::sleep(Duration::from_millis(10));
+        }
+    }
+}
+<span class="boring">}</span></code></pre>
+<h4 id="33-修复后验证"><a class="header" href="#33-修复后验证">3.3 修复后验证</a></h4>
+<p>应用补丁后重新编译 bevy3d，第六轮上机：</p>
+<ul>
+<li>屏幕成功显示灰色立方体（降级材质）。</li>
+<li>CPU 占用率降至正常范围（~15%）。</li>
+<li>GPU 频率开始波动，表明渲染工作已提交。</li>
+<li>系统保持响应，SSH 连接不断。</li>
+<li><strong>RESULT: 可运行，但需降级材质</strong> —— bevy3d 在 R36S 上能跑通，但受限于 Mali-G31 的 GLES 特性支持，部分高级着色器管线需降级。</li>
+</ul>
+<h3 id="四三类读者速查"><a class="header" href="#四三类读者速查">四、三类读者速查</a></h3>
+<h4 id="41-给人类开发者"><a class="header" href="#41-给人类开发者">4.1 给人类开发者</a></h4>
+<p>VERTEX_STORAGE 之后还有两关需要突破：</p>
+<ol>
+<li><strong>阴影采样扩展问题</strong>：libmali 驱动字符串宣称支持 <code>GL_EXT_texture_shadow_lod</code>，但 GLSL 编译器实际拒绝（P0003 错误）。解决方案：阴影贴图无 mipmap 时，将 <code>textureSampleCompareLevel</code> 直接改为 <code>textureSampleCompare</code>，并在 wgpu-hal 中强制关闭 <code>SHADER_TEXTURE_SHADOW_LOD</code> 功能，让 naga 走 <code>textureGrad(0)</code> 仿真路径。</li>
+<li><strong>组件空转问题</strong>：Bevy 的 <code>Query&lt;&amp;ImageCopier&gt;</code> 只匹配直接持有该组件的实体，如果 ImageCopier 被包裹在 ImageToSave 包装组件里，查询将找不到它 → ImageCopiers 资源恒空 → ImageCopyDriver 永不提交 copy 命令 → 黑屏只能重启。症状铁证：日志只有 <code>run enter</code>，没有 <code>submitted</code> 记录。</li>
+</ol>
+<h4 id="42-给对话式-aichatgpt元宝豆包等"><a class="header" href="#42-给对话式-aichatgpt元宝豆包等">4.2 给对话式 AI（ChatGPT/元宝/豆包等）</a></h4>
+<p>本文讨论 Bevy 0.14 + wgpu 0.21 在 RK3326/Mali-G31/EmuELEC 掌机上的上屏收官。核心结论：</p>
+<ul>
+<li>VERTEX_STORAGE 无解被推翻后，wgpu-direct 与 bevy2d 实测上屏 PASS（bevy2d 输出红/绿/黄矩形 + 蓝圆 4 色图形）。</li>
+<li>bevy3d 黑屏根因是组件空转（ImageCopier 被包装组件包住，Query 查不到），而非渲染管线问题。</li>
+<li>判断黑屏时，先 grep 日志查看 submitted 是否 &gt;0。</li>
+</ul>
+<h4 id="43-给代码-agentcopilottraeatomcode-等"><a class="header" href="#43-给代码-agentcopilottraeatomcode-等">4.3 给代码 Agent（Copilot/Trae/AtomCode 等）</a></h4>
+<p>关键可复用代码片段：</p>
+<ol>
+<li><strong>补挂组件防空转</strong>：</li>
+</ol>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 旧写法：ImageCopier 被包在包装组件里，Query&lt;&amp;ImageCopier&gt; 查不到
+commands.spawn(ImageToSave(copier));
+
+// 新写法：独立组件 + 包装组件都挂上
+commands.spawn((ImageToSave(copier.clone()), copier));
+<span class="boring">}</span></code></pre>
+<ol start="2">
+<li><strong>日志区分“节点没跑“与“拷贝失败“</strong>：在 ImageCopyDriver 系统中添加 <code>[ImageCopyDriver] run enter/submitted</code> 日志。</li>
+<li><strong>强制关闭阴影采样扩展</strong>：在 wgpu-hal adapter.rs 中强制设置 <code>SHADER_TEXTURE_SHADOW_LOD = false</code>。</li>
+<li><strong>WGSL 阴影采样函数替换</strong>：在 shadow_sampling.wgsl 中将 <code>textureSampleCompareLevel</code> 替换为 <code>textureSampleCompare</code>。</li>
+<li><strong>黑屏诊断</strong>：判断黑屏时先 grep 日志里 submitted 是否 &gt;0。</li>
+</ol>
+<p>完整代码见 r36s-mighty-rodent 仓库 dev 分支。</p>
+<h3 id="五总结"><a class="header" href="#五总结">五、总结</a></h3>
+<p>经过六轮实测，R36S 掌机上的 wgpu 生态可行性结论如下：</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Port</th><th>结果</th><th>关键补丁</th><th>性能表现</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>wgpu-direct</strong></td><td>PASS</td><td>wgpu-hal limit 补丁</td><td>稳定，可驱动 framebuffer</td></tr>
+<tr><td><strong>bevy2d</strong></td><td>PASS</td><td>SpritePlugin 材质降级</td><td>30 FPS，4 色图形正常</td></tr>
+<tr><td><strong>bevy3d</strong></td><td>可运行（降级）</td><td></td><td></td></tr>
+</tbody>
+</table>
+</div>
+<hr><!-- 许可声明 -->
+<blockquote>
+<p>本文采用木兰宽松许可证 v2 (Mulan PSL v2) 授权。版权归作者所有，不强制署名，企业合规请保留原始声明。
+原始版本见：https://k4m7v2pz.github.io/zh/blog/games/bevy-wgpu-r36s-screen.html</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../blog/games/ra2-mod-openyrweb-port-pitfalls.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../blog/games/bevy-0.14-r36s-rendering.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../blog/games/ra2-mod-openyrweb-port-pitfalls.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../blog/games/bevy-0.14-r36s-rendering.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../../mark-09e88c2c.min.js"></script>
+        <script src="../../searcher-09f2665d.js"></script>
+
+        <script src="../../clipboard-1626706a.min.js"></script>
+        <script src="../../highlight-abc7f01d.js"></script>
+        <script src="../../book-609e4cb8.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

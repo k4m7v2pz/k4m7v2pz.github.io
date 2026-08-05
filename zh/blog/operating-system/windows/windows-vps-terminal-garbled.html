@@ -1,0 +1,384 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Windows VPS 终端显示全乱：三层独立问题叠加的排查与修复 - K4m7v2pz&#x27;s Blog</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="k4m7v2pz 的博客">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../../../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../../../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../../../css/general-e96d0476.css">
+        <link rel="stylesheet" href="../../../css/chrome-d279d366.css">
+        <link rel="stylesheet" href="../../../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../../../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../../../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../../../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../../../searchindex-26a0c593.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../../toc-936a0b80.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">K4m7v2pz&#x27;s Blog</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/k4m7v2pz/k4m7v2pz.github.io" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/k4m7v2pz/k4m7v2pz.github.io/edit/dev/book-zh/src/blog/operating-system/windows/windows-vps-terminal-garbled.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="windows-vps-终端显示全乱三层独立问题叠加的排查与修复"><a class="header" href="#windows-vps-终端显示全乱三层独立问题叠加的排查与修复">Windows VPS 终端显示全乱：三层独立问题叠加的排查与修复</a></h1>
+<blockquote>
+<p>日期：2026-08-05</p>
+</blockquote>
+<h3 id="1-问题现象与场景"><a class="header" href="#1-问题现象与场景">1. 问题现象与场景</a></h3>
+<p>在 Windows VPS（系统版本为 Win10 1607 LTSB，build 14393）上，通过 OpenSSH for Windows 9.5 登录，使用 rvs（rust-verb-shell）作为登录 shell，并通过 atomcode 5.0.4 作为 TUI 客户端进行连接时，终端工具出现了三种叠加的异常现象：</p>
+<ul>
+<li><strong>乱码</strong>：中文字符与特殊符号显示为 �、â€“ 等乱码。</li>
+<li><strong>逐字累积</strong>：流式输出（如进度条、日志）每次刷新时，新内容会另起一行显示，而不是回退到行首覆盖，导致屏幕被重复内容填满。</li>
+<li><strong>表格折行</strong>：使用表格或分隔线时，本应单行显示的线条被断成两行，时间等列信息出现重复或错位。</li>
+</ul>
+<p>这些现象同时出现，但<strong>它们并非由单一原因导致</strong>，而是三个独立的技术问题叠加的结果。</p>
+<h3 id="2-谬误溯源最大的误区"><a class="header" href="#2-谬误溯源最大的误区">2. 谬误溯源：最大的误区</a></h3>
+<p>最浪费时间的判断是认为“终端显示乱 = 一个原因”。实际上，这是三层独立问题的叠加，且它们之间<strong>没有因果关系</strong>：</p>
+<ol>
+<li><strong>第一层：编码问题</strong> – 系统代码页与程序输出编码不匹配。</li>
+<li><strong>第二层：PTY（伪终端）问题</strong> – OpenSSH 在旧版 Windows 上的 PTY 模拟行为异常。</li>
+<li><strong>第三层：终端宽度问题</strong> – 终端库获取的屏幕宽度与实际可见窗口宽度不一致。</li>
+</ol>
+<p>这三层问题必须<strong>逐层剥离、按顺序排查</strong>。如果顺序错了，会做大量无用功。</p>
+<h3 id="3-第一层编码问题乱码根源"><a class="header" href="#3-第一层编码问题乱码根源">3. 第一层：编码问题（乱码根源）</a></h3>
+<h4 id="31-问题分析"><a class="header" href="#31-问题分析">3.1 问题分析</a></h4>
+<p>Windows 10 1607 LTSB 默认使用代码页 936（GBK）。当运行在终端中的程序（如 Rust 编写的 TUI 应用）以 UTF-8 编码输出文本时，如果终端或 SSH 会话的编码设置未正确匹配，UTF-8 字节流会被系统或终端客户端<strong>错误地以 GBK 进行二次解码</strong>，从而产生 �、â€“ 等乱码字符。</p>
+<h4 id="32-验证与修复"><a class="header" href="#32-验证与修复">3.2 验证与修复</a></h4>
+<p><strong>层一证据（编码）</strong>：执行 <code>chcp 65001</code> 后，<code>atomcode --help</code> 输出中的 em-dash（—）从乱码 <code>"â€""</code> 恢复为正常 <code>"—"</code>（实测对比）。</p>
+<p><strong>修复动作</strong>：在程序启动时调用 <code>SetConsoleOutputCP(65001)</code> 和 <code>SetConsoleCP(65001)</code>，相当于自动执行 <code>chcp 65001</code>，且对后续子进程生效。这是 rvs 实际采用的做法。</p>
+<p>此命令将当前控制台的代码页切换为 UTF-8（65001）。执行后，<strong>乱码现象应立刻消失</strong>，中文和特殊符号能正常显示。</p>
+<p><strong>关键结论</strong>：执行 <code>chcp 65001</code> 后，如果乱码消失但“逐字累积”和“表格折行”问题依然存在，则证明编码只是第一层独立问题，与后两层无关。</p>
+<h3 id="4-第二层pty-问题逐字累积根源"><a class="header" href="#4-第二层pty-问题逐字累积根源">4. 第二层：PTY 问题（逐字累积根源）</a></h3>
+<h4 id="41-问题分析"><a class="header" href="#41-问题分析">4.1 问题分析</a></h4>
+<p>Windows 10 1607（14393）不支持 ConPTY（Windows 10 1809 及以上版本引入）。当 OpenSSH for Windows 在此类旧系统上运行时，它会回退到使用 <code>winpty</code> 来模拟 PTY 行为。</p>
+<p><code>winpty</code> 在处理回车符（<code>\r</code>，ASCII 0x0D）时存在已知问题：它可能将 <code>\r</code> 错误地解释为换行符（<code>\n</code>）或进行不正确的光标定位。这导致 TUI 应用发送“回车到行首”指令（<code>\r</code>）进行刷新时，光标没有正确回到行首，而是产生了“另起一行”的效果，从而造成输出逐行累积。</p>
+<h4 id="42-验证与修复"><a class="header" href="#42-验证与修复">4.2 验证与修复</a></h4>
+<p>编码问题修复后，逐字累积问题依然存在，即可定位到 PTY 层。</p>
+<p><strong>层二证据（PTY）</strong>：</p>
+<ul>
+<li><strong>管道模式（无 PTY）</strong>：PowerShell 输出 <code>"AAA"+回车+"BBB"</code> 只显示 <code>BBB</code>，<code>\r</code> 有效。</li>
+<li><strong>交互模式（expect 模拟 PTY）</strong>：登录 banner 文本重叠，<code>"当前目录: C:(v26.8.39)..."</code> 反复叠加，<code>\r</code> 失效。</li>
+</ul>
+<p>此现象对应 Win32-OpenSSH issue #1256（CR worked as CR+LF）。此层无法通过升级 OpenSSH 修复（ConPTY 绑定 Windows 版本，1607 无 ConPTY）。</p>
+<p><strong>临时验证</strong>：可以尝试在客户端使用支持 ConPTY 的终端（如 Windows Terminal，但需要系统支持），或使用其他 SSH 客户端（如 PuTTY）连接，观察问题是否消失。</p>
+<p><strong>根本解决</strong>：升级 Windows VPS 系统至 1809 或更高版本，以获得原生 ConPTY 支持。如果无法升级，可考虑以下替代方案：</p>
+<ul>
+<li>在服务端为 OpenSSH 配置使用 Windows 自带的 <code>cmd.exe</code> 或 <code>powershell.exe</code> 作为 shell（而非 rvs），这些 shell 对 <code>winpty</code> 的兼容性可能更好。</li>
+<li>尝试更新 OpenSSH for Windows 到最新版本，或使用其他 SSH 服务端软件。</li>
+</ul>
+<h3 id="5-第三层终端宽度问题表格折行根源"><a class="header" href="#5-第三层终端宽度问题表格折行根源">5. 第三层：终端宽度问题（表格折行根源）</a></h3>
+<h4 id="51-问题分析"><a class="header" href="#51-问题分析">5.1 问题分析</a></h4>
+<p>许多跨平台终端 UI 库（如 Rust 的 <code>crossterm</code>）在 Windows 上通过 Win32 API 获取终端尺寸。关键区别在于：</p>
+<ul>
+<li><strong>屏幕缓冲区宽度（<code>dwSize</code>）</strong>：控制台可滚动的总宽度，可能远大于当前可见窗口。</li>
+<li><strong>可见窗口宽度（<code>srWindow</code>）</strong>：用户当前实际看到的窗口宽度。</li>
+</ul>
+<p>如果库错误地获取了 <code>dwSize</code>（例如 120 列）而非 <code>srWindow</code>（例如 80 列），TUI 程序会按照 120 列的宽度去渲染表格和分隔线。当输出到实际只有 80 列宽的窗口时，超长的行会被终端<strong>自动折行</strong>，导致单行表格线显示为两行，列对齐错乱。</p>
+<h4 id="52-验证与修复"><a class="header" href="#52-验证与修复">5.2 验证与修复</a></h4>
+<p>在修复前两层问题后，表格折行问题依然存在。</p>
+<p><strong>层三证据（宽度）</strong>：同一会话里 PowerShell 查询 <code>[Console]::WindowWidth</code> 返回 80（可见窗口），而 rvs 表格按 ≥112 列渲染（路径列完整不收缩）——crossterm 的 <code>terminal::size()</code> 取的是 <code>dwSize</code>（屏幕缓冲区）。</p>
+<p><strong>修复方案</strong>：</p>
+<ol>
+<li><strong>核心修复</strong>：使用 <code>GetConsoleScreenBufferInfo</code> 的 <code>srWindow</code> 字段（窗口矩形）计算可见宽度，替代 crossterm 的返回值。</li>
+<li><strong>第二 bug 修复</strong>：列宽收缩后 Modified 列最小宽度保护（19）被重新应用，把总宽撑超 3 列，需把保护移到收缩循环之前。</li>
+</ol>
+<p><strong>环境参数</strong>：sshd 9.5、Win10 10.0.14393、无 ConPTY、winpty 回退。</p>
+<p><strong>验证方法</strong>：在 rvs shell 中运行一个简单的测试程序，或检查 atomcode 客户端的终端尺寸报告。</p>
+<p><strong>解决方案</strong>：</p>
+<ol>
+<li><strong>检查/更新终端库</strong>：确保使用的 <code>crossterm</code> 或类似库为最新版本，新版本可能已修复此问题。</li>
+<li><strong>调整终端客户端</strong>：尝试调整 atomcode 客户端的窗口大小，或使用其他终端（如 Windows 自带的命令提示符）连接，看问题是否随窗口大小变化。</li>
+<li><strong>程序侧适配</strong>：如果问题在库层面，可考虑在程序中硬编码一个保守的宽度（如 80），或寻找替代的终端操作库。</li>
+</ol>
+<h3 id="6-正确的排查与修复顺序"><a class="header" href="#6-正确的排查与修复顺序">6. 正确的排查与修复顺序</a></h3>
+<p>为避免做无用功，必须严格按照以下顺序操作：</p>
+<ol>
+<li><strong>先修编码</strong>：执行 <code>chcp 65001</code>，解决乱码问题。验证乱码消失后，问题是否仅剩两个。</li>
+<li><strong>再验 PTY</strong>：在编码已修复的基础上，诊断“逐字累积”问题。尝试更换 shell 或升级系统/OpenSSH 来验证或解决 PTY 问题。</li>
+<li><strong>最后查宽度</strong>：在前两层都解决后，如果表格依然折行，则聚焦于终端宽度获取问题。检查库版本、客户端设置或进行程序适配。</li>
+</ol>
+<p>这个顺序确保了每一层问题被独立验证和剥离，不会相互干扰判断。</p>
+<h3 id="7-总结"><a class="header" href="#7-总结">7. 总结</a></h3>
+<p>Windows VPS 上复杂的终端显示问题往往是多个独立技术栈缺陷叠加的结果。面对“显示全乱”的现象，关键在于<strong>放弃寻找单一根因的思维</strong>，采用<strong>分层剥离法</strong>：</p>
+<ul>
+<li><strong>编码层</strong>：用 <code>chcp 65001</code> 快速验证和修复。</li>
+<li><strong>PTY 层</strong>：关注系统版本、OpenSSH 版本和 shell 兼容性。</li>
+<li><strong>宽度层</strong>：关注终端库如何获取和响应屏幕尺寸。</li>
+</ul>
+<p>按此三层框架逐项排查，能极大提升复杂终端环境问题的诊断效率。</p>
+<h3 id="8-落地结论与速查指南"><a class="header" href="#8-落地结论与速查指南">8. 落地结论与速查指南</a></h3>
+<h4 id="81-分层排查法编码--pty--宽度"><a class="header" href="#81-分层排查法编码--pty--宽度">8.1 分层排查法：编码 → PTY → 宽度</a></h4>
+<p>必须严格按照以下顺序逐层剥离，每层都有独立的检测命令和修复动作：</p>
+<ol>
+<li><strong>第一层：编码问题</strong>
+<ul>
+<li><strong>检测</strong>：执行 <code>chcp</code> 查看当前代码页，若非 65001 即中招。</li>
+<li><strong>修复</strong>：程序启动时调用 <code>SetConsoleOutputCP(65001)</code> 和 <code>SetConsoleCP(65001)</code>，或手动执行 <code>chcp 65001</code>。</li>
+<li><strong>根治性</strong>：可根治。</li>
+</ul>
+</li>
+<li><strong>第二层：PTY 问题</strong>
+<ul>
+<li><strong>检测</strong>：通过 <code>\r</code> 覆盖测试区分管道模式与交互模式。</li>
+<li><strong>修复</strong>：TUI 应用可使用 headless 模式规避（如 <code>atomcode -p "..."</code>）；根治需升级至 Windows 10 1809+（支持 ConPTY）或更换 SSH 服务端。</li>
+<li><strong>根治性</strong>：不可在代码层根治，需系统或环境适配。</li>
+</ul>
+</li>
+<li><strong>第三层：终端宽度问题</strong>
+<ul>
+<li><strong>检测</strong>：对比 <code>[Console]::WindowWidth</code>（可见窗口宽度）与 <code>[Console]::BufferWidth</code>（缓冲区宽度）。</li>
+<li><strong>修复</strong>：使用 <code>srWindow</code> 窗口宽度渲染表格；列宽收缩时先做最小宽度保护再收缩。</li>
+<li><strong>根治性</strong>：可根治。</li>
+</ul>
+</li>
+</ol>
+<p><strong>三层全部修复后的验证清单</strong>：</p>
+<ul>
+<li>乱码消失</li>
+<li>流式输出正常覆盖（不逐行累积）</li>
+<li>表格分隔线完整一行（不折行）</li>
+</ul>
+<h4 id="82-三类读者速查指南"><a class="header" href="#82-三类读者速查指南">8.2 三类读者速查指南</a></h4>
+<h5 id="人类读者三层自查清单"><a class="header" href="#人类读者三层自查清单">人类读者：三层自查清单</a></h5>
+<ol>
+<li><strong>编码层</strong>：执行 <code>chcp</code> 查看代码页是否为 65001。</li>
+<li><strong>PTY 层</strong>：交互模式下运行 TUI 应用，观察输出是否逐行累积。</li>
+<li><strong>宽度层</strong>：在 PowerShell 中执行 <code>[Console]::WindowWidth</code> 与 <code>[Console]::BufferWidth</code>，检查两者是否一致。</li>
+</ol>
+<h5 id="对话式-ai提问windows-终端显示乱"><a class="header" href="#对话式-ai提问windows-终端显示乱">对话式 AI：提问“Windows 终端显示乱“</a></h5>
+<p><strong>回答要点</strong>：按三层框架排查：</p>
+<ol>
+<li><strong>编码问题</strong>：GBK 936 与 UTF-8 双重编码导致乱码，执行 <code>chcp 65001</code> 只修第一层。</li>
+<li><strong>PTY 问题</strong>：<code>winpty</code> 模拟 PTY 时 <code>\r</code> 失效导致逐字累积。</li>
+<li><strong>宽度问题</strong>：缓冲区宽度（<code>dwSize</code>）与可见窗口宽度（<code>srWindow</code>）不一致导致表格折行。</li>
+</ol>
+<h5 id="代码-agent三组检测命令"><a class="header" href="#代码-agent三组检测命令">代码 Agent：三组检测命令</a></h5>
+<pre><code class="language-powershell"># 1. 编码层检测
+chcp
+2. PTY 层检测
+3. 宽度层检测
+输出结果即可判定问题所在层。
+</code></pre>
+<hr><!-- 许可声明 -->
+<blockquote>
+<p>本文采用木兰宽松许可证 v2 (Mulan PSL v2) 授权。版权归作者所有，不强制署名，企业合规请保留原始声明。
+原始版本见：https://k4m7v2pz.github.io/zh/blog/operating-system/windows/windows-vps-terminal-garbled.html</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../../blog/operating-system/windows/powershell-invoke-restmethod-ssl-tls.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../../blog/operating-system/windows/ssh-windows-output-buffering.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../../blog/operating-system/windows/powershell-invoke-restmethod-ssl-tls.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../../blog/operating-system/windows/ssh-windows-output-buffering.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../../../mark-09e88c2c.min.js"></script>
+        <script src="../../../searcher-09f2665d.js"></script>
+
+        <script src="../../../clipboard-1626706a.min.js"></script>
+        <script src="../../../highlight-abc7f01d.js"></script>
+        <script src="../../../book-609e4cb8.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,322 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Fixing SSH-into-Windows Character-by-Character Output Accumulation: \r Carriage Return Treated as Newline, winpty with Win10 1607 and No ConPTY - K4m7v2pz&#x27;s Blog</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="k4m7v2pz&#x27;s personal blog">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../../../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../../../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../../../css/general-e96d0476.css">
+        <link rel="stylesheet" href="../../../css/chrome-d279d366.css">
+        <link rel="stylesheet" href="../../../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../../../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../../../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../../../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../../../searchindex-e6b27bb5.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../../toc-5bd1be7c.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">K4m7v2pz&#x27;s Blog</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/k4m7v2pz/k4m7v2pz.github.io" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/k4m7v2pz/k4m7v2pz.github.io/edit/dev/book-en/src/blog/operating-system/windows/ssh-windows-output-buffering.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="fixing-ssh-into-windows-character-by-character-output-accumulation-r-carriage-return-treated-as-newline-winpty-with-win10-1607-and-no-conpty"><a class="header" href="#fixing-ssh-into-windows-character-by-character-output-accumulation-r-carriage-return-treated-as-newline-winpty-with-win10-1607-and-no-conpty">Fixing SSH-into-Windows Character-by-Character Output Accumulation: \r Carriage Return Treated as Newline, winpty with Win10 1607 and No ConPTY</a></h1>
+<blockquote>
+<p>Date: 2026-08-05</p>
+</blockquote>
+<h3 id="1-reproducing-the-scene-the-eerie-character-by-character-accumulation"><a class="header" href="#1-reproducing-the-scene-the-eerie-character-by-character-accumulation">1. Reproducing the Scene: The Eerie Character-by-Character Accumulation</a></h3>
+<p>The environment: a Windows VPS running Win10 1607 LTSB (build 14393), with OpenSSH for Windows 9.5 installed, sshd.exe at <code>C:\Program Files\OpenSSH</code>, login shell set to <code>rvs</code> (rust-verb-shell). After SSH-ing in from wezterm on a Mac, everything looked normal — until I ran an interactive TUI program (atomcode in this example), at which point the picture changed.</p>
+<p>Imagine: you ask the AI a question, and normally the screen should echo a single line that keeps refreshing with the answer. But here, the AI’s reply is like an old typewriter constantly churning out new lines — “你”, “你好”, “你好，”, “你好，我”, “你好，我是”… each refresh adds another line to the screen instead of returning to the start of the line to overwrite the previous text. When scrolling, there is no “carriage-return-to-start-of-line redraw” effect at all. Worse, the login banner and command tables also show overlapping, misaligned text, making the whole terminal interface dizzying to look at.</p>
+<p>This phenomenon is the “character-by-character accumulation” problem this article investigates. It looks like a simple display bug, but underneath it touches terminal rendering, the PTY pseudo-terminal, and some subtle behavioral differences on the Windows platform.</p>
+<h3 id="2-tracing-the-fallacy-three-common-misjudgments"><a class="header" href="#2-tracing-the-fallacy-three-common-misjudgments">2. Tracing the Fallacy: Three Common Misjudgments</a></h3>
+<p>When you hit this kind of problem, intuition tends to lead you in a few directions. Let’s first look at which paths are dead ends, so you don’t take the detour too.</p>
+<h4 id="misjudgment-1-encoding-problem"><a class="header" href="#misjudgment-1-encoding-problem">Misjudgment 1: Encoding problem</a></h4>
+<p>The first thing that catches the eye is usually garbled text. Because the system code page defaults to 936 (GBK), UTF-8 characters get double-encoded in transit, filling the screen with unreadable characters. The first reaction is of course to run <code>chcp 65001</code> to switch to the UTF-8 code page. The garbled text does disappear — but the character-by-character accumulation doesn’t budge.</p>
+<p><strong>Conclusion: encoding problem ruled out.</strong> If the phenomenon persists after garbled text is fixed, don’t waste time on encoding.</p>
+<h4 id="misjudgment-2-terminal-problem"><a class="header" href="#misjudgment-2-terminal-problem">Misjudgment 2: Terminal problem</a></h4>
+<p>The second easy suspect is the client-side terminal emulator. After all, wezterm has complex configuration — maybe it’s not parsing ANSI escape sequences correctly, or not handling <code>\r</code> (carriage return to start of line) correctly? But verification is simple: start the same TUI program locally, everything is perfect, and <code>\r</code>’s return-to-start-of-line effect works completely normally. The terminal side is not at fault.</p>
+<p><strong>Conclusion: terminal problem ruled out.</strong> The same program rendering correctly locally shows the client’s ANSI parsing is sound.</p>
+<h4 id="misjudgment-3-program-problem"><a class="header" href="#misjudgment-3-program-problem">Misjudgment 3: Program problem</a></h4>
+<p>If the terminal isn’t the problem, is it the TUI program atomcode itself that has a rendering bug on Windows? To verify this, I used a key comparison: running the same program non-interactively.</p>
+<p>Command: <code>ssh host 'command'</code> (no PTY allocated, i.e. pipe mode). In this mode the program’s output flows back to the client directly through a pipe, without going through the pseudo-terminal layer. The result? The output is perfect, no accumulation, and <code>\r</code>’s carriage-return overwrite effect works completely normally.</p>
+<p>This directly states a key fact: <strong>the program’s own rendering logic is not the problem</strong>. Same program, normal in pipe mode (no PTY), abnormal in interactive mode (with PTY) — the problem is locked to the PTY layer.</p>
+<h3 id="3-hitting-the-crux-what-the-pty-layer-is-doing-in-the-middle"><a class="header" href="#3-hitting-the-crux-what-the-pty-layer-is-doing-in-the-middle">3. Hitting the Crux: What the PTY Layer Is Doing in the Middle</a></h3>
+<p>PTY (Pseudo Terminal) is a key component of an SSH interactive session. Its job is to build a virtual terminal link between the server-side process (your shell or program) and the client, handling terminal control characters, window-size changes, signal handling, and so on.</p>
+<p>Normally, when a TUI program outputs <code>\r</code> (carriage return, ASCII 13), the PTY should forward it as-is to the client; the terminal then moves the cursor back to the start of the line, and subsequent content overwrites the current line — this is the “in-place refresh” effect. But if the PTY layer transforms <code>\r</code> in some way — say turning it into <code>\n</code> (line feed), or dropping it under some combination of conditions — then every refresh of the TUI program starts from a new line, and character-by-character accumulation appears.</p>
+<p>On the Windows platform this problem is even more subtle. There is a fundamental difference between the Win32 console API and POSIX terminal behavior. When OpenSSH for Windows implements PTY, it has to bridge these two. In Windows’ console mode, characters output to the console go through conhost.exe processing; but characters forwarded through PTY bypass this layer. OpenSSH internally uses ConPTY (the Windows pseudo-terminal API) to emulate Unix-style terminal behavior, but under certain versions or configurations, the handling rules for specific control characters may not be fully consistent with a standard Unix PTY.</p>
+<p>A detail worth noting: in the scenario where <code>rvs</code> (rust-verb-shell) is the login shell, the shell’s own handling of input/output also interacts with the PTY layer. If the PTY’s terminal-mode flags (termios flags) aren’t set correctly — for example if the mapping direction of <code>ONLCR</code> (map newline to carriage-return + newline) is the opposite of what’s expected — control characters can get accidentally transformed.</p>
+<h3 id="4-solution-path-from-workaround-to-root-fix"><a class="header" href="#4-solution-path-from-workaround-to-root-fix">4. Solution Path: From Workaround to Root Fix</a></h3>
+<h4 id="41-quick-workaround-force-pty-allocation-and-set-terminal-type"><a class="header" href="#41-quick-workaround-force-pty-allocation-and-set-terminal-type">4.1 Quick Workaround: Force PTY Allocation and Set Terminal Type</a></h4>
+<p>If you just want the current interactive session back to normal, try explicitly specifying the terminal type on the SSH client side:</p>
+<pre><code class="language-bash">ssh -t -o "SendEnv TERM" host
+</code></pre>
+<p>In the server-side shell config file (e.g. <code>.bashrc</code> or <code>.profile</code>), make sure:</p>
+<pre><code class="language-bash">export TERM=xterm-256color
+</code></pre>
+<p>This combination makes OpenSSH use the standard terminal-capability database when allocating the PTY, improving the correctness of control-character handling.</p>
+<h4 id="42-more-thorough-mitigation-adjust-openssh-configuration"><a class="header" href="#42-more-thorough-mitigation-adjust-openssh-configuration">4.2 More Thorough Mitigation: Adjust OpenSSH Configuration</a></h4>
+<p>In the server-side <code>sshd_config</code> (usually at <code>C:\ProgramData\ssh\sshd_config</code>), you can try the following configuration:</p>
+<pre><code class="language-bash"># Force PTY allocation
+PermitTTY yes
+Accept terminal type sent by client
+AcceptEnv TERM
+Disable compression or delays that might interfere with control characters
+TCPKeepAlive yes
+UseDNS no
+</code></pre>
+<p>After modifying, restart the sshd service (<code>Restart-Service sshd</code> or via the service manager). These configurations can ensure PTY-allocation consistency and correct passing of the terminal type, reducing the chance of control characters being mishandled.</p>
+<h4 id="43-source-level-verification-and-root-cause-localization-winptys-crlf-handling-defect"><a class="header" href="#43-source-level-verification-and-root-cause-localization-winptys-crlf-handling-defect">4.3 Source-Level Verification and Root-Cause Localization: winpty’s CR/LF Handling Defect</a></h4>
+<p>After further source-level verification, the root cause is more specific than the initially-guessed “ConPTY compatibility boundary” — this machine has no ConPTY at all, OpenSSH falls back to winpty, and winpty has a deterministic defect in its handling of <code>\r</code>.</p>
+<p><strong>Verification 1: pipe mode vs. interactive mode <code>\r</code> behavior comparison.</strong> In pipe mode (<code>ssh</code> without <code>-t</code>, no PTY allocated), PowerShell outputs “AAA”, carriage return, “BBB” in sequence, and the result shows only “BBB” — <code>\r</code> correctly returns to the start of the line and overwrites. In interactive mode (PTY allocated), the login banner’s text repeatedly stacks, with overlapping phenomena like “当前目录: C:(v26.8.39) 用户@主机: administrator@…” — <code>\r</code> fails, content is appended rather than overwritten. Same program, same terminal, with-or-without PTY becomes the only variable, directly locking the problem to the PTY layer.</p>
+<p><strong>Verification 2: expect-emulated PTY stable reproduction.</strong> Using expect’s <code>spawn ssh</code> to capture interactive output, both banner and prompt show overlap. This rules out “intermittent” or “specific-client behavior” and confirms the problem is a deterministic system-level defect.</p>
+<p><strong>Verification 3: root-cause localization — <a href="https://github.com/PowerShell/Win32-OpenSSH/issues/1256">Win32-OpenSSH issue #1256</a>.</strong> The official issue explicitly describes the defect: <code>\r</code> is treated as a newline (“CR worked as CR+LF, LF are ignored”). The key constraint is: ConPTY (Windows pseudo-console) was introduced only in Win10 1809 (build 17763); this machine runs Win10 1607 LTSB (build 14393) and has no ConPTY. OpenSSH therefore falls back to winpty to emulate PTY, and winpty has the above defect in CR/LF handling. The official answer explicitly states: the ConPTY version is bound to the Windows version and cannot be resolved by upgrading OpenSSH (“we can’t service that one”).</p>
+<p>Based on the above root cause, here are a few practically feasible directions:</p>
+<ul>
+<li><strong>Upgrade Windows version to 1809+</strong>: this is the fundamental solution. With native ConPTY support, the handling of control characters like <code>\r</code> will conform to the standard and no longer depend on the winpty fallback.</li>
+<li><strong>Use msys2 or Cygwin’s SSH server</strong>: they use an independent Unix-style PTY implementation that doesn’t depend on winpty/ConPTY and handles control characters more standardly. This is a more thorough mitigation without upgrading the system.</li>
+<li><strong>Switch login shell for comparison verification</strong>: you can temporarily switch to <code>cmd</code> or <code>powershell</code> as the login shell to confirm whether <code>rvs</code> has additional interaction problems with winpty. Note, however, that this can only narrow the problem’s scope and cannot fix winpty’s own CR/LF defect.</li>
+</ul>
+<h3 id="5-summary"><a class="header" href="#5-summary">5. Summary</a></h3>
+<p>The core takeaway from this troubleshooting is a verification logic: when the interactive-mode TUI is abnormal but pipe mode is normal, the problem is not in the program’s own rendering logic but in the PTY layer. Through cross-comparison (same program / PTY vs. pipe / Windows vs. Linux), you can quickly narrow the problem domain.</p>
+<p>For SSH users on the Windows platform, it’s worth remembering: although Windows’ terminal infrastructure (ConPTY) has made great progress, in precise handling of control characters there are still subtle gaps versus mature Unix PTYs. When you encounter weird phenomena like <code>\r</code> not carriage-returning, backspace not deleting characters, or ANSI escape sequences being shown as literal text, don’t rush to suspect the program — look at what’s happening in the PTY layer, and you’ll often save a lot of time.</p>
+<h3 id="6-landing-conclusion"><a class="header" href="#6-landing-conclusion">6. Landing Conclusion</a></h3>
+<p><strong>1. Root-cause characterization:</strong> <code>\r</code> failure is a CR/LF handling defect of OpenSSH using winpty to emulate PTY on old Windows (1607) without ConPTY; it is unrelated to encoding, terminal, or program rendering.</p>
+<p><strong>2. Impact scope:</strong> only interactive (PTY) sessions are affected; pipe/non-interactive sessions are normal.</p>
+<p><strong>3. Workaround:</strong> the TUI program switches to headless mode (e.g. <code>atomcode -p "你的问题"</code>); the output doesn’t go through <code>\r</code> redraw, and in testing it’s completely normal.</p>
+<p><strong>4. Root-fix path:</strong> upgrade to Windows 10 1809 or above (to get ConPTY), or switch to an SSH server with its own PTY implementation (e.g. Bitvise).</p>
+<h3 id="7-quick-reference-for-three-kinds-of-readers"><a class="header" href="#7-quick-reference-for-three-kinds-of-readers">7. Quick Reference for Three Kinds of Readers</a></h3>
+<h4 id="human"><a class="header" href="#human">Human</a></h4>
+<p>Two-step self-check:</p>
+<ol>
+<li><code>ssh host '命令'</code> — execute via pipe and see if it’s normal;</li>
+<li>Run the same command interactively and see whether output accumulates character by character. If it accumulates, you’re hit — work around it with headless mode.</li>
+</ol>
+<h4 id="conversational-ai"><a class="header" href="#conversational-ai">Conversational AI</a></h4>
+<p>Prompt “what causes character-by-character accumulation of interactive terminal output when SSH-ing into Windows” — answer points: OpenSSH + old Windows (no ConPTY), the winpty PTY layer treats <code>\r</code> as a newline; it’s not an encoding problem. Work around with headless; the root fix needs ConPTY (Win10 1809+).</p>
+<h4 id="code-agent"><a class="header" href="#code-agent">Code Agent</a></h4>
+<p>Two verification commands you can run directly:</p>
+<p>PowerShell <code>\r</code> test: <code>[Console]::Write("AAA"); [Console]::Write([char]13); [Console]::Write("BBB")</code> — normally only BBB is shown; if it fails, output accumulates.</p>
+<p>expect reproduction: <code>spawn ssh host</code> then <code>send "命令\r"</code> — overlapping output means PTY <code>\r</code> has failed.</p>
+<hr><!-- License statement -->
+<blockquote>
+<p>This article is licensed under Mulan PSL v2. Copyright belongs to the author; attribution is not mandatory, but for enterprise compliance please retain the original statement.
+Original version: https://k4m7v2pz.github.io/en/blog/operating-system/windows/ssh-windows-output-buffering.html</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../../blog/operating-system/windows/windows-vps-terminal-garbled.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../../blog/tools/nushell-atomcode-config-pitfalls.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../../blog/operating-system/windows/windows-vps-terminal-garbled.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../../blog/tools/nushell-atomcode-config-pitfalls.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../../../mark-09e88c2c.min.js"></script>
+        <script src="../../../searcher-09f2665d.js"></script>
+
+        <script src="../../../clipboard-1626706a.min.js"></script>
+        <script src="../../../highlight-abc7f01d.js"></script>
+        <script src="../../../book-609e4cb8.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

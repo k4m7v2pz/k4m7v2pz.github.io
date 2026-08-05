@@ -1,0 +1,474 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Bevy 0.14 在 R36S 上渲染全链路打通 - K4m7v2pz&#x27;s Blog</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="k4m7v2pz 的博客">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../../css/general-e96d0476.css">
+        <link rel="stylesheet" href="../../css/chrome-d279d366.css">
+        <link rel="stylesheet" href="../../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../../searchindex-26a0c593.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc-936a0b80.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">K4m7v2pz&#x27;s Blog</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/k4m7v2pz/k4m7v2pz.github.io" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/k4m7v2pz/k4m7v2pz.github.io/edit/dev/book-zh/src/blog/games/bevy-0.14-r36s-rendering.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="bevy-014-在-r36s-上渲染全链路打通"><a class="header" href="#bevy-014-在-r36s-上渲染全链路打通">Bevy 0.14 在 R36S 上渲染全链路打通</a></h1>
+<blockquote>
+<p>日期：2026-08-05</p>
+</blockquote>
+<h3 id="-重要提醒"><a class="header" href="#-重要提醒">🚨 重要提醒</a></h3>
+<p>本文是《把 Bevy 0.14 游戏移植到 R36S 掌机：一场与“无窗口系统“的搏斗》的续篇。</p>
+<p>上篇讲到坑 8：Mali-G31 驱动缺 <code>VERTEX_STORAGE</code>，Bevy 0.14 渲染管线撞墙，当时结论是“GPU 驱动能力问题，不是代码能绕过的——需改渲染器或换 SDL2 方案“。</p>
+<p><strong>这篇要宣布：那个结论被推翻了。</strong> 不需要改 Bevy 源码，也不需要 SDL2——真相是 wgpu-hal 的驱动能力判定在撒谎，以及 Bevy 的 GPU 预计算“判定不严“。各用一个补丁/一行应用侧配置，R36S 上的 Bevy 0.14 渲染全链路已经打通。</p>
+<h3 id="一破绽为什么-portmaster-的-sdl2-游戏能跑而-bevy-不行"><a class="header" href="#一破绽为什么-portmaster-的-sdl2-游戏能跑而-bevy-不行">一、破绽：为什么 PortMaster 的 SDL2 游戏能跑，而 Bevy 不行？</a></h3>
+<p>上篇的推断是“Bevy 的 WebGPU 抽象对 downlevel 设备要求高“。这句话只说对了一半。</p>
+<p>带着怀疑先写了个 C 探针程序（dlopen 直测 libmali，不经过任何框架），上机实测结果：</p>
+<pre><code class="language-c">GL_MAX_VERTEX_SHADER_STORAGE_BLOCKS   = 0
+GL_MAX_FRAGMENT_SHADER_STORAGE_BLOCKS = 0
+GL_MAX_SHADER_STORAGE_BLOCK_SIZE      = 0
+</code></pre>
+<p><strong>libmali r13p0 不是“顶点阶段不支持 SSBO“，而是任何阶段都没有 storage buffer（零 SSBO）。</strong></p>
+<p>比预想更彻底。这引出一个关键疑点：既然全阶段零 SSBO，Bevy 0.14 又是怎么在 WebGL2（= GLES 3.0，同样零 SSBO）上正常跑 3D 的？——说明 Bevy 一定有零 SSBO 的完整回退路径，只是在我们这台设备上没被触发。问题出在<strong>触发条件</strong>上。</p>
+<h3 id="二根因精化vertex_storage-只在storage-暴露给顶点阶段才被要求"><a class="header" href="#二根因精化vertex_storage-只在storage-暴露给顶点阶段才被要求">二、根因精化：VERTEX_STORAGE 只在“storage 暴露给顶点阶段“才被要求</a></h3>
+<p>wgpu-core 对 bind group layout 的校验代码只有一处会要求 <code>VERTEX_STORAGE</code>：</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// wgpu-core device/resource.rs（0.21 与 24 同款判定）
+if entry.visibility.contains(ShaderStages::VERTEX) {
+    if let Buffer { ty: BufferBindingType::Storage, .. } = entry.ty {
+        required_downlevel_flags |= DownlevelFlags::VERTEX_STORAGE;
+    }
+}
+<span class="boring">}</span></code></pre>
+<p>即：<strong>storage buffer 绑定暴露给顶点着色器阶段</strong>时才要求该 flag；uniform buffer 永远不触发。</p>
+<p>那么问题变成：为什么 Bevy 会给顶点可见的数据选 storage？看 wgpu-hal 的 GLES adapter 怎么算 limit：</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// wgpu-hal gles/adapter.rs（原版）
+let max_storage_buffers_per_shader_stage = if vertex_ssbo == 0 {
+    fragment_ssbo          // ← 顶点为 0，就拿 fragment 的数量顶上
+} else {
+    min(vertex, fragment)
+};
+<span class="boring">}</span></code></pre>
+<p>而 Bevy 0.14 完全是<strong>按这个 limit 决定绑定类型</strong>的：</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// bevy_render GpuArrayBuffer（mesh2d / mesh 每对象数据）
+if limits.max_storage_buffers_per_shader_stage == 0 { Uniform 回退 } else { Storage }
+// bevy_render get_supported_read_only_binding_type（visibility ranges / cluster 数据）
+if limits.max_storage_buffers_per_shader_stage &gt;= 需要数 { Storage } else { Uniform }
+<span class="boring">}</span></code></pre>
+<p><strong>撒谎的链条</strong>：libmali 顶点 SSBO=0 但 fragment SSBO&gt;0（当时还没实测到 fragment 也是 0）→ wgpu-hal 用 fragment 数量顶替 → limit 报 &gt;0 → Bevy 给顶点可见数据选 storage 绑定 → wgpu-core 要求 VERTEX_STORAGE → 设备没有 → 创建 bind group layout 失败、黑屏闪回。</p>
+<h3 id="三为什么-bevy-一定有-uniform-回退现成的救命通道"><a class="header" href="#三为什么-bevy-一定有-uniform-回退现成的救命通道">三、为什么 Bevy 一定有 uniform 回退（现成的救命通道）</a></h3>
+<p>Bevy 0.14 官方支持 <strong>WebGL2（GLES 3.0，零 SSBO）</strong>，所以所有顶点可见的 storage 绑定在 WGSL 里都带 <code>#ifdef</code> uniform 双胞胎：</p>
+<pre><code class="language-wgsl">// bevy_sprite mesh2d_bindings.wgsl
+#ifdef PER_OBJECT_BUFFER_BATCH_SIZE
+@group(1) @binding(0) var&lt;uniform&gt; mesh: array&lt;Mesh2d, #{PER_OBJECT_BUFFER_BATCH_SIZE}u&gt;;
+#else
+@group(1) @binding(0) var&lt;storage&gt; mesh: array&lt;Mesh2d&gt;;
+#endif
+// bevy_pbr mesh_view_bindings.wgsl：cluster（binding 6/7/8）与 visibility_ranges（binding 12）
+#ifdef AVAILABLE_STORAGE_BUFFER_BINDINGS &gt;= 3
+... var&lt;storage&gt; ...
+#else
+... var&lt;uniform&gt; ...
+#endif
+</code></pre>
+<p><code>AVAILABLE_STORAGE_BUFFER_BINDINGS</code> 这个 shader def 由 device limit 派生（<code>pipeline_cache.rs</code>）。<strong>WebGL2 在 0.14 上能跑 3D 场景，就是这条 uniform 回退全链路完整的现成证据。</strong></p>
+<h3 id="四解法一wgpu-hal-limit-补丁5-行让-bevy-走-uniform-回退"><a class="header" href="#四解法一wgpu-hal-limit-补丁5-行让-bevy-走-uniform-回退">四、解法一：wgpu-hal limit 补丁（5 行）——让 Bevy 走 uniform 回退</a></h3>
+<p>在已 vendor 的 wgpu-hal 里，把“顶点 SSBO 为 0 时用 fragment 顶上“改成“真实顶点 SSBO 缺失时报 0“（保留 RPI4 假零特例：RPI4 顶点 SSTO 存在说明顶点 SSBO 报 0 是假的）：</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// patches/wgpu-hal src/gles/adapter.rs
+let max_storage_buffers_per_shader_stage = if vertex_shader_storage_blocks == 0 {
+    if vertex_ssbo_false_zero {       // RPI4 假零特例保留原逻辑
+        fragment_shader_storage_blocks
+    } else {
+        0                             // R36S/libmali → 触发 Bevy uniform 回退
+    }
+} else {
+    vertex_shader_storage_blocks.min(fragment_shader_storage_blocks)
+};
+<span class="boring">}</span></code></pre>
+<p>补丁后 <code>VERTEX_STORAGE</code> 错误消失——Bevy 的 <code>GpuArrayBuffer</code> 与 <code>get_supported_read_only_binding_type</code> 全部自动落到 uniform 回退。（事后 probe 实测 fragment SSBO 也是 0，所以原版代码在这台设备上本来就会算出 0；但补丁把“撒谎的兜底“从逻辑上抹掉了，行为可预期、可移植到其他“顶点 0 但 fragment&gt;0“的设备。）</p>
+<h3 id="五解法二gpu-预计算自启用limit0-还差最后一脚"><a class="header" href="#五解法二gpu-预计算自启用limit0-还差最后一脚">五、解法二：GPU 预计算自启用——limit=0 还差最后一脚</a></h3>
+<p>limit 补丁让 <code>VERTEX_STORAGE</code> 错误消失，上机后立刻冒出新错误：</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>In Device::create_bind_group_layout
+  note: label = `build mesh uniforms direct bind group layout`
+Too many bindings of type StorageBuffers in Stage ShaderStages(COMPUTE), limit is 0, count was 4.
+Check the limit `max_storage_buffers_per_shader_stage` passed to `Adapter::request_device`
+<span class="boring">}</span></code></pre>
+<p>Bevy 0.14 有个 <strong>GPU 预计算（GPU preprocessing）</strong> 模块：用 compute shader 在 GPU 上构建 mesh uniform 缓冲（GPU-driven 渲染的一部分），其 compute bind group layout 要 4 个 storage buffer。关键在它的自启用判定（<code>bevy_render/src/batching/gpu_preprocessing.rs</code>，<code>GpuPreprocessingSupport::from_world</code>）：</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>if device.limits().max_compute_workgroup_size_x == 0 { GpuPreprocessingSupport::None }
+else if !features.contains(INDIRECT_FIRST_INSTANCE) ... { PreprocessingOnly }
+else { Culling }
+<span class="boring">}</span></code></pre>
+<p><strong>它只查 compute workgroup size，完全不看 storage buffer limit！</strong> libmali 的 <code>max_compute_workgroup_size_x = 128</code>（≠0），于是 GPU 预计算照常启用，拿着 4 个 storage buffer 去撞 limit=0 的墙。</p>
+<p><strong>解法：应用侧插入 <code>GpuPreprocessingSupport::None</code>（零 Bevy 源码改动）。</strong></p>
+<p><code>GpuPreprocessingSupport</code> 是渲染世界里一个 FromWorld 生成的 Resource，枚举三态 <code>None / PreprocessingOnly / Culling</code>。应用在 <code>add_plugins</code> 之后、<code>run()</code> 之前，直接往渲染子世界插入 <code>None</code> 覆盖默认判定：</p>
+<pre class="playground"><code class="language-rust">fn main() {
+    let mut app = App::new();
+    app.add_plugins(DefaultPlugins /* headless 三件套 */)
+        .add_plugins(ImageCopyPlugin)
+        .add_plugins(ScheduleRunnerPlugin::run_loop(Duration::from_secs_f64(1.0 / 60.0)))
+        .add_systems(Startup, setup)
+        .add_systems(Update, save_and_exit);
+    // libmali 零 SSBO：禁用 GPU 预计算（compute 阶段要 4 个 storage buffer），
+    // 走 CPU 预处理回退（WebGL2 同款路径）——应用侧插 Resource 覆盖默认判定。
+    if let Some(render_app) = app.get_sub_app_mut(bevy::render::RenderApp) {
+        render_app.world_mut().insert_resource(
+            bevy::render::batching::gpu_preprocessing::GpuPreprocessingSupport::None,
+        );
+    }
+    app.run();
+}</code></pre>
+<p><code>None</code> 状态让 Bevy 走 CPU 预处理回退——WebGL2（GLES 3.0 无 compute）上就是这条路径，稳。顺带一提，Bevy 0.14 的优雅降级机制很成熟，日志里能看到同类例子：<code>WARN bevy_pbr::ssao: ScreenSpaceAmbientOcclusionPlugin not loaded. GPU lacks support: R16FloatSTORAGE_BINDING.</code>——缺能力自动不加载。GPU 预计算是少数“判定不严“的漏网之鱼，补上之后行为与其他降级一致。</p>
+<h3 id="六测试矩阵7-个最小-port-一次测穿批量验证方法论"><a class="header" href="#六测试矩阵7-个最小-port-一次测穿批量验证方法论">六、测试矩阵：7 个最小 port 一次测穿（批量验证方法论）</a></h3>
+<p>单点验证效率太低（编译+部署+上机一轮 20 分钟）。一次性做 7 个最小 port，每个跑 ~2 秒自动退出，黑屏弹回就测下一个，日志全在 <code>/storage/logs/&lt;名&gt;.log</code>：</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>#</th><th>port</th><th>栈</th><th>渲染路径</th><th>验证点</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td>probe</td><td>C / dlopen</td><td>无（诊断）</td><td>fb0 格式、EGL 扩展、SSBO 数值、图形库扫描、surfaceless 自检</td></tr>
+<tr><td>2</td><td>fb0-cpu</td><td>C / 纯 CPU</td><td>/dev/fb0 直写</td><td>fb0 写屏链路 + 屏幕格式（16/32bpp）</td></tr>
+<tr><td>3</td><td>egl-fb</td><td>C / dlopen EGL+GBM</td><td>surfaceless GLES → 读回 → fb0</td><td>无 SDL2 裸 GLES 上屏（主路线）</td></tr>
+<tr><td>4</td><td>sdl2-gles</td><td>C / SDL2</td><td>SDL 渲染器（KMSDRM）</td><td>PortMaster 标准路径对照基线</td></tr>
+<tr><td>5</td><td>bevy3d</td><td>Rust / Bevy 0.14 3D</td><td>wgpu GLES → 读回 → fb0+PNG</td><td>3D uniform 回退</td></tr>
+<tr><td>6</td><td>bevy2d</td><td>Rust / Bevy 0.14 2D</td><td>wgpu GLES → 读回 → fb0+PNG</td><td>SpritePlugin 恢复</td></tr>
+<tr><td>7</td><td>wgpu-direct</td><td>Rust / wgpu 0.20（无 Bevy）</td><td>wgpu GLES → 读回 → PNG</td><td>隔离 Bevy 层</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>上机结果（三轮累计）</strong>：</p>
+<ul>
+<li><strong>egl-fb PASS（第二轮）</strong>：裸 EGL + GBM + fb0 上屏 120 帧全通——<strong>无 SDL2 主路线成立</strong>。</li>
+<li><strong>fb0-cpu PASS（第二轮）</strong>：fb0 写屏 + 屏幕格式确认（<code>640x480 bpp=32 stride=2560</code>），红绿蓝横条+移动白线动画。</li>
+<li><strong>probe PASS（第二轮）</strong>：实锤 libmali 零 SSBO（三个参数全 0）、EGL 客户端扩展只有 GBM。</li>
+<li><strong>sdl2-gles 第三轮 PASS</strong>：<code>cp -f</code> 修复生效——<code>SDL_Init OK / SDL_CreateWindow OK / SDL_CreateRenderer OK (accelerated) / RESULT: PASS (120 frames)</code>，屏幕上“多种颜色快闪+渐变“ 即 SDL2 色相循环动画。<strong>KMSDRM 显示路径确认</strong>（与 fb0 写屏是两条独立链路，都已打通）。</li>
+<li><strong>bevy3d 第三轮越过 GPU 预计算</strong>：错误不再是 compute storage，变成 <code>Resource requested by bevy_text::text2d::update_text2d_layout does not exist: Assets&lt;TextureAtlasLayout&gt;</code>——因为当初为了绕 VERTEX_STORAGE 禁用了 SpritePlugin，而 bevy_text 的 text2d 系统需要 SpritePlugin 注册的 <code>Assets&lt;TextureAtlasLayout&gt;</code> 资产类型。limit 补丁后 mesh2d 已走 uniform 回退，<strong>恢复 SpritePlugin 即可</strong>（当初禁用它绕 VERTEX_STORAGE 的理由已不存在）。</li>
+<li><strong>bevy2d 第三轮卡死</strong>：日志停在 AdapterInfo + SSAO WARN、无 panic——黑屏 10 秒不退、select+start 无效、长按电源强制重启。疑似渲染循环/等待（map_async/poll）卡住，待调试。</li>
+<li><strong>wgpu-direct</strong>：第二轮 <code>LimitsExceeded</code>（workgroup y 256&gt;128，已改 <code>adapter.limits()</code>）；第三轮日志缺失，待复测。</li>
+</ul>
+<p><strong>分层定位法（wgpu 系排障）</strong>：probe 先行（fb 格式决定写屏代码、SSBO 数值验证驱动诊断）；wgpu-direct 成功而 Bevy 失败 → 问题在 Bevy 渲染器层，反之在 wgpu-hal/驱动层；sdl2-gles 是锚点（PortMaster 生态证明 SDL2 能上屏，它成功而 egl-fb 失败 → 裸 EGL 细节问题）。</p>
+<h3 id="七部署与-tf-卡分区经验全是实测踩出来的"><a class="header" href="#七部署与-tf-卡分区经验全是实测踩出来的">七、部署与 TF 卡分区经验（全是实测踩出来的）</a></h3>
+<h4 id="分区约定thinkpad-上-lsblk-实测"><a class="header" href="#分区约定thinkpad-上-lsblk-实测">分区约定（ThinkPad 上 lsblk 实测）</a></h4>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>分区</th><th>文件系统</th><th>设备路径</th><th>ThinkPad 挂载点</th></tr>
+</thead>
+<tbody>
+<tr><td>p1 EMUELEC</td><td>vfat</td><td>boot</td><td>/mnt/r36s/boot</td></tr>
+<tr><td>p2 STORAGE</td><td>ext4</td><td><strong>设备上的 /storage</strong>（logs/saves 在此）</td><td>/mnt/r36s/storage</td></tr>
+<tr><td>p3 EEROMS</td><td>vfat</td><td><strong>设备上的 /storage/roms</strong>（ports/ 在此）</td><td>/mnt/r36s/eroms</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>port 部署约定</strong>（EmuELEC 的 PortMaster 式结构）：launcher 脚本 → <code>EEROMS/ports_scripts/&lt;名&gt;.sh</code>（<strong>菜单就是扫这个目录的 .sh 文件</strong>，所以只显示有 launcher 的 port）；二进制/资源目录 → <code>EEROMS/ports/&lt;名&gt;/</code>；launcher 里 <code>cd /storage/roms/ports/&lt;名&gt;</code>（设备侧路径）。菜单显示名默认取 .sh 文件名，<code>gamelist.xml</code> 可覆盖。</p>
+<h4 id="挂载态拔卡的坑"><a class="header" href="#挂载态拔卡的坑">挂载态拔卡的坑</a></h4>
+<p>TF 卡在<strong>挂载状态下被拔出</strong>（从读卡器直接拔），会导致挂载失效：</p>
+<pre><code class="language-bash">读取目录直接 Input/output error，但 dumpe2fs 显示 Filesystem state: clean
+</code></pre>
+<p>别急着 fsck——这通常是<strong>失效挂载</strong>而非文件系统损坏（dmesg 会有 <code>JBD2: I/O error when updating journal superblock</code>，那是拔卡时日志中止的正常表现）。<code>umount + 重新 mount</code> 即恢复。拔卡前先安全卸载。</p>
+<h4 id="fat32-不支持符号链接"><a class="header" href="#fat32-不支持符号链接">FAT32 不支持符号链接</a></h4>
+<p>port 目录在 vfat 分区上，<code>ln -sf</code> 建的软链会失效（loader 报 <code>cannot open shared object file</code>）。需要本地“改名“的动态库（如把 <code>libSDL2-2.0.so.0</code> 当 <code>libSDL2.so.2</code> 用），用 <strong><code>cp -f</code> 复制</strong>而不是软链。</p>
+<h3 id="八交叉编译补充上篇之外的测试侧技巧"><a class="header" href="#八交叉编译补充上篇之外的测试侧技巧">八、交叉编译补充（上篇之外的测试侧技巧）</a></h3>
+<p>上篇讲了 zig 交叉编译 alsa/udev 系统库；这里补测试侧的三条：</p>
+<ol>
+<li><strong>C 测试程序：zig cc 直出，零依赖、秒级构建</strong>，全部 dlopen 动态加载 libmali（libEGL.so.1 / libGLESv2.so.2 / libgbm.so.1），stripped 后 15-46KB：</li>
+</ol>
+<pre><code class="language-bash">zig cc -target aarch64-linux-gnu -O2 -Wall main.c egl_load.c fb.c -ldl -o probe
+</code></pre>
+<ol start="2">
+<li><strong>Rust：多个 Bevy 测试 crate 收成 Cargo workspace</strong>——<code>wgpu-hal</code> 补丁和 <code>[profile.release]</code> 提到根 <code>Cargo.toml</code>，成员共享 target 缓存；<code>CARGO_TARGET_DIR</code> 指向旧缓存避免 Bevy 全量重编，增量构建 2-3 分钟：</li>
+</ol>
+<pre><code class="language-bash">export CARGO_TARGET_DIR="${CARGO_TARGET_DIR:-&lt;旧 target 缓存&gt;}"
+cargo zigbuild --release --target aarch64-unknown-linux-gnu --workspace
+</code></pre>
+<ol start="3">
+<li><strong>链接期 stub 技巧</strong>：本机没有目标库（如 SDL2）时，写一个空实现 stub .so（函数签名一致、返回 0），<code>-Wl,-soname,libSDL2.so.2</code> 编译；链接时给 stub 路径，DT_NEEDED 记录 SONAME；设备上 launcher 用 <code>cp -f</code> 把真库复制成同名文件 + <code>LD_LIBRARY_PATH</code>。注意：lld 不支持 GNU ld 的 <code>--unresolved-symbols=ignore-all</code>，所以必须用“stub 定义空实现“而不是“允许未定义符号“。</li>
+</ol>
+<h3 id="九为什么升级-bevy解决不了方向是反的"><a class="header" href="#九为什么升级-bevy解决不了方向是反的">九、为什么“升级 Bevy“解决不了（方向是反的）</a></h3>
+<p>遇到 VERTEX_STORAGE 时最自然的想法是“换个新版 Bevy 试试“，实测结论是<strong>越升越糟</strong>：</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>版本</th><th>wgpu</th><th>结论</th></tr>
+</thead>
+<tbody>
+<tr><td>0.15</td><td>23</td><td>同架构同失败（VERTEX_STORAGE 判定不变）</td></tr>
+<tr><td>0.16</td><td>24</td><td>同上；且 <strong>WebGL2 渲染器被移除</strong>（web 只剩 WebGPU），GLES 支持更差</td></tr>
+<tr><td>0.17</td><td>25/26</td><td><strong>GLES 降级为可选 feature</strong> <code>bevy_render/gles</code>（PR #20793），官方明言“未测试、可能坏“；渲染器大重构</td></tr>
+</tbody>
+</table>
+</div>
+<p>R36S 只有 GLES 驱动（无 Vulkan/Metal），Bevy 越高版本 GLES 越被边缘化。<strong>留在 0.14 + wgpu-hal 补丁 + 应用侧配置，是唯一既不动 Bevy 源码、又不用 SDL2 的路径。</strong></p>
+<h3 id="十给三类读者的速查更新版从无解到可解"><a class="header" href="#十给三类读者的速查更新版从无解到可解">十、给三类读者的速查（更新版：从“无解“到“可解“）</a></h3>
+<h4 id="给人类开发者30-秒结论"><a class="header" href="#给人类开发者30-秒结论">给人类开发者（30 秒结论）</a></h4>
+<p>上篇说 VERTEX_STORAGE 无解是<strong>错的</strong>。真相是 wgpu-hal 的 limit 判定用 fragment 顶替 vertex，误导 Bevy 给顶点可见数据选 storage；把 <code>max_storage_buffers_per_shader_stage</code> 报成 0，Bevy 的 WebGL2 同款 uniform 回退自动接管；再往渲染世界插 <code>GpuPreprocessingSupport::None</code> 关掉 GPU 预计算（它判定不严，只查 workgroup size 不看 storage limit）。显示走离屏渲染 → CPU 读回 → 写 <code>/dev/fb0</code>（640×480 32bpp），不需要 SDL2。</p>
+<h4 id="给对话式-ai问答速查"><a class="header" href="#给对话式-ai问答速查">给对话式 AI（问答速查）</a></h4>
+<ul>
+<li><strong>Bevy 在无 X11/Wayland 的嵌入式设备上怎么跑？</strong> 禁用 WinitPlugin、WindowPlugin 设 <code>primary_window: None</code>，用 ScheduleRunnerPlugin 驱动主循环；渲染目标用离屏纹理，读回后写 fb。</li>
+<li><strong>wgpu 报 VERTEX_STORAGE downlevel flag 缺失？</strong> 说明有 storage 绑定暴露给顶点阶段。查 wgpu-hal GLES adapter 的 <code>max_storage_buffers_per_shader_stage</code>——顶点 SSBO=0 时它可能用 fragment 数量顶替，误导上层选 storage。把 limit 报 0，上层走 uniform 回退。</li>
+<li><strong>报 “Too many bindings of type StorageBuffers in Stage ShaderStages(COMPUTE)”？</strong> Bevy 0.14 GPU 预计算自启用判定只看 compute workgroup size、不看 storage limit；应用侧往渲染世界插入 <code>GpuPreprocessingSupport::None</code> 即走 CPU 预处理回退。</li>
+<li><strong>EGL 初始化失败（DEFAULT_DISPLAY 返回 NULL）？</strong> 驱动可能是 GBM winsys：查 <code>eglQueryString(EGL_NO_DISPLAY, EGL_EXTENSIONS)</code>，有 <code>EGL_KHR_platform_gbm</code> 就用 <code>eglGetPlatformDisplayEXT(EGL_PLATFORM_GBM_KHR, gbm_device, NULL)</code>。</li>
+<li><strong>升级 Bevy 能解决吗？</strong> 不能。0.15/0.16 同架构同问题；0.17 把 GLES 降级为未测试的可选 feature。</li>
+</ul>
+<h4 id="给代码-agent可执行清单"><a class="header" href="#给代码-agent可执行清单">给代码 Agent（可执行清单）</a></h4>
+<pre><code class="language-text">1. headless 三件套：WinitPlugin::disable + WindowPlugin{primary_window:None} + ScheduleRunnerPlugin
+2. wgpu-hal vendor 补丁（src/gles/egl.rs）：EGL_KHR_platform_gbm 平台分支，
+   dlopen libgbm → gbm_create_device(/dev/dri/card0) → eglGetPlatformDisplayEXT(GBM)
+3. wgpu-hal vendor 补丁（src/gles/adapter.rs）：GL_MAX_VERTEX_SHADER_STORAGE_BLOCKS==0
+   且非 RPI4 假零 → max_storage_buffers_per_shader_stage = 0（触发上层 uniform 回退）
+4. 应用侧（add_plugins 后、run 前）：
+   app.get_sub_app_mut(RenderApp).world_mut().insert_resource(GpuPreprocessingSupport::None)
+5. 显示：离屏纹理 → ImageCopyPlugin 读回 → 按 /sys/class/graphics/fb0/ 的 bits_per_pixel
+   转换（16=RGB565 / 32=XRGB8888）→ pwrite /dev/fb0
+6. 部署：launcher → EEROMS/ports_scripts/，二进制目录 → EEROMS/ports/&lt;名&gt;/；
+   FAT32 上动态库改名用 cp 不用 ln -s；拔卡先卸载
+7. 交叉编译：C 用 zig cc -target aarch64-linux-gnu；Rust 用 cargo zigbuild
+   （CARGO_TARGET_DIR 复用缓存）；缺目标库用空实现 stub .so + DT_NEEDED
+</code></pre>
+<h3 id="尾声更新至第三轮上机"><a class="header" href="#尾声更新至第三轮上机">尾声（更新至第三轮上机）</a></h3>
+<p>截至 2026-08-03 三轮上机：裸 EGL 上屏（egl-fb）、纯 CPU 写屏（fb0-cpu）、环境探针（probe）、SDL2/KMSDRM 锚点（sdl2-gles）全部 PASS——<strong>显示链路的 fb0 与 KMSDRM 两条路都通了</strong>。</p>
+<p>Bevy 侧：3D 已越过 VERTEX_STORAGE 与 GPU 预计算两道坎，第三轮暴露出最后一个问题——当初为绕 VERTEX_STORAGE 禁用的 SpritePlugin 导致 bevy_text 的 <code>Assets&lt;TextureAtlasLayout&gt;</code> 缺失（limit 补丁后已无禁用必要，恢复即可）；2D 第三轮卡死（无 panic，疑似渲染循环/等待卡住，待调试）；wgpu-direct 第三轮日志缺失待复测。补丁与修复均已部署到卡，正在推进最后一步。</p>
+<p>贯穿始终的洞见：<strong>嵌入式设备跑 Bevy 不是玄学，要找的是“驱动能力判定链条里哪一环在撒谎“</strong>——wgpu-hal 用 fragment 顶替 vertex 的 limit 兜底、Bevy 预计算只看 workgroup size 不看 storage limit，两处“判定不严“造成了两次假死。把它们揪出来，剩下的就是 WebGL2 时代就铺好的 uniform 回退路径。</p>
+<p>空实现 stub .so + DT_NEEDED</p>
+<hr><!-- 许可声明 -->
+<blockquote>
+<p>本文采用木兰宽松许可证 v2 (Mulan PSL v2) 授权。版权归作者所有，不强制署名，企业合规请保留原始声明。
+原始版本见：https://k4m7v2pz.github.io/zh/blog/games/bevy-0.14-r36s-rendering.html</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../blog/games/bevy-wgpu-r36s-screen.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../blog/games/bevy-0.14-port-to-r36s.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../blog/games/bevy-wgpu-r36s-screen.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../blog/games/bevy-0.14-port-to-r36s.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../../mark-09e88c2c.min.js"></script>
+        <script src="../../searcher-09f2665d.js"></script>
+
+        <script src="../../clipboard-1626706a.min.js"></script>
+        <script src="../../highlight-abc7f01d.js"></script>
+        <script src="../../book-609e4cb8.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>
