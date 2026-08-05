@@ -1,14 +1,14 @@
 <!DOCTYPE HTML>
-<html lang="en" class="light sidebar-visible" dir="ltr">
+<html lang="zh" class="light sidebar-visible" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Porting an RA2 MOD to OpenYRWeb: BGM Mounting and UI Overflow Fixes - K4m7v2pz&#x27;s Blog</title>
+        <title>rvs（rust-verb-shell）更新全览 26.7.12~26.7.17 - K4m7v2pz&#x27;s Blog</title>
 
 
         <!-- Custom HTML head -->
 
-        <meta name="description" content="k4m7v2pz&#x27;s personal blog">
+        <meta name="description" content="k4m7v2pz 的博客">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
@@ -35,10 +35,10 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-78556c46.js";
+            window.path_to_searchindex_js = "../../searchindex-2ecd0433.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../toc-c4ad2e06.js"></script>
+        <script src="../../toc-3e6498f8.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -146,7 +146,7 @@
                         <a href="https://github.com/k4m7v2pz/k4m7v2pz.github.io" title="Git repository" aria-label="Git repository">
                             <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
                         </a>
-                        <a href="https://github.com/k4m7v2pz/k4m7v2pz.github.io/edit/dev/book-en/src/blog/games/openyrweb-ra2-bgm-and-ui-fixes.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                        <a href="https://github.com/k4m7v2pz/k4m7v2pz.github.io/edit/dev/book-zh/src/blog/tools/rvs-changelog-26.7.12-26.7.17.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
                             <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
                         </a>
 
@@ -180,99 +180,110 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="porting-an-ra2-mod-to-openyrweb-bgm-mounting-and-ui-overflow-fixes"><a class="header" href="#porting-an-ra2-mod-to-openyrweb-bgm-mounting-and-ui-overflow-fixes">Porting an RA2 MOD to OpenYRWeb: BGM Mounting and UI Overflow Fixes</a></h1>
+                        <h1 id="rvsrust-verb-shell更新全览-2671226717"><a class="header" href="#rvsrust-verb-shell更新全览-2671226717">rvs（rust-verb-shell）更新全览 26.7.12~26.7.17</a></h1>
 <blockquote>
-<p>Date: 2026-08-02</p>
+<p>日期：2026-07-17</p>
 </blockquote>
-<h3 id="trigger-scenario-and-tracing-the-misconceptions"><a class="header" href="#trigger-scenario-and-tracing-the-misconceptions">Trigger Scenario and Tracing the Misconceptions</a></h3>
-<p>When porting the “Yellow Alert” expansion MOD of Red Alert 2 into the OpenYRWeb browser engine, two subtle problems appeared.</p>
-<p><strong>First:</strong> the MOD ships 3 BGM tracks (1 for the main menu, 2 in-game, one of them Frank Klepacki’s “Mud”), but the original data only has <code>art.ini</code>/<code>rules.ini</code> (RA2 non-md naming), while the engine is YR-only and reads only <code>artmd.ini</code>/<code>rulesmd.ini</code>/<code>thememd.ini</code> — even though the music files were placed, there is no sound on the main menu or in-game; and even when sound works, the music selection list shows raw keys like <code>01 - THEME:YellowBattle1</code> instead of “Yellow Alert - In Game”.</p>
-<p><strong>Second:</strong> when playing windowed (not fullscreen), the main menu and freshly-entered gameplay look fine, but as soon as you click on the scene or UI in-game, the bottom command bar and menu buttons end up beyond the browser’s visible area and are almost unclickable.</p>
-<p>Both problems reproduce reliably on real hardware; after debugging, both point to one main thread: “the data format doesn’t match what the engine expects”.</p>
-<h3 id="source-code-verification-and-actionable-conclusions"><a class="header" href="#source-code-verification-and-actionable-conclusions">Source-Code Verification and Actionable Conclusions</a></h3>
-<h4 id="music-problem-missing-link-and-encoding-misalignment"><a class="header" href="#music-problem-missing-link-and-encoding-misalignment">Music problem: missing link and encoding misalignment</a></h4>
-<p>The initial assumption was “drop the mp3 into the browser filesystem and it plays”. In reality OpenYRWeb’s music playback is a complete chain:</p>
-<ol>
-<li><strong>Music specs (<code>MusicSpecs</code>)</strong> are read from the <code>[Themes]</code> section of <code>thememd.ini</code>; each theme has <code>Sound</code>, <code>Normal</code>, <code>Repeat</code>.</li>
-<li>At playback, <code>Music.getMp3File()</code> concatenates <code>lowercase sound + ".mp3"</code> and loads it from the <code>music/</code> folder at the OPFS root.</li>
-</ol>
-<p>The MOD is from the original RA2 platform; its art is defined in <code>art.ini</code> (a 307KB delta table inside <code>expand11.mix</code>), but the engine only reads <code>artmd.ini</code>, and the two don’t match — so all the exclusive units’ rendering collapses and the music goes silent.</p>
-<p>The second assumption: “just write a Chinese Name straight into <code>thememd.ini</code>”. The engine’s <code>readString</code> decodes byte-by-byte as ASCII by default, so UTF-8 Chinese gets split into mojibake (<code>é»è²è­¦æ</code>); and the music list UI (<code>MusicJukebox</code>) displays <code>i.get(e.name)</code> — it treats Name as a CSF translation key, and a missing key returns the raw string.</p>
-<h4 id="resolution-problem-misaligned-viewport-baseline"><a class="header" href="#resolution-problem-misaligned-viewport-baseline">Resolution problem: misaligned viewport baseline</a></h4>
-<p>It looked like an engine rendering bug, but testing showed the external Playwright script takes the window outer size via CDP <code>Browser.getWindowBounds</code> (including the title bar; measured 1440×846 vs a visible area of 1440×759, a difference of about 87px) and directly calls <code>page.setViewportSize</code>, making the page viewport larger than the browser’s visible area; the main menu is DOM-adaptive so it works, but the in-game HUD is pixel-positioned (<code>x = viewport.width - sidebar width</code>, <code>N = viewport.height - command bar height</code>), so the bottom UI naturally gets pushed outside the visible area.</p>
-<p>The verification points are all in the engine source:</p>
+<h2 id="版本概览"><a class="header" href="#版本概览">版本概览</a></h2>
+<p><strong>rust-verb-shell (rvs)</strong> 从 <strong>v26.7.12</strong> 升级至 <strong>v26.7.17</strong>，共包含 <strong>29 次提交</strong>。本次更新聚焦于提升交互友好性、标准化 AI 输出格式、增强跨平台兼容性，并引入了多项实用新功能。</p>
+<h2 id="更新摘要"><a class="header" href="#更新摘要">更新摘要</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>类别</th><th>主要更新</th></tr>
+</thead>
+<tbody>
+<tr><td>新功能</td><td>POSIX 重定向检测、<code>~</code> 路径展开、仪表盘、用户脚本即命令、虚拟屏幕系统、Windows 裸盘符支持、表格自适应、clera 别名</td></tr>
+<tr><td>重要修复</td><td>Tab 补全逻辑修复、版本号动态注入、<code>^C</code> 信号处理、Nushell 字符串括号转义、Windows 盘符路径分隔符修复</td></tr>
+<tr><td>AI/Agent 支持</td><td>输出 JSON 标准化、关键配置路径明确、跨平台行尾统一、新增 detect_posix_redirect API</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="一人类开发者速览"><a class="header" href="#一人类开发者速览">一、人类开发者速览</a></h2>
+<h3 id="-新功能"><a class="header" href="#-新功能">✨ 新功能</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>功能</th><th>说明</th></tr>
+</thead>
+<tbody>
+<tr><td>POSIX 重定向检测</td><td>输入 <code>&gt;</code>、<code>&gt;&gt;</code>、<code>2&gt;</code> 等 POSIX 重定向符号时，rvs 会返回友好错误提示，引导用户改用 <code>set-content</code> / <code>add-content</code> 或 <code>enter-shell bash</code></td></tr>
+<tr><td><code>~</code> 路径展开</td><td>命令行参数中的 <code>~</code> 或 <code>~/</code> 会自动展开为 <code>$HOME</code> 环境变量的值，例如 <code>ls ~/Downloads</code> 可直接使用</td></tr>
+<tr><td>仪表盘（dashboard）</td><td>新增多面板终端监控界面，可实时查看进程状态、系统资源使用情况等信息</td></tr>
+<tr><td>用户脚本即命令</td><td><code>~/.rvs/scripts/</code> 目录下的 <code>.rvs</code> 脚本和 <code>.json</code> 宏定义会自动注册为可直接调用的命令</td></tr>
+<tr><td>虚拟屏幕系统</td><td>支持多虚拟屏幕切换、跨语言思维映射配置、以及 typo（拼写错误）自动纠正配置</td></tr>
+<tr><td>Windows 裸盘符支持</td><td>在 Windows 上直接输入盘符（如 <code>D:</code>）会自动执行 <code>set-location</code> 切换到对应驱动器</td></tr>
+<tr><td>表格自适应</td><td>输出的表格会自动适配当前终端宽度，并且 “Modified” 列的时间显示为本地时间</td></tr>
+<tr><td>clera 别名</td><td>自动将常见的 <code>clear</code> 命令手误 <code>clera</code> 纠正为正确的 <code>clear</code> 命令</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="-重要修复"><a class="header" href="#-重要修复">🐛 重要修复</a></h3>
 <ul>
-<li>The non-fullscreen branch of <code>Application.updateViewportSize()</code> has <code>Math.min(window.innerWidth, config.viewport.width)</code> and <code>Math.max(800, ...)</code>/<code>Math.max(600, ...)</code> minimum clamps.</li>
-<li><code>Gui.handleViewportChange</code> syncs the viewport to the renderer and UiScene.</li>
-<li><code>HudFactory.create()</code> lays out the sidebar and command bar from <code>uiScene.viewport</code>.</li>
+<li><strong>Tab 补全修复</strong>：修复了在已知命令后补全路径、已知别名后不误路由、复合命令名正确处理等问题。</li>
+<li><strong>版本号动态注入</strong>：版本号不再硬编码，而是从 <code>CARGO_PKG_VERSION</code> 环境变量动态获取，确保 banner 显示的版本与代码一致。</li>
+<li><strong><code>^C</code> (SIGINT) 处理</strong>：按下 <code>Ctrl+C</code> 不再直接终止 rvs 进程，而是由 noop handler 处理，避免意外退出。</li>
+<li><strong>Nushell 字符串括号转义修复</strong>：修复了在特定情况下字符串内括号的错误转义问题。</li>
+<li><strong>Windows 盘符路径分隔符修复</strong>：修复了 Windows 盘符路径缺少根目录分隔符导致的问题。</li>
 </ul>
-<h3 id="three-layer-fix-plan"><a class="header" href="#three-layer-fix-plan">Three-Layer Fix Plan</a></h3>
-<h4 id="1-merge-and-register-data"><a class="header" href="#1-merge-and-register-data">1. Merge and Register Data</a></h4>
-<p>Merge the MOD’s art table into <code>artmd.ini</code> (original 1581 sections + MOD 1705 sections), and register every referenced animation in the <code>[Animations]</code> section of <code>rulesmd.ini</code> (remember to strip <code>;%</code> comments before scanning, so you don’t miss keys like <code>NATorpedoT_A</code>).</p>
-<h4 id="2-complete-music-chain"><a class="header" href="#2-complete-music-chain">2. Complete Music Chain</a></h4>
-<p>Custom <code>thememd.ini</code> (example):</p>
-<pre><code class="language-[YellowBattle1]">Sound=YellowBattle1
-Normal=yes
-Repeat=yes
-
-[YellowBattle2]
-Sound=YellowBattle2
-Normal=yes
-Repeat=yes
-
-[YellowMenu]
-Sound=YellowMenu
-Normal=yes
-Repeat=yes```ini
-
-Package it as `yellowmusic.mmx` and let the engine auto-mount it to override the original theme table. Transcode the mp3s at 22050Hz/96k and inject them into the OPFS `music/` directory.
-
-For display names, switch to CSF translation instead: keep `THEME:YellowBattle1` as the Name key, and write "Yellow Alert - In Game" and "Frank Klepacki - Mud" into `ra2md.csf` (in the engine's CsfFile format: entry = `' LBL' | flags | nameLen | name | ' RTS' | charCount | UTF-16LE inverted bytes`).
-
-#### 3. Fix the Resolution Script
-
-Change it to first measure and cache the browser border delta (title bar height is constant; measured dy=87), then on every poll convert the CDP outer size into the content area size (`cw = w - dx`, keeping the 800×600 lower bound) before syncing it to the page.
-
-### Fix Results and Lessons Learned
-
-After the three fixes, the main-menu and in-game BGM work, the list shows the Chinese track names, and the bottom UI stays fully clickable no matter how the window is stretched.
-
-**Lessons learned:** when porting to a cross-platform engine, "filename variants (md), ini section registration, CSF key translation, and the pixel-positioning baseline" are the four highest-frequency pitfalls; the troubleshooting order should be to match the source-code format first and then change the data — don't suspect the render layer first.
-
-### Quick Reference for Three Kinds of Readers
-
-#### Human Developers: Four-Step Self-Check
-
-1. The engine only reads the md variants (rulesmd/artmd/thememd); RA2 original data needs renaming or merging.
-2. Music files must be under the OPFS root `music/`, named = lowercase theme Sound + `.mp3`, and the theme table lives in the `[Themes]` section of `thememd.ini`.
-3. In-game bottom UI overflowing = viewport larger than the visible area; check the outer/content conversion (title-bar delta) and mind the engine's 800×600 minimum clamp.
-4. List showing raw keys = missing CSF translation; add the key-value pairs to `ra2md.csf`.
-
-#### Conversational AI: Question Templates
-
-- "OpenYRWeb music doesn't play / shows THEME:xxx — how to fix?" The answer should be: the theme table is in the thememd.ini `[Themes]` section, mp3s go in OPFS `music/`, and display names go through CSF key translation.
-- "Windowed UI overflows the visible area" The answer should be: CDP returns the outer size, you need to subtract the title bar; the engine has an 800×600 minimum viewport clamp.
-
-#### Code Agents: Key Anchors
-
-- `engine/sound/MusicSpecs.ts` (theme parsing)
-- `engine/sound/Music.ts` (getMp3File name building)
-- `gui/screen/options/component/MusicJukebox.ts` (i.get display)
-- `Application.ts` updateViewportSize (clamping)
-- `gui/screen/game/component/Hud.ts` (pixel positioning)
-
-After making changes, re-run `bun run scripts/inject-persist.mjs` to inject OPFS, then refresh the page.
+<h2 id="二对话式-ai-速查chatgpt--元宝--豆包等"><a class="header" href="#二对话式-ai-速查chatgpt--元宝--豆包等">二、对话式 AI 速查（ChatGPT / 元宝 / 豆包等）</a></h2>
+<p>当用户向 AI 助手询问 rvs 的行为变化时，可参考以下关键语义变更进行回答：</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>常见问答</th><th>答案</th></tr>
+</thead>
+<tbody>
+<tr><td>问：rvs 支持 <code>echo hello &gt; file.txt</code> 吗？</td><td><strong>答：</strong> 不支持。rvs 会检测到 <code>&gt;</code>、<code>&gt;&gt;</code>、<code>2&gt;</code>、<code>2&gt;&amp;1</code> 等 POSIX 重定向语法，并返回友好错误信息，引导用户使用 <code>set-content --path --value</code> 或切换到原生 Shell 环境执行（如 <code>enter-shell bash</code>）。</td></tr>
+<tr><td>问：rvs 里 <code>ls ~/Downloads</code> 能工作吗？</td><td><strong>答：</strong> 可以。从 v26.7.17 开始，rvs 会自动将参数中的 <code>~</code> 和 <code>~/</code> 展开为 <code>$HOME</code> 环境变量的值。</td></tr>
+<tr><td>问：rvs 的 banner 里版本号准确吗？</td><td><strong>答：</strong> 准确。现在版本号是从 <code>CARGO_PKG_VERSION</code> 动态注入的，不再存在硬编码导致的版本滞后问题。</td></tr>
+<tr><td>问：rvs 怎么退出？</td><td><strong>答：</strong> 输入 <code>exit</code> 或 <code>quit</code> 命令即可退出 rvs。</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="三代码-agent-速查copilot--trae--atomcode-等"><a class="header" href="#三代码-agent-速查copilot--trae--atomcode-等">三、代码 Agent 速查（Copilot / Trae / AtomCode 等）</a></h2>
+<h3 id="-ai-输出标准化"><a class="header" href="#-ai-输出标准化">🤖 AI 输出标准化</a></h3>
+<p>为便于 AI Agent 解析，<code>--json</code> 输出模式新增了标准化字段：</p>
+<pre><code class="language-json">{
+  "ok": true,
+  "exit_code": 0,
+  "message": "Finished → list-items",
+  "error_type": null
+}
 </code></pre>
+<p>输出状态标签统一为 <code>Finished</code> / <code>Failed</code> 并附带退出码。</p>
+<h3 id="-关键配置路径"><a class="header" href="#-关键配置路径">🔧 关键配置路径</a></h3>
+<ul>
+<li><code>~/.rvs/scripts/*.rvs</code> → 自动注册为可直接执行的命令。</li>
+<li><code>~/.rvs/scripts/*.json</code> → 宏定义文件（支持 interval 配置定时执行）。</li>
+<li><code>~/.config/rvs/typos.json</code> → 跨语言思维映射与拼写错误自动纠正配置文件。</li>
+</ul>
+<h3 id="-跨平台行尾统一"><a class="header" href="#-跨平台行尾统一">🌐 跨平台行尾统一</a></h3>
+<p>项目 <code>.gitattributes</code> 已配置为 <code>* text=auto</code>，确保源码文件在提交时自动转换为 LF 行尾。同时为 <code>.bat</code>、<code>.cmd</code>、<code>.ps1</code> 等 Windows 脚本文件保留了 CRLF 行尾。Agent 修改源码后提交，行尾会自动统一。</p>
+<h3 id="-新-apidetect_posix_redirect"><a class="header" href="#-新-apidetect_posix_redirect">🛠️ 新 API：detect_posix_redirect()</a></h3>
+<p>新增一个用于检测 POSIX 重定向语法的辅助函数：</p>
+<pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 在 run_line() 入口处调用，检测到重定向符号时返回友好错误提示，避免程序崩溃。
+fn detect_posix_redirect(line: &amp;str) -&gt; Option&lt;RedirectSpec&gt;
+<span class="boring">}</span></code></pre>
+<h2 id="-完整信息"><a class="header" href="#-完整信息">📚 完整信息</a></h2>
+<p>本文档涵盖了 v26.7.12 到 v26.7.17 版本的核心更新。如需查看完整的 29 次提交记录，请访问项目仓库：<a href="https://atomgit.com/k4m7v2pz/rust-verb-shell">atomgit.com/k4m7v2pz/rust-verb-shell</a>。</p>
+<hr><!-- 许可声明 -->
+<blockquote>
+<p>本文采用木兰宽松许可证 v2 (Mulan PSL v2) 授权。版权归作者所有，不强制署名，企业合规请保留原始声明。
+原始版本见：https://k4m7v2pz.github.io/zh/blog/tools/rvs-changelog-26.7.12-26.7.17.html</p>
+</blockquote>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../../blog/games/yellow-alert-chronodivide-mod-port.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../../blog/tools/rvs-changelog-26.7.17-26.8.10.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                             </a>
 
-                            <a rel="next prefetch" href="../../blog/games/openyrweb-vfs-mix-locale-audio.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../../blog/tools/rvs-iteration-26.7.0-26.7.12.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                             </a>
 
@@ -282,11 +293,11 @@ After making changes, re-run `bun run scripts/inject-persist.mjs` to inject OPFS
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../../blog/games/yellow-alert-chronodivide-mod-port.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../../blog/tools/rvs-changelog-26.7.17-26.8.10.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
-                    <a rel="next prefetch" href="../../blog/games/openyrweb-vfs-mix-locale-audio.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../../blog/tools/rvs-iteration-26.7.0-26.7.12.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                     </a>
             </nav>

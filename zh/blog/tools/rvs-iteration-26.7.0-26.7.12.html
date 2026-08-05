@@ -1,14 +1,14 @@
 <!DOCTYPE HTML>
-<html lang="en" class="light sidebar-visible" dir="ltr">
+<html lang="zh" class="light sidebar-visible" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Porting an RA2 MOD to OpenYRWeb: BGM Mounting and UI Overflow Fixes - K4m7v2pz&#x27;s Blog</title>
+        <title>rvs（rust-verb-shell）迭代全览 26.7.0~26.7.12 - K4m7v2pz&#x27;s Blog</title>
 
 
         <!-- Custom HTML head -->
 
-        <meta name="description" content="k4m7v2pz&#x27;s personal blog">
+        <meta name="description" content="k4m7v2pz 的博客">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
@@ -35,10 +35,10 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-78556c46.js";
+            window.path_to_searchindex_js = "../../searchindex-2ecd0433.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../toc-c4ad2e06.js"></script>
+        <script src="../../toc-3e6498f8.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -146,7 +146,7 @@
                         <a href="https://github.com/k4m7v2pz/k4m7v2pz.github.io" title="Git repository" aria-label="Git repository">
                             <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
                         </a>
-                        <a href="https://github.com/k4m7v2pz/k4m7v2pz.github.io/edit/dev/book-en/src/blog/games/openyrweb-ra2-bgm-and-ui-fixes.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                        <a href="https://github.com/k4m7v2pz/k4m7v2pz.github.io/edit/dev/book-zh/src/blog/tools/rvs-iteration-26.7.0-26.7.12.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
                             <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
                         </a>
 
@@ -180,99 +180,212 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="porting-an-ra2-mod-to-openyrweb-bgm-mounting-and-ui-overflow-fixes"><a class="header" href="#porting-an-ra2-mod-to-openyrweb-bgm-mounting-and-ui-overflow-fixes">Porting an RA2 MOD to OpenYRWeb: BGM Mounting and UI Overflow Fixes</a></h1>
+                        <h1 id="rvsrust-verb-shell迭代全览-267026712"><a class="header" href="#rvsrust-verb-shell迭代全览-267026712">rvs（rust-verb-shell）迭代全览 26.7.0~26.7.12</a></h1>
 <blockquote>
-<p>Date: 2026-08-02</p>
+<p>日期：2026-07-12</p>
 </blockquote>
-<h3 id="trigger-scenario-and-tracing-the-misconceptions"><a class="header" href="#trigger-scenario-and-tracing-the-misconceptions">Trigger Scenario and Tracing the Misconceptions</a></h3>
-<p>When porting the “Yellow Alert” expansion MOD of Red Alert 2 into the OpenYRWeb browser engine, two subtle problems appeared.</p>
-<p><strong>First:</strong> the MOD ships 3 BGM tracks (1 for the main menu, 2 in-game, one of them Frank Klepacki’s “Mud”), but the original data only has <code>art.ini</code>/<code>rules.ini</code> (RA2 non-md naming), while the engine is YR-only and reads only <code>artmd.ini</code>/<code>rulesmd.ini</code>/<code>thememd.ini</code> — even though the music files were placed, there is no sound on the main menu or in-game; and even when sound works, the music selection list shows raw keys like <code>01 - THEME:YellowBattle1</code> instead of “Yellow Alert - In Game”.</p>
-<p><strong>Second:</strong> when playing windowed (not fullscreen), the main menu and freshly-entered gameplay look fine, but as soon as you click on the scene or UI in-game, the bottom command bar and menu buttons end up beyond the browser’s visible area and are almost unclickable.</p>
-<p>Both problems reproduce reliably on real hardware; after debugging, both point to one main thread: “the data format doesn’t match what the engine expects”.</p>
-<h3 id="source-code-verification-and-actionable-conclusions"><a class="header" href="#source-code-verification-and-actionable-conclusions">Source-Code Verification and Actionable Conclusions</a></h3>
-<h4 id="music-problem-missing-link-and-encoding-misalignment"><a class="header" href="#music-problem-missing-link-and-encoding-misalignment">Music problem: missing link and encoding misalignment</a></h4>
-<p>The initial assumption was “drop the mp3 into the browser filesystem and it plays”. In reality OpenYRWeb’s music playback is a complete chain:</p>
-<ol>
-<li><strong>Music specs (<code>MusicSpecs</code>)</strong> are read from the <code>[Themes]</code> section of <code>thememd.ini</code>; each theme has <code>Sound</code>, <code>Normal</code>, <code>Repeat</code>.</li>
-<li>At playback, <code>Music.getMp3File()</code> concatenates <code>lowercase sound + ".mp3"</code> and loads it from the <code>music/</code> folder at the OPFS root.</li>
-</ol>
-<p>The MOD is from the original RA2 platform; its art is defined in <code>art.ini</code> (a 307KB delta table inside <code>expand11.mix</code>), but the engine only reads <code>artmd.ini</code>, and the two don’t match — so all the exclusive units’ rendering collapses and the music goes silent.</p>
-<p>The second assumption: “just write a Chinese Name straight into <code>thememd.ini</code>”. The engine’s <code>readString</code> decodes byte-by-byte as ASCII by default, so UTF-8 Chinese gets split into mojibake (<code>é»è²è­¦æ</code>); and the music list UI (<code>MusicJukebox</code>) displays <code>i.get(e.name)</code> — it treats Name as a CSF translation key, and a missing key returns the raw string.</p>
-<h4 id="resolution-problem-misaligned-viewport-baseline"><a class="header" href="#resolution-problem-misaligned-viewport-baseline">Resolution problem: misaligned viewport baseline</a></h4>
-<p>It looked like an engine rendering bug, but testing showed the external Playwright script takes the window outer size via CDP <code>Browser.getWindowBounds</code> (including the title bar; measured 1440×846 vs a visible area of 1440×759, a difference of about 87px) and directly calls <code>page.setViewportSize</code>, making the page viewport larger than the browser’s visible area; the main menu is DOM-adaptive so it works, but the in-game HUD is pixel-positioned (<code>x = viewport.width - sidebar width</code>, <code>N = viewport.height - command bar height</code>), so the bottom UI naturally gets pushed outside the visible area.</p>
-<p>The verification points are all in the engine source:</p>
-<ul>
-<li>The non-fullscreen branch of <code>Application.updateViewportSize()</code> has <code>Math.min(window.innerWidth, config.viewport.width)</code> and <code>Math.max(800, ...)</code>/<code>Math.max(600, ...)</code> minimum clamps.</li>
-<li><code>Gui.handleViewportChange</code> syncs the viewport to the renderer and UiScene.</li>
-<li><code>HudFactory.create()</code> lays out the sidebar and command bar from <code>uiScene.viewport</code>.</li>
-</ul>
-<h3 id="three-layer-fix-plan"><a class="header" href="#three-layer-fix-plan">Three-Layer Fix Plan</a></h3>
-<h4 id="1-merge-and-register-data"><a class="header" href="#1-merge-and-register-data">1. Merge and Register Data</a></h4>
-<p>Merge the MOD’s art table into <code>artmd.ini</code> (original 1581 sections + MOD 1705 sections), and register every referenced animation in the <code>[Animations]</code> section of <code>rulesmd.ini</code> (remember to strip <code>;%</code> comments before scanning, so you don’t miss keys like <code>NATorpedoT_A</code>).</p>
-<h4 id="2-complete-music-chain"><a class="header" href="#2-complete-music-chain">2. Complete Music Chain</a></h4>
-<p>Custom <code>thememd.ini</code> (example):</p>
-<pre><code class="language-[YellowBattle1]">Sound=YellowBattle1
-Normal=yes
-Repeat=yes
-
-[YellowBattle2]
-Sound=YellowBattle2
-Normal=yes
-Repeat=yes
-
-[YellowMenu]
-Sound=YellowMenu
-Normal=yes
-Repeat=yes```ini
-
-Package it as `yellowmusic.mmx` and let the engine auto-mount it to override the original theme table. Transcode the mp3s at 22050Hz/96k and inject them into the OPFS `music/` directory.
-
-For display names, switch to CSF translation instead: keep `THEME:YellowBattle1` as the Name key, and write "Yellow Alert - In Game" and "Frank Klepacki - Mud" into `ra2md.csf` (in the engine's CsfFile format: entry = `' LBL' | flags | nameLen | name | ' RTS' | charCount | UTF-16LE inverted bytes`).
-
-#### 3. Fix the Resolution Script
-
-Change it to first measure and cache the browser border delta (title bar height is constant; measured dy=87), then on every poll convert the CDP outer size into the content area size (`cw = w - dx`, keeping the 800×600 lower bound) before syncing it to the page.
-
-### Fix Results and Lessons Learned
-
-After the three fixes, the main-menu and in-game BGM work, the list shows the Chinese track names, and the bottom UI stays fully clickable no matter how the window is stretched.
-
-**Lessons learned:** when porting to a cross-platform engine, "filename variants (md), ini section registration, CSF key translation, and the pixel-positioning baseline" are the four highest-frequency pitfalls; the troubleshooting order should be to match the source-code format first and then change the data — don't suspect the render layer first.
-
-### Quick Reference for Three Kinds of Readers
-
-#### Human Developers: Four-Step Self-Check
-
-1. The engine only reads the md variants (rulesmd/artmd/thememd); RA2 original data needs renaming or merging.
-2. Music files must be under the OPFS root `music/`, named = lowercase theme Sound + `.mp3`, and the theme table lives in the `[Themes]` section of `thememd.ini`.
-3. In-game bottom UI overflowing = viewport larger than the visible area; check the outer/content conversion (title-bar delta) and mind the engine's 800×600 minimum clamp.
-4. List showing raw keys = missing CSF translation; add the key-value pairs to `ra2md.csf`.
-
-#### Conversational AI: Question Templates
-
-- "OpenYRWeb music doesn't play / shows THEME:xxx — how to fix?" The answer should be: the theme table is in the thememd.ini `[Themes]` section, mp3s go in OPFS `music/`, and display names go through CSF key translation.
-- "Windowed UI overflows the visible area" The answer should be: CDP returns the outer size, you need to subtract the title bar; the engine has an 800×600 minimum viewport clamp.
-
-#### Code Agents: Key Anchors
-
-- `engine/sound/MusicSpecs.ts` (theme parsing)
-- `engine/sound/Music.ts` (getMp3File name building)
-- `gui/screen/options/component/MusicJukebox.ts` (i.get display)
-- `Application.ts` updateViewportSize (clamping)
-- `gui/screen/game/component/Hud.ts` (pixel positioning)
-
-After making changes, re-run `bun run scripts/inject-persist.mjs` to inject OPFS, then refresh the page.
+<p>本文讲的是 rvs 从 v26.7.0 到 v26.7.12 这一路迭代更新了什么。所有命令以最新 dev 分支为准。</p>
+<h2 id="一先说设计哲学的两处修正"><a class="header" href="#一先说设计哲学的两处修正">一、先说设计哲学的两处修正</a></h2>
+<h3 id="1-从-powershell-的-new-item-思路里跳出来"><a class="header" href="#1-从-powershell-的-new-item-思路里跳出来">1. 从 PowerShell 的 New-Item 思路里跳出来</a></h3>
+<p>最初 rvs 抄了 PowerShell 的 <code>New-Item</code>，用一个命令、一个 <code>--type</code> 参数同时创建文件和目录。听起来很统一，实际很坑：</p>
+<pre><code class="language-bash">new-item --path foo              # 默认 --type file，创建文件 foo
+new-item --path bar --type dir   # 创建目录 bar
 </code></pre>
+<p>问题在于 <code>mkdir</code> 这个别名也指向 <code>new-item</code>，而 <code>new-item</code> 默认 <code>--type file</code>。于是 <code>mkdir demo</code> 实际创建了一个名为 <code>demo</code> 的<strong>文件</strong>，不是目录。这是个会让人骂街的静默错误。</p>
+<p>新版把 <code>new-item</code> 拆开，语义各自明确：</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>命令</th><th>别名</th><th>说明</th></tr>
+</thead>
+<tbody>
+<tr><td><code>new-directory</code></td><td><code>mkdir</code></td><td>只创建目录，<code>--parents</code>（默认 true）控制递归</td></tr>
+<tr><td><code>new-file</code></td><td><code>touch</code> / <code>ni</code></td><td>只创建文件，<code>--value</code> 提供初始内容</td></tr>
+</tbody>
+</table>
+</div>
+<pre><code class="language-bash">new-directory --path demo           # 创建目录 demo
+mkdir demo                          # 别名，等价
+new-file --path test.rs             # 创建空文件
+touch test.rs --value "fn main(){}" # 创建带初始内容的文件
+</code></pre>
+<p>这个拆分还为未来留了位置：<code>new-softlink</code>、<code>new-hardlink</code> 都可以按同样模式加进来，不需要在 <code>--type</code> 上继续叠条件。</p>
+<h3 id="2-用户可见文本里的-verb-noun-全部改成-verb-noun"><a class="header" href="#2-用户可见文本里的-verb-noun-全部改成-verb-noun">2. 用户可见文本里的 Verb-Noun 全部改成 verb-noun</a></h3>
+<p>旧版 banner 里写的是「commands use Verb-Noun style」，跟 rvs 自己「全小写 kebab-case」的设计原则自相矛盾——既然命令名是 <code>get-child-item</code> 这种全小写形式，那提示语里就不该出现 PascalCase 的 <code>Verb-Noun</code>。</p>
+<p>新版统一成小写：</p>
+<pre><code>rvs — rust-verb-shell (v26.7.12)
+no sandbox (full FS access).  use --sandbox  to restrict.
+commands use verb-noun style (get-child-item, set-location, ...).
+aliases: ls / cd / pwd / cat / mkdir / rm / echo / clear; 'exit' to quit.
+</code></pre>
+<p>这是个小事，但它涉及一个判断：文档里举的例子要和工具实际接受的输入完全一致，否则 AI 和人类都会被带偏。</p>
+<h2 id="二借鉴-ripgrepsearch-content-重写"><a class="header" href="#二借鉴-ripgrepsearch-content-重写">二、借鉴 ripgrep：search-content 重写</a></h2>
+<p>rvs 早期的 <code>search-content</code>（别名 <code>sc</code> / <code>grep</code>）是最小可用版：自写 <code>collect_files</code> 递归遍历，硬编码跳过 <code>.git</code> / <code>target</code> / <code>node_modules</code>，单线程搜。这版能跑，但有两个问题：</p>
+<ul>
+<li>噪音目录硬编码，换个项目就失效</li>
+<li>不读 <code>.gitignore</code>，搜一次能把 <code>target/debug/</code> 里几百 MB 的编译产物全扫一遍</li>
+</ul>
+<p>新版直接换成 ripgrep 同款的 <code>ignore</code> crate 做目录遍历，再上 <code>rayon</code> 多文件并行。ripgrep 的“四重默认过滤“全都到位：</p>
+<ul>
+<li>尊重 <code>.gitignore</code> / <code>.ignore</code> / <code>.git/info/exclude</code> / 全局 gitignore</li>
+<li>默认跳过隐藏文件（<code>.</code> 开头）</li>
+<li>默认跳过二进制文件（启发式 NUL 字节检测）</li>
+<li>不跟随符号链接</li>
+</ul>
+<h3 id="渐进关闭过滤rg--u---uu---uuu"><a class="header" href="#渐进关闭过滤rg--u---uu---uuu">渐进关闭过滤（rg -u / -uu / -uuu）</a></h3>
+<p>ripgrep 用户熟悉 <code>-u</code> 叠加：<code>-u</code> 关 ignore，<code>-uu</code> 再加 hidden，<code>-uuu</code> 等同 <code>grep -r</code>。rvs 参数解析层不支持 <code>-u</code> 叠加，所以用显式 switch 对应：</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>rg 写法</th><th>rvs 写法</th><th>语义</th></tr>
+</thead>
+<tbody>
+<tr><td><code>rg pat</code></td><td><code>sc --pattern pat</code></td><td>默认四重过滤</td></tr>
+<tr><td><code>rg -u pat</code></td><td><code>sc --pattern pat --no-ignore</code></td><td>关 .gitignore</td></tr>
+<tr><td><code>rg -uu pat</code></td><td><code>sc --pattern pat --no-ignore --hidden</code></td><td>再加隐藏文件</td></tr>
+<tr><td><code>rg -uuu pat</code></td><td><code>sc --pattern pat --no-ignore --hidden --binary</code></td><td>再加二进制</td></tr>
+</tbody>
+</table>
+</div>
+<p><code>-u</code> 是 <code>--no-ignore</code> 的短别名，方便记忆。</p>
+<h2 id="三上下文行与多文件并行"><a class="header" href="#三上下文行与多文件并行">三、上下文行与多文件并行</a></h2>
+<h3 id="上下文行context-n--before-n--after-n"><a class="header" href="#上下文行context-n--before-n--after-n">上下文行（–context N / –before N / –after N）</a></h3>
+<p>Agent 搜到一个匹配，通常要看上下文才能判断“这是不是我要找的“。新版加了上下文行，输出 Table 里多 <code>Before</code> 和 <code>After</code> 字段：</p>
+<pre><code class="language-bash">sc --pattern "pub struct" --path crates --include *.rs --context 1
+</code></pre>
+<p><code>--context N</code> 同时给前后 N 行；<code>--before N</code> / <code>--after N</code> 单独控制。</p>
+<h3 id="多文件并行"><a class="header" href="#多文件并行">多文件并行</a></h3>
+<p><code>rayon</code> 的 <code>par_iter</code> 让多个文件并行搜索。<code>--max-results</code> 用 <code>AtomicUsize</code> 跨线程计数，超过上限就提前停。单文件搜索不并行，避免小文件场景的线程开销。</p>
+<h2 id="四get-versionrvs-自身可观测性"><a class="header" href="#四get-versionrvs-自身可观测性">四、get-version：rvs 自身可观测性</a></h2>
+<p>这个命令的背景是一次排错：源码和 locale 都改了，但 wezterm 新开的标签页还是显示旧 banner。绕了好几条命令才定位到——<strong>旧二进制没重编</strong>，而 rvs 自己没有任何机制让 Agent 一眼看清“现在跑的是哪个二进制“。</p>
+<p>新版加了 <code>get-version</code>（别名 <code>ver</code> / <code>version</code>），通过编译时 <code>build.rs</code> 注入的信息回答这个问题：</p>
+<pre><code class="language-bash">rvs --json -c 'get-version'
+</code></pre>
+<p>输出（简化）：</p>
+<pre><code class="language-json">{
+  "Version": "26.7.12",
+  "BuildTime": "2026-07-25T14:56:08Z",
+  "GitCommit": "11e70c4",
+  "GitDirty": "dirty",
+  "BuildHost": "macos aarch64",
+  "Profile": "debug"
+}
+</code></pre>
+<p>排错决策树因此变得很短：</p>
+<ol>
+<li>跑 <code>get-version</code> 看 <code>BuildTime</code></li>
+<li>对比源码 mtime</li>
+<li>源码新于 BuildTime → 跑的是旧二进制，需要 <code>cargo build</code></li>
+</ol>
+<p><code>GitDirty</code> 字段额外告诉你当前二进制是从一个有未提交改动的工作区编出来的，Agent 据此能判断“这个二进制能不能信任“。</p>
+<h2 id="五get-child-item-llm尊重-gitignore喂对话式-llm"><a class="header" href="#五get-child-item-llm尊重-gitignore喂对话式-llm">五、get-child-item –llm：尊重 .gitignore，喂对话式 LLM</a></h2>
+<p>一个常见场景：你在 wezterm 里想问 ChatGPT/Claude/元宝“这个项目大概是个啥“，最自然的做法是把当前目录的文件列表 copy 进对话框。但 <code>ls</code> 的输出又长又乱——表格边框、<code>target/</code>、<code>node_modules/</code>、隐藏文件全混在一起，贴进去几百行，LLM 还要从噪音里捞信号。</p>
+<p>新版加了 <code>--llm</code> 模式（<code>get-child-item --llm</code>，别名 <code>ls --llm</code>）专门解决这个：</p>
+<pre><code class="language-bash">rvs -c 'get-child-item --llm --path crates/rvs-commands'
+</code></pre>
+<p>输出：</p>
+<pre><code>[F] Cargo.toml
+[F] build.rs
+[D] src/
+[F] src/lib.rs
+</code></pre>
+<p><code>[D]</code> 是目录、<code>[F]</code> 是文件，路径相对，每行一个条目，无表格边框。底层用 <code>ignore::WalkBuilder</code>，默认尊重 <code>.gitignore</code>，跳过 <code>target/</code> / <code>node_modules/</code> 等噪音目录。</p>
+<p>工作流变成：<code>ls --llm</code> → 全选复制 → 粘到对话框。LLM 拿到的是干净的项目结构视图。</p>
+<h2 id="六wezterm-rvssh编译期间的双语进度提示"><a class="header" href="#六wezterm-rvssh编译期间的双语进度提示">六、wezterm-rvs.sh：编译期间的双语进度提示</a></h2>
+<p>这是 wezterm 用户的体验改进。旧版的启动包装脚本只在“二进制不存在“时编译，于是出现了上面提到的 silent stale 问题——源码改了，但新开的标签页还是跑旧二进制。</p>
+<p>新版策略：</p>
+<ol>
+<li>每次启动跑 <code>cargo build --dry-run</code> 检测是否需要重编</li>
+<li>需要时先打印双语进度提示到 stdout（wezterm 直接可见，避免黑屏假死）：
+<pre><code>rvs: source changed, rebuilding binary before launch…
+rvs：检测到代码更改，正在编译以获取最新二进制…
+</code></pre>
+</li>
+<li>编译完成后打印“启动中“</li>
+<li>编译失败打印 <code>[ERR]</code> + stderr 并退出</li>
+</ol>
+<p><code>cargo build --dry-run</code> 本身很快（&lt;0.5s），无变更时直接跳过；有变更时先提示再编译，让人类和 Agent 都知道发生了什么。</p>
+<h2 id="七面向三类读者的速查"><a class="header" href="#七面向三类读者的速查">七、面向三类读者的速查</a></h2>
+<h3 id="人类开发者wezterm--终端"><a class="header" href="#人类开发者wezterm--终端">人类开发者（wezterm / 终端）</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>你要做什么</th><th>rvs 命令</th><th>别名</th></tr>
+</thead>
+<tbody>
+<tr><td>列目录</td><td><code>get-child-item</code></td><td><code>ls</code></td></tr>
+<tr><td>列目录（喂 LLM 用）</td><td><code>get-child-item --llm</code></td><td><code>ls --llm</code></td></tr>
+<tr><td>创建目录</td><td><code>new-directory --path demo</code></td><td><code>mkdir demo</code></td></tr>
+<tr><td>创建文件</td><td><code>new-file --path test.rs</code></td><td><code>touch test.rs</code></td></tr>
+<tr><td>搜代码（ripgrep 风格）</td><td><code>search-content --pattern foo</code></td><td><code>sc --pattern foo</code> / <code>grep foo</code></td></tr>
+<tr><td>搜代码带上下文</td><td><code>sc --pattern foo --context 3</code></td><td>—</td></tr>
+<tr><td>关 ignore 搜</td><td><code>sc --pattern foo --no-ignore</code></td><td><code>sc -u foo</code></td></tr>
+<tr><td>看 rvs 自身版本</td><td><code>get-version</code></td><td><code>ver</code> / <code>version</code></td></tr>
+<tr><td>切到 bash</td><td><code>enter-shell bash</code></td><td>—</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="对话式-aichatgpt--腾讯元宝--豆包等"><a class="header" href="#对话式-aichatgpt--腾讯元宝--豆包等">对话式 AI（ChatGPT / 腾讯元宝 / 豆包等）</a></h3>
+<p>当用户描述一个文件操作意图时，对话 AI 应该生成 rvs 全小写 verb-noun 命令，不要生成 PowerShell 的 PascalCase（<code>Get-ChildItem</code>），也不要生成 POSIX（<code>ls</code>）——后者只是别名，rvs native 形式才是 <code>get-child-item</code>。</p>
+<p>命令模板（v26.7.12+）：</p>
+<pre><code class="language-bash"># 列目录
+get-child-item [path] [-recurse]
+
+# 列目录并尊重 .gitignore（喂给对话式 LLM 用）
+get-child-item --llm [path]
+
+# 读文件
+get-content &lt;path&gt;
+
+# 创建目录 / 文件（注意：new-item 已拆分）
+new-directory --path &lt;path&gt;
+new-file --path &lt;path&gt;
+
+# 搜代码（ripgrep 风格）
+search-content --pattern &lt;pat&gt; [--path &lt;path&gt;] [--regex] [--include *.rs]
+              [--no-ignore] [--hidden] [--binary]
+              [--context N] [--before N] [--after N]
+
+# 看 rvs 自身版本（排错第一动作）
+get-version
+</code></pre>
+<p>如果用户传入的指令是 POSIX 风格的管道（如 <code>ls | grep foo</code>），提示用 <code>enter-shell bash</code> 切换到 bash 后再执行，或用 rvs native 的 <code>get-child-item | where-object "..."</code>。</p>
+<h3 id="代码-agentvscode-copilot--trae-ide--atomcode-等"><a class="header" href="#代码-agentvscode-copilot--trae-ide--atomcode-等">代码 Agent（VSCode Copilot / Trae IDE / AtomCode 等）</a></h3>
+<p>Agent 调用 rvs 时应走 <code>--json</code> 模式，输出是合法 JSON，无需额外解析：</p>
+<pre><code class="language-bash"># 单个命令
+rvs --json -c 'get-child-item --llm'
+
+# 管道喂多行
+echo -e "get-location\nget-version" | rvs --json
+</code></pre>
+<p>rvs 行为异常时的第一动作：</p>
+<ol>
+<li>跑 <code>rvs --json -c 'get-version'</code> 看 <code>BuildTime</code> / <code>GitCommit</code> / <code>Profile</code></li>
+<li>对比源码 mtime：
+<ul>
+<li>源码新于 <code>BuildTime</code> → 跑的是旧二进制，需要 <code>cargo build</code></li>
+<li><code>BuildTime</code> ≥ 源码 mtime → 二进制是最新的，问题在别处</li>
+</ul>
+</li>
+</ol>
+<p>字符串检索（grep 替代品）：Agent 在 rvs 里想搜代码时，不要 <code>enter-shell bash</code> 跳出去用 grep。用 rvs 原生 <code>search-content</code>（别名 <code>sc</code> / <code>grep</code>）。沙盒内可用，<code>--json</code> 输出 Table <code>{Path, Line, Content, Before?, After?}</code>，Agent 直接消费。</p>
+<h2 id="八一句话总结"><a class="header" href="#八一句话总结">八、一句话总结</a></h2>
+<p>rvs v26.7.12 = 借鉴 ripgrep 的搜索（ignore + rayon + <code>-u</code> 渐进 + <code>--context</code>）+ 自身可观测（<code>get-version</code> 注入 BuildTime/GitCommit/BuildHost/Profile）+ <code>--llm</code> 输出尊重 <code>.gitignore</code> 喂对话式 LLM + <code>new-item</code> 拆成 <code>new-directory</code> / <code>new-file</code> 修 <code>mkdir</code> 创建文件的 bug。项目在 <a href="https://atomgit.com/k4m7v2pz/rust-verb-shell">atomgit.com/k4m7v2pz/rust-verb-shell</a>，版本号 CalVer YY.M.P，当前 v26.7.12。</p>
+<hr><!-- 许可声明 -->
+<blockquote>
+<p>本文采用木兰宽松许可证 v2 (Mulan PSL v2) 授权。版权归作者所有，不强制署名，企业合规请保留原始声明。
+原始版本见：https://k4m7v2pz.github.io/zh/blog/tools/rvs-iteration-26.7.0-26.7.12.html</p>
+</blockquote>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../../blog/games/yellow-alert-chronodivide-mod-port.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../../blog/tools/rvs-changelog-26.7.12-26.7.17.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                             </a>
 
-                            <a rel="next prefetch" href="../../blog/games/openyrweb-vfs-mix-locale-audio.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../../blog/tools/wezterm-cjk-glyph-fix.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                             </a>
 
@@ -282,11 +395,11 @@ After making changes, re-run `bun run scripts/inject-persist.mjs` to inject OPFS
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../../blog/games/yellow-alert-chronodivide-mod-port.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../../blog/tools/rvs-changelog-26.7.12-26.7.17.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
-                    <a rel="next prefetch" href="../../blog/games/openyrweb-vfs-mix-locale-audio.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../../blog/tools/wezterm-cjk-glyph-fix.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                     </a>
             </nav>
