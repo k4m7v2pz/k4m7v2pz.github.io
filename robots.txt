@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://k4m7v2pz.github.io/sitemap.xml

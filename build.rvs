@@ -27,6 +27,14 @@ mdbook build book-en --dest-dir site/en
 write-output "=== Copying root index.html ==="
 cp index.html site/index.html
 
+# 复制 robots.txt
+write-output "=== Copying robots.txt ==="
+cp robots.txt site/robots.txt
+
+# 生成 sitemap.xml
+write-output "=== Generating sitemap.xml ==="
+uv run python scripts/generate-sitemap.py
+
 write-output "=== Done ==="
 write-output ""
 write-output "  预览： cd site && python -m http.server 8080"

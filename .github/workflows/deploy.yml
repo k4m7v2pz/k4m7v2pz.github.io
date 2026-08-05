@@ -39,6 +39,12 @@ jobs:
       - name: Copy root index
         run: cp ${{ github.workspace }}/index.html ${{ github.workspace }}/site/
 
+      - name: Copy robots.txt
+        run: cp ${{ github.workspace }}/robots.txt ${{ github.workspace }}/site/
+
+      - name: Generate sitemap
+        run: python3 ${{ github.workspace }}/scripts/generate-sitemap.py
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
