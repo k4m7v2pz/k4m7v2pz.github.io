@@ -13,6 +13,7 @@
 - [在 Arch Linux 上模拟 macOS 键盘习惯](blog/operating-system/gnulinux/archlinux-macos-keyboard-keyd-sway-wezterm.md)
 - [纯字符极简 Arch Linux 装机指南](blog/operating-system/gnulinux/minimal-archlinux-install-guide.md)
 - [XFCE 桌面环境 lightdm 包列表参考](blog/operating-system/gnulinux/xfce-lightdm-package-list.md)
+- [ThinkPad E490 风扇温度自动控制实录：thinkfan 缺位，自写曲线脚本接管](blog/operating-system/gnulinux/thinkpad-e490-fan-control.md)
 
 ## Windows
 - [嵌入式 Python Windows 版 pip 安装](blog/operating-system/windows/embed-python-pip-installation-windows.md)
@@ -25,6 +26,8 @@
 - [Windows 下通过 Scoop 安装 Nushell](blog/operating-system/windows/scoop-install-nushell-windows.md)
 - [System Management 核心脚本存档](blog/operating-system/windows/system-management-scripts.md)
 - [PowerShell Invoke-RestMethod SSL/TLS 安全通道错误排查](blog/operating-system/windows/powershell-invoke-restmethod-ssl-tls.md)
+- [Windows VPS 终端显示全乱：三层独立问题叠加的排查与修复](blog/operating-system/windows/windows-vps-terminal-garbled.md)
+- [修复 SSH 进 Windows 输出逐字累积：\r 回车被当换行，winpty 与 Win10 1607 无 ConPTY](blog/operating-system/windows/ssh-windows-output-buffering.md)
 
 # 工具
 - [Nushell + AtomCode 配置踩坑记录](blog/tools/nushell-atomcode-config-pitfalls.md)
@@ -38,6 +41,7 @@
 - [rvs（rust-verb-shell）更新全览 26.7.12~26.7.17](blog/tools/rvs-changelog-26.7.12-26.7.17.md)
 - [rvs（rust-verb-shell）迭代全览 26.7.0~26.7.12](blog/tools/rvs-iteration-26.7.0-26.7.12.md)
 - [WezTerm 终端 CJK 字形混乱排查与修复](blog/tools/wezterm-cjk-glyph-fix.md)
+- [macOS 电路设计自动校验工作流：KiCad CLI + ngspice + Python 从零搭建](blog/tools/macos-kicad-ngspice-circuit-validation.md)
 
 # 编程开发
 - [Rust Bevy 0.13 到 0.14 升级踩坑指南](blog/programming/rust-bevy-0.13-to-0.14-upgrade-guide.md)
@@ -54,6 +58,10 @@
 - [Bevy 0.14.2 玩家精灵不渲染排查全记录](blog/programming/bevy-0.14.2-sprite-not-rendering.md)
 - [Bytebeat Moog City Reconstruction v3.2 技术解析与实现](blog/programming/bytebeat-moog-city-reconstruction.md)
 - [从 rg 到 rr：CLI 工具的 r 前缀拜物教](blog/programming/rg-to-rr-r-prefix-cult.md)
+- [Bevy 0.14 窗口纯黑问题排查：Camera2d 只是标记组件，spawn Camera2d 不会创建相机](blog/programming/bevy-0.14-black-window-camera2d.md)
+- [Rust 交叉编译实战：从 Mac 到 Linux / Windows（以 rvs 为例）](blog/programming/rust-cross-compile-mac-linux-windows.md)
+- [egui 中文渲染整体偏高：FontTweak 基线对齐修复实录](blog/programming/egui-cjk-rendering-fonttweak.md)
+- [修复终端表格折行：crossterm 返回缓冲区宽度而非窗口宽度（dwSize vs srWindow）](blog/programming/crossterm-terminal-table-wrap.md)
 
 # 游戏
 - [Mighty Rodent Splash 黑屏踩坑记录](blog/games/mighty-rodent-splash-black-screen-debug.md)
@@ -69,6 +77,12 @@
 - [RA2/YR CSF 文件格式逆向解析](blog/games/ra2-yr-csf-format-reverse.md)
 - [RA2 MOD 的 BGM 挂载与显示名翻译](blog/games/ra2-mod-bgm-thememd-csf.md)
 - [RA2 MOD 移植 OpenYRWeb 踩坑实录](blog/games/ra2-mod-openyrweb-port-pitfalls.md)
+- [Bevy wgpu 在 R36S 掌机上屏收官](blog/games/bevy-wgpu-r36s-screen.md)
+- [Bevy 0.14 在 R36S 上渲染全链路打通](blog/games/bevy-0.14-r36s-rendering.md)
+- [把 Bevy 0.14 游戏移植到 R36S 掌机](blog/games/bevy-0.14-port-to-r36s.md)
+- [OpenYRWeb 战场光标速度异常排查记录](blog/games/openyrweb-cursor-speed.md)
+- [OpenYRWeb 引擎配置迁移：从 INI 到 JSON Schema 的实践指南](blog/games/openyrweb-config-migration-ini-json.md)
+- [OpenYRWeb 加载繁体中文 MOD 显示简体界面的完整解决方案](blog/games/openyrweb-traditional-chinese-mod.md)
 
 # Suno AI
 - [红警 2 黄色警戒 主菜单音乐 Suno AI 风格提示词](blog/sunoai/yellow-alert-suno-style-prompt.md)

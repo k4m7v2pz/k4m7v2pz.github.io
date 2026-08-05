@@ -152,10 +152,12 @@ for f in "${files[@]}"; do
   # 6) 机器别名 / 云平台名 / 型号黑名单
   # 用户要求：连「有几台机器、什么平台」都不能暴露。以下词是真实机器标识，
   # 出现即说明把机器清单写进了公开仓库，必须换成 <lan-host> / <vps> / <your-key> 占位符。
-  # 注意：只列「独特词」——printer/arch/ubuntu 等通用词不拦（可能误伤正常语义）。
+  # 注意：只列「独特词」——printer/arch/ubuntu/thinkpad 等通用词不拦（可能误伤正常语义）。
+  # thinkpad 是品牌名 + Linux 内核通用模块名（thinkpad_acpi），放行；
+  # tp-e490 是真实主机名/mDNS 标识，必须拦截。
   while IFS= read -r hit; do
     report "$f" "机器标识" "$hit"
-  done < <(grep -InEi 'vultr|thinkpad|tp-e490' "$f" 2>/dev/null)
+  done < <(grep -InEi 'vultr|tp-e490' "$f" 2>/dev/null)
 done
 
 if (( violations > 0 )); then
