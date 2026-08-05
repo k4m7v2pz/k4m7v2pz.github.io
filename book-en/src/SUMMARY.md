@@ -35,6 +35,8 @@
 - [From PowerShell to Nushell Migration](blog/tools/powershell-to-nushell-migration.md)
 - [rvs (rust-verb-shell): A Structured Shell for Humans and AI Agents](blog/tools/rvs-structured-shell-intro.md)
 - [rvs (rust-verb-shell) Changelog Overview 26.7.17 – 26.8.10](blog/tools/rvs-changelog-26.7.17-26.8.10.md)
+- [rvs (rust-verb-shell) Changelog Overview 26.7.12 – 26.7.17](blog/tools/rvs-changelog-26.7.12-26.7.17.md)
+- [rvs (rust-verb-shell) Iteration Overview 26.7.0 – 26.7.12](blog/tools/rvs-iteration-26.7.0-26.7.12.md)
 - [WezTerm CJK Glyph Rendering Chaos: Diagnosis and Fix](blog/tools/wezterm-cjk-glyph-fix.md)
 
 # Programming
@@ -43,6 +45,7 @@
 - [Bevy 0.14 Cursor Pitfalls](blog/programming/bevy-0.14-cursor-pitfalls.md)
 - [Bevy 0.14 FPS Camera Pitfalls](blog/programming/bevy-0.14-fps-camera-pitfalls.md)
 - [AtomCode Spinner Labels Explained](blog/programming/atomcode-spinner-thinking-labels.md)
+- [AtomCode Spinner Wordlist Errata: 85% Was Fabricated](blog/programming/atomcode-spinner-wordlist-errata.md)
 - [From AtomCode to Ascend NPU](blog/programming/atomcode-ascend-npu-free-tier.md)
 - [AtomCode Project: Agent Memorized-Writing SOP](blog/programming/atomcode-writing-sop.md)
 - [Inside AtomCode's Ctrl+O: The Evolution from Tool Output to Reasoning Visibility](blog/programming/atomcode-ctrl-o-evolution.md)

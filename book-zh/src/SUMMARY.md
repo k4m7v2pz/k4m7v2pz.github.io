@@ -35,6 +35,8 @@
 - [从 PowerShell 到 Nushell 迁移指南](blog/tools/powershell-to-nushell-migration.md)
 - [rvs（rust-verb-shell）：面向人类和 AI Agent 的结构化 Shell](blog/tools/rvs-structured-shell-intro.md)
 - [rvs（rust-verb-shell）更新全览 26.7.17~26.8.10](blog/tools/rvs-changelog-26.7.17-26.8.10.md)
+- [rvs（rust-verb-shell）更新全览 26.7.12~26.7.17](blog/tools/rvs-changelog-26.7.12-26.7.17.md)
+- [rvs（rust-verb-shell）迭代全览 26.7.0~26.7.12](blog/tools/rvs-iteration-26.7.0-26.7.12.md)
 - [WezTerm 终端 CJK 字形混乱排查与修复](blog/tools/wezterm-cjk-glyph-fix.md)
 
 # 编程开发
@@ -43,6 +45,7 @@
 - [Bevy 0.14 光标踩坑全记录](blog/programming/bevy-0.14-cursor-pitfalls.md)
 - [Bevy 0.14 第一人称转视角踩坑全记](blog/programming/bevy-0.14-fps-camera-pitfalls.md)
 - [AtomCode 终端 Spinner 词表解析](blog/programming/atomcode-spinner-thinking-labels.md)
+- [AtomCode 终端 Spinner 词表勘误：85% 是编的](blog/programming/atomcode-spinner-wordlist-errata.md)
 - [从 AtomCode 续杯到昇腾容器](blog/programming/atomcode-ascend-npu-free-tier.md)
 - [AtomCode 项目 Agent 记忆化写作 SOP](blog/programming/atomcode-writing-sop.md)
 - [AtomCode Ctrl+O 探秘：从工具输出到推理可见的演进史](blog/programming/atomcode-ctrl-o-evolution.md)
