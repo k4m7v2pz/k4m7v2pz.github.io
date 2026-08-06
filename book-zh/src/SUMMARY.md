@@ -32,6 +32,7 @@
 # 工具
 - [Nushell + AtomCode 配置踩坑记录](blog/tools/nushell-atomcode-config-pitfalls.md)
 - [macOS 解压 40GB 分卷+中文密码固件镜像的五个深坑](blog/tools/macos-multivolume-zip-chinese-password.md)
+- [CSDN 写作 Agent 内容审核实测：什么话题会被拒、怎么绕过](blog/tools/csdn-writing-agent-content-review.md)
 - [WezTerm + Nushell + Cargo 找不到命令](blog/tools/wezterm-nushell-cargo-not-found.md)
 - [CSDN 写作 Agent 输入限制实测与分段策略](blog/tools/csdn-writing-agent-input-limits.md)
 - [macOS 上 Nushell 自定义配置陷阱](blog/tools/macos-nushell-config-path-pitfall.md)

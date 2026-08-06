@@ -32,6 +32,7 @@
 # Tools
 - [Nushell + AtomCode Configuration Pitfalls](blog/tools/nushell-atomcode-config-pitfalls.md)
 - [Five Deep Pitfalls in Extracting a 40GB Multi-Volume Encrypted Firmware Image on macOS](blog/tools/macos-multivolume-zip-chinese-password.md)
+- [CSDN Writing Agent Content Review: What Gets Rejected and How to Get Around It](blog/tools/csdn-writing-agent-content-review.md)
 - [WezTerm + Nushell + Cargo Not Found](blog/tools/wezterm-nushell-cargo-not-found.md)
 - [CSDN Writing Agent Input Limits](blog/tools/csdn-writing-agent-input-limits.md)
 - [macOS Nushell Config Path Pitfall](blog/tools/macos-nushell-config-path-pitfall.md)
