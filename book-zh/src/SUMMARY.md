@@ -31,6 +31,7 @@
 
 # 工具
 - [Nushell + AtomCode 配置踩坑记录](blog/tools/nushell-atomcode-config-pitfalls.md)
+- [macOS 解压 40GB 分卷+中文密码固件镜像的五个深坑](blog/tools/macos-multivolume-zip-chinese-password.md)
 - [WezTerm + Nushell + Cargo 找不到命令](blog/tools/wezterm-nushell-cargo-not-found.md)
 - [CSDN 写作 Agent 输入限制实测与分段策略](blog/tools/csdn-writing-agent-input-limits.md)
 - [macOS 上 Nushell 自定义配置陷阱](blog/tools/macos-nushell-config-path-pitfall.md)
@@ -45,6 +46,7 @@
 
 # 编程开发
 - [Rust Bevy 0.13 到 0.14 升级踩坑指南](blog/programming/rust-bevy-0.13-to-0.14-upgrade-guide.md)
+- [RK3326 设备树面板调试：换内核后 LCD 背光亮但屏幕黑](blog/programming/rk3326-dtb-panel-debug.md)
 - [玄铁 0.17.5 InputExpression 分支遗漏 Bug](blog/programming/xuantie-input-expression-bug.md)
 - [Bevy 0.14 光标踩坑全记录](blog/programming/bevy-0.14-cursor-pitfalls.md)
 - [Bevy 0.14 第一人称转视角踩坑全记](blog/programming/bevy-0.14-fps-camera-pitfalls.md)
@@ -65,6 +67,7 @@
 
 # 游戏
 - [Mighty Rodent Splash 黑屏踩坑记录](blog/games/mighty-rodent-splash-black-screen-debug.md)
+- [R36S 系统卡与游戏卡分离实战：EmuELEC 双卡方案](blog/games/r36s-emuelec-dual-card-separation.md)
 - [给 AI Agent 看的游戏配置：JSON Schema 与 ai_context 注释层设计](blog/games/game-config-json-schema-ai-context.md)
 - [Arch Linux + Wine + i3wm 搭建复古游戏环境](blog/games/archlinux-wine-i3wm-retro-game-env.md)
 - [浏览器窗口化游戏分辨率适配：CDP 外层尺寸 vs 内容区尺寸](blog/games/browser-windowed-game-resolution-cdp.md)

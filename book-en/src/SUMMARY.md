@@ -31,6 +31,7 @@
 
 # Tools
 - [Nushell + AtomCode Configuration Pitfalls](blog/tools/nushell-atomcode-config-pitfalls.md)
+- [Five Deep Pitfalls in Extracting a 40GB Multi-Volume Encrypted Firmware Image on macOS](blog/tools/macos-multivolume-zip-chinese-password.md)
 - [WezTerm + Nushell + Cargo Not Found](blog/tools/wezterm-nushell-cargo-not-found.md)
 - [CSDN Writing Agent Input Limits](blog/tools/csdn-writing-agent-input-limits.md)
 - [macOS Nushell Config Path Pitfall](blog/tools/macos-nushell-config-path-pitfall.md)
@@ -45,6 +46,7 @@
 
 # Programming
 - [Rust Bevy 0.13 to 0.14 Upgrade Guide](blog/programming/rust-bevy-0.13-to-0.14-upgrade-guide.md)
+- [RK3326 Device Tree Panel Debug: LCD Backlight On but Black Screen After Kernel Upgrade](blog/programming/rk3326-dtb-panel-debug.md)
 - [XuanTie 0.17.5 InputExpression Bug](blog/programming/xuantie-input-expression-bug.md)
 - [Bevy 0.14 Cursor Pitfalls](blog/programming/bevy-0.14-cursor-pitfalls.md)
 - [Bevy 0.14 FPS Camera Pitfalls](blog/programming/bevy-0.14-fps-camera-pitfalls.md)
@@ -65,6 +67,7 @@
 
 # Games
 - [Debugging Black Screen on Mighty Rodent Splash Screen](blog/games/mighty-rodent-splash-black-screen-debug.md)
+- [R36S System Card and Game Card Separation: EmuELEC Dual-Card Setup](blog/games/r36s-emuelec-dual-card-separation.md)
 - [Game Config for AI Agents: JSON Schema and an ai_context Annotation-Layer Design](blog/games/game-config-json-schema-ai-context.md)
 - [Arch Linux + Wine + i3wm Retro Gaming Environment](blog/games/archlinux-wine-i3wm-retro-game-env.md)
 - [Windowed Browser Game Resolution: CDP Outer Size vs Content Area Size](blog/games/browser-windowed-game-resolution-cdp.md)
