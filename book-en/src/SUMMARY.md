@@ -87,6 +87,14 @@
 - [OpenYRWeb: Troubleshooting Battlefield Cursor Speed Anomalies](blog/games/openyrweb-cursor-speed.md)
 - [OpenYRWeb Engine Configuration Migration: A Practical Guide from INI to JSON Schema](blog/games/openyrweb-config-migration-ini-json.md)
 - [OpenYRWeb: Complete Solution for Displaying Simplified Chinese Interface When Loading a Traditional Chinese MOD](blog/games/openyrweb-traditional-chinese-mod.md)
+- [Why "No Error, No Crash" Bugs Are the Hardest: A Six-Layer Crash Chain in PNG Building Rendering](blog/games/openyrweb-png-building-crash-chain.md)
+- [Reshaping a Red Alert Engine: OpenYRWeb Modernization Overview](blog/games/openyrweb-modernization-overview.md)
+- [mix/SHP/ini → PNG/WAV/JSON: Modernizing an Old Engine's Data Formats](blog/games/openyrweb-data-format-modernization.md)
+- [Engine-Modding Tradeoffs: Playability First, Aesthetics Serve the Feel](blog/games/openyrweb-modding-tradeoffs.md)
+- [Replacing Terrain Tiles with PNG: Digging meta.json Truth Out of mix](blog/games/openyrweb-png-tileset-terrain.md)
+- [128 TTS Voice Lines into a Red Alert Engine: Qwen-TTS + Neil Batch Synthesis](blog/games/openyrweb-tts-voice-batch.md)
+- [Bilingual EVA Announcer: Letting Custom Voice Take Over from Vanilla](blog/games/openyrweb-bilingual-eva-voice.md)
+- [Locking Down Rules Config with JSON Schema: Event Enums and AI-Hallucination Guards](blog/games/openyrweb-json-schema-rules.md)
 
 # Suno AI
 - [Red Alert 2 Yellow Alert Main Menu Music — Suno AI Style Prompt](blog/sunoai/yellow-alert-suno-style-prompt.md)

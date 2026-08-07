@@ -87,6 +87,14 @@
 - [OpenYRWeb 战场光标速度异常排查记录](blog/games/openyrweb-cursor-speed.md)
 - [OpenYRWeb 引擎配置迁移：从 INI 到 JSON Schema 的实践指南](blog/games/openyrweb-config-migration-ini-json.md)
 - [OpenYRWeb 加载繁体中文 MOD 显示简体界面的完整解决方案](blog/games/openyrweb-traditional-chinese-mod.md)
+- [为什么报错不崩的问题最难修：PNG 建筑渲染崩溃链复盘](blog/games/openyrweb-png-building-crash-chain.md)
+- [把红警引擎改成我的形状：OpenYRWeb 现代化改造全景](blog/games/openyrweb-modernization-overview.md)
+- [mix/SHP/ini → PNG/WAV/JSON：老引擎的数据格式现代化](blog/games/openyrweb-data-format-modernization.md)
+- [引擎改造的取舍：能玩才有动力，审美服务于手感](blog/games/openyrweb-modding-tradeoffs.md)
+- [PNG tileset 替换地形图块：从 mix 里挖 meta.json 的真相](blog/games/openyrweb-png-tileset-terrain.md)
+- [128 条 TTS 语音注入红警引擎：Qwen-TTS + Neil 音色批量合成](blog/games/openyrweb-tts-voice-batch.md)
+- [中英双语 EVA 副官：让原版语音让位给自定义播报](blog/games/openyrweb-bilingual-eva-voice.md)
+- [用 JSON Schema 锁死规则配置：事件枚举与 AI 幻觉防护](blog/games/openyrweb-json-schema-rules.md)
 
 # Suno AI
 - [红警 2 黄色警戒 主菜单音乐 Suno AI 风格提示词](blog/sunoai/yellow-alert-suno-style-prompt.md)
