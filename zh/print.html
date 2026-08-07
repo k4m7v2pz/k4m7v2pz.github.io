@@ -36,10 +36,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-26a0c593.js";
+            window.path_to_searchindex_js = "searchindex-d8a63482.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-936a0b80.js"></script>
+        <script src="toc-72c5c129.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -2197,6 +2197,165 @@ $env.PROMPT_COMMAND_RIGHT = {|| "" }
 原始版本见：https://k4m7v2pz.github.io/zh/blog/tools/nushell-atomcode-config-pitfalls.html</p>
 </blockquote>
 <div style="break-before: page; page-break-before: always;"></div>
+<h1 id="macos-解压-40gb-分卷中文密码固件镜像的五个深坑"><a href="#macos-解压-40gb-分卷中文密码固件镜像的五个深坑" class="header">macOS 解压 40GB 分卷+中文密码固件镜像的五个深坑</a></h1>
+<h2 id="一触发场景40gb-分卷--中文密码的固件镜像"><a class="header" href="#一触发场景40gb-分卷--中文密码的固件镜像">一、触发场景：40GB 分卷 + 中文密码的固件镜像</a></h2>
+<p>某天接到任务：把一份 R36S 掌机的「64G 单卡懒人固件」解压成磁盘镜像。文件在移动硬盘上：</p>
+<ul>
+<li><code>R36s-64G.zip</code> + <code>R36s-64G.z01</code> ~ <code>z19</code>，共 20 卷，合计约 40GB</li>
+<li>旁边有提示文件 <code>解压密码-浪子玩数码.txt</code>，第一行是「解压密码-浪子玩数码」</li>
+<li>目标是解出压缩包内唯一的 <code>R36s-64G.img</code>（53.5GB）</li>
+</ul>
+<p>环境：macOS arm64。先 <code>ls</code> 看卷完整、<code>7z l</code> 列目录（需先 <code>brew install p7zip</code>），确认：多卷 zip、AES-256 加密、单文件镜像。然后噩梦开始。</p>
+<h3 id="现象时间线"><a class="header" href="#现象时间线">现象时间线</a></h3>
+<ol>
+<li><code>7z x -p'浪子玩数码'</code> → <code>ERROR: Wrong password</code></li>
+<li>换 <code>7zz</code>（brew 装 7zip）→ 同样 Wrong password</li>
+<li>连 <code>7zz a -p'浪子玩数码'</code> 创建测试包都报 <code>E_INVALIDARG</code></li>
+<li>Python 的 pyzipper 直接报「zipfiles that span multiple disks are not supported」</li>
+<li>最后自己写 Python 解密流，一步步调通，53.5GB 全量解压 + HMAC 校验通过</li>
+</ol>
+<h2 id="二谬误溯源五个坑逐个拆"><a class="header" href="#二谬误溯源五个坑逐个拆">二、谬误溯源：五个坑逐个拆</a></h2>
+<h3 id="坑-1macos-自带-unzip-能解多卷-zip"><a class="header" href="#坑-1macos-自带-unzip-能解多卷-zip">坑 1：macOS 自带 unzip 能解多卷 zip</a></h3>
+<p>错。<code>unzip</code>/<code>zipinfo</code>/<code>ditto</code> 只认单文件 zip，<code>.z01</code> 分卷直接不认。多卷 zip 必须 7-Zip（brew 装 <code>p7zip</code> 或 <code>7zip</code>）。</p>
+<h3 id="坑-27-zip-命令行能直接解中文密码的-aes-zip"><a class="header" href="#坑-27-zip-命令行能直接解中文密码的-aes-zip">坑 2：7-Zip 命令行能直接解中文密码的 AES zip</a></h3>
+<p>错得最隐蔽。zip 是 Windows 上创建的，AES 密钥派生的密码字节按 <strong>GBK 编码</strong>存；而 macOS 的 7zz 把 <code>-p</code> 参数按 <strong>UTF-8</strong> 转字节，两者算出的 PBKDF2 密钥完全不同 → Wrong password。用 <code>iconv</code> 转 GBK 传参也一样失败，因为 7zz 内部还会再转一次。连用 7zz 创建中文密码包都 E_INVALIDARG，说明它整条中文密码链路在 macOS 上就不可用。</p>
+<h3 id="坑-3pyzipper-能直接读多卷-zip"><a class="header" href="#坑-3pyzipper-能直接读多卷-zip">坑 3：pyzipper 能直接读多卷 zip</a></h3>
+<p>pyzipper 支持 AES 解密，但它继承 zipfile，打开多卷 zip 会在读 ZIP64 locator 时抛「multiple disks not supported」。它在 <code>_EndRecData64</code> 检查 <code>diskno != 0 or disks != 1</code>。</p>
+<h3 id="坑-4按-winzip-标准-pbkdf2-参数算"><a class="header" href="#坑-4按-winzip-标准-pbkdf2-参数算">坑 4：按 WinZip 标准 PBKDF2 参数算</a></h3>
+<p>凭印象写 <code>PBKDF2(password, salt, count=1000, dkLen=34)</code> 取末 2 字节当 verifier，匹配不上。真实参数要看 7-Zip/pyzipper 源码：AES-256 的 <code>dkLen = 2*32 + 2 = 66</code>（加密 key 32B + HMAC key 32B + verifier 2B），verifier 在 <code>dk[64:66]</code>。</p>
+<h3 id="坑-5aes-ctr-计数器从-0-开始"><a class="header" href="#坑-5aes-ctr-计数器从-0-开始">坑 5：AES-CTR 计数器从 0 开始</a></h3>
+<p>解出来的字节乱码、zlib 报 <code>invalid stored block lengths</code>。对照 pyzipper 源码才发现 7-Zip zip AES 的 CTR 计数器是 <code>Counter.new(nbits=128, little_endian=True, initial_value=1)</code>——<strong>从 1 开始</strong>。这是我耗时最长的坑。</p>
+<h2 id="三源码验证真实解密流程全链路实测通过"><a class="header" href="#三源码验证真实解密流程全链路实测通过">三、源码验证：真实解密流程（全链路实测通过）</a></h2>
+<h3 id="1-解析-z01-的-local-header取-salt--verifier"><a class="header" href="#1-解析-z01-的-local-header取-salt--verifier">1. 解析 z01 的 local header，取 salt + verifier</a></h3>
+<p>分卷 zip 的第一个卷 <code>R36s-64G.z01</code> 开头有 4 字节 stub（<code>PK\x07\x08</code>，7z 报告 Embedded Stub Size=4），local header 从 offset 4 开始：</p>
+<pre><code class="language-python">mv.seek(4); hdr = mv.read(30)
+sig, ver, flags, method, tm, dt, crc, csize, usize, nlen, elen = struct.unpack('&lt;4s5H3L2H', hdr)
+# method=99 (AES), 名称 R36s-64G.img, extra 含 AES 头 0x9901: strength=3(AES-256)
+pos = 34 + nlen + elen          # 跳过文件名和 extra
+salt = mv.read(16); verifier = mv.read(2)
+data_off = mv.tell()            # 加密数据从这里开始
+</code></pre>
+<h3 id="2-多卷-zip-的虚拟拼接--zip64-locator-patch"><a class="header" href="#2-多卷-zip-的虚拟拼接--zip64-locator-patch">2. 多卷 zip 的虚拟拼接 + ZIP64 locator patch</a></h3>
+<p>pyzipper 打开多卷 zip 报「multiple disks not supported」。解决：写一个 <code>MultiVolumeReader</code> 把 20 个卷按顺序拼成可 seek 的只读视图（不复制 42GB），并把 EOCD 前 20 字节的 ZIP64 locator 字段 patch 成单卷：</p>
+<pre><code class="language-python"># locator: sig(4)+diskno(4)+reloff(8)+disks(4)，位于 EOCD(22B) 之前
+ba[4:8]  = (0).to_bytes(4, 'little')   # diskno -&gt; 0
+ba[16:20] = (1).to_bytes(4, 'little')  # disks  -&gt; 1
+</code></pre>
+<p>中央目录的 <code>header_offset</code> 是相对逻辑起点的，实际文件里要 +4（stub）。</p>
+<h3 id="3-密钥派生pbkdf2-参数是硬核"><a class="header" href="#3-密钥派生pbkdf2-参数是硬核">3. 密钥派生：PBKDF2 参数是硬核</a></h3>
+<pre><code class="language-python">import hashlib
+PWD = '浪子玩数码'.encode('gbk')          # 关键：GBK 字节，不是 UTF-8！
+dk = hashlib.pbkdf2_hmac('sha1', PWD, salt, 1000, 66)
+key, mac_key, ver = dk[:32], dk[32:64], dk[64:66]
+assert ver == verifier                    # 密码验证通过
+</code></pre>
+<h3 id="4-aes-ctr-解密--hmac-校验--zlib-解压"><a class="header" href="#4-aes-ctr-解密--hmac-校验--zlib-解压">4. AES-CTR 解密 + HMAC 校验 + zlib 解压</a></h3>
+<pre><code class="language-python">from Cryptodome.Cipher import AES
+from Cryptodome.Util import Counter
+dec = AES.new(key, AES.MODE_CTR,
+    counter=Counter.new(nbits=128, little_endian=True, initial_value=1))
+hm = hmac.new(mac_key, digestmod=hashlib.sha1)  # HMAC-SHA1
+d = zlib.decompressobj(-15)                     # raw deflate
+# 流式: hm.update(cipher) -&gt; plain = dec.decrypt(cipher) -&gt; d.decompress(plain)
+# 尾部 10 字节是 HMAC: hm.digest()[:10] 与末尾比对
+</code></pre>
+<h3 id="实测数据2026-08-06macos-arm64usb-移动硬盘"><a class="header" href="#实测数据2026-08-06macos-arm64usb-移动硬盘">实测数据（2026-08-06，macOS arm64，USB 移动硬盘）</a></h3>
+<ul>
+<li>20 卷总物理大小 <code>42482360207</code> 字节，与中央目录声明完全一致（分卷无缺损）</li>
+<li>密码「浪子玩数码」GBK 字节 PBKDF2 verifier 匹配 ✓</li>
+<li>53.5GB 全量解压 <strong>423 秒</strong>（约 105 MiB/s），8MB 块流式读写</li>
+<li>解密首 4KB 即标准 x86 MBR（<code>fa b8 00 10 8e d0</code>），尾部 <strong>HMAC ok: True</strong></li>
+<li>全程不落 42GB 中间文件，直接边解边写 .img</li>
+</ul>
+<h2 id="四落地结论可复用方案"><a class="header" href="#四落地结论可复用方案">四、落地结论：可复用方案</a></h2>
+<h3 id="下次遇到多卷-zip--中文密码--aes直接抄"><a class="header" href="#下次遇到多卷-zip--中文密码--aes直接抄">下次遇到「多卷 zip + 中文密码 + AES」直接抄</a></h3>
+<ol>
+<li><strong>列目录</strong>：<code>7z l -p'密码' R36s-64G.zip</code>（7zz/p7zip 都行），确认卷数和内部文件名</li>
+<li><strong>验证密码</strong>：不要信 7zz 的 Wrong password——macOS 下中文密码 AES zip 它基本解不了。用 Python 直接验：读 z01 的 local header → 取 salt/verifier → <code>pbkdf2_hmac('sha1', 密码.encode('gbk'), salt, 1000, 66)</code>，比对 <code>dk[64:66]</code></li>
+<li><strong>解码传参</strong>：密码字节一律走 GBK（Windows 侧创建的包），少走 UTF-8 弯路</li>
+<li><strong>全量解压</strong>：虚拟拼接分卷（MultiVolumeReader）+ patch ZIP64 locator + AES-CTR(initial_value=1) + zlib(-15) 流式写盘，53.5GB 约 7 分钟</li>
+</ol>
+<h3 id="适用范围"><a class="header" href="#适用范围">适用范围</a></h3>
+<ul>
+<li>淘宝/闲鱼「懒人固件」「整合包」：多为 Windows 上 7-Zip 打包，中文密码、多卷、AES-256 是标配</li>
+<li>同套路适用 EmuELEC/ArkOS 掌机镜像、各类「网盘分享」分卷包</li>
+<li>纯 ASCII 密码 + 单卷：直接 7zz，不用走这套</li>
+</ul>
+<h3 id="判断顺序重要"><a class="header" href="#判断顺序重要">判断顺序（重要）</a></h3>
+<p>先验密码编码 → 再管多卷 → 最后调 CTR。密码编码错了后面全白费；CTR 初始值错了解出来是乱码但不报密码错，最迷惑。</p>
+<h2 id="五三类读者速查"><a class="header" href="#五三类读者速查">五、三类读者速查</a></h2>
+<h3 id="人类开发者"><a class="header" href="#人类开发者">人类开发者</a></h3>
+<pre><code class="language-bash">brew install p7zip 7zip
+7z l -p'密码' x.zip          # 列内容（多卷需 7z）
+7zz t -p'密码' x.zip         # 测密码（中文密码可能误报）
+python3 -c "import hashlib; print('浪子玩数码'.encode('gbk').hex())"  # 看 GBK 字节
+</code></pre>
+<h3 id="对话式-ai-1"><a class="header" href="#对话式-ai-1">对话式 AI</a></h3>
+<p>问法：「这个多卷 zip 密码验证不过，怎么定位编码？」回答要点：先读 z01 头拿 salt/verifier，用 GBK 字节跑 PBKDF2(count=1000, dkLen=66) 对比 verifier，命中即密码编码确认，再谈解压。</p>
+<h3 id="代码-agent-1"><a class="header" href="#代码-agent-1">代码 Agent</a></h3>
+<ul>
+<li>密码派生：<code>hashlib.pbkdf2_hmac('sha1', pwd_gbk, salt, 1000, 66)</code>，verifier=<code>dk[64:66]</code></li>
+<li>AES-CTR：<code>Counter.new(nbits=128, little_endian=True, initial_value=1)</code>，<strong>不是 0</strong></li>
+<li>多卷：自定义 reader 按卷偏移 seek/read，patch ZIP64 locator 的 diskno/disks</li>
+<li>解压：<code>zlib.decompressobj(-15)</code> raw deflate，尾部 10B 是 HMAC-SHA1</li>
+<li>完整脚本思路见 2.md，实测 105 MiB/s 可复现</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="csdn-写作-agent-内容审核实测什么话题会被拒怎么绕过"><a class="header" href="#csdn-写作-agent-内容审核实测什么话题会被拒怎么绕过">CSDN 写作 Agent 内容审核实测：什么话题会被拒、怎么绕过</a></h1>
+<blockquote>
+<p>日期：2026-08-07</p>
+</blockquote>
+<h2 id="一背景"><a class="header" href="#一背景">一、背景</a></h2>
+<p>想把 R36S 掌机排障经历（换固件黑屏、双卡分离、解压固件镜像）写成博客发到 CSDN。走的是 CSDN 写作 Agent 流程：把素材分段（每段 ≤4000 字节、合计 ≤13965 字节）贴到写作页面，由 Agent 增量扩写合并成文。分段策略本身没问题（详见《CSDN 写作 Agent 输入限制实测与分段策略》），但这次遇到了更硬的墙——<strong>内容审核</strong>。</p>
+<h2 id="二现象话题被拒"><a class="header" href="#二现象话题被拒">二、现象：话题被拒</a></h2>
+<p>把第一篇素材（R36S 换 ROCKNIX 固件黑屏排障）的第一段贴进去，CSDN 写作 Agent 直接回复：</p>
+<blockquote>
+<p>抱歉，这个话题无法回答，请换个话题吧。</p>
+</blockquote>
+<p>注意：不是“内容有误“、不是“分段超限“，而是<strong>话题级拒绝</strong>。尝试换措辞再贴，仍然被拒。</p>
+<h2 id="三分析什么触发了审核"><a class="header" href="#三分析什么触发了审核">三、分析：什么触发了审核</a></h2>
+<p>对比被拒版本和通过版本，差异集中在内容定位上：</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>版本</th><th>表述</th><th>结果</th></tr>
+</thead>
+<tbody>
+<tr><td>被拒</td><td>“R36S 开源掌机”“游戏卡插左侧没反应”“下载了网上的懒人固件”</td><td>❌ 抱歉无法回答</td></tr>
+<tr><td>通过</td><td>“RK3326 嵌入式 Linux 设备”“换内核后 LCD 背光亮但屏幕黑”“设备树面板调试”</td><td>✅ 正常生成</td></tr>
+</tbody>
+</table>
+</div>
+<p>推测触发点（未官方证实，仅实测推断）：</p>
+<ol>
+<li><strong>设备/平台指向性</strong>：具体掌机型号（R36S）+ 游戏相关内容组合，容易被内容安全策略归类为“游戏机改装/刷机“敏感话题</li>
+<li><strong>资源获取表述</strong>：“下载网上的懒人固件“这类词，容易被判定为涉及非官方资源分发</li>
+<li><strong>话题类型</strong>：纯技术内核开发（设备树、LCD 调试、内核版本绑定）是 CSDN 主流内容，审核宽松</li>
+</ol>
+<h2 id="四绕过方法话题抽象化"><a class="header" href="#四绕过方法话题抽象化">四、绕过方法：话题抽象化</a></h2>
+<p>把文章从“具体设备排障“改写为“通用技术话题“，保留全部技术干货：</p>
+<ol>
+<li><strong>去设备名</strong>：R36S → “RK3326 平台嵌入式 Linux 设备”</li>
+<li><strong>去游戏化</strong>：游戏卡 → “数据卡”，游戏分离 → “系统与数据分离”</li>
+<li><strong>去资源词</strong>：下载懒人固件 → “替换第三方系统镜像”</li>
+<li><strong>聚焦技术层</strong>：内核版本绑定、设备树面板初始化序列、U-Boot 引导链——这些都是中性技术概念</li>
+</ol>
+<p>改写后同一篇文章顺利通过，Agent 正常扩写生成。</p>
+<h2 id="五其他实测限制汇总"><a class="header" href="#五其他实测限制汇总">五、其他实测限制（汇总）</a></h2>
+<ul>
+<li><strong>每日发布数量限制</strong>：CSDN 账号每天只能发 5 篇（个人实测），大批量发旧文会被卡</li>
+<li><strong>输入分段限制</strong>：每段 ≤4000 字节、合计 ≤13965 字节，超出会静默截断（详见另一篇）</li>
+<li><strong>同页面连续粘贴</strong>：CSDN 写作 Agent 无跨会话记忆，分段素材必须在同一写作页面连续贴，中途新开页面会丢失上下文</li>
+<li><strong>内容审核</strong>：本文主题——设备/游戏/资源类话题有被话题级拒绝的风险，抽象化为纯技术话题可绕过</li>
+</ul>
+<h2 id="六结论"><a class="header" href="#六结论">六、结论</a></h2>
+<ul>
+<li>CSDN 写作 Agent 的审核是<strong>话题级</strong>的：不是逐词过滤，而是整段判断“这个话题能不能答“</li>
+<li>绕过不是钻空子：把“具体设备经验“抽象成“通用技术方法论“，文章价值不变，审核更宽松，读者面反而更广</li>
+<li>如果素材被拒，别反复改措辞——<strong>换话题角度</strong>（从设备视角换到技术视角）通常一次见效</li>
+<li>需要无审核、无限量发布渠道时，自有 GitHub Pages 站（mdBook）是更好的选择，本仓库即一例</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
 <h1 id="wezterm--nushell--cargo-找不到命令"><a href="#wezterm--nushell--cargo-找不到命令" class="header">WezTerm + Nushell + Cargo 找不到命令</a></h1>
 <p><strong>摘要：</strong> 本文记录了在 macOS（Apple Silicon）环境下，wezterm 新标签页启动 nushell 后无法找到 <code>cargo</code> 命令的排查与修复过程。核心坑点包括 nushell 不自动 source <code>~/.cargo/env</code>、默认配置目录不是 <code>~/.config/nushell/</code> 以及字符串插值语法差异。</p>
 <h2 id="1-症状"><a class="header" href="#1-症状">1. 症状</a></h2>
@@ -2885,7 +3044,7 @@ rvs = 全小写 Verb-Noun 命令 + 可选沙盒 + 人类表格输出 + AI 的 `-
 <h3 id="四跨机器部署与三类读者速查"><a class="header" href="#四跨机器部署与三类读者速查">四、跨机器部署与三类读者速查</a></h3>
 <h4 id="部署"><a class="header" href="#部署">部署</a></h4>
 <p>rvs 已部署到 <code>&lt;lan-host&gt;</code> / 局域网打印机 / Ubuntu VPS / 远程 Windows 四台机器，并全部把默认 shell 切换为 rvs（Linux 用 usermod + /etc/shells，Windows 用 OpenSSH DefaultShell 注册表）。跨机器统一 verb-noun 语法 + <code>--json</code> 输出，不再有 shell 方言差异。</p>
-<h4 id="人类开发者"><a class="header" href="#人类开发者">人类开发者</a></h4>
+<h4 id="人类开发者-1"><a class="header" href="#人类开发者-1">人类开发者</a></h4>
 <ul>
 <li>REPL 里 <code>ls</code>、<code>cd</code>、<code>cat</code> 等 POSIX 肌肉记忆别名照常用；</li>
 <li><code>show-version</code> 一眼看版本；</li>
@@ -2897,7 +3056,7 @@ rvs = 全小写 Verb-Noun 命令 + 可选沙盒 + 人类表格输出 + AI 的 `-
 <li>粘贴 <code>list-items --llm</code> 的输出即可获得项目结构视图；</li>
 <li>rvs 输出表格/纯文本都是给 LLM 直接消费的，无需二次转述。</li>
 </ul>
-<h4 id="代码-agent-1"><a class="header" href="#代码-agent-1">代码 Agent</a></h4>
+<h4 id="代码-agent-2"><a class="header" href="#代码-agent-2">代码 Agent</a></h4>
 <ul>
 <li><code>rvs --json -c ''</code> 拿结构化输出；</li>
 <li><code>session.proxy</code> 字段自动报告本机代理（如 Mac 7890 http/socks、支持局域网），agent 据此让远端走 <code>http://&lt;局域网IP&gt;:7890</code> 联网；</li>
@@ -3392,7 +3551,7 @@ if __name__ == "__main__":
     sys.exit(1 if bad else 0)
 </code></pre>
 <p>用法：python3 erc_rules.py 原理图.kicad_sch，配合 pytest 对 custom_rules 写回归测试，即可把“自动纠偏“闭环起来。</p>
-<h2 id="五三类读者速查"><a class="header" href="#五三类读者速查">五、三类读者速查</a></h2>
+<h2 id="五三类读者速查-1"><a class="header" href="#五三类读者速查-1">五、三类读者速查</a></h2>
 <p><strong>人类开发者</strong>：GUI 画图 → erc / netlist / ngspice 三条命令 → 通过后开焊。改图前先 GUI 保存再跑 CLI。</p>
 <p><strong>对话式 AI（ChatGPT/腾讯元宝/豆包）</strong>：把 erc.json 贴给它，问“这些违规怎么修“；让它解释 netlist 结构；让它生成 SPICE 瞬态分析指令。</p>
 <p><strong>代码 Agent（VSCode Copilot/Trae IDE/AtomCode 等）</strong>：按本文命令写自动化脚本；Agent 跑 kicad-cli sch erc –format json 后用上面的 Python 模板解析；提醒它用 sch upgrade 消除格式警告、不要手写 .kicad_sch。</p>
@@ -3690,6 +3849,134 @@ pub struct ScriptEvent {
 <p>本文采用木兰宽松许可证 v2 (Mulan PSL v2) 授权。版权归作者所有，不强制署名，企业合规请保留原始声明。
 原始版本见：https://k4m7v2pz.github.io/zh/blog/programming/rust-bevy-0.13-to-0.14-upgrade-guide.html</p>
 </blockquote>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="rk3326-设备树面板调试换内核后-lcd-背光亮但屏幕黑"><a href="#rk3326-设备树面板调试换内核后-lcd-背光亮但屏幕黑" class="header">RK3326 设备树面板调试：换内核后 LCD 背光亮但屏幕黑</a></h1>
+<h2 id="一触发场景换内核后-lcd-背光亮但屏幕黑"><a class="header" href="#一触发场景换内核后-lcd-背光亮但屏幕黑">一、触发场景：换内核后 LCD 背光亮但屏幕黑</a></h2>
+<p>一台 RK3326 平台（Cortex-A35 / Mali-G31 / 640×480 MIPI-DSI）的嵌入式 Linux 设备，原系统内核 5.10 正常点亮屏幕。为了升级系统，替换为内核 6.12 的新镜像并整盘写入存储卡，上电后——<strong>背光亮起，但屏幕始终黑屏，进不了系统</strong>。</p>
+<h3 id="现象时间线关键现象会分级"><a class="header" href="#现象时间线关键现象会分级">现象时间线（关键：现象会分级）</a></h3>
+<ol>
+<li>整盘写入后上电：黑屏、无背光、电源灯不亮 → 以为镜像没写对</li>
+<li>补拷引导区（MBR 后 16MB）后：<strong>背光亮了</strong>，但屏幕黑、状态灯不亮 → 有进展，U-Boot 在跑</li>
+<li>反复换设备树 / 改配置：背光时亮时不亮，屏幕始终黑</li>
+<li>排除供电问题后：依然黑屏</li>
+<li>而原系统（内核 5.10）在同一张卡/同一台设备上<strong>一直能点亮屏幕</strong></li>
+</ol>
+<h3 id="判读口诀本文最值钱的部分"><a class="header" href="#判读口诀本文最值钱的部分">判读口诀（本文最值钱的部分）</a></h3>
+<ul>
+<li><strong>背光亮 = U-Boot 已运行</strong>（引导链 OK）</li>
+<li><strong>状态灯亮 = 系统启动到较深阶段</strong></li>
+<li><strong>背光不亮 + 充电灯常亮 = 供电/电量问题</strong>（不是镜像的问题）</li>
+<li><strong>拔卡后系统仍在运行（背光可控）= 内核/rootfs 已在内存</strong></li>
+</ul>
+<h2 id="二谬误溯源三个错误假设"><a class="header" href="#二谬误溯源三个错误假设">二、谬误溯源：三个错误假设</a></h2>
+<h3 id="坑-1引导区没拷全"><a class="header" href="#坑-1引导区没拷全">坑 1：“引导区没拷全”</a></h3>
+<p>RK3326 引导链（idbloader/U-Boot/trust）在 MBR 之后、第一分区之前的 <strong>16MB</strong> 区域。只写入分区（loop0p1/p2）确实会黑屏——补拷 <code>dd bs=512 skip=1 seek=1 count=32767</code> 后<strong>背光亮了</strong>，看似解决。但屏幕还是黑，说明引导区不是唯一问题。</p>
+<h3 id="坑-2设备树换对就能亮"><a class="header" href="#坑-2设备树换对就能亮">坑 2：“设备树换对就能亮”</a></h3>
+<p>新镜像里带了 60+ 个设备树（panel1-4 / type2-4 等变体），逐个换、甚至把原系统通用 dtb 直接拿来用——全部失败。原因有两个：</p>
+<ul>
+<li><strong>dtb 与内核版本强绑定</strong>：原系统 dtb 是 5.10 内核配套的，6.12 内核加载直接不兼容</li>
+<li><strong>面板驱动不读 dtb 里的初始化序列</strong>：新镜像 dtb 走自定义驱动（<code>gameconsole,r36s-panel</code>），原系统 dtb 走标准驱动（<code>simple-panel-dsi</code>）</li>
+</ul>
+<h3 id="坑-3把原系统初始化序列注入新-dtb-就能救"><a class="header" href="#坑-3把原系统初始化序列注入新-dtb-就能救">坑 3：“把原系统初始化序列注入新 dtb 就能救”</a></h3>
+<p>尝试给新镜像的 r36s.dtb 注入原系统 dtb 的完整 1134 字节 st7703 <code>panel-init-sequence</code>，并把 compatible 改成 <code>simple-panel-dsi</code>——编译通过、文件就位，但<strong>依然黑屏</strong>。因为新镜像的显示驱动栈与原系统完全不同，改 dtb 属性改变不了驱动行为。</p>
+<h2 id="三源码验证为什么不兼容实测证据"><a class="header" href="#三源码验证为什么不兼容实测证据">三、源码验证：为什么不兼容（实测证据）</a></h2>
+<h3 id="1-引导链位置确认"><a class="header" href="#1-引导链位置确认">1. 引导链位置确认</a></h3>
+<pre><code class="language-bash"># RK3326 引导链在 MBR 后、第一分区前 16MB
+dd if=卡 bs=1M skip=8 count=1 | head -c8   # 应见 "LOADER"
+dd if=卡 bs=1M skip=12 count=1 | head -c8  # 应见 "BL3X"
+# 补拷命令（漏了必黑屏）：
+dd if=镜像 of=卡 bs=512 skip=1 seek=1 count=32767
+</code></pre>
+<h3 id="2-dtb-面板初始化序列对比决定性证据"><a class="header" href="#2-dtb-面板初始化序列对比决定性证据">2. dtb 面板初始化序列对比（决定性证据）</a></h3>
+<pre><code class="language-bash"># 反编译对比两个 dtb 的 panel 节点
+dtc -I dtb -O dts 原系统.dtb &gt; /tmp/m.dts
+dtc -I dtb -O dts 新镜像r36s.dtb &gt; /tmp/r.dts
+
+# 原系统 dtb：有完整 1134 字节初始化序列
+grep -c "panel-init-sequence" /tmp/m.dts   # → 1
+# 新镜像所有 R36S dtb：全部为 0
+for f in /mnt/*.dtb; do
+  dtc -I dtb -O dts "$f" | grep -c "panel-init-sequence"
+done  # → 全部 0
+</code></pre>
+<p>原系统面板节点：<code>compatible = "sitronix,st7703", "simple-panel-dsi"</code> + <code>panel-init-sequence</code>（1134 字节）+ <code>display-timings</code>。
+新镜像面板节点：<code>compatible = "gameconsole,r36s-panel", "sitronix,st7703"</code>，<strong>无 init sequence、无 timings</strong>——靠驱动内置序列，与这块屏幕不匹配。</p>
+<h3 id="3-dtb-与内核版本强绑定"><a class="header" href="#3-dtb-与内核版本强绑定">3. dtb 与内核版本强绑定</a></h3>
+<pre><code class="language-bash">strings KERNEL | grep "Linux version"
+# 原系统: Linux version 5.10.160
+# 新镜像: Linux version 6.12.79
+</code></pre>
+<p>把原系统 5.10 的 dtb 直接给 6.12 内核用 → 失败；注入初始化序列 + 改 compatible → 仍失败。驱动栈不兼容，改 dtb 属性无济于事。</p>
+<h3 id="4-实测修复矩阵全部失败"><a class="header" href="#4-实测修复矩阵全部失败">4. 实测修复矩阵（全部失败）</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>尝试</th><th>结果</th></tr>
+</thead>
+<tbody>
+<tr><td>补引导区 16MB</td><td>背光从无到有（U-Boot 跑通）</td></tr>
+<tr><td>换 dtb（panel1-4/type4/原系统通用）</td><td>黑屏</td></tr>
+<tr><td>注入 panel-init-sequence + 改 compatible</td><td>黑屏</td></tr>
+<tr><td>boot/disk 硬编码 UUID</td><td>黑屏</td></tr>
+<tr><td>简化 boot.scr（纯 sysboot）</td><td>黑屏</td></tr>
+<tr><td>恢复完整 boot.scr（ADC 自动选 dtb）</td><td>黑屏</td></tr>
+<tr><td>排除供电后测试</td><td>仍黑屏</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="5-反例原系统正常"><a class="header" href="#5-反例原系统正常">5. 反例：原系统正常</a></h3>
+<p>原系统（5.10 + 通用 <code>rk3326-evb-lp3-v12-linux.dtb</code>）在同一张卡/同一台设备上<strong>始终正常点亮屏幕</strong>——证明卡、机器、供电都没问题，问题锁定在新镜像与硬件不兼容。</p>
+<h2 id="四判读分级快速定位故障层"><a class="header" href="#四判读分级快速定位故障层">四、判读分级（快速定位故障层）</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>现象</th><th>结论</th></tr>
+</thead>
+<tbody>
+<tr><td>背光亮 + 状态灯不亮 + 黑屏</td><td>U-Boot 已运行，内核/面板未起来 → 查 dtb/驱动</td></tr>
+<tr><td>背光不亮 + 充电灯常亮</td><td>供电/电量问题，先充满再测</td></tr>
+<tr><td>拔卡后系统仍在运行</td><td>内核/rootfs 已在内存，问题在显示层</td></tr>
+<tr><td>状态灯亮</td><td>系统启动到较深阶段，接近成功</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="五落地结论可复用方案"><a class="header" href="#五落地结论可复用方案">五、落地结论：可复用方案</a></h2>
+<h3 id="换内核前先做兼容性自查按顺序"><a class="header" href="#换内核前先做兼容性自查按顺序">换内核前先做兼容性自查（按顺序）</a></h3>
+<ol>
+<li><strong>确认引导链在</strong>：<code>dd if=卡 bs=1M skip=8 | head -c8</code> 应见 <code>LOADER</code>，<code>skip=12</code> 应见 <code>BL3X</code>——不在则补拷 16MB 引导区</li>
+<li><strong>确认面板初始化序列</strong>：反编译候选镜像的 dtb，<code>grep -c "panel-init-sequence"</code> 应 &gt; 0；为 0 说明面板靠驱动内置序列，可能与你的屏幕不匹配</li>
+<li><strong>确认 dtb 与内核版本配套</strong>：<code>strings KERNEL | grep "Linux version"</code> 对照 dtb 来源；跨内核版本（如 5.10 dtb 给 6.12 内核）直接用必失败</li>
+<li><strong>确认供电</strong>：充电灯常亮时背光不亮是电量问题，充满再测（红灯熄灭 = 满电）</li>
+</ol>
+<h3 id="排障止损顺序"><a class="header" href="#排障止损顺序">排障止损顺序</a></h3>
+<p>先查引导区 → 再查 UUID/分区 → 然后查 dtb 面板序列 → 最后才怀疑硬件。
+本次实测：引导区补齐后 U-Boot 能跑（背光亮），但<strong>面板序列缺失 + 驱动栈不兼容</strong>导致屏幕永远黑——这是配置层面无法修复的，应果断弃用，回到原系统。</p>
+<h3 id="适用范围-1"><a class="header" href="#适用范围-1">适用范围</a></h3>
+<ul>
+<li>RK3326 平台嵌入式 Linux 设备升级内核/替换系统镜像时</li>
+<li>遇到“背光亮但屏幕黑 / 状态灯不亮“现象的排障</li>
+<li>判断镜像是否值得继续调试，避免无效投入</li>
+</ul>
+<h3 id="关键经验"><a class="header" href="#关键经验">关键经验</a></h3>
+<ul>
+<li>原系统（通用 dtb）通常兼容性最好，新镜像的专用 dtb 未必匹配你的硬件批次</li>
+<li>“背光亮“是排障的分水岭：背光亮 = U-Boot 通了，后面全是内核/驱动层的问题</li>
+<li>面板驱动匹配（compatible）与初始化序列（panel-init-sequence）是 LCD 点亮的两个必要条件</li>
+</ul>
+<h2 id="六三类读者速查-1"><a class="header" href="#六三类读者速查-1">六、三类读者速查</a></h2>
+<h3 id="人类开发者-2"><a class="header" href="#人类开发者-2">人类开发者</a></h3>
+<pre><code class="language-bash">dd if=卡 bs=1M skip=8 count=1 | head -c8      # 查 LOADER
+dtc -I dtb -O dts 镜像.dtb | grep -c "panel-init-sequence"
+strings KERNEL | grep "Linux version"
+</code></pre>
+<h3 id="对话式-ai-2"><a class="header" href="#对话式-ai-2">对话式 AI</a></h3>
+<p>问法：「RK3326 设备换内核后背光亮但屏幕黑，怎么排查？」回答要点：背光亮 = U-Boot 已运行；接着反编译 dtb 看是否有 <code>panel-init-sequence</code>（无则面板靠驱动内置序列，可能不匹配你的屏幕）；并核对 dtb 与内核版本是否配套（跨内核版本直接用必失败）。</p>
+<h3 id="代码-agent-3"><a class="header" href="#代码-agent-3">代码 Agent</a></h3>
+<ul>
+<li>判读：背光亮=U-Boot 通；状态灯不亮+屏幕黑=内核/面板未起来</li>
+<li>排查：<code>dtc -I dtb -O dts X.dtb | grep -c "panel-init-sequence"</code> 应 &gt;0；<code>strings KERNEL | grep "Linux version"</code> 对照 dtb 来源</li>
+<li>止损：面板序列缺失 + 驱动不兼容 = 配置不可修复，弃用镜像回到原系统</li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="玄铁-0175-跑不起猜数字游戏evaluator-漏注册-inputexpression-分支的根因复盘"><a class="header" href="#玄铁-0175-跑不起猜数字游戏evaluator-漏注册-inputexpression-分支的根因复盘">玄铁 0.17.5 跑不起猜数字游戏：evaluator 漏注册 InputExpression 分支的根因复盘</a></h1>
 <blockquote>
@@ -5416,8 +5703,8 @@ copy /Y C:\Windows\Temp\rvs.new.exe C:\Windows\System32\rvs.exe
 </tbody>
 </table>
 </div>
-<h2 id="六三类读者速查-1"><a class="header" href="#六三类读者速查-1">六、三类读者速查</a></h2>
-<h3 id="人类开发者-1"><a class="header" href="#人类开发者-1">人类开发者</a></h3>
+<h2 id="六三类读者速查-2"><a class="header" href="#六三类读者速查-2">六、三类读者速查</a></h2>
+<h3 id="人类开发者-3"><a class="header" href="#人类开发者-3">人类开发者</a></h3>
 <p>三句口诀——<code>rustup target add</code> 装目标；<code>.cargo/config.toml</code> 配 linker；<code>cargo build --release --target &lt;triple&gt;</code> 构建。产物在 <code>target/&lt;triple&gt;/release/</code>。</p>
 <h3 id="对话式-aichatgpt--元宝--豆包"><a class="header" href="#对话式-aichatgpt--元宝--豆包">对话式 AI（ChatGPT / 元宝 / 豆包）</a></h3>
 <p>被问到「Rust 怎么交叉编译到 Linux/Windows」时，按此回答——交叉编译需要 target 标准库 + linker 两步；推荐 musl 静态链接避免 glibc 依赖；部署时注意 text file busy，用 mv 而非覆盖；Windows 先 rename 再 copy。</p>
@@ -5646,7 +5933,7 @@ fn console_window_width() -&gt; Option&lt;u16&gt; {
 <li><strong>自查命令</strong>：在 PowerShell 中对比 <code>[Console]::WindowWidth</code> 与 <code>[Console]::BufferWidth</code>，若两者不一致，则表明当前环境存在此问题。</li>
 </ol>
 <h3 id="三类读者速查"><a class="header" href="#三类读者速查">三类读者速查</a></h3>
-<h4 id="人类开发者-2"><a class="header" href="#人类开发者-2">人类开发者</a></h4>
+<h4 id="人类开发者-4"><a class="header" href="#人类开发者-4">人类开发者</a></h4>
 <p><strong>自查步骤：</strong></p>
 <ol>
 <li>在 PowerShell 中执行 <code>[Console]::WindowWidth</code> 与 <code>[Console]::BufferWidth</code>，检查两者是否一致。</li>
@@ -5816,6 +6103,147 @@ cargo run    → jaggedlogo.jpg 全显 → 淡到黑 → mainpic.jpg 变亮 + �
 <p>本文采用木兰宽松许可证 v2 (Mulan PSL v2) 授权。版权归作者所有，不强制署名，企业合规请保留原始声明。
 原始版本见：https://k4m7v2pz.github.io/zh/blog/games/mighty-rodent-splash-black-screen-debug.html</p>
 </blockquote>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="r36s-系统卡与游戏卡分离实战emuelec-双卡方案"><a href="#r36s-系统卡与游戏卡分离实战emuelec-双卡方案" class="header">R36S 系统卡与游戏卡分离实战：EmuELEC 双卡方案</a></h1>
+<h2 id="一触发场景r36s-双卡分离梦魇"><a class="header" href="#一触发场景r36s-双卡分离梦魇">一、触发场景：R36S 双卡分离梦魇</a></h2>
+<p>R36S 开源掌机（RK3326 / Mali-G31 / 640×480 LCD）有两个 TF 卡槽：<strong>右侧 = OS 槽，左侧 = game 槽</strong>。很多玩家第一反应是“一张装系统、一张装游戏“，但实际买回来的商家固件（EmuELEC 定制版）插右侧系统卡能开机，左侧插游戏卡却<strong>毫无反应</strong>——游戏只能跟系统挤在同一张卡上，想加游戏还得来回倒腾。</p>
+<h3 id="现象时间线-1"><a class="header" href="#现象时间线-1">现象时间线</a></h3>
+<ol>
+<li>商家 64G 卡（EmuELEC 系统）插右侧 OS 槽：正常开机</li>
+<li>左侧插任何 game 卡：系统里完全看不到，游戏库还是原来那些</li>
+<li>网上查“EmuELEC 双卡“，说法五花八门：有的说只支持单卡、有的说需要改配置、有的说换固件</li>
+<li>实测折腾：下载了另一套“懒人固件“（ROCKNIX/ArkOS 6.12 内核），结果<strong>完全黑屏</strong>（背光亮但屏幕无画面、指示灯不亮），商家系统却一直正常</li>
+<li>最后回到商家 EmuELEC，从它的挂载逻辑入手，成功实现双卡分离</li>
+</ol>
+<h3 id="目标"><a class="header" href="#目标">目标</a></h3>
+<ul>
+<li>32G 卡 = 系统卡（右侧 OS 槽，只装系统）</li>
+<li>64G 卡 = 游戏卡（左侧 game 槽，只放游戏）</li>
+<li>开机后游戏库自动变成 game 卡内容</li>
+</ul>
+<h2 id="二谬误溯源两个坑"><a class="header" href="#二谬误溯源两个坑">二、谬误溯源：两个坑</a></h2>
+<h3 id="坑-1emuelec-不支持双卡"><a class="header" href="#坑-1emuelec-不支持双卡">坑 1：EmuELEC 不支持双卡？</a></h3>
+<p>错。EmuELEC 原生支持双卡，挂载逻辑在系统里写死了：</p>
+<ul>
+<li>配置文件 <code>.config/emuelec/configs/emuelec.conf</code> 有 <code>ee_mount.handler=eemount</code>（C 写的挂载处理器）</li>
+<li>系统内还有 <code>mount_romfs.sh</code>（旧版 Bash 实现）和 <code>storage-roms.mount.sample</code>（systemd 模板）</li>
+<li><code>eemount</code> 二进制里明确有 <code>Trying to mount EEROMS to ...</code> 和 <code>Last hope, mounting LABEL=EEROMS directly</code></li>
+</ul>
+<p><strong>真正的原因</strong>：游戏卡必须有一个<strong>卷标为 <code>EEROMS</code> 的 vfat 分区</strong>，EmuELEC 启动时靠 <code>LABEL=EEROMS</code> 兜底挂载它，把 <code>/storage/roms</code> 指向游戏卡。直接插一张没分区/没卷标的卡，eemount 找不到标记就跳过——表现为“没反应“。</p>
+<h3 id="坑-2系统卡必须整卡对拷"><a class="header" href="#坑-2系统卡必须整卡对拷">坑 2：系统卡必须整卡对拷？</a></h3>
+<p>商家系统卡的迁移确实有讲究，但不是“整卡 dd 到新卡“这么简单：</p>
+<ul>
+<li>系统卡 MBR 三分区：P1 <code>EMUELEC</code>（vfat boot，1G，起始扇区 32768）、P2 <code>STORAGE</code>（ext4，5G，起始扇区 2129920）、P3 <code>EEROMS</code>（vfat，游戏）</li>
+<li><strong>P1/P2 的起始扇区与大小必须和原镜像完全一致</strong>（引导配置 <code>boot=UUID=... disk=UUID=...</code> 硬编码了分区 UUID）</li>
+<li><strong>RK3326 引导链（idbloader/U-Boot/trust）在 MBR 之后、P1 之前的 16MB</strong>，只拷分区不拷引导区必然黑屏</li>
+</ul>
+<p>所以系统卡要“整块 dd P1/P2 + 补引导区“，游戏卡则只需要“一个 EEROMS 卷标分区“。</p>
+<h2 id="三源码验证eemount-的双卡挂载逻辑实测"><a class="header" href="#三源码验证eemount-的双卡挂载逻辑实测">三、源码验证：eemount 的双卡挂载逻辑（实测）</a></h2>
+<h3 id="1-商家-emuelec-系统的挂载配置"><a class="header" href="#1-商家-emuelec-系统的挂载配置">1. 商家 EmuELEC 系统的挂载配置</a></h3>
+<p>在系统卡 P2（STORAGE 分区）的 <code>.config/emuelec/configs/emuelec.conf</code>：</p>
+<pre><code class="language-ini">## Mount handler: eemount (newer, C) or mount_romfs.sh (older, Bash)
+#ee_mount.handler=eemount
+ee_mount.retry=1
+</code></pre>
+<p><code>eemount</code> 二进制（<code>/usr/sbin/eemount</code>）的关键字符串：</p>
+<pre><code class="language-text">Trying to mount EEROMS to ...
+Last hope, mounting LABEL=EEROMS directly
+Checking if external system directory ... exists and create it if neccessary
+Skipped external drive ... mark file ... does not exist
+</code></pre>
+<p>结论：<strong>eemount 扫描所有外部驱动，优先找 EEROMS 卷标分区，找不到就用 <code>LABEL=EEROMS</code> 兜底</strong>。这就是游戏卡必须带 EEROMS 卷标的原因。</p>
+<h3 id="2-系统卡迁移商家-64g--32g"><a class="header" href="#2-系统卡迁移商家-64g--32g">2. 系统卡迁移（商家 64G → 32G）</a></h3>
+<pre><code class="language-bash"># 原镜像分区（fdisk 确认起始扇区）
+#   P1: 32768 起 1G vfat EMUELEC (boot)
+#   P2: 2129920 起 5G ext4 STORAGE
+
+# 目标卡重建分区（起始扇区必须与镜像一致）
+sfdisk /dev/mmcblk0 &lt;&lt;EOF
+label: dos
+32768, 2097152, c, *
+2129920, 10452992, 83
+EOF
+
+# 整块 dd P1 / P2（UUID 原地保留）
+dd if=full_disk_image.img of=/dev/mmcblk0 bs=1M skip=16 seek=16 count=1024
+dd if=full_disk_image.img of=/dev/mmcblk0 bs=1M skip=1040 seek=1040 count=5104
+
+# 补引导区（MBR 之后、P1 之前 16MB：idbloader/U-Boot/trust）
+dd if=full_disk_image.img of=/dev/mmcblk0 bs=512 skip=1 seek=1 count=32767
+</code></pre>
+<h3 id="3-游戏卡制作64g"><a class="header" href="#3-游戏卡制作64g">3. 游戏卡制作（64G）</a></h3>
+<pre><code class="language-bash"># 单 vfat 分区 + 卷标 EEROMS
+sfdisk /dev/sde &lt;&lt;EOF
+label: dos
+, , c
+EOF
+mkfs.vfat -F 32 -n EEROMS /dev/sde1
+
+# 游戏目录直接放分区根目录
+mount /dev/sde1 /mnt/gamecard
+cp -a /原游戏目录/{nes,snes,sfc,famicom,genesis,megadrive,ports} /mnt/gamecard/
+</code></pre>
+<h3 id="实测数据2026-08-07"><a class="header" href="#实测数据2026-08-07">实测数据（2026-08-07）</a></h3>
+<ul>
+<li>32G 系统卡单独开机：电池图标 → R36S 开机画面 → 正常进 EmuELEC</li>
+<li>加插 64G 游戏卡（EEROMS 卷标）重启：进系统后 <strong>All Games 识别 15928 个游戏</strong></li>
+<li>12 个精选平台目录共 13G：famicom 387M / fds / nes 1.4G / sfc 3.3G / snes 2.5G / genesis 1.3G / megadrive 2.6G / mastersystem 171M / segacd / sega32x / sg-1000 / ports 1.1G</li>
+<li>e2fsck / fsck.vfat 全部通过，UUID 与镜像一致（<code>boot=UUID=0207-1718 disk=UUID=28173377-...</code>）</li>
+</ul>
+<h2 id="四落地结论可复用方案-1"><a class="header" href="#四落地结论可复用方案-1">四、落地结论：可复用方案</a></h2>
+<h3 id="双卡分离三步走"><a class="header" href="#双卡分离三步走">双卡分离三步走</a></h3>
+<ol>
+<li>
+<p><strong>系统卡（右侧 OS 槽）</strong>：从商家原镜像迁移</p>
+<ul>
+<li>P1/P2 起始扇区与镜像完全一致（UUID 保留），整块 dd</li>
+<li>补引导区 <code>skip=1 seek=1 count=32767</code>（16MB 引导链，漏了必黑屏）</li>
+<li>系统卡不需要带游戏分区，P3 可省略</li>
+</ul>
+</li>
+<li>
+<p><strong>游戏卡（左侧 game 槽）</strong>：单 vfat 分区 + 卷标 <code>EEROMS</code></p>
+<ul>
+<li><code>mkfs.vfat -F 32 -n EEROMS</code>，平台目录直接放根目录</li>
+<li>EmuELEC 启动时 <code>eemount</code> 靠 <code>LABEL=EEROMS</code> 自动挂载为 <code>/storage/roms</code></li>
+</ul>
+</li>
+<li>
+<p><strong>上机验证</strong>：系统卡开机 → 正常后关机加插游戏卡 → 重启，游戏库应为游戏卡内容</p>
+</li>
+</ol>
+<h3 id="适用范围-2"><a class="header" href="#适用范围-2">适用范围</a></h3>
+<ul>
+<li>R36S / RK3326 系列开源掌机（EmuELEC 定制系统均可）</li>
+<li>想“OS 卡 + 游戏卡分离“、游戏库独立扩充的玩家</li>
+<li>已有一张能开机系统卡 + 想加第二张游戏卡的场景</li>
+</ul>
+<h3 id="关键判断顺序"><a class="header" href="#关键判断顺序">关键判断顺序</a></h3>
+<p>先看挂载标记（EEROMS 卷标）→ 再看系统卡 UUID/引导区 → 最后才怀疑系统不支持。
+实测 EmuELEC 双卡是原生功能，商家“game 卡没反应“九成是分区/卷标问题。</p>
+<h3 id="避坑清单"><a class="header" href="#避坑清单">避坑清单</a></h3>
+<ul>
+<li>游戏卡没分区/卷标 → 没反应：<code>mkfs.vfat -F 32 -n EEROMS</code> 解决</li>
+<li>系统卡 UUID 不一致 → 找不到系统：必须整块 dd，不能只复制文件</li>
+<li>系统卡漏引导区 → 黑屏：补 <code>count=32767</code>（16MB）</li>
+<li>想换 ROCKNIX/ArkOS 懒人固件 → 本机实测黑屏不兼容，EE 系统最稳</li>
+</ul>
+<h2 id="五三类读者速查-2"><a class="header" href="#五三类读者速查-2">五、三类读者速查</a></h2>
+<h3 id="人类开发者-5"><a class="header" href="#人类开发者-5">人类开发者</a></h3>
+<pre><code class="language-bash">sfdisk /dev/sdX &lt;&lt;EOF   # 游戏卡：单 vfat 分区
+label: dos
+, , c
+EOF
+mkfs.vfat -F 32 -n EEROMS /dev/sdX1   # 卷标必须 EEROMS
+</code></pre>
+<h3 id="对话式-ai-3"><a class="header" href="#对话式-ai-3">对话式 AI</a></h3>
+<p>问法：「R36S 双卡分离，游戏卡插左边没反应怎么解决？」回答要点：检查游戏卡是否为 <code>EEROMS</code> 卷标的 vfat 分区——EmuELEC 的 eemount 靠 <code>LABEL=EEROMS</code> 挂载 <code>/storage/roms</code>，没有卷标就跳过。</p>
+<h3 id="代码-agent-4"><a class="header" href="#代码-agent-4">代码 Agent</a></h3>
+<ul>
+<li>系统卡迁移：<code>dd if=镜像 of=卡 bs=1M skip=16 seek=16 count=1024</code>（P1）+ <code>skip=1040 seek=1040 count=5104</code>（P2）+ <code>bs=512 skip=1 seek=1 count=32767</code>（引导区），P1/P2 起始扇区与镜像一致</li>
+<li>游戏卡：<code>mkfs.vfat -F 32 -n EEROMS</code>，平台目录放根目录</li>
+<li>验证：<code>blkid</code> 查 UUID/卷标；上机看 All Games 数量（实测 15928）</li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="给-ai-agent-看的游戏配置json-schema-与-ai_context-注释层设计"><a class="header" href="#给-ai-agent-看的游戏配置json-schema-与-ai_context-注释层设计">给 AI Agent 看的游戏配置：JSON Schema 与 ai_context 注释层设计</a></h1>
 <blockquote>
@@ -6652,7 +7080,7 @@ Repeat=yes```ini
 <blockquote>
 <p>日期：2026-08-02</p>
 </blockquote>
-<h3 id="一背景"><a class="header" href="#一背景">一、背景</a></h3>
+<h3 id="一背景-1"><a class="header" href="#一背景-1">一、背景</a></h3>
 <p>R36S 是常见的开源掌机，出厂自带一张 64G 原厂 TF 卡，刷好 EmuELEC 系统并预装几十个平台的游戏。原厂卡看着容量不小，但 PSP、NEOGEO、GBA、N64、GBC、街机等平台动辄几个 G，对只玩红白机（FC/NES）和超任（SFC/SNES）的玩家来说，九成内容是用不上的“占闪存垃圾“。本文记录一次完整迁移：把原厂 64G 卡上的 FC/SFC/NES/SNES 四套游戏（含改版）搬到一张新的 32G OS 卡，顺带保留世嘉平台的 RTS 精品（命令与征服、沙丘魔堡）和兵蜂系列，再把 64G 卡上约 30G 的其它平台全部清掉。全程只用 Linux 自带的 mount、rsync、find、rm 等命令，不依赖专用工具。</p>
 <h3 id="二emuelec-的-os-卡结构"><a class="header" href="#二emuelec-的-os-卡结构">二、EmuELEC 的 OS 卡结构</a></h3>
 <p>用 lsblk 看清两张卡的分区（32G 卡在板载读卡器为 mmcblk0，64G 卡在 USB 读卡器为 sdf）：</p>
@@ -7665,11 +8093,11 @@ neither WAYLAND_DISPLAY nor WAYLAND_SOCKET nor DISPLAY is set.
 <p>根据“慢 10 倍“加 ×10 补偿，结果光标快 10 倍——补偿只在输入确实失真时可用，且必须先排除缓存等干扰再动补偿。</p>
 <h3 id="落地结论-2"><a class="header" href="#落地结论-2">落地结论</a></h3>
 <p>方案是 pointer lock 请求恒禁用 unadjustedMovement，movementX 走系统指针路径，光标与桌面 1:1、无加速度（用户“没开加速“时即线性）。要点是改光标速度前先排除浏览器缓存（硬刷新）；不要凭一次观察就加缩放补偿，补偿极易过度；对比基准（桌面 vs 游戏内）要明确。适用范围为 Chromium 系浏览器（Chrome/Edge/Vivaldi）在 macOS 上的 pointer lock 光标速度问题；同样思路可用于 FPS 类 Web 游戏。</p>
-<h3 id="人类开发者-3"><a class="header" href="#人类开发者-3">人类开发者</a></h3>
+<h3 id="人类开发者-6"><a class="header" href="#人类开发者-6">人类开发者</a></h3>
 <p>自查：战场中 F12 console 执行 <code>document.addEventListener("mousemove",e=&gt;console.log(e.movementX))</code>，移动鼠标对比实际位移。验证：<code>Cmd+Shift+R</code> 硬刷新后再测；可用 curl 确认 serve 返回的新 JS 内容。</p>
-<h3 id="对话式-ai-1"><a class="header" href="#对话式-ai-1">对话式 AI</a></h3>
+<h3 id="对话式-ai-4"><a class="header" href="#对话式-ai-4">对话式 AI</a></h3>
 <p>一句话问法：「Chromium 150 下 pointer lock 光标移动慢 10 倍，怎么修？」回答要点：检查 unadjustedMovement——macOS 上 true 会使 movementX 缩水约 0.1 倍，禁用（false）走系统路径即可 1:1；排除浏览器缓存后再做缩放补偿。</p>
-<h3 id="代码-agent-2"><a class="header" href="#代码-agent-2">代码 Agent</a></h3>
+<h3 id="代码-agent-5"><a class="header" href="#代码-agent-5">代码 Agent</a></h3>
 <p>可执行流程：grep pointer lock 请求点 → 把 unadjustedMovement 恒置 false → 全量 build → 确认产物 → 提示用户硬刷新验证（不要直接加 movementX 缩放补偿）。</p>
 <hr><!-- 许可声明 -->
 <blockquote>
@@ -8211,6 +8639,415 @@ convert_csf_file("./mod/ra2md.csf", "./mod/ra2md_zh-CN.csf")
 <p>本文采用木兰宽松许可证 v2 (Mulan PSL v2) 授权。版权归作者所有，不强制署名，企业合规请保留原始声明。
 原始版本见：https://k4m7v2pz.github.io/zh/blog/games/openyrweb-traditional-chinese-mod.html</p>
 </blockquote>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="为什么报错不崩的问题最难修png-建筑渲染崩溃链复盘"><a class="header" href="#为什么报错不崩的问题最难修png-建筑渲染崩溃链复盘">为什么报错不崩的问题最难修：PNG 建筑渲染崩溃链复盘</a></h1>
+<blockquote>
+<p>日期：2026-08-07</p>
+</blockquote>
+<h3 id="1-问题背景-1"><a class="header" href="#1-问题背景-1">1. 问题背景</a></h3>
+<p>在给 OpenYRWeb（红警2 / 尤里的复仇浏览器移植引擎）接入原创 PNG 建筑素材时，遇到了一个长达六层的崩溃链。表面症状是「基地车展开后显示绿白/蓝白棋盘格」，背后却是一个环环相扣的隐性问题。本文完整复盘这条链路——它比「报错并崩溃」的问题难修得多，因为每一层都安静地失败。</p>
+<h3 id="2-崩溃链全貌"><a class="header" href="#2-崩溃链全貌">2. 崩溃链全貌</a></h3>
+<p>目标是：让基地车（MCV）展开后的建造厂显示我们自制的 <code>construction_yard.png</code>，而不是原版 SHP。为此需要引擎支持「PNG 直色建筑渲染」——原版引擎建筑只吃 SHP（8-bit 调色板索引），而 PNG 是 32-bit RGBA 直色。</p>
+<h4 id="21-第一层systemjs-404"><a class="header" href="#21-第一层systemjs-404">2.1 第一层：SystemJS 404</a></h4>
+<p>新增了 <code>data/PngShpFile.ts.js</code>（把解码后的 RGBA 包装成 ShpFile 兼容对象）后，游戏加载时报：</p>
+<pre><code>XHR error (404 Not Found) loading http://127.0.0.1:8080/data/PngShpFile
+</code></pre>
+<p>根因：<code>repack.mjs</code> 按 <code>src/_module-map.json</code> 的模块清单打包。新增文件没有注册进清单，导致 bundle 里只有 Engine 对它的 deps 引用字符串，却没有模块本体——SystemJS 运行时按路径 fetch 不到。手动往 <code>_module-map.json</code> 插入条目后解决。<strong>教训：这个引擎的打包清单是手工维护的，新增文件必须先注册。</strong></p>
+<h4 id="22-第二层images-集合一个都没注入"><a class="header" href="#22-第二层images-集合一个都没注入">2.2 第二层：images 集合一个都没注入</a></h4>
+<p>棋盘格出现，说明 ImageFinder 回退 <code>.png</code> 永远 miss。反复排查 OPFS 数据、浏览器缓存后，最后读引擎源码才发现：</p>
+<pre><code class="language-js">// RealFileSystemDir.getEntries()
+async *getEntries() {
+  for (const name of this.handle.keys()) yield name; // ← 产出纯字符串！
+}
+</code></pre>
+<p>而我的扫描代码写的是 <code>fe?.name</code>——对字符串取 <code>.name</code> 恒为 undefined，<code>fname = ""</code>，所有 PNG 被 <code>endsWith(".png")</code> 过滤掉。<strong>这是最贵的错误：它不报错、不崩溃，只是「什么都不做」</strong>，纯靠读引擎源码才定位。</p>
+<h4 id="23-第三层空帧聚合-agg-shp"><a class="header" href="#23-第三层空帧聚合-agg-shp">2.3 第三层：空帧聚合 agg SHP</a></h4>
+<p><code>Building.ts.js</code> 会把 mainShpFile + bib + 动画帧聚合为 <code>agg_&lt;name&gt;.shp</code>。当 PNG 回退未命中时 <code>mainShpFile</code> 为 undefined，聚合输入全空 → <code>agg_GACNST.shp</code> images.length=0 → <code>getImage(0)</code> 越界 RangeError → 渲染队列崩 → 点选/框选全失效。</p>
+<p>修复：<code>Building</code> 主 art 获取失败时回退原版 art（<code>objectRules.name</code>）。</p>
+<h4 id="24-第四层rgba-帧数被砍半"><a class="header" href="#24-第四层rgba-帧数被砍半">2.4 第四层：RGBA 帧数被砍半</a></h4>
+<p><code>ShpAggregator.getShpFrameInfo</code> 里：</p>
+<pre><code class="language-js">frameCount: Math.floor(e.numImages * (t ? 0.5 : 1)) // SHP 主帧+阴影半帧布局
+</code></pre>
+<p>PNG 只有 1 帧 RGBA（自带 alpha），<code>hasShadow=true</code> 时被算成 0 帧 → 聚合结果为空。修复：检测 imageData 长度是否为 <code>w*h*4</code>，RGBA 直色帧不砍半、无阴影。</p>
+<h4 id="25-第五层材质格式断言"><a class="header" href="#25-第五层材质格式断言">2.5 第五层：材质格式断言</a></h4>
+<pre><code>Texture must have format THREE.AlphaFormat
+</code></pre>
+<p>批量渲染路径 <code>useMaterial</code> 强制 AlphaFormat（调色板材质），PNG 直色纹理是 RGBAFormat。修复：RGBAFormat 纹理跳过批处理，走 <code>MeshBasicMaterial</code> 直色路径。</p>
+<h4 id="26-第六层batchedmesh-专属方法缺失"><a class="header" href="#26-第六层batchedmesh-专属方法缺失">2.6 第六层：BatchedMesh 专属方法缺失</a></h4>
+<pre><code>this.mesh.setPaletteIndex / setOpacity / setExtraLight is not a function
+</code></pre>
+<p>直色材质（MeshBasicMaterial）没有这三个 BatchedMesh 专属方法，逐个加 <code>typeof === "function"</code> 防护。</p>
+<h3 id="3-为什么不崩的问题更难修"><a class="header" href="#3-为什么不崩的问题更难修">3. 为什么「不崩的问题」更难修</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>特征</th><th>报错并崩溃</th><th>安静失败</th></tr>
+</thead>
+<tbody>
+<tr><td>定位</td><td>堆栈直接指到代码行</td><td>需要通读源码找「什么都没做」的原因</td></tr>
+<tr><td>排查方向</td><td>单点</td><td>可能是数据、缓存、渲染管线任意一层</td></tr>
+<tr><td>直觉</td><td>顺着栈追</td><td>每层看起来都「正常」</td></tr>
+</tbody>
+</table>
+</div>
+<p>本次第二层（getEntries 返回字符串）就是典型：三个中间步骤全绿（OPFS 有文件、bundle 有代码、加载无报错），唯独注入结果为空。</p>
+<h3 id="4-可复用的排查方法"><a class="header" href="#4-可复用的排查方法">4. 可复用的排查方法</a></h3>
+<ol>
+<li><strong>先怀疑「静默丢弃」</strong>：批量循环里 <code>filter/continue</code> 条件最容易吞掉数据，先打印循环里实际看到了什么；</li>
+<li><strong>读工具的实现，不猜 API</strong>：<code>getEntries()</code> 到底返回对象还是字符串，读 <code>RealFileSystemDir.ts.js</code> 一眼可知；</li>
+<li><strong>每层修复后立刻验证</strong>：playwright 进遭遇战实测（<code>verify-iow.mjs</code>），不要攒多个改动一起测；</li>
+<li><strong>把「能玩」当作回归基准</strong>：渲染链改动后，进游戏确认交互（点选、框选）仍正常——崩溃链的终点往往是交互失效，而不是红屏。</li>
+</ol>
+<h3 id="5-结论"><a class="header" href="#5-结论">5. 结论</a></h3>
+<p>报错并崩溃的问题像路障，一眼看到；安静失败的问题像漏气，需要逐层排查。给旧引擎接新格式（PNG 直色）时，真正的成本不在「加一个 Image 键」，而在理解渲染管线的每一层假设（打包清单、注入循环、聚合帧数、材质格式、材质方法）。这些假设写成了 <code>docs/PORTING.md</code> 的踩坑记录，后续接入其他 PNG 素材时可以直接照抄排查路径。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="把红警引擎改成我的形状openyrweb-现代化改造全景"><a class="header" href="#把红警引擎改成我的形状openyrweb-现代化改造全景">把红警引擎改成我的形状：OpenYRWeb 现代化改造全景</a></h1>
+<blockquote>
+<p>日期：2026-08-07</p>
+</blockquote>
+<h3 id="1-为什么改一个浏览器里的老引擎"><a class="header" href="#1-为什么改一个浏览器里的老引擎">1. 为什么改一个浏览器里的老引擎</a></h3>
+<p>OpenYRWeb 是红警2 / 尤里的复仇的开源浏览器移植引擎（Apache-2.0），跑在浏览器里，数据从 OPFS 注入。它的上游已近乎停摆，因此本仓库就是事实上的活跃分支——引擎 bug 自己修，格式自己改。</p>
+<p>改造的总目标是：让这个 2000 年代的引擎，贴合「个人格式审美」和「Agent 协作」两套标准：</p>
+<ul>
+<li><strong>贴合个人审美</strong>：素材用 PNG（图块/建筑）和 WAV（语音），不用 mix/SHP 调色板格式；</li>
+<li><strong>贴合 Agent</strong>：配置用 JSON + JSON Schema（可校验、可枚举、可生成），不用纯 ini。</li>
+</ul>
+<h3 id="2-改造的四个层面"><a class="header" href="#2-改造的四个层面">2. 改造的四个层面</a></h3>
+<h4 id="21-数据注入层"><a class="header" href="#21-数据注入层">2.1 数据注入层</a></h4>
+<p>原版游戏数据（9 个 mix）通过浏览器 OPFS 注入，MOD 文件同样走 OPFS。为此实现了注入页面 <code>inject.html</code>（带进度条、结果回传后端 <code>/api/inject-report</code>）和 playwright 自动化注入脚本。</p>
+<h4 id="22-图块层png-tileset"><a class="header" href="#22-图块层png-tileset">2.2 图块层（PNG tileset）</a></h4>
+<p>自制图块集 <code>yuanbao</code> 以 PNG 提供（256×128 / @2x），<code>meta.json</code> 描述 tile 编号与 subTile。引擎新增 <code>PngTileset</code> 加载器，把 PNG 解码后与地形图块系统对接。</p>
+<h4 id="23-建筑渲染层png-直色"><a class="header" href="#23-建筑渲染层png-直色">2.3 建筑渲染层（PNG 直色）</a></h4>
+<p>建筑本体原本只吃 SHP（8-bit 调色板索引）。新增 <code>PngShpFile</code> 把 RGBA 包装成 ShpFile 兼容对象，ImageFinder 支持 <code>.shp</code> 缺失时回退同名 <code>.png</code>，ShpBuilder 支持 RGBAFormat 直色材质。这条路踩了六层坑，详见《为什么报错不崩的问题最难修》。</p>
+<h4 id="24-规则配置层json-schema"><a class="header" href="#24-规则配置层json-schema">2.4 规则配置层（JSON Schema）</a></h4>
+<p>原创建筑/科技树/经济以 <code>design/*.json</code> 描述，JSON Schema 锁死结构（事件枚举、字段必填、additionalProperties:false），构建脚本 <code>build-json-rules.mjs</code> 生成 flat INI 段。语音配置 <code>design/voice/*.json</code> 同理，事件键对齐引擎实际触发的 EVA 事件枚举。</p>
+<h3 id="3-改造后的形态"><a class="header" href="#3-改造后的形态">3. 改造后的形态</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>层面</th><th>原版</th><th>改造后</th></tr>
+</thead>
+<tbody>
+<tr><td>图块</td><td>mix 内 .tem</td><td>PNG + meta.json（含 @2x）</td></tr>
+<tr><td>建筑</td><td>artmd Image → .shp</td><td>Image → .png（ImageFinder 回退）</td></tr>
+<tr><td>语音</td><td>mix 内 ceva/csof wav</td><td>OPFS 内 TTS 生成 wav（中英双语）</td></tr>
+<tr><td>规则</td><td>rulesmd.ini 手写</td><td>design JSON → 生成 ini</td></tr>
+<tr><td>校验</td><td>无</td><td>JSON Schema（IDE 实时校验）</td></tr>
+<tr><td>验证</td><td>手动</td><td>playwright 进遭遇战实测</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="4-改造的代价"><a class="header" href="#4-改造的代价">4. 改造的代价</a></h3>
+<ul>
+<li>引擎源码改了十几个文件（渲染管线、打包清单、art 解析），每次 repack 后必须硬刷新浏览器；</li>
+<li>PNG 直色与 SHP 调色板是两套渲染管线，需要同时维护；</li>
+<li>新增引擎文件必须手工注册 <code>_module-map.json</code>，否则 SystemJS 404；</li>
+<li>任何渲染链改动都要回归验证「能玩」：点选、框选、展开、攻击。</li>
+</ul>
+<h3 id="5-结论-1"><a class="header" href="#5-结论-1">5. 结论</a></h3>
+<p>把老引擎改成「我的形状」，本质是在四层（数据注入、图块、建筑渲染、规则配置）各自做格式现代化。收益是可复现、可校验、Agent 友好；成本是引擎渲染管线的深度适配。这套改造全部记录在 <code>docs/PORTING.md</code>，后续 MOD 直接复用。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="mixshpini--pngwavjson老引擎的数据格式现代化"><a class="header" href="#mixshpini--pngwavjson老引擎的数据格式现代化">mix/SHP/ini → PNG/WAV/JSON：老引擎的数据格式现代化</a></h1>
+<blockquote>
+<p>日期：2026-08-07</p>
+</blockquote>
+<h3 id="1-三种格式的迁移动机"><a class="header" href="#1-三种格式的迁移动机">1. 三种格式的迁移动机</a></h3>
+<p>OpenYRWeb 引擎沿用了红警2 的经典数据格式：二进制 mix 包、8-bit 调色板 SHP 图、无结构的 ini 规则。这些格式在 2000 年代是性能最优解，但对现代开发与 Agent 协作并不友好。改造选择了三组替代：</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>原格式</th><th>新格式</th><th>理由</th></tr>
+</thead>
+<tbody>
+<tr><td>mix（二进制打包）</td><td>目录 + OPFS 注入</td><td>可增量修改、可版本管理</td></tr>
+<tr><td>SHP（调色板索引）</td><td>PNG（RGBA 直色）</td><td>图像编辑工具链通用、支持 @2x</td></tr>
+<tr><td>ini（无类型）</td><td>JSON + JSON Schema</td><td>可校验、可枚举、可生成、IDE 补全</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="2-shp--png-的迁移路径"><a class="header" href="#2-shp--png-的迁移路径">2. SHP → PNG 的迁移路径</a></h3>
+<p>SHP 是 8-bit 调色板索引，渲染时按 palette 上色；PNG 是 32-bit RGBA 直色。迁移不是简单换文件，而是渲染管线的适配：</p>
+<ol>
+<li><strong>图块层</strong>：新增 <code>PngTileset</code>，读 <code>meta.json</code>（tile 编号 → PNG 文件 + subTile 布局），解码后注入地形图块系统；</li>
+<li><strong>建筑层</strong>：新增 <code>PngShpFile</code> 把 RGBA 包装成 ShpFile 兼容对象，<code>ImageFinder</code> 在 <code>.shp</code> 缺失时回退同名 <code>.png</code>；</li>
+<li><strong>材质层</strong>：<code>ShpBuilder</code> 支持 RGBAFormat 直色材质（MeshBasicMaterial），跳过调色板路径与批处理路径。</li>
+</ol>
+<p>关键坑：SHP 有「主帧 + 阴影半帧」布局（<code>frameCount = numImages * (hasShadow ? 0.5 : 1)</code>），PNG 只有一帧，直接套用会把 1 帧算成 0 帧，聚合出空文件。必须对 RGBA 直色帧特判。</p>
+<h3 id="3-wav-语音的接入"><a class="header" href="#3-wav-语音的接入">3. WAV 语音的接入</a></h3>
+<p>语音原本在 mix 里的 ceva/csof wav，引擎按 <code>eva.ini</code> 的 <code>[DialogList]</code> 查表播放。接入自定义 WAV 的方式：</p>
+<ul>
+<li>用 TTS 批量合成（Qwen-TTS，Neil 音色），输出 <code>audio/voice/{lang}/EVA_*.wav</code>；</li>
+<li><code>design/voice/{lang}/event_voice_mapping.json</code> 描述事件 → 文件名 → 文本；</li>
+<li>事件键对齐引擎实际触发的 64 条 EVA 事件枚举，保证映射可校验。</li>
+</ul>
+<h3 id="4-ini--json-的迁移路径"><a class="header" href="#4-ini--json-的迁移路径">4. ini → JSON 的迁移路径</a></h3>
+<p>规则从「手写 flat ini 段」迁移到「design JSON → 生成 ini」：</p>
+<pre><code class="language-json">// design/entities/buildings/通用/油井.json
+{
+  "extends": null,
+  "id": "oil-well",
+  "abstract": true,
+  "techLevel": 1,
+  "cost": 800,
+  "produceCash": { "startup": 500, "amount": 25, "delay": 5 }
+}
+</code></pre>
+<ul>
+<li>支持对象继承（abstract 基类 → 阵营实体 extends）；</li>
+<li>JSON Schema 锁死结构：字段必填、<code>additionalProperties:false</code>、事件名枚举；</li>
+<li><code>build-json-rules.mjs</code> 解析继承、校验引用完整性、生成 flat INI 段；</li>
+<li>引擎只读 rulesmd.ini，生成的段需要合入 <code>[BuildingTypes]</code> 注册表（当前由生成管线输出，合入为后续工作）。</li>
+</ul>
+<h3 id="5-迁移的收益与遗留"><a class="header" href="#5-迁移的收益与遗留">5. 迁移的收益与遗留</a></h3>
+<p><strong>收益</strong>：可复现（重跑生成脚本即可）、可校验（Schema + playwright）、Agent 友好（JSON 可枚举、可提示）。</p>
+<p><strong>遗留</strong>：生成的 flat INI 段与 rulesmd.ini 的 <code>[BuildingTypes]</code> 注册尚未自动化合入；语音 mapping 的引擎消费端（事件触发 → 播 wav）仍是待接线状态——原版 eva.ini 语音继续兜底。这两条作为后续迭代方向记录在 <code>docs/PORTING.md</code>。</p>
+<h3 id="6-结论"><a class="header" href="#6-结论">6. 结论</a></h3>
+<p>格式现代化的本质是「三层管道的逐一适配」：数据加载（mix → OPFS）→ 资源包装（SHP → PngShpFile）→ 渲染材质（palette → RGBA）。每一层都有隐性假设，改一层崩一层；把假设写成踩坑记录（<code>docs/PORTING.md</code>）后，后续同类迁移可以直接复用排查路径。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="引擎改造的取舍能玩才有动力审美服务于手感"><a class="header" href="#引擎改造的取舍能玩才有动力审美服务于手感">引擎改造的取舍：能玩才有动力，审美服务于手感</a></h1>
+<blockquote>
+<p>日期：2026-08-07</p>
+</blockquote>
+<h3 id="1-为什么坚持在浏览器里改"><a class="header" href="#1-为什么坚持在浏览器里改">1. 为什么坚持在浏览器里改</a></h3>
+<p>OpenYRWeb 是浏览器里的红警引擎。有人会问：为什么不把游戏重写成 Rust 原生窗口？答案很实际：</p>
+<ul>
+<li><strong>能玩才有动力</strong>：浏览器版本能跑、能注入、能进遭遇战，每一次改动都有即时反馈；重写意味着失去所有迭代动力；</li>
+<li><strong>能测才敢改</strong>：playwright 无头浏览器可以自动化进遭遇战、检查 canvas、扫描错误——这是「改引擎不怕改坏」的底气；</li>
+<li><strong>生态红利白嫖</strong>：@2x 高清资源、WebGL 渲染、OPFS 持久化、fetch 加载，都是浏览器白送的。</li>
+</ul>
+<p>Rust 窗口、终端是更「属于自己」的形态，但这个项目是「跟随生态的妥协」——妥协换来的是可玩与可测。</p>
+<h3 id="2-三条取舍原则"><a class="header" href="#2-三条取舍原则">2. 三条取舍原则</a></h3>
+<h4 id="21-素材格式贴合个人审美"><a class="header" href="#21-素材格式贴合个人审美">2.1 素材格式贴合个人审美</a></h4>
+<ul>
+<li>图块/建筑用 PNG（RGBA 直色），不用 SHP 调色板——图像工具链通用，还能出 @2x；</li>
+<li>语音用 WAV（TTS 合成），不用 mix 内的原版 wav——想换中英双语随时重生成；</li>
+<li>结果是素材目录干净、可复现、可版本管理。</li>
+</ul>
+<h4 id="22-配置贴合-agent"><a class="header" href="#22-配置贴合-agent">2.2 配置贴合 Agent</a></h4>
+<ul>
+<li>规则、语音映射、MOD 元数据全部 JSON + JSON Schema；</li>
+<li>Schema 锁死枚举（事件名、阵营、分类），<code>additionalProperties:false</code> 挡住拼写错误；</li>
+<li>构建脚本把 design JSON 生成引擎能读的 flat INI——人读 JSON，引擎读 INI，Agent 改 JSON。</li>
+</ul>
+<h4 id="23-能玩是回归基准"><a class="header" href="#23-能玩是回归基准">2.3 能玩是回归基准</a></h4>
+<p>引擎渲染链的任何改动，回归验证都是「进遭遇战能不能玩」：点选、框选、展开、攻击。崩溃链的终点往往是交互失效而不是红屏——「能玩」是最真实的冒烟测试。</p>
+<h3 id="3-取舍的代价"><a class="header" href="#3-取舍的代价">3. 取舍的代价</a></h3>
+<ul>
+<li>引擎源码改动十几个文件，每次 repack 后浏览器必须硬刷新（Cmd+Shift+R）；</li>
+<li>PNG 直色与 SHP 调色板两套渲染管线并存，维护面变大；</li>
+<li>新增引擎文件必须手工注册 <code>_module-map.json</code>，否则 SystemJS 404；</li>
+<li>浏览器形态决定了调试工具链是 console/元素面板，而不是 Rust 的编译器和终端——这是妥协的一部分。</li>
+</ul>
+<h3 id="4-结论"><a class="header" href="#4-结论">4. 结论</a></h3>
+<p>改造的取舍不是「技术最优」，而是「审美 + Agent 协作 + 能玩」三方平衡：素材用 PNG/WAV 讨好自己，配置用 JSON/Schema 讨好 Agent，回归用「能玩」讨好手感。这套原则让改造可持续——每一步都有正反馈，才有动力继续改下去。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="png-tileset-替换地形图块从-mix-里挖-metajson-的真相"><a class="header" href="#png-tileset-替换地形图块从-mix-里挖-metajson-的真相">PNG tileset 替换地形图块：从 mix 里挖 meta.json 的真相</a></h1>
+<blockquote>
+<p>日期：2026-08-07</p>
+</blockquote>
+<h3 id="1-目标与背景"><a class="header" href="#1-目标与背景">1. 目标与背景</a></h3>
+<p>OpenYRWeb 的地形图块原本在 mix 包的 .tem 文件里，靠 <code>temperatmd.ini</code> 的 <code>[TileSetXXXX]</code> 段描述（tileSetIndex → SetName/FileName/TilesInSet）。自制图块集 <code>yuanbao</code> 想用 PNG 替换：256×128 图块 + @2x 高清版，语义上对应「兵营/轻工厂/油井/建造厂」等建筑图块。</p>
+<h3 id="2-从-mix-里挖出真相"><a class="header" href="#2-从-mix-里挖出真相">2. 从 mix 里挖出真相</a></h3>
+<p>第一步是搞清楚引擎怎么索引图块。写脚本解开 <code>ra2md.mix &gt; localmd.mix</code> 里的 <code>temperatmd.ini</code>，逐段打印：</p>
+<pre><code>TileSet0010: SetName=Cliff Set FileName=Cliff TilesInSet=40
+</code></pre>
+<p><strong>关键发现：<code>yuanbao</code> 的 <code>tileSetIndex=10</code> 对应的是原版「Cliff Set（山崖集）」</strong>。这意味着：</p>
+<ul>
+<li>把自制建筑图块放在 yuanbao 的 tile 编号上，会<strong>覆盖地图上所有引用该编号的山崖图块</strong>；</li>
+<li>如果不想让山崖地形被覆盖，PNG tileset 只应替换它拥有的图块，缺失的 tile 要回退原版 .tem。</li>
+</ul>
+<h3 id="3-metajson-的结构"><a class="header" href="#3-metajson-的结构">3. meta.json 的结构</a></h3>
+<p>PNG tileset 目录结构：</p>
+<pre><code>tilesets/yuanbao/
+├── meta.json            # tile 语义 + subTile 布局
+├── tile_16.png / @2x    # 兵营（石头房子）
+├── tile_17.png / @2x    # 兵营（砖房子）
+├── tile_20.png / @2x    # 轻工厂
+└── oil_well.png / @2x   # 油井
+</code></pre>
+<p><code>meta.json</code> 每个 tile 条目：</p>
+<pre><code class="language-json">{
+  "tile": 16,
+  "description": "兵营（石头房子）",
+  "variants": [{
+    "file": "tile_16.png",
+    "subTiles": [{
+      "x": 0, "y": 0, "w": 256, "h": 128,
+      "terrainType": 0, "rampType": 0
+    }]
+  }]
+}
+</code></pre>
+<h3 id="4-两个大坑"><a class="header" href="#4-两个大坑">4. 两个大坑</a></h3>
+<h4 id="41-tilesetindex-覆盖山崖集"><a class="header" href="#41-tilesetindex-覆盖山崖集">4.1 tileSetIndex 覆盖山崖集</a></h4>
+<p>把建造厂图块放进 yuanbao 后，游戏里「山崖图片变成建造厂的图」——因为 yuanbao 的 tileSetIndex=10 正是 Cliff Set，tile 1 覆盖了山崖 1 号图块。<strong>修复：从 meta.json 移除 tile 1 条目，山崖集恢复原版。</strong></p>
+<h4 id="42-删-tile-后-subtile-崩溃"><a class="header" href="#42-删-tile-后-subtile-崩溃">4.2 删 tile 后 SubTile 崩溃</a></h4>
+<p>移除 tile 1 后进游戏报：</p>
+<pre><code>SubTile 0 not found
+</code></pre>
+<p>根因：地图数据仍引用山崖集 1 号图块，但 PNG tileset 里没有 tile 1；<code>TileSets.initTileSets</code> 的 TMP 回退误用 <code>png.meta.fileName</code>（“yuanbao”）拼文件名，去找 <code>yuanbao01.tem</code>（不存在），而原版山崖图块是 <code>cliff01.tem</code>——entry.files 全空 → getTileImage 抛错。<strong>修复：TMP 回退前缀始终用原版 FileName（“Cliff”），缺失 tile 回退原版山崖图块。</strong></p>
+<h3 id="5-注入与验证"><a class="header" href="#5-注入与验证">5. 注入与验证</a></h3>
+<ul>
+<li><code>scripts/gen-inject-page.mjs</code> 递归收集 tilesets 目录（含子目录），生成注入清单；</li>
+<li>新增 PNG 后重新生成 inject.html + Cmd+Shift+R 硬刷新注入；</li>
+<li>playwright 验证：进遭遇战无 SubTile 崩溃、canvas 正常渲染。</li>
+</ul>
+<h3 id="6-结论-1"><a class="header" href="#6-结论-1">6. 结论</a></h3>
+<p>PNG tileset 替换的真相是：<strong>tileSetIndex 决定你替换的是哪一套原版图块</strong>。选错索引 = 悄悄覆盖别人的地形；删图块 = 触发回退链崩溃。先把 <code>temperatmd.ini</code> 的索引映射挖出来，再决定 PNG 放哪些编号、缺失 tile 回退到哪，是这套方案不踩雷的前提。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="128-条-tts-语音注入红警引擎qwen-tts--neil-音色批量合成"><a class="header" href="#128-条-tts-语音注入红警引擎qwen-tts--neil-音色批量合成">128 条 TTS 语音注入红警引擎：Qwen-TTS + Neil 音色批量合成</a></h1>
+<blockquote>
+<p>日期：2026-08-07</p>
+</blockquote>
+<h3 id="1-目标"><a class="header" href="#1-目标">1. 目标</a></h3>
+<p>给红警引擎配一套可复现的中英双语副官语音：64 条 EVA 事件 × 中英两版 = 128 条 WAV，全部由 TTS 批量合成，注入浏览器 OPFS。要点是「代码入库、Key 不落盘、随时可重生成」。</p>
+<h3 id="2-为什么用-qwen-tts-的-neil"><a class="header" href="#2-为什么用-qwen-tts-的-neil">2. 为什么用 Qwen-TTS 的 Neil</a></h3>
+<p>调研了阿里云三个 TTS API 的音色：</p>
+<ul>
+<li><strong>CosyVoice / Qwen-Audio-TTS</strong>：系统音色全是龙安/loong 系列；下载 1000+ 基础音色 Excel 全文搜过——没有 Neil；</li>
+<li><strong>MiniMax</strong>：系统音色是 <code>male-qn-*</code> / <code>female-*</code> 格式，无 Neil；</li>
+<li><strong>Qwen-TTS</strong>：<strong>有 Neil</strong>（音色名「阿闻」，男新闻主播，中英日韩等 10 语种），<code>qwen3-tts-instruct-flash</code> 支持。</li>
+</ul>
+<p>Neil 的新闻主播声线适合「副官播报」风格，且支持 <code>instructions</code> 控制语速/情感，中英文本各配一条指令。</p>
+<h3 id="3-批量生成脚本设计"><a class="header" href="#3-批量生成脚本设计">3. 批量生成脚本设计</a></h3>
+<p><code>scripts/tts-generate.mts</code>（TypeScript，tsc 检查）：</p>
+<pre><code class="language-ts">const MODEL = "qwen3-tts-instruct-flash";
+const VOICE = "Neil";
+const INSTRUCTIONS = {
+  en: "News anchor style, steady pace, calm and neutral emotion.",
+  "zh-CN": "新闻播报风格，语速适中，吐字清晰，情感沉稳中性。",
+};
+</code></pre>
+<p>流程：读 <code>design/voice/{lang}/event_voice_mapping.json</code> → 逐条调 DashScope 接口 → 下载 wav 写入 <code>audio/voice/{lang}/EVA_*.wav</code>。支持 <code>--lang / --event / --force</code> 增量重生成。</p>
+<h3 id="4-key-永不落盘"><a class="header" href="#4-key-永不落盘">4. Key 永不落盘</a></h3>
+<ul>
+<li>API Key 只从环境变量读取（<code>process.env.DASHSCOPE_API_KEY</code>），脚本内无硬编码；</li>
+<li><code>.gitignore</code> 增加 <code>.env</code> / <code>.env.*</code>（保留 <code>.env.example</code>），防止 <code>git add .</code> 误提交；</li>
+<li>请求头用运行时拼接的 <code>Bearer ${API_KEY}</code>，日志不回显 Key。</li>
+</ul>
+<p>实测检查：全仓库 git 跟踪文件搜真实 Key 前缀 → 零匹配。</p>
+<h3 id="5-语音如何接入引擎"><a class="header" href="#5-语音如何接入引擎">5. 语音如何接入引擎</a></h3>
+<ul>
+<li>生成结果：<code>audio/voice/{en,zh-CN}/EVA_1MinuteRemaining.wav</code> 等 128 条；</li>
+<li>引擎的 EVA 副官播报走 <code>eva.ini</code> 的 <code>[DialogList]</code>（Allied=cevaXXX）→ 从 mix 读原版 wav；</li>
+<li>自定义语音的引擎消费端（事件触发 → 读 design/voice mapping → 播自定义 wav）是后续接线工作，当前原版语音兜底。</li>
+</ul>
+<h3 id="6-注入清单递归修复"><a class="header" href="#6-注入清单递归修复">6. 注入清单递归修复</a></h3>
+<p><code>gen-inject-page.mjs</code> 原本只收集 <code>audio/</code> 根目录文件，不递归 <code>audio/voice/{lang}/</code> 子目录——新增语音不会被注入。改成递归收集（<code>collectFiles</code> 遍历子目录），并过滤 <code>.DS_Store</code>（macOS 垃圾文件会导致注入 404）。</p>
+<h3 id="7-结论"><a class="header" href="#7-结论">7. 结论</a></h3>
+<p>128 条 TTS 语音的完整流水线：调研音色（Neil）→ 批量脚本（.mts + env Key）→ 生成 wav → 注入（递归清单）→ 引擎接线（待办）。核心原则：<strong>代码可复现、Key 不落盘、输出随时重生成</strong>——这套骨架同时服务了后续的语音迭代与引擎接线。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="中英双语-eva-副官让原版语音让位给自定义播报"><a class="header" href="#中英双语-eva-副官让原版语音让位给自定义播报">中英双语 EVA 副官：让原版语音让位给自定义播报</a></h1>
+<blockquote>
+<p>日期：2026-08-07</p>
+</blockquote>
+<h3 id="1-背景-1"><a class="header" href="#1-背景-1">1. 背景</a></h3>
+<p>红警引擎的副官（EVA）语音是游戏体验的一部分。原版引擎播放 mix 里的 ceva/csof wav（<code>eva.ini</code> 的 <code>[DialogList]</code> 查表）。想让副官说中文/说自定义英文，需要两条路：一是摸清引擎到底会触发哪些 EVA 事件，二是设计一套自定义语音的映射结构。</p>
+<h3 id="2-摸清引擎的-64-条-eva-事件"><a class="header" href="#2-摸清引擎的-64-条-eva-事件">2. 摸清引擎的 64 条 EVA 事件</a></h3>
+<p>第一步不是猜，而是从源码和原版数据里挖：</p>
+<ul>
+<li>引擎源码 <code>eva.play("EVA_xxx")</code> 调用点：grep 全部字面量，去重得到引擎实际触发的 EVA 事件名；</li>
+<li>从 <code>ra2.mix &gt; local.mix</code> 提取 <code>eva.ini</code>，解析 <code>[DialogList]</code>（356 条有效条目），逐条取 <code>Text</code>（原版英文句）和 <code>Allied/Russian</code>（音色文件）；</li>
+<li>交集确认：引擎引用的 64 条事件全部在 eva.ini 有对应 Text + 音色。</li>
+</ul>
+<p><strong>关键洞察：引擎只触发 64 条，eva.ini 全集 356 条里的任务目标类（EVA_MissionAccomplished 等）用不上</strong>。所以自定义语音只做引擎实际会触发的子集即可。</p>
+<h3 id="3-事件语义标注"><a class="header" href="#3-事件语义标注">3. 事件语义标注</a></h3>
+<p>把 64 条按用途分类，决定做不做：</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>分组</th><th>数量</th><th>说明</th></tr>
+</thead>
+<tbody>
+<tr><td>经济/建造/单位（核心）</td><td>30</td><td>建造完成、资金不足、电力不足、单位就绪等</td></tr>
+<tr><td>占领/驻军</td><td>4</td><td>建筑被占领、驻军、弃守</td></tr>
+<tr><td>间谍/渗透/升级</td><td>12</td><td>资金被窃、雷达被破、单位晋升等</td></tr>
+<tr><td>联盟</td><td>5</td><td>结盟、断盟、请求结盟</td></tr>
+<tr><td>超武</td><td>13</td><td>核弹、铁幕、超时空、闪电风暴（MOD 无超武可不做）</td></tr>
+</tbody>
+</table>
+</div>
+<p>每条有原版英文句 + 中文翻译，形成中英双语对照表。</p>
+<h3 id="4-语音映射结构json--schema"><a class="header" href="#4-语音映射结构json--schema">4. 语音映射结构（JSON + Schema）</a></h3>
+<p><code>design/voice/{en,zh-CN}/event_voice_mapping.json</code>：</p>
+<pre><code class="language-json">{
+  "events": {
+    "EVA_ConstructionComplete": {
+      "filename": "EVA_ConstructionComplete.wav",
+      "text": "建造完成。"
+    }
+  }
+}
+</code></pre>
+<p><code>schema/voice.schema.json</code> 锁死：</p>
+<ul>
+<li>事件键必须属于 64 条 EVA 枚举（<code>propertyNames.enum</code>）；</li>
+<li>每条必填 <code>filename</code> + <code>text</code>，<code>additionalProperties:false</code>；</li>
+<li><code>filename</code> 必须等于事件键 + <code>.wav</code>。</li>
+</ul>
+<p>这样拼写错误在写 JSON 时就报错，而不是运行时才炸。</p>
+<h3 id="5-引擎消费端待接线"><a class="header" href="#5-引擎消费端待接线">5. 引擎消费端（待接线）</a></h3>
+<p>当前状态：语音文件已生成注入 OPFS，mapping 已就位并通过 Schema 校验；但引擎的 <code>eva.play()</code> 仍走 eva.ini → 原版 mix 语音。让自定义语音真正发声需要引擎接线：事件触发 → 读 <code>design/voice/{lang}/mapping</code> → 播自定义 wav（找不到回退 eva.ini 原版）。这是下一步的候选工作，已记录在 <code>docs/PORTING.md</code>。</p>
+<h3 id="6-结论-2"><a class="header" href="#6-结论-2">6. 结论</a></h3>
+<p>中英双语副官的骨架是「事件枚举（64 条）+ 双语文本 + JSON Schema 映射 + TTS 生成」。先摸清引擎触发面再做语音，避免为 356 条全集白做 300 条用不上的音频；Schema 锁枚举保证映射与引擎事实同步，是「让原版语音让位」的第一步。</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="用-json-schema-锁死规则配置事件枚举与-ai-幻觉防护"><a class="header" href="#用-json-schema-锁死规则配置事件枚举与-ai-幻觉防护">用 JSON Schema 锁死规则配置：事件枚举与 AI 幻觉防护</a></h1>
+<blockquote>
+<p>日期：2026-08-07</p>
+</blockquote>
+<h3 id="1-为什么规则配置需要-schema"><a class="header" href="#1-为什么规则配置需要-schema">1. 为什么规则配置需要 Schema</a></h3>
+<p>红警引擎的规则是 ini（无结构、无类型）。MOD 要表达「油井经济」「三阵营继承」「64 条语音映射」这类结构化概念时，ini 手写容易错、难校验、Agent 改不动。改造方案：规则用 JSON 描述，JSON Schema 锁死结构，构建脚本生成引擎能读的 flat INI。</p>
+<h3 id="2-三层配置体系"><a class="header" href="#2-三层配置体系">2. 三层配置体系</a></h3>
+<pre><code>design/
+├── mod.json                    # MOD 元数据（i18n 双语）
+├── economy.json                # 油井经济（产出、延迟、启动资金）
+├── tech-tree.json              # 科技树（T1/T2/T3 跃迁）
+├── entities/buildings/
+│   ├── 通用/油井.json          # abstract 基类（成本、产出、前置）
+│   ├── 盟军/油井.json          # extends 基类，owner=[Allied]
+│   ├── 苏军/油井.json          # extends 基类，owner=[Soviet]
+│   └── 尤里/油井.json          # extends 基类，owner=[Yuri]
+└── voice/{en,zh-CN}/event_voice_mapping.json
+</code></pre>
+<p><code>schema/</code> 下每个 JSON 配一个 Schema（draft-07，与引擎侧一致）。</p>
+<h3 id="3-schema-怎么锁死"><a class="header" href="#3-schema-怎么锁死">3. Schema 怎么「锁死」</a></h3>
+<p>以 <code>building.schema.json</code> 为例，几个关键约束：</p>
+<pre><code class="language-json">{
+  "required": ["id", "name"],
+  "properties": {
+    "extends": { "type": "string" },
+    "abstract": { "type": "boolean", "default": false },
+    "code": { "pattern": "^[A-Z0-9]{1,8}$" },
+    "owner": { "items": { "enum": ["Allied", "Soviet", "Yuri"] } }
+  },
+  "if": { "properties": { "abstract": { "const": true } } },
+  "then": { "description": "抽象模板只需 id + name" },
+  "else": { "required": ["code", "techLevel", "prerequisites", "buildCat"] },
+  "additionalProperties": false
+}
+</code></pre>
+<ul>
+<li><code>required</code> + <code>additionalProperties:false</code>：缺字段、多字段都报错；</li>
+<li><code>enum</code>：owner 只能是三阵营、buildCat 只能是固定分类；</li>
+<li><code>if/then/else</code>：abstract 基类与具体实体的必填字段不同；</li>
+<li>语音 Schema 用 <code>propertyNames.enum</code> 把事件键锁死在 64 条 EVA 枚举上。</li>
+</ul>
+<h3 id="4-防-ai-幻觉的机制"><a class="header" href="#4-防-ai-幻觉的机制">4. 防 AI 幻觉的机制</a></h3>
+<p>Agent 改配置时的幻觉（拼错字段名、编造事件、格式错）被三层拦住：</p>
+<ol>
+<li><strong>编辑器实时校验</strong>：JSON 带 <code>$schema</code> 指针，IDE 自动补全 + 报错；</li>
+<li><strong>构建时校验</strong>：<code>build-json-rules.mjs</code> 解析继承、校验引用完整性（id/code 唯一、prerequisites 存在）、跑 Schema 校验，失败即退出；</li>
+<li><strong>运行时枚举</strong>：语音事件键必须命中引擎实际触发的 64 条枚举——编造一个不存在的 EVA 事件，Schema 直接拒绝。</li>
+</ol>
+<h3 id="5-对象继承"><a class="header" href="#5-对象继承">5. 对象继承</a></h3>
+<pre><code>通用/油井.json（abstract：techLevel=1, cost=800, produceCash=500/25/5）
+├── 盟军/油井.json → AILW（owner=Allied）
+├── 苏军/油井.json → SILW（owner=Soviet）
+└── 尤里/油井.json → YILW（owner=Yuri）
+</code></pre>
+<p>构建时深合并覆盖基类，生成 flat INI 段（<code>ProduceCashStartup/Amount/Delay</code> 等油井经济键）。新增阵营只需复制一个实体 JSON，改 owner 与 code。</p>
+<h3 id="6-结论-3"><a class="header" href="#6-结论-3">6. 结论</a></h3>
+<p>JSON Schema 把「人读的 JSON」和「引擎读的 INI」之间的契约锁死：结构错误在编辑期暴露、引用错误在构建期暴露、枚举错误在 Schema 期暴露——三道人墙把 AI 幻觉挡在规则层之外。这也是整个 MOD「Agent 友好」的根基：Agent 改配置不会改坏，因为 Schema 就是它的护栏。</p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="红色警戒-2-mod-黄色警戒-主菜单音乐-suno-ai-风格提示词"><a class="header" href="#红色警戒-2-mod-黄色警戒-主菜单音乐-suno-ai-风格提示词">红色警戒 2 Mod 黄色警戒 主菜单音乐 Suno AI 风格提示词</a></h1>
 <blockquote>

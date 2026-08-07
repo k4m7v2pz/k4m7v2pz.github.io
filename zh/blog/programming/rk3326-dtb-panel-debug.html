@@ -1,0 +1,366 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>RK3326 设备树面板调试：换内核后 LCD 背光亮但屏幕黑 - K4m7v2pz&#x27;s Blog</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="k4m7v2pz 的博客">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../../css/general-e96d0476.css">
+        <link rel="stylesheet" href="../../css/chrome-d279d366.css">
+        <link rel="stylesheet" href="../../css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../../ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../../searchindex-d8a63482.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../../toc-72c5c129.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">K4m7v2pz&#x27;s Blog</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/k4m7v2pz/k4m7v2pz.github.io" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/k4m7v2pz/k4m7v2pz.github.io/edit/dev/book-zh/src/blog/programming/rk3326-dtb-panel-debug.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                            <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h2 id="一触发场景换内核后-lcd-背光亮但屏幕黑"><a class="header" href="#一触发场景换内核后-lcd-背光亮但屏幕黑">一、触发场景：换内核后 LCD 背光亮但屏幕黑</a></h2>
+<p>一台 RK3326 平台（Cortex-A35 / Mali-G31 / 640×480 MIPI-DSI）的嵌入式 Linux 设备，原系统内核 5.10 正常点亮屏幕。为了升级系统，替换为内核 6.12 的新镜像并整盘写入存储卡，上电后——<strong>背光亮起，但屏幕始终黑屏，进不了系统</strong>。</p>
+<h3 id="现象时间线关键现象会分级"><a class="header" href="#现象时间线关键现象会分级">现象时间线（关键：现象会分级）</a></h3>
+<ol>
+<li>整盘写入后上电：黑屏、无背光、电源灯不亮 → 以为镜像没写对</li>
+<li>补拷引导区（MBR 后 16MB）后：<strong>背光亮了</strong>，但屏幕黑、状态灯不亮 → 有进展，U-Boot 在跑</li>
+<li>反复换设备树 / 改配置：背光时亮时不亮，屏幕始终黑</li>
+<li>排除供电问题后：依然黑屏</li>
+<li>而原系统（内核 5.10）在同一张卡/同一台设备上<strong>一直能点亮屏幕</strong></li>
+</ol>
+<h3 id="判读口诀本文最值钱的部分"><a class="header" href="#判读口诀本文最值钱的部分">判读口诀（本文最值钱的部分）</a></h3>
+<ul>
+<li><strong>背光亮 = U-Boot 已运行</strong>（引导链 OK）</li>
+<li><strong>状态灯亮 = 系统启动到较深阶段</strong></li>
+<li><strong>背光不亮 + 充电灯常亮 = 供电/电量问题</strong>（不是镜像的问题）</li>
+<li><strong>拔卡后系统仍在运行（背光可控）= 内核/rootfs 已在内存</strong></li>
+</ul>
+<h2 id="二谬误溯源三个错误假设"><a class="header" href="#二谬误溯源三个错误假设">二、谬误溯源：三个错误假设</a></h2>
+<h3 id="坑-1引导区没拷全"><a class="header" href="#坑-1引导区没拷全">坑 1：“引导区没拷全”</a></h3>
+<p>RK3326 引导链（idbloader/U-Boot/trust）在 MBR 之后、第一分区之前的 <strong>16MB</strong> 区域。只写入分区（loop0p1/p2）确实会黑屏——补拷 <code>dd bs=512 skip=1 seek=1 count=32767</code> 后<strong>背光亮了</strong>，看似解决。但屏幕还是黑，说明引导区不是唯一问题。</p>
+<h3 id="坑-2设备树换对就能亮"><a class="header" href="#坑-2设备树换对就能亮">坑 2：“设备树换对就能亮”</a></h3>
+<p>新镜像里带了 60+ 个设备树（panel1-4 / type2-4 等变体），逐个换、甚至把原系统通用 dtb 直接拿来用——全部失败。原因有两个：</p>
+<ul>
+<li><strong>dtb 与内核版本强绑定</strong>：原系统 dtb 是 5.10 内核配套的，6.12 内核加载直接不兼容</li>
+<li><strong>面板驱动不读 dtb 里的初始化序列</strong>：新镜像 dtb 走自定义驱动（<code>gameconsole,r36s-panel</code>），原系统 dtb 走标准驱动（<code>simple-panel-dsi</code>）</li>
+</ul>
+<h3 id="坑-3把原系统初始化序列注入新-dtb-就能救"><a class="header" href="#坑-3把原系统初始化序列注入新-dtb-就能救">坑 3：“把原系统初始化序列注入新 dtb 就能救”</a></h3>
+<p>尝试给新镜像的 r36s.dtb 注入原系统 dtb 的完整 1134 字节 st7703 <code>panel-init-sequence</code>，并把 compatible 改成 <code>simple-panel-dsi</code>——编译通过、文件就位，但<strong>依然黑屏</strong>。因为新镜像的显示驱动栈与原系统完全不同，改 dtb 属性改变不了驱动行为。</p>
+<h2 id="三源码验证为什么不兼容实测证据"><a class="header" href="#三源码验证为什么不兼容实测证据">三、源码验证：为什么不兼容（实测证据）</a></h2>
+<h3 id="1-引导链位置确认"><a class="header" href="#1-引导链位置确认">1. 引导链位置确认</a></h3>
+<pre><code class="language-bash"># RK3326 引导链在 MBR 后、第一分区前 16MB
+dd if=卡 bs=1M skip=8 count=1 | head -c8   # 应见 "LOADER"
+dd if=卡 bs=1M skip=12 count=1 | head -c8  # 应见 "BL3X"
+# 补拷命令（漏了必黑屏）：
+dd if=镜像 of=卡 bs=512 skip=1 seek=1 count=32767
+</code></pre>
+<h3 id="2-dtb-面板初始化序列对比决定性证据"><a class="header" href="#2-dtb-面板初始化序列对比决定性证据">2. dtb 面板初始化序列对比（决定性证据）</a></h3>
+<pre><code class="language-bash"># 反编译对比两个 dtb 的 panel 节点
+dtc -I dtb -O dts 原系统.dtb &gt; /tmp/m.dts
+dtc -I dtb -O dts 新镜像r36s.dtb &gt; /tmp/r.dts
+
+# 原系统 dtb：有完整 1134 字节初始化序列
+grep -c "panel-init-sequence" /tmp/m.dts   # → 1
+# 新镜像所有 R36S dtb：全部为 0
+for f in /mnt/*.dtb; do
+  dtc -I dtb -O dts "$f" | grep -c "panel-init-sequence"
+done  # → 全部 0
+</code></pre>
+<p>原系统面板节点：<code>compatible = "sitronix,st7703", "simple-panel-dsi"</code> + <code>panel-init-sequence</code>（1134 字节）+ <code>display-timings</code>。
+新镜像面板节点：<code>compatible = "gameconsole,r36s-panel", "sitronix,st7703"</code>，<strong>无 init sequence、无 timings</strong>——靠驱动内置序列，与这块屏幕不匹配。</p>
+<h3 id="3-dtb-与内核版本强绑定"><a class="header" href="#3-dtb-与内核版本强绑定">3. dtb 与内核版本强绑定</a></h3>
+<pre><code class="language-bash">strings KERNEL | grep "Linux version"
+# 原系统: Linux version 5.10.160
+# 新镜像: Linux version 6.12.79
+</code></pre>
+<p>把原系统 5.10 的 dtb 直接给 6.12 内核用 → 失败；注入初始化序列 + 改 compatible → 仍失败。驱动栈不兼容，改 dtb 属性无济于事。</p>
+<h3 id="4-实测修复矩阵全部失败"><a class="header" href="#4-实测修复矩阵全部失败">4. 实测修复矩阵（全部失败）</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>尝试</th><th>结果</th></tr>
+</thead>
+<tbody>
+<tr><td>补引导区 16MB</td><td>背光从无到有（U-Boot 跑通）</td></tr>
+<tr><td>换 dtb（panel1-4/type4/原系统通用）</td><td>黑屏</td></tr>
+<tr><td>注入 panel-init-sequence + 改 compatible</td><td>黑屏</td></tr>
+<tr><td>boot/disk 硬编码 UUID</td><td>黑屏</td></tr>
+<tr><td>简化 boot.scr（纯 sysboot）</td><td>黑屏</td></tr>
+<tr><td>恢复完整 boot.scr（ADC 自动选 dtb）</td><td>黑屏</td></tr>
+<tr><td>排除供电后测试</td><td>仍黑屏</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="5-反例原系统正常"><a class="header" href="#5-反例原系统正常">5. 反例：原系统正常</a></h3>
+<p>原系统（5.10 + 通用 <code>rk3326-evb-lp3-v12-linux.dtb</code>）在同一张卡/同一台设备上<strong>始终正常点亮屏幕</strong>——证明卡、机器、供电都没问题，问题锁定在新镜像与硬件不兼容。</p>
+<h2 id="四判读分级快速定位故障层"><a class="header" href="#四判读分级快速定位故障层">四、判读分级（快速定位故障层）</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>现象</th><th>结论</th></tr>
+</thead>
+<tbody>
+<tr><td>背光亮 + 状态灯不亮 + 黑屏</td><td>U-Boot 已运行，内核/面板未起来 → 查 dtb/驱动</td></tr>
+<tr><td>背光不亮 + 充电灯常亮</td><td>供电/电量问题，先充满再测</td></tr>
+<tr><td>拔卡后系统仍在运行</td><td>内核/rootfs 已在内存，问题在显示层</td></tr>
+<tr><td>状态灯亮</td><td>系统启动到较深阶段，接近成功</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="五落地结论可复用方案"><a class="header" href="#五落地结论可复用方案">五、落地结论：可复用方案</a></h2>
+<h3 id="换内核前先做兼容性自查按顺序"><a class="header" href="#换内核前先做兼容性自查按顺序">换内核前先做兼容性自查（按顺序）</a></h3>
+<ol>
+<li><strong>确认引导链在</strong>：<code>dd if=卡 bs=1M skip=8 | head -c8</code> 应见 <code>LOADER</code>，<code>skip=12</code> 应见 <code>BL3X</code>——不在则补拷 16MB 引导区</li>
+<li><strong>确认面板初始化序列</strong>：反编译候选镜像的 dtb，<code>grep -c "panel-init-sequence"</code> 应 &gt; 0；为 0 说明面板靠驱动内置序列，可能与你的屏幕不匹配</li>
+<li><strong>确认 dtb 与内核版本配套</strong>：<code>strings KERNEL | grep "Linux version"</code> 对照 dtb 来源；跨内核版本（如 5.10 dtb 给 6.12 内核）直接用必失败</li>
+<li><strong>确认供电</strong>：充电灯常亮时背光不亮是电量问题，充满再测（红灯熄灭 = 满电）</li>
+</ol>
+<h3 id="排障止损顺序"><a class="header" href="#排障止损顺序">排障止损顺序</a></h3>
+<p>先查引导区 → 再查 UUID/分区 → 然后查 dtb 面板序列 → 最后才怀疑硬件。
+本次实测：引导区补齐后 U-Boot 能跑（背光亮），但<strong>面板序列缺失 + 驱动栈不兼容</strong>导致屏幕永远黑——这是配置层面无法修复的，应果断弃用，回到原系统。</p>
+<h3 id="适用范围"><a class="header" href="#适用范围">适用范围</a></h3>
+<ul>
+<li>RK3326 平台嵌入式 Linux 设备升级内核/替换系统镜像时</li>
+<li>遇到“背光亮但屏幕黑 / 状态灯不亮“现象的排障</li>
+<li>判断镜像是否值得继续调试，避免无效投入</li>
+</ul>
+<h3 id="关键经验"><a class="header" href="#关键经验">关键经验</a></h3>
+<ul>
+<li>原系统（通用 dtb）通常兼容性最好，新镜像的专用 dtb 未必匹配你的硬件批次</li>
+<li>“背光亮“是排障的分水岭：背光亮 = U-Boot 通了，后面全是内核/驱动层的问题</li>
+<li>面板驱动匹配（compatible）与初始化序列（panel-init-sequence）是 LCD 点亮的两个必要条件</li>
+</ul>
+<h2 id="六三类读者速查"><a class="header" href="#六三类读者速查">六、三类读者速查</a></h2>
+<h3 id="人类开发者"><a class="header" href="#人类开发者">人类开发者</a></h3>
+<pre><code class="language-bash">dd if=卡 bs=1M skip=8 count=1 | head -c8      # 查 LOADER
+dtc -I dtb -O dts 镜像.dtb | grep -c "panel-init-sequence"
+strings KERNEL | grep "Linux version"
+</code></pre>
+<h3 id="对话式-ai"><a class="header" href="#对话式-ai">对话式 AI</a></h3>
+<p>问法：「RK3326 设备换内核后背光亮但屏幕黑，怎么排查？」回答要点：背光亮 = U-Boot 已运行；接着反编译 dtb 看是否有 <code>panel-init-sequence</code>（无则面板靠驱动内置序列，可能不匹配你的屏幕）；并核对 dtb 与内核版本是否配套（跨内核版本直接用必失败）。</p>
+<h3 id="代码-agent"><a class="header" href="#代码-agent">代码 Agent</a></h3>
+<ul>
+<li>判读：背光亮=U-Boot 通；状态灯不亮+屏幕黑=内核/面板未起来</li>
+<li>排查：<code>dtc -I dtb -O dts X.dtb | grep -c "panel-init-sequence"</code> 应 &gt;0；<code>strings KERNEL | grep "Linux version"</code> 对照 dtb 来源</li>
+<li>止损：面板序列缺失 + 驱动不兼容 = 配置不可修复，弃用镜像回到原系统</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../blog/programming/rust-bevy-0.13-to-0.14-upgrade-guide.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="../../blog/programming/xuantie-input-expression-bug.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../blog/programming/rust-bevy-0.13-to-0.14-upgrade-guide.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="../../blog/programming/xuantie-input-expression-bug.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../../mark-09e88c2c.min.js"></script>
+        <script src="../../searcher-09f2665d.js"></script>
+
+        <script src="../../clipboard-1626706a.min.js"></script>
+        <script src="../../highlight-abc7f01d.js"></script>
+        <script src="../../book-609e4cb8.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

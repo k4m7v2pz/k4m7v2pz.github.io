@@ -36,10 +36,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-e6b27bb5.js";
+            window.path_to_searchindex_js = "searchindex-238dc212.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-5bd1be7c.js"></script>
+        <script src="toc-ab6ab2ea.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -1993,6 +1993,167 @@ $env.PROMPT_COMMAND_RIGHT = {|| "" }
 Original version: https://k4m7v2pz.github.io/en/blog/tools/nushell-atomcode-config-pitfalls.html</p>
 </blockquote>
 <div style="break-before: page; page-break-before: always;"></div>
+<h1 id="five-deep-pitfalls-in-extracting-a-40gb-multi-volume-encrypted-firmware-image-on-macos"><a class="header" href="#five-deep-pitfalls-in-extracting-a-40gb-multi-volume-encrypted-firmware-image-on-macos">Five Deep Pitfalls in Extracting a 40GB Multi-Volume Encrypted Firmware Image on macOS</a></h1>
+<blockquote>
+<p>Date: 2026-08-07</p>
+</blockquote>
+<h2 id="1-trigger-40gb-split-archive--chinese-password-firmware-image"><a class="header" href="#1-trigger-40gb-split-archive--chinese-password-firmware-image">1. Trigger: 40GB Split Archive + Chinese Password Firmware Image</a></h2>
+<p>A task came in: extract a disk image from an R36S handheld “64G single-card lazy firmware” package. Files on an external drive:</p>
+<ul>
+<li><code>R36s-64G.zip</code> + <code>R36s-64G.z01</code> ~ <code>z19</code>, 20 volumes, ~40GB total</li>
+<li>Hint file <code>解压密码-浪子玩数码.txt</code> (first line: “解压密码-浪子玩数码”)</li>
+<li>Goal: extract the single <code>R36s-64G.img</code> (53.5GB) inside</li>
+</ul>
+<p>Environment: macOS arm64. First <code>ls</code> to confirm volumes, <code>7z l</code> to list (install p7zip first), confirmed: multi-volume zip, AES-256 encryption, single image file. Then the nightmare began.</p>
+<h3 id="symptom-timeline"><a class="header" href="#symptom-timeline">Symptom timeline</a></h3>
+<ol>
+<li><code>7z x -p'浪子玩数码'</code> → <code>ERROR: Wrong password</code></li>
+<li>Tried <code>7zz</code> (brew 7zip) → same Wrong password</li>
+<li>Even <code>7zz a -p'浪子玩数码'</code> to create a test archive → <code>E_INVALIDARG</code></li>
+<li>Python pyzipper → “zipfiles that span multiple disks are not supported”</li>
+<li>Finally wrote my own Python decryption stream, worked through it step by step: full 53.5GB extraction + HMAC verified</li>
+</ol>
+<h2 id="2-misdiagnoses-five-traps"><a class="header" href="#2-misdiagnoses-five-traps">2. Misdiagnoses: Five Traps</a></h2>
+<h3 id="trap-1-macos-built-in-unzip-handles-multi-volume-zips"><a class="header" href="#trap-1-macos-built-in-unzip-handles-multi-volume-zips">Trap 1: macOS built-in unzip handles multi-volume zips</a></h3>
+<p>No. <code>unzip</code>/<code>zipinfo</code>/<code>ditto</code> only handle single-file zips; <code>.z01</code> volumes are unrecognized. Multi-volume zips need 7-Zip (brew install <code>p7zip</code> or <code>7zip</code>).</p>
+<h3 id="trap-2-7-zip-cli-can-directly-extract-chinese-password-aes-zips"><a class="header" href="#trap-2-7-zip-cli-can-directly-extract-chinese-password-aes-zips">Trap 2: 7-Zip CLI can directly extract Chinese-password AES zips</a></h3>
+<p>Wrong, and the sneakiest. The zip was created on Windows; AES key derivation uses the password bytes <strong>encoded in GBK</strong>, while macOS 7zz converts the <code>-p</code> argument <strong>as UTF-8</strong> — the PBKDF2 keys differ completely → Wrong password. Passing GBK via iconv also fails because 7zz re-encodes internally. Even creating a Chinese-password zip with 7zz gives E_INVALIDARG; the whole Chinese-password path is broken on macOS.</p>
+<h3 id="trap-3-pyzipper-can-read-multi-volume-zips-directly"><a class="header" href="#trap-3-pyzipper-can-read-multi-volume-zips-directly">Trap 3: pyzipper can read multi-volume zips directly</a></h3>
+<p>pyzipper supports AES decryption but inherits zipfile; opening a multi-volume zip throws “multiple disks not supported” while reading the ZIP64 locator. It checks <code>diskno != 0 or disks != 1</code> in <code>_EndRecData64</code>.</p>
+<h3 id="trap-4-standard-winzip-pbkdf2-params"><a class="header" href="#trap-4-standard-winzip-pbkdf2-params">Trap 4: Standard WinZip PBKDF2 params</a></h3>
+<p>Assumed <code>PBKDF2(password, salt, count=1000, dkLen=34)</code> taking the last 2 bytes as verifier — no match. The real params come from 7-Zip/pyzipper source: AES-256 <code>dkLen = 2*32 + 2 = 66</code> (enc key 32B + HMAC key 32B + verifier 2B), verifier at <code>dk[64:66]</code>.</p>
+<h3 id="trap-5-aes-ctr-counter-starts-at-0"><a class="header" href="#trap-5-aes-ctr-counter-starts-at-0">Trap 5: AES-CTR counter starts at 0</a></h3>
+<p>Decrypted bytes were garbage; zlib reported <code>invalid stored block lengths</code>. Comparing pyzipper source revealed 7-Zip zip AES uses <code>Counter.new(nbits=128, little_endian=True, initial_value=1)</code> — <strong>starts at 1</strong>. This was the most time-consuming trap.</p>
+<h2 id="3-source-verification-real-decryption-flow-all-measured"><a class="header" href="#3-source-verification-real-decryption-flow-all-measured">3. Source Verification: Real Decryption Flow (All Measured)</a></h2>
+<h3 id="31-parse-z01-local-header-take-salt--verifier"><a class="header" href="#31-parse-z01-local-header-take-salt--verifier">3.1 Parse z01 local header, take salt + verifier</a></h3>
+<p>The first volume <code>R36s-64G.z01</code> starts with a 4-byte stub (<code>PK\x07\x08</code>, 7z reports Embedded Stub Size=4); local header begins at offset 4:</p>
+<pre><code class="language-python">mv.seek(4); hdr = mv.read(30)
+sig, ver, flags, method, tm, dt, crc, csize, usize, nlen, elen = struct.unpack('&lt;4s5H3L2H', hdr)
+# method=99 (AES), name R36s-64G.img, extra AES 0x9901: strength=3 (AES-256)
+pos = 34 + nlen + elen
+salt = mv.read(16); verifier = mv.read(2)
+data_off = mv.tell()
+</code></pre>
+<h3 id="32-multi-volume-virtual-concatenation--zip64-locator-patch"><a class="header" href="#32-multi-volume-virtual-concatenation--zip64-locator-patch">3.2 Multi-volume virtual concatenation + ZIP64 locator patch</a></h3>
+<p>pyzipper rejects multi-volume zips. Solution: write a <code>MultiVolumeReader</code> exposing the 20 volumes as one seekable read-only view (no 42GB copy), and patch the ZIP64 locator (20 bytes before EOCD) to look single-volume:</p>
+<pre><code class="language-python">ba[4:8]  = (0).to_bytes(4, 'little')   # diskno -&gt; 0
+ba[16:20] = (1).to_bytes(4, 'little')  # disks  -&gt; 1
+</code></pre>
+<p>The central directory’s <code>header_offset</code> is relative to the logical start; add 4 in the real file (stub).</p>
+<h3 id="33-key-derivation-the-params-are-the-hard-core"><a class="header" href="#33-key-derivation-the-params-are-the-hard-core">3.3 Key derivation: the params are the hard core</a></h3>
+<pre><code class="language-python">import hashlib
+PWD = '浪子玩数码'.encode('gbk')          # key: GBK bytes, not UTF-8!
+dk = hashlib.pbkdf2_hmac('sha1', PWD, salt, 1000, 66)
+key, mac_key, ver = dk[:32], dk[32:64], dk[64:66]
+assert ver == verifier
+</code></pre>
+<h3 id="34-aes-ctr-decrypt--hmac-verify--zlib-inflate"><a class="header" href="#34-aes-ctr-decrypt--hmac-verify--zlib-inflate">3.4 AES-CTR decrypt + HMAC verify + zlib inflate</a></h3>
+<pre><code class="language-python">from Cryptodome.Cipher import AES
+from Cryptodome.Util import Counter
+dec = AES.new(key, AES.MODE_CTR,
+    counter=Counter.new(nbits=128, little_endian=True, initial_value=1))
+hm = hmac.new(mac_key, digestmod=hashlib.sha1)
+d = zlib.decompressobj(-15)
+# stream: hm.update(cipher) -&gt; plain = dec.decrypt(cipher) -&gt; d.decompress(plain)
+# trailing 10 bytes are HMAC: compare hm.digest()[:10]
+</code></pre>
+<h3 id="measured-data-2026-08-07-macos-arm64-usb-drive"><a class="header" href="#measured-data-2026-08-07-macos-arm64-usb-drive">Measured data (2026-08-07, macOS arm64, USB drive)</a></h3>
+<ul>
+<li>20 volumes total physical size <code>42482360207</code> bytes, matches central directory exactly (no damaged volumes)</li>
+<li>Password <code>浪子玩数码</code> GBK bytes PBKDF2 verifier matched ✓</li>
+<li>Full 53.5GB extraction in <strong>423 seconds</strong> (~105 MiB/s), 8MB streaming chunks</li>
+<li>Decrypted head is standard x86 MBR (<code>fa b8 00 10 8e d0</code>), trailing <strong>HMAC ok: True</strong></li>
+<li>No 42GB intermediate file; streamed straight to .img</li>
+</ul>
+<h2 id="4-conclusions-reusable-approach"><a class="header" href="#4-conclusions-reusable-approach">4. Conclusions: Reusable Approach</a></h2>
+<h3 id="next-time-multi-volume-zip--chinese-password--aes--copy-this"><a class="header" href="#next-time-multi-volume-zip--chinese-password--aes--copy-this">Next time: “multi-volume zip + Chinese password + AES” — copy this</a></h3>
+<ol>
+<li><strong>List</strong>: <code>7z l -p'password' file.zip</code>, confirm volumes and inner filename</li>
+<li><strong>Verify password</strong>: don’t trust 7zz’s Wrong password on macOS — verify with Python: read z01 local header → salt/verifier → <code>pbkdf2_hmac('sha1', 密码.encode('gbk'), salt, 1000, 66)</code>, compare <code>dk[64:66]</code></li>
+<li><strong>Encoding</strong>: password bytes are GBK (Windows-side creation), skip the UTF-8 detour</li>
+<li><strong>Full extract</strong>: virtual-concat volumes (MultiVolumeReader) + patch ZIP64 locator + AES-CTR(initial_value=1) + zlib(-15) streaming; 53.5GB in ~7 min</li>
+</ol>
+<h3 id="scope"><a class="header" href="#scope">Scope</a></h3>
+<ul>
+<li>Taobao/Xianyu “lazy firmware” / “integrated packages”: mostly Windows 7-Zip, Chinese passwords, multi-volume, AES-256</li>
+<li>Same approach for EmuELEC/ArkOS handheld images and other “netdisk” split archives</li>
+<li>Pure ASCII password + single volume: just use 7zz</li>
+</ul>
+<h3 id="judgement-order-important"><a class="header" href="#judgement-order-important">Judgement order (important)</a></h3>
+<p>Verify password encoding → then multi-volume → then CTR. Wrong encoding wastes everything; wrong CTR gives garbage without a password error — most confusing.</p>
+<h2 id="5-quick-reference"><a class="header" href="#5-quick-reference">5. Quick Reference</a></h2>
+<h3 id="human-developers"><a class="header" href="#human-developers">Human developers</a></h3>
+<pre><code class="language-bash">brew install p7zip 7zip
+7z l -p'密码' x.zip          # list (7z needed for multi-volume)
+7zz t -p'密码' x.zip         # test password (Chinese may false-report)
+python3 -c "import hashlib; print('浪子玩数码'.encode('gbk').hex())"
+</code></pre>
+<h3 id="conversational-ai-1"><a class="header" href="#conversational-ai-1">Conversational AI</a></h3>
+<p>Question: “Multi-volume zip password won’t verify — how to find the encoding?” Answer: read the z01 header for salt/verifier, run PBKDF2(count=1000, dkLen=66) with GBK bytes, compare the verifier — a hit confirms the encoding before extracting.</p>
+<h3 id="code-agents"><a class="header" href="#code-agents">Code agents</a></h3>
+<ul>
+<li>Derive: <code>hashlib.pbkdf2_hmac('sha1', pwd_gbk, salt, 1000, 66)</code>, verifier=<code>dk[64:66]</code></li>
+<li>AES-CTR: <code>Counter.new(nbits=128, little_endian=True, initial_value=1)</code>, <strong>not 0</strong></li>
+<li>Multi-volume: custom reader by volume offset, patch ZIP64 locator diskno/disks</li>
+<li>Inflate: <code>zlib.decompressobj(-15)</code> raw deflate; trailing 10B is HMAC-SHA1</li>
+<li>Full script idea in §3; 105 MiB/s reproducible</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="csdn-writing-agent-content-review-what-gets-rejected-and-how-to-get-around-it"><a class="header" href="#csdn-writing-agent-content-review-what-gets-rejected-and-how-to-get-around-it">CSDN Writing Agent Content Review: What Gets Rejected and How to Get Around It</a></h1>
+<blockquote>
+<p>Date: 2026-08-07</p>
+</blockquote>
+<h2 id="1-background-1"><a class="header" href="#1-background-1">1. Background</a></h2>
+<p>Wanted to publish R36S handheld troubleshooting experiences (black screen after firmware swap, dual-card separation, extracting firmware images) as blog posts on CSDN. The flow goes through the CSDN Writing Agent: prepare material in segments (each ≤4000 bytes, total ≤13965 bytes), paste them into the writing page, and the Agent incrementally expands and merges them into an article. The segmentation strategy itself was fine (see “CSDN Writing Agent Input Limits”), but this time I hit a harder wall — <strong>content review</strong>.</p>
+<h2 id="2-symptom-topic-rejected"><a class="header" href="#2-symptom-topic-rejected">2. Symptom: Topic Rejected</a></h2>
+<p>Pasted the first segment (R36S black screen after switching to ROCKNIX firmware) into the writing page. The CSDN Writing Agent replied directly:</p>
+<blockquote>
+<p>Sorry, this topic cannot be answered. Please try another topic.</p>
+</blockquote>
+<p>Note: not “content is wrong”, not “segment too long” — it’s a <strong>topic-level rejection</strong>. Trying rewording and pasting again still got rejected.</p>
+<h2 id="3-analysis-what-triggered-the-review"><a class="header" href="#3-analysis-what-triggered-the-review">3. Analysis: What Triggered the Review</a></h2>
+<p>Comparing the rejected version with the accepted one, the differences are in content positioning:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Version</th><th>Wording</th><th>Result</th></tr>
+</thead>
+<tbody>
+<tr><td>Rejected</td><td>“R36S open-source handheld”, “game card in left slot no reaction”, “downloaded a lazy firmware from the internet”</td><td>❌ Sorry, cannot answer</td></tr>
+<tr><td>Accepted</td><td>“RK3326 embedded Linux device”, “LCD backlight on but black screen after kernel upgrade”, “device tree panel debugging”</td><td>✅ Generated normally</td></tr>
+</tbody>
+</table>
+</div>
+<p>Likely triggers (inferred from testing, not officially confirmed):</p>
+<ol>
+<li><strong>Device/platform targeting</strong>: a specific handheld model (R36S) combined with gaming content can be classified by content-safety policies as “console modding/flashing” sensitive topics</li>
+<li><strong>Resource acquisition wording</strong>: phrases like “downloaded a lazy firmware from the internet” can be judged as involving unofficial resource distribution</li>
+<li><strong>Topic type</strong>: pure kernel development (device tree, LCD debugging, kernel version binding) is mainstream CSDN content with looser review</li>
+</ol>
+<h2 id="4-workaround-topic-abstraction"><a class="header" href="#4-workaround-topic-abstraction">4. Workaround: Topic Abstraction</a></h2>
+<p>Rewrite the article from “specific device troubleshooting” to “generic technical topic”, keeping all the technical substance:</p>
+<ol>
+<li><strong>Drop device names</strong>: R36S → “RK3326 embedded Linux device”</li>
+<li><strong>De-gamify</strong>: game card → “data card”, game separation → “system/data separation”</li>
+<li><strong>Drop resource words</strong>: download lazy firmware → “replace with a third-party system image”</li>
+<li><strong>Focus on the technical layer</strong>: kernel version binding, device tree panel init sequence, U-Boot boot chain — all neutral technical concepts</li>
+</ol>
+<p>After rewriting, the same article passed and the Agent expanded it normally.</p>
+<h2 id="5-other-measured-limits-summary"><a class="header" href="#5-other-measured-limits-summary">5. Other Measured Limits (Summary)</a></h2>
+<ul>
+<li><strong>Daily publish quota</strong>: a CSDN account can publish only 5 posts per day (personally measured); bulk back-publishing old posts gets blocked</li>
+<li><strong>Input segmentation limits</strong>: each segment ≤4000 bytes, total ≤13965 bytes; exceeding silently truncates (see the other article)</li>
+<li><strong>Same-page sequential pasting</strong>: the CSDN Writing Agent has no cross-session memory; segments must be pasted sequentially on the same writing page; opening a new page loses context</li>
+<li><strong>Content review</strong>: this article’s theme — device/game/resource topics — risks topic-level rejection; abstracting to pure technical topics gets around it</li>
+</ul>
+<h2 id="6-conclusions"><a class="header" href="#6-conclusions">6. Conclusions</a></h2>
+<ul>
+<li>CSDN Writing Agent review is <strong>topic-level</strong>: not word-by-word filtering, but judging “can this topic be answered” as a whole</li>
+<li>Getting around it is not loophole-hunting: abstracting “specific device experience” into “generic technical methodology” keeps the article’s value, passes review more easily, and reaches more readers</li>
+<li>If material gets rejected, don’t keep rephrasing — <strong>change the topic angle</strong> (from device perspective to technical perspective) usually works in one try</li>
+<li>For a review-free, unlimited publishing channel, a self-hosted GitHub Pages site (mdBook) is a better choice — this repository is one example</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
 <h1 id="wezterm--nushell--cargo-not-found"><a href="#wezterm--nushell--cargo-not-found" class="header">WezTerm + Nushell + Cargo Not Found</a></h1>
 <p><strong>Summary:</strong> This article documents troubleshooting <code>cargo</code> not found in new WezTerm tabs running Nushell on macOS (Apple Silicon). Core issues include nushell not sourcing <code>~/.cargo/env</code>, the default config directory not being <code>~/.config/nushell/</code>, and string interpolation syntax differences.</p>
 <h2 id="1-symptoms"><a class="header" href="#1-symptoms">1. Symptoms</a></h2>
@@ -2145,7 +2306,7 @@ Original version: https://k4m7v2pz.github.io/en/blog/tools/csdn-writing-agent-in
 <blockquote>
 <p><strong>One-liner summary:</strong> On macOS, nushell reads its configuration from <code>~/Library/Application Support/nushell/config.nu</code>, <strong>not</strong> <code>~/.config/nushell/config.nu</code>. Editing the wrong file makes your custom functions “look updated but revert on new terminal tabs.”</p>
 </blockquote>
-<h2 id="1-background-1"><a class="header" href="#1-background-1">1. Background</a></h2>
+<h2 id="1-background-2"><a class="header" href="#1-background-2">1. Background</a></h2>
 <p>I use nushell as my daily shell on macOS, with a custom Rust project called <code>creeper</code>. I wrote a nushell custom function <code>def creeper [...args: string] { ... }</code> in config.nu that automatically runs <code>cargo build --release --features gui</code> then executes the binary.</p>
 <h2 id="2-symptom-config-changes-dont-persist"><a class="header" href="#2-symptom-config-changes-dont-persist">2. Symptom: Config Changes Don’t Persist</a></h2>
 <p>After modifying <code>~/.config/nushell/config.nu</code>:</p>
@@ -2527,7 +2688,7 @@ rvs --json get-command
 <h3 id="4-cross-machine-deployment--quick-reference-for-three-reader-types"><a class="header" href="#4-cross-machine-deployment--quick-reference-for-three-reader-types">4. Cross-Machine Deployment &amp; Quick Reference for Three Reader Types</a></h3>
 <h4 id="deployment"><a class="header" href="#deployment">Deployment</a></h4>
 <p>rvs has been deployed to four machines — <code>&lt;lan-host&gt;</code> / LAN printer / Ubuntu VPS / remote Windows — and the default shell was switched to rvs on all of them (usermod + /etc/shells on Linux, OpenSSH DefaultShell registry on Windows). Unified verb-noun syntax + <code>--json</code> output across machines; no more shell dialect differences.</p>
-<h4 id="human-developers"><a class="header" href="#human-developers">Human Developers</a></h4>
+<h4 id="human-developers-1"><a class="header" href="#human-developers-1">Human Developers</a></h4>
 <ul>
 <li>Keep using POSIX muscle-memory aliases like <code>ls</code>, <code>cd</code>, <code>cat</code> in the REPL as usual;</li>
 <li><code>show-version</code> shows the version at a glance;</li>
@@ -2539,7 +2700,7 @@ rvs --json get-command
 <li>Paste the output of <code>list-items --llm</code> for an instant project-structure view;</li>
 <li>rvs table/plain-text output is directly consumable by LLMs — no secondhand re-telling needed.</li>
 </ul>
-<h4 id="code-agents"><a class="header" href="#code-agents">Code Agents</a></h4>
+<h4 id="code-agents-1"><a class="header" href="#code-agents-1">Code Agents</a></h4>
 <ul>
 <li><code>rvs --json -c ''</code> for structured output;</li>
 <li>The <code>session.proxy</code> field automatically reports the local proxy (e.g. Mac’s 7890 http/socks, LAN-capable), letting agents route remote requests through <code>http://&lt;LAN-IP&gt;:7890</code>;</li>
@@ -2935,7 +3096,7 @@ config.harfbuzz_features = { 'language=zh-Hans' }
 <p>The output should show <code>PingFang SC</code> in the CJK fallback chain, positioned before Japanese fonts (such as Hiragino Sans). Words like 「路径」 「目录」 「配置」 in tab titles and Shell prompts should consistently render in Simplified Chinese style.</p>
 <hr>
 <h3 id="quick-reference-for-three-reader-types"><a class="header" href="#quick-reference-for-three-reader-types">Quick Reference for Three Reader Types</a></h3>
-<h4 id="human-developers-1"><a class="header" href="#human-developers-1">Human Developers</a></h4>
+<h4 id="human-developers-2"><a class="header" href="#human-developers-2">Human Developers</a></h4>
 <p>Paste the complete Lua config block above directly into <code>~/.config/wezterm/wezterm.lua</code>, replacing <code>PingFang SC</code> with your system’s Simplified Chinese font (e.g. <code>Noto Sans CJK SC</code> on Linux, <code>Microsoft YaHei</code> on Windows). Add <code>export LANG=zh_CN.UTF-8</code> to your shell rc file. Restart WezTerm and you’re done.</p>
 <h4 id="conversational-ai-chatgpt--tencent-yuanbao--doubao-etc-2"><a class="header" href="#conversational-ai-chatgpt--tencent-yuanbao--doubao-etc-2">Conversational AI (ChatGPT / Tencent Yuanbao / Doubao, etc.)</a></h4>
 <p>When a user asks “WezTerm shows Chinese as Japanese, what do I do”, first check whether <code>font_rules</code> only covers the Normal + Non-Italic combination. If the user pastes their config, check whether it has <code>config.font</code> but is missing Bold/Italic fallback rules. Core fix: use <code>font_with_fallback</code> to give all four style combinations a CJK glyph fallback of <code>PingFang SC</code> (macOS) / <code>Noto Sans CJK SC</code> (Linux) / <code>Microsoft YaHei</code> (Windows), and set <code>harfbuzz_features = { 'language=zh-Hans' }</code>.</p>
@@ -3318,6 +3479,126 @@ pub struct ScriptEvent {
 <p>This article is licensed under Mulan PSL v2. Copyright reserved. No attribution required. For enterprise compliance, please retain the original license notice.
 Original version: https://k4m7v2pz.github.io/en/blog/programming/rust-bevy-0.13-to-0.14-upgrade-guide.html</p>
 </blockquote>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="rk3326-device-tree-panel-debug-lcd-backlight-on-but-black-screen-after-kernel-upgrade"><a class="header" href="#rk3326-device-tree-panel-debug-lcd-backlight-on-but-black-screen-after-kernel-upgrade">RK3326 Device Tree Panel Debug: LCD Backlight On but Black Screen After Kernel Upgrade</a></h1>
+<blockquote>
+<p>Date: 2026-08-07</p>
+</blockquote>
+<h2 id="1-trigger-black-screen-after-kernel-upgrade"><a class="header" href="#1-trigger-black-screen-after-kernel-upgrade">1. Trigger: Black Screen After Kernel Upgrade</a></h2>
+<p>An embedded Linux device based on RK3326 (Cortex-A35 / Mali-G31 / 640x480 MIPI-DSI) booted its stock kernel 5.10 with a working display. To upgrade the system, a new image with kernel 6.12 was written to the storage card. After power-on: <strong>backlight lit, but the screen stayed black and the system never came up.</strong></p>
+<h3 id="timeline-key-symptoms-are-staged"><a class="header" href="#timeline-key-symptoms-are-staged">Timeline (key: symptoms are staged)</a></h3>
+<ol>
+<li>After writing the image: black screen, no backlight, power LED off — thought the image was written wrong</li>
+<li>After copying the bootloader region (16MB after MBR): <strong>backlight came on</strong>, but screen black, status LED off — progress, U-Boot running</li>
+<li>Tried swapping device trees / configs repeatedly: backlight flickered, screen always black</li>
+<li>After ruling out power issues: still black</li>
+<li>The stock system (kernel 5.10) on the same card/device <strong>always lit the screen</strong></li>
+</ol>
+<h3 id="readout-tips-the-most-valuable-part"><a class="header" href="#readout-tips-the-most-valuable-part">Readout tips (the most valuable part)</a></h3>
+<ul>
+<li><strong>Backlight on = U-Boot running</strong> (boot chain OK)</li>
+<li><strong>Status LED on = system booted deeper</strong></li>
+<li><strong>No backlight + charge LED on = power/battery issue</strong> (not the image)</li>
+<li><strong>System still running after card removal (backlight controllable) = kernel/rootfs in RAM</strong></li>
+</ul>
+<h2 id="2-misdiagnoses-three-wrong-assumptions"><a class="header" href="#2-misdiagnoses-three-wrong-assumptions">2. Misdiagnoses: Three Wrong Assumptions</a></h2>
+<h3 id="trap-1-bootloader-region-not-fully-copied"><a class="header" href="#trap-1-bootloader-region-not-fully-copied">Trap 1: “Bootloader region not fully copied”</a></h3>
+<p>The RK3326 boot chain (idbloader/U-Boot/trust) lives in the <strong>16MB region after MBR, before partition 1</strong>. Writing only partitions (loop0p1/p2) does cause black screen — after copying <code>dd bs=512 skip=1 seek=1 count=32767</code>, <strong>backlight came on</strong>, seemingly solved. But screen still black: bootloader was not the only problem.</p>
+<h3 id="trap-2-the-right-device-tree-will-light-it"><a class="header" href="#trap-2-the-right-device-tree-will-light-it">Trap 2: “The right device tree will light it”</a></h3>
+<p>The new image ships 60+ DTBs (panel1-4 / type2-4 variants). Swapping all of them, even reusing the stock generic DTB, all failed. Two reasons:</p>
+<ul>
+<li><strong>DTB is tightly bound to kernel version</strong>: stock DTB pairs with 5.10 kernel, loading it on 6.12 fails</li>
+<li><strong>Panel driver ignores the DTB init sequence</strong>: new image DTB uses a custom driver (<code>gameconsole,r36s-panel</code>), stock DTB uses the standard driver (<code>simple-panel-dsi</code>)</li>
+</ul>
+<h3 id="trap-3-injecting-the-stock-init-sequence-into-the-new-dtb-will-save-it"><a class="header" href="#trap-3-injecting-the-stock-init-sequence-into-the-new-dtb-will-save-it">Trap 3: “Injecting the stock init sequence into the new DTB will save it”</a></h3>
+<p>Injected the stock 1134-byte st7703 <code>panel-init-sequence</code> into the new r36s.dtb and changed compatible to <code>simple-panel-dsi</code> — compiled, file in place, <strong>still black</strong>. The new image’s display driver stack is completely different; changing DTB properties cannot change driver behavior.</p>
+<h2 id="3-source-verification-why-incompatible-measured-evidence"><a class="header" href="#3-source-verification-why-incompatible-measured-evidence">3. Source Verification: Why Incompatible (Measured Evidence)</a></h2>
+<h3 id="31-boot-chain-location"><a class="header" href="#31-boot-chain-location">3.1 Boot chain location</a></h3>
+<pre><code class="language-bash">dd if=card bs=1M skip=8 count=1 | head -c8   # should show "LOADER"
+dd if=card bs=1M skip=12 count=1 | head -c8  # should show "BL3X"
+dd if=image of=card bs=512 skip=1 seek=1 count=32767  # copy bootloader
+</code></pre>
+<h3 id="32-dtb-panel-init-sequence-comparison-decisive"><a class="header" href="#32-dtb-panel-init-sequence-comparison-decisive">3.2 DTB panel init sequence comparison (decisive)</a></h3>
+<pre><code class="language-bash">dtc -I dtb -O dts stock.dtb &gt; /tmp/m.dts
+dtc -I dtb -O dts new-r36s.dtb &gt; /tmp/r.dts
+grep -c "panel-init-sequence" /tmp/m.dts   # stock: 1 (1134 bytes)
+for f in /mnt/*.dtb; do dtc -I dtb -O dts "$f" | grep -c "panel-init-sequence"; done  # new: all 0
+</code></pre>
+<p>Stock panel node: <code>compatible = "sitronix,st7703", "simple-panel-dsi"</code> + <code>panel-init-sequence</code> + <code>display-timings</code>.
+New image panel node: <code>compatible = "gameconsole,r36s-panel", "sitronix,st7703"</code>, <strong>no init sequence, no timings</strong> — relies on driver-built-in sequence, mismatched with this panel.</p>
+<h3 id="33-kerneldtb-binding"><a class="header" href="#33-kerneldtb-binding">3.3 Kernel/DTB binding</a></h3>
+<pre><code class="language-bash">strings KERNEL | grep "Linux version"   # stock 5.10.160 vs new 6.12.79
+</code></pre>
+<h3 id="34-fix-attempts-all-failed"><a class="header" href="#34-fix-attempts-all-failed">3.4 Fix attempts (all failed)</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Attempt</th><th>Result</th></tr>
+</thead>
+<tbody>
+<tr><td>Copy bootloader 16MB</td><td>backlight on (U-Boot works)</td></tr>
+<tr><td>Swap DTB (panel1-4/type4/stock)</td><td>black</td></tr>
+<tr><td>Inject panel-init-sequence + change compatible</td><td>black</td></tr>
+<tr><td>Hardcode boot/disk UUID</td><td>black</td></tr>
+<tr><td>Simplify boot.scr (pure sysboot)</td><td>black</td></tr>
+<tr><td>Restore full boot.scr (ADC auto DTB)</td><td>black</td></tr>
+<tr><td>Full battery, retest</td><td>still black</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="35-counter-example-stock-system-works"><a class="header" href="#35-counter-example-stock-system-works">3.5 Counter-example: stock system works</a></h3>
+<p>Stock EmuELEC (5.10 + generic <code>rk3326-evb-lp3-v12-linux.dtb</code>) on the same card/device <strong>always boots with display</strong> — card, machine, power are all fine; the problem is the new image’s incompatibility with the hardware.</p>
+<h2 id="4-symptom-grading-locate-the-fault-layer-fast"><a class="header" href="#4-symptom-grading-locate-the-fault-layer-fast">4. Symptom Grading (locate the fault layer fast)</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Symptom</th><th>Conclusion</th></tr>
+</thead>
+<tbody>
+<tr><td>Backlight on + status LED off + black</td><td>U-Boot running; kernel/panel not up → check DTB/driver</td></tr>
+<tr><td>No backlight + charge LED on</td><td>power/battery; charge fully first</td></tr>
+<tr><td>System still running after card removal</td><td>kernel/rootfs in RAM; display layer issue</td></tr>
+<tr><td>Status LED on</td><td>system booted deep, nearly there</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="5-conclusions-reusable-approach"><a class="header" href="#5-conclusions-reusable-approach">5. Conclusions: Reusable Approach</a></h2>
+<h3 id="pre-flight-compatibility-check-in-order"><a class="header" href="#pre-flight-compatibility-check-in-order">Pre-flight compatibility check (in order)</a></h3>
+<ol>
+<li><strong>Bootloader present</strong>: <code>dd if=card bs=1M skip=8 | head -c8</code> shows <code>LOADER</code>, <code>skip=12</code> shows <code>BL3X</code></li>
+<li><strong>Panel init sequence</strong>: <code>dtc -I dtb -O dts image.dtb | grep -c "panel-init-sequence"</code> should be &gt;0</li>
+<li><strong>DTB/kernel match</strong>: <code>strings KERNEL | grep "Linux version"</code> vs DTB source</li>
+<li><strong>Power</strong>: charge LED on with no backlight = battery, charge until LED off</li>
+</ol>
+<h3 id="troubleshooting-order"><a class="header" href="#troubleshooting-order">Troubleshooting order</a></h3>
+<p>Bootloader → UUID/partitions → DTB panel sequence → finally suspect hardware.
+Measured here: after fixing the bootloader, U-Boot ran (backlight), but <strong>missing panel sequence + driver stack incompatibility</strong> left the screen permanently black — not fixable at config level. Abandon the image, return to stock.</p>
+<h3 id="scope-1"><a class="header" href="#scope-1">Scope</a></h3>
+<ul>
+<li>RK3326 embedded Linux devices upgrading kernels / replacing system images</li>
+<li>“Backlight on but screen black / status LED off” troubleshooting</li>
+<li>Deciding whether an image is worth further effort</li>
+</ul>
+<h3 id="key-lessons"><a class="header" href="#key-lessons">Key lessons</a></h3>
+<ul>
+<li>Stock systems (generic DTB) usually have the best compatibility</li>
+<li>“Backlight on” is the watershed: U-Boot is through; everything after is kernel/driver layer</li>
+<li>Panel driver match (compatible) and init sequence are the two requirements for LCD</li>
+</ul>
+<h2 id="6-quick-reference"><a class="header" href="#6-quick-reference">6. Quick Reference</a></h2>
+<h3 id="human-developers-3"><a class="header" href="#human-developers-3">Human developers</a></h3>
+<pre><code class="language-bash">dd if=card bs=1M skip=8 count=1 | head -c8      # check LOADER
+dtc -I dtb -O dts image.dtb | grep -c "panel-init-sequence"
+strings KERNEL | grep "Linux version"
+</code></pre>
+<h3 id="conversational-ai-2"><a class="header" href="#conversational-ai-2">Conversational AI</a></h3>
+<p>Question: “RK3326 device black screen after kernel upgrade, backlight on, how to debug?” Answer: backlight on = U-Boot running; decompile DTB and check <code>panel-init-sequence</code> (absent means driver-built-in sequence, possibly mismatched); verify DTB/kernel version pairing.</p>
+<h3 id="code-agents-2"><a class="header" href="#code-agents-2">Code agents</a></h3>
+<ul>
+<li>Readout: backlight on = U-Boot OK; status LED off + black = kernel/panel not up</li>
+<li>Check: <code>dtc -I dtb -O dts X.dtb | grep -c "panel-init-sequence"</code> should be &gt;0; <code>strings KERNEL | grep "Linux version"</code></li>
+<li>Stop-loss: missing panel sequence + driver incompatibility = not fixable at config level; revert to stock image</li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="xuantie-0175-inputexpression-bug-root-cause-analysis"><a class="header" href="#xuantie-0175-inputexpression-bug-root-cause-analysis">XuanTie 0.17.5 InputExpression Bug: Root Cause Analysis</a></h1>
 <blockquote>
@@ -4886,7 +5167,7 @@ copy /Y C:\Windows\Temp\rvs.new.exe C:\Windows\System32\rvs.exe
 </table>
 </div>
 <h2 id="6-quick-reference-for-three-types-of-readers"><a class="header" href="#6-quick-reference-for-three-types-of-readers">6. Quick Reference for Three Types of Readers</a></h2>
-<h3 id="human-developers-2"><a class="header" href="#human-developers-2">Human developers</a></h3>
+<h3 id="human-developers-4"><a class="header" href="#human-developers-4">Human developers</a></h3>
 <p>A three-line mnemonic — <code>rustup target add</code> to install the target; <code>.cargo/config.toml</code> to configure the linker; <code>cargo build --release --target &lt;triple&gt;</code> to build. The artifact lives in <code>target/&lt;triple&gt;/release/</code>.</p>
 <h3 id="conversational-ai-chatgpt--元宝--豆包"><a class="header" href="#conversational-ai-chatgpt--元宝--豆包">Conversational AI (ChatGPT / 元宝 / 豆包)</a></h3>
 <p>When asked “how do I cross-compile Rust to Linux/Windows”, answer like this — cross-compilation takes two steps: the target standard library + a linker; musl static linking is recommended to avoid glibc dependencies; mind <code>text file busy</code> when deploying and use <code>mv</code> rather than overwriting; on Windows rename first, then copy.</p>
@@ -5115,7 +5396,7 @@ fn console_window_width() -&gt; Option&lt;u16&gt; {
 <li><strong>Self-check command</strong>: in PowerShell, compare <code>[Console]::WindowWidth</code> with <code>[Console]::BufferWidth</code>; if the two differ, the current environment has this problem.</li>
 </ol>
 <h3 id="quick-reference-for-three-types-of-readers"><a class="header" href="#quick-reference-for-three-types-of-readers">Quick Reference for Three Types of Readers</a></h3>
-<h4 id="human-developers-3"><a class="header" href="#human-developers-3">Human developers</a></h4>
+<h4 id="human-developers-5"><a class="header" href="#human-developers-5">Human developers</a></h4>
 <p><strong>Self-check steps:</strong></p>
 <ol>
 <li>In PowerShell, run <code>[Console]::WindowWidth</code> and <code>[Console]::BufferWidth</code> and check whether the two are consistent.</li>
@@ -5285,6 +5566,133 @@ cargo run    → jaggedlogo.jpg fully visible → fade to black → mainpic.jpg 
 <p>This article is licensed under Mulan PSL v2. Copyright reserved. No attribution required. For enterprise compliance, please retain the original license notice.
 Original version: https://k4m7v2pz.github.io/en/blog/games/mighty-rodent-splash-black-screen-debug.html</p>
 </blockquote>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="r36s-system-card-and-game-card-separation-emuelec-dual-card-setup"><a class="header" href="#r36s-system-card-and-game-card-separation-emuelec-dual-card-setup">R36S System Card and Game Card Separation: EmuELEC Dual-Card Setup</a></h1>
+<blockquote>
+<p>Date: 2026-08-07</p>
+</blockquote>
+<h2 id="1-trigger-the-r36s-dual-card-nightmare"><a class="header" href="#1-trigger-the-r36s-dual-card-nightmare">1. Trigger: The R36S Dual-Card Nightmare</a></h2>
+<p>The R36S open-source handheld (RK3326 / Mali-G31 / 640x480 LCD) has two TF slots: <strong>right = OS slot, left = game slot</strong>. Many players assume “one card for the system, one for games,” but the stock merchant firmware (custom EmuELEC) boots from the right OS card while the left game slot <strong>does nothing</strong> — games stay crammed on the system card.</p>
+<h3 id="timeline"><a class="header" href="#timeline">Timeline</a></h3>
+<ol>
+<li>Merchant 64G card (EmuELEC) in right OS slot: boots fine</li>
+<li>Any game card in the left slot: invisible to the system, game library unchanged</li>
+<li>Online “EmuELEC dual-card” advice varies: single-card only / need config changes / switch firmware</li>
+<li>Tried another “lazy firmware” (ROCKNIX/ArkOS 6.12): <strong>completely black screen</strong> (backlight on but no image, status LED off); stock system kept working</li>
+<li>Returned to stock EmuELEC, dug into its mount logic, and achieved dual-card separation</li>
+</ol>
+<h3 id="goal"><a class="header" href="#goal">Goal</a></h3>
+<ul>
+<li>32G card = system card (right OS slot, system only)</li>
+<li>64G card = game card (left game slot, games only)</li>
+<li>On boot, the game library automatically comes from the game card</li>
+</ul>
+<h2 id="2-misdiagnoses-two-traps"><a class="header" href="#2-misdiagnoses-two-traps">2. Misdiagnoses: Two Traps</a></h2>
+<h3 id="trap-1-emuelec-doesnt-support-dual-cards"><a class="header" href="#trap-1-emuelec-doesnt-support-dual-cards">Trap 1: “EmuELEC doesn’t support dual cards”?</a></h3>
+<p>Wrong. EmuELEC natively supports dual cards; the mount logic is hardcoded in the system:</p>
+<ul>
+<li><code>.config/emuelec/configs/emuelec.conf</code> has <code>ee_mount.handler=eemount</code> (C mount handler)</li>
+<li>System also ships <code>mount_romfs.sh</code> (older Bash) and <code>storage-roms.mount.sample</code> (systemd template)</li>
+<li><code>eemount</code> binary literally contains <code>Trying to mount EEROMS to ...</code> and <code>Last hope, mounting LABEL=EEROMS directly</code></li>
+</ul>
+<p><strong>Real cause</strong>: the game card must have a <strong>vfat partition labeled <code>EEROMS</code></strong>. On boot EmuELEC mounts it via <code>LABEL=EEROMS</code> and points <code>/storage/roms</code> at the game card. A card without partition/label is skipped by eemount — the “no reaction.”</p>
+<h3 id="trap-2-system-card-must-be-copied-whole"><a class="header" href="#trap-2-system-card-must-be-copied-whole">Trap 2: “System card must be copied whole”?</a></h3>
+<p>System card migration does have rules, but not simply “dd the whole image”:</p>
+<ul>
+<li>System card MBR has 3 partitions: P1 <code>EMUELEC</code> (vfat boot, 1G, start sector 32768), P2 <code>STORAGE</code> (ext4, 5G, start 2129920), P3 <code>EEROMS</code> (vfat, games)</li>
+<li><strong>P1/P2 start sectors and sizes must match the source image exactly</strong> (boot config hardcodes <code>boot=UUID=... disk=UUID=...</code>)</li>
+<li><strong>RK3326 boot chain (idbloader/U-Boot/trust) lives in the 16MB after MBR, before P1</strong> — copying only partitions gives black screen</li>
+</ul>
+<p>So: system card = “dd P1/P2 whole + copy bootloader region”; game card = “just one EEROMS-labeled partition.”</p>
+<h2 id="3-source-verification-eemount-dual-card-mount-logic-measured"><a class="header" href="#3-source-verification-eemount-dual-card-mount-logic-measured">3. Source Verification: eemount Dual-Card Mount Logic (Measured)</a></h2>
+<h3 id="31-mount-config-in-stock-emuelec"><a class="header" href="#31-mount-config-in-stock-emuelec">3.1 Mount config in stock EmuELEC</a></h3>
+<p>In system card P2 (STORAGE), <code>.config/emuelec/configs/emuelec.conf</code>:</p>
+<pre><code class="language-ini">## Mount handler: eemount (newer, C) or mount_romfs.sh (older, Bash)
+#ee_mount.handler=eemount
+ee_mount.retry=1
+</code></pre>
+<p><code>eemount</code> binary (<code>/usr/sbin/eemount</code>) key strings:</p>
+<pre><code class="language-text">Trying to mount EEROMS to ...
+Last hope, mounting LABEL=EEROMS directly
+Checking if external system directory ... exists and create it if neccessary
+Skipped external drive ... mark file ... does not exist
+</code></pre>
+<p>Conclusion: eemount scans external drives, prefers an EEROMS-labeled partition, falls back to <code>LABEL=EEROMS</code>. That’s why the game card needs the EEROMS label.</p>
+<h3 id="32-system-card-migration-merchant-64g--32g"><a class="header" href="#32-system-card-migration-merchant-64g--32g">3.2 System card migration (merchant 64G → 32G)</a></h3>
+<pre><code class="language-bash"># Source image partitions (fdisk)
+#   P1: 32768, 1G vfat EMUELEC (boot)
+#   P2: 2129920, 5G ext4 STORAGE
+
+# Target card repartition (start sectors must match source)
+sfdisk /dev/mmcblk0 &lt;&lt;EOF
+label: dos
+32768, 2097152, c, *
+2129920, 10452992, 83
+EOF
+
+# dd P1 / P2 whole (UUID preserved in place)
+dd if=full_disk_image.img of=/dev/mmcblk0 bs=1M skip=16 seek=16 count=1024
+dd if=full_disk_image.img of=/dev/mmcblk0 bs=1M skip=1040 seek=1040 count=5104
+
+# Copy bootloader (16MB after MBR: idbloader/U-Boot/trust)
+dd if=full_disk_image.img of=/dev/mmcblk0 bs=512 skip=1 seek=1 count=32767
+</code></pre>
+<h3 id="33-game-card-64g"><a class="header" href="#33-game-card-64g">3.3 Game card (64G)</a></h3>
+<pre><code class="language-bash">sfdisk /dev/sde &lt;&lt;EOF
+label: dos
+, , c
+EOF
+mkfs.vfat -F 32 -n EEROMS /dev/sde1
+
+mount /dev/sde1 /mnt/gamecard
+cp -a /games/{nes,snes,sfc,famicom,genesis,megadrive,ports} /mnt/gamecard/
+</code></pre>
+<h3 id="measured-data-2026-08-07"><a class="header" href="#measured-data-2026-08-07">Measured data (2026-08-07)</a></h3>
+<ul>
+<li>32G system card boots alone: battery icon → R36S boot logo → EmuELEC</li>
+<li>With 64G game card (EEROMS label): <strong>All Games = 15928</strong></li>
+<li>12 platforms, 13G total: famicom 387M / fds / nes 1.4G / sfc 3.3G / snes 2.5G / genesis 1.3G / megadrive 2.6G / mastersystem 171M / segacd / sega32x / sg-1000 / ports 1.1G</li>
+<li>e2fsck / fsck.vfat clean, UUID matches source (<code>boot=UUID=0207-1718 disk=UUID=28173377-...</code>)</li>
+</ul>
+<h2 id="4-conclusions-reusable-approach-1"><a class="header" href="#4-conclusions-reusable-approach-1">4. Conclusions: Reusable Approach</a></h2>
+<h3 id="dual-card-in-three-steps"><a class="header" href="#dual-card-in-three-steps">Dual-card in three steps</a></h3>
+<ol>
+<li><strong>System card (right OS slot)</strong>: migrate from stock image — P1/P2 start sectors identical, dd whole, copy bootloader (<code>skip=1 seek=1 count=32767</code>); no game partition needed on the system card</li>
+<li><strong>Game card (left game slot)</strong>: single vfat partition + label <code>EEROMS</code> (<code>mkfs.vfat -F 32 -n EEROMS</code>), platform dirs directly at root</li>
+<li><strong>Verify</strong>: boot system card, shut down, add game card, reboot — library should be the game card’s</li>
+</ol>
+<h3 id="scope-2"><a class="header" href="#scope-2">Scope</a></h3>
+<ul>
+<li>R36S / RK3326 handhelds with EmuELEC custom firmware</li>
+<li>Players wanting OS/game separation and independent game libraries</li>
+<li>Already have a bootable system card and want to add a second game card</li>
+</ul>
+<h3 id="key-order"><a class="header" href="#key-order">Key order</a></h3>
+<p>Check mount label (EEROMS) → then system card UUID/bootloader → only then suspect the system.
+Measured: EmuELEC dual-card is native; “game card no reaction” is 90% a partition/label issue.</p>
+<h3 id="pitfall-list"><a class="header" href="#pitfall-list">Pitfall list</a></h3>
+<ul>
+<li>Game card without partition/label → no reaction: <code>mkfs.vfat -F 32 -n EEROMS</code></li>
+<li>System card UUID mismatch → system not found: dd whole, never just copy files</li>
+<li>Missing bootloader region → black screen: copy <code>count=32767</code> (16MB)</li>
+<li>Switching to ROCKNIX/ArkOS lazy firmware → black screen on this unit; EmuELEC is most stable</li>
+</ul>
+<h2 id="5-quick-reference-1"><a class="header" href="#5-quick-reference-1">5. Quick Reference</a></h2>
+<h3 id="human-developers-6"><a class="header" href="#human-developers-6">Human developers</a></h3>
+<pre><code class="language-bash">sfdisk /dev/sdX &lt;&lt;EOF   # game card: single vfat partition
+label: dos
+, , c
+EOF
+mkfs.vfat -F 32 -n EEROMS /dev/sdX1   # label MUST be EEROMS
+</code></pre>
+<h3 id="conversational-ai-3"><a class="header" href="#conversational-ai-3">Conversational AI</a></h3>
+<p>Question: “R36S dual-card, game card in left slot no reaction?” Answer: check whether the game card is a vfat partition labeled <code>EEROMS</code> — EmuELEC’s eemount mounts <code>/storage/roms</code> via <code>LABEL=EEROMS</code>; without the label it’s skipped.</p>
+<h3 id="code-agents-3"><a class="header" href="#code-agents-3">Code agents</a></h3>
+<ul>
+<li>System card: <code>dd if=image of=card bs=1M skip=16 seek=16 count=1024</code> (P1) + <code>skip=1040 seek=1040 count=5104</code> (P2) + <code>bs=512 skip=1 seek=1 count=32767</code> (bootloader); P1/P2 start sectors match source</li>
+<li>Game card: <code>mkfs.vfat -F 32 -n EEROMS</code>, platform dirs at root</li>
+<li>Verify: <code>blkid</code> for UUID/label; on device check All Games count (measured 15928)</li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="game-config-for-ai-agents-json-schema-and-an-ai_context-annotation-layer-design"><a class="header" href="#game-config-for-ai-agents-json-schema-and-an-ai_context-annotation-layer-design">Game Config for AI Agents: JSON Schema and an ai_context Annotation-Layer Design</a></h1>
 <blockquote>
@@ -6119,7 +6527,7 @@ After making changes, re-run `bun run scripts/inject-persist.mjs` to inject OPFS
 <blockquote>
 <p>Date: 2026-08-02</p>
 </blockquote>
-<h3 id="1-background-2"><a class="header" href="#1-background-2">1. Background</a></h3>
+<h3 id="1-background-3"><a class="header" href="#1-background-3">1. Background</a></h3>
 <p>The R36S is a common open-source handheld. It ships with a stock 64G TF card pre-flashed with the EmuELEC system and games preinstalled for dozens of platforms. The stock card looks roomy, but platforms like PSP, NEOGEO, GBA, N64, GBC, and arcade each take several gigabytes; for a player who only plays Famicom (FC/NES) and Super Famicom (SFC/SNES), nine-tenths of the content is “flash-storage garbage” that will never be used. This article records one complete migration: moving the FC/SFC/NES/SNES game sets (including hacks) from the stock 64G card onto a new 32G OS card, keeping the Sega RTS gems (Command &amp; Conquer, Dune) and the TwinBee series along the way, then wiping the ~30G of other platforms from the 64G card. Everything is done with Linux’s built-in mount, rsync, find, rm and similar commands — no special tools needed.</p>
 <h3 id="2-emuelecs-os-card-layout"><a class="header" href="#2-emuelecs-os-card-layout">2. EmuELEC’s OS Card Layout</a></h3>
 <p>Use lsblk to see the partitions on both cards (the 32G card appears as mmcblk0 in the onboard reader, the 64G card as sdf in the USB reader):</p>
@@ -7134,7 +7542,7 @@ Original version: https://k4m7v2pz.github.io/en/blog/games/bevy-0.14-port-to-r36
 <p>The solution is to permanently disable unadjustedMovement in the pointer lock request, so movementX goes through the system pointer path, making the cursor 1:1 with the desktop, with no acceleration (linear when the user has “acceleration off”). The key points are: before changing cursor speed, first eliminate browser caching (hard refresh); do not add scaling compensation based on a single observation, as compensation is easily excessive; the comparison baseline (desktop vs in-game) must be clear. The applicable scope is Chromium-based browsers (Chrome/Edge/Vivaldi) on macOS for pointer lock cursor speed issues; the same approach works for FPS-type web games.</p>
 <h3 id="human-developer"><a class="header" href="#human-developer">Human Developer</a></h3>
 <p>Self-check: in the battlefield, run in the F12 console <code>document.addEventListener("mousemove",e=&gt;console.log(e.movementX))</code>, move the mouse and compare with actual displacement. Verification: hard refresh with <code>Cmd+Shift+R</code> before retesting; you can use curl to confirm the new JS content served.</p>
-<h3 id="conversational-ai-1"><a class="header" href="#conversational-ai-1">Conversational AI</a></h3>
+<h3 id="conversational-ai-4"><a class="header" href="#conversational-ai-4">Conversational AI</a></h3>
 <p>One-line question: “Under Chromium 150, the pointer lock cursor moves 10x too slow—how to fix?” Answer points: check unadjustedMovement—on macOS, true makes movementX shrink to about 0.1x; disable it (false) to go through the system path for 1:1; eliminate browser caching before applying scaling compensation.</p>
 <h3 id="code-agent-1"><a class="header" href="#code-agent-1">Code Agent</a></h3>
 <p>Executable flow: grep pointer lock request points → set unadjustedMovement to always false → full build → confirm artifacts → prompt user to hard refresh and verify (do not directly add movementX scaling compensation).</p>
@@ -7678,6 +8086,415 @@ convert_csf_file("./mod/ra2md.csf", "./mod/ra2md_zh-CN.csf")
 <p>This article is licensed under Mulan PSL v2. Copyright reserved. No attribution required. For enterprise compliance, please retain the original license notice.
 Original version: https://k4m7v2pz.github.io/en/blog/games/openyrweb-traditional-chinese-mod.html</p>
 </blockquote>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="why-no-error-no-crash-bugs-are-the-hardest-a-six-layer-crash-chain-in-png-building-rendering"><a class="header" href="#why-no-error-no-crash-bugs-are-the-hardest-a-six-layer-crash-chain-in-png-building-rendering">Why “No Error, No Crash” Bugs Are the Hardest: A Six-Layer Crash Chain in PNG Building Rendering</a></h1>
+<blockquote>
+<p>Date: 2026-08-07</p>
+</blockquote>
+<h3 id="1-background-4"><a class="header" href="#1-background-4">1. Background</a></h3>
+<p>While integrating custom PNG building assets into OpenYRWeb (the browser port of Red Alert 2 / Yuri’s Revenge), we hit a six-layer chain of failures. The surface symptom was “MCV deploys into a green/blue checkerboard placeholder”, but underneath was a series of silently failing assumptions. This article walks through the whole chain — it is far harder than a bug that errors out and crashes, because every layer fails quietly.</p>
+<h3 id="2-the-crash-chain"><a class="header" href="#2-the-crash-chain">2. The Crash Chain</a></h3>
+<p>The goal: make the MCV-deployed Construction Yard show our custom <code>construction_yard.png</code> instead of the original SHP. That requires the engine to support “PNG direct-color building rendering” — the vanilla engine only eats SHP (8-bit palette indices), while PNG is 32-bit RGBA.</p>
+<h4 id="21-layer-1-systemjs-404"><a class="header" href="#21-layer-1-systemjs-404">2.1 Layer 1: SystemJS 404</a></h4>
+<p>After adding <code>data/PngShpFile.ts.js</code> (a wrapper that makes decoded RGBA look like a ShpFile), the game failed with:</p>
+<pre><code>XHR error (404 Not Found) loading http://127.0.0.1:8080/data/PngShpFile
+</code></pre>
+<p>Root cause: <code>repack.mjs</code> bundles according to the module list in <code>src/_module-map.json</code>. The new file was not registered, so the bundle only contained Engine’s dependency reference string — no module body. SystemJS then fetched it by path at runtime and got 404. Fix: insert the entry into <code>_module-map.json</code> manually. <strong>Lesson: this engine’s bundle manifest is hand-maintained; new files must be registered first.</strong></p>
+<h4 id="22-layer-2-not-a-single-png-was-injected"><a class="header" href="#22-layer-2-not-a-single-png-was-injected">2.2 Layer 2: Not a Single PNG Was Injected</a></h4>
+<p>The checkerboard showed up because the ImageFinder <code>.png</code> fallback always missed. After ruling out stale OPFS data and browser cache, reading the engine source finally revealed:</p>
+<pre><code class="language-js">// RealFileSystemDir.getEntries()
+async *getEntries() {
+  for (const name of this.handle.keys()) yield name; // ← yields plain strings!
+}
+</code></pre>
+<p>My scan code read <code>fe?.name</code> — taking <code>.name</code> of a string is always <code>undefined</code>, so <code>fname = ""</code> and every PNG was filtered out by <code>endsWith(".png")</code>. <strong>This was the most expensive bug: it does not error, does not crash, it just “does nothing”</strong> — only found by reading the engine source.</p>
+<h4 id="23-layer-3-empty-aggregated-agg-shp"><a class="header" href="#23-layer-3-empty-aggregated-agg-shp">2.3 Layer 3: Empty Aggregated agg SHP</a></h4>
+<p><code>Building.ts.js</code> aggregates mainShpFile + bib + animation frames into <code>agg_&lt;name&gt;.shp</code>. When the PNG fallback missed, <code>mainShpFile</code> was <code>undefined</code>, the aggregate input was empty → <code>agg_GACNST.shp</code> had <code>images.length=0</code> → <code>getImage(0)</code> threw RangeError → the render queue broke → selection and box-select stopped working.</p>
+<p>Fix: when main art lookup fails, fall back to the original art (<code>objectRules.name</code>).</p>
+<h4 id="24-layer-4-rgba-frame-count-halved"><a class="header" href="#24-layer-4-rgba-frame-count-halved">2.4 Layer 4: RGBA Frame Count Halved</a></h4>
+<p>In <code>ShpAggregator.getShpFrameInfo</code>:</p>
+<pre><code class="language-js">frameCount: Math.floor(e.numImages * (t ? 0.5 : 1)) // SHP main+shadow half-frame layout
+</code></pre>
+<p>A PNG has only 1 RGBA frame (alpha included). With <code>hasShadow=true</code> it was computed as 0 frames → empty aggregate. Fix: detect <code>imageData.length === w*h*4</code> and never halve RGBA direct-color frames, and treat them as shadow-less.</p>
+<h4 id="25-layer-5-material-format-assertion"><a class="header" href="#25-layer-5-material-format-assertion">2.5 Layer 5: Material Format Assertion</a></h4>
+<pre><code>Texture must have format THREE.AlphaFormat
+</code></pre>
+<p>The batched path <code>useMaterial</code> forces AlphaFormat (palette material); PNG direct-color textures are RGBAFormat. Fix: skip batching for RGBAFormat textures, go direct with <code>MeshBasicMaterial</code>.</p>
+<h4 id="26-layer-6-missing-batchedmesh-methods"><a class="header" href="#26-layer-6-missing-batchedmesh-methods">2.6 Layer 6: Missing BatchedMesh Methods</a></h4>
+<pre><code>this.mesh.setPaletteIndex / setOpacity / setExtraLight is not a function
+</code></pre>
+<p>The direct-color material (MeshBasicMaterial) lacks those three BatchedMesh-only methods. Guard each with <code>typeof === "function"</code>.</p>
+<h3 id="3-why-no-crash-bugs-are-harder"><a class="header" href="#3-why-no-crash-bugs-are-harder">3. Why “No Crash” Bugs Are Harder</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Feature</th><th>Errors and crashes</th><th>Silent failure</th></tr>
+</thead>
+<tbody>
+<tr><td>Locating</td><td>Stack trace points at the line</td><td>Need to read source to find “does nothing”</td></tr>
+<tr><td>Search direction</td><td>Single point</td><td>Could be data, cache, or any render layer</td></tr>
+<tr><td>Intuition</td><td>Follow the stack</td><td>Every layer looks “normal”</td></tr>
+</tbody>
+</table>
+</div>
+<p>Layer 2 (getEntries returning strings) is the classic case: all three intermediate steps were green (OPFS has files, bundle has code, load logs no error) — only the injection result was empty.</p>
+<h3 id="4-reusable-debugging-methods"><a class="header" href="#4-reusable-debugging-methods">4. Reusable Debugging Methods</a></h3>
+<ol>
+<li><strong>Suspect “silent dropping” first</strong>: in batch loops, <code>filter/continue</code> conditions swallow data quietly. Log what the loop actually sees.</li>
+<li><strong>Read the implementation, don’t guess the API</strong>: whether <code>getEntries()</code> returns objects or strings is obvious the moment you read <code>RealFileSystemDir.ts.js</code>.</li>
+<li><strong>Verify after each fix</strong>: playwright into Skirmish (<code>verify-iow.mjs</code>) after every change — do not batch several fixes before testing.</li>
+<li><strong>Treat “playable” as the regression baseline</strong>: after render-chain changes, confirm interactions (select, box-select) still work — crash chains usually end in dead interaction, not a red screen.</li>
+</ol>
+<h3 id="5-conclusion"><a class="header" href="#5-conclusion">5. Conclusion</a></h3>
+<p>Bugs that error and crash are like roadblocks — visible at a glance. Bugs that fail silently are like slow leaks — they need layer-by-layer inspection. When adding a new format (PNG direct color) to an old engine, the real cost is not “add one Image key” but understanding every layer’s assumptions (bundle manifest, injection loop, aggregate frame count, material format, material methods). These assumptions are recorded in <code>docs/PORTING.md</code> so future PNG asset integration can reuse the same debugging path.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="reshaping-a-red-alert-engine-openyrweb-modernization-overview"><a class="header" href="#reshaping-a-red-alert-engine-openyrweb-modernization-overview">Reshaping a Red Alert Engine: OpenYRWeb Modernization Overview</a></h1>
+<blockquote>
+<p>Date: 2026-08-07</p>
+</blockquote>
+<h3 id="1-why-modify-an-old-engine-that-runs-in-a-browser"><a class="header" href="#1-why-modify-an-old-engine-that-runs-in-a-browser">1. Why Modify an Old Engine That Runs in a Browser</a></h3>
+<p>OpenYRWeb is an open-source browser port of Red Alert 2 / Yuri’s Revenge (Apache-2.0). Game data is injected via OPFS, and it runs inside a browser. Its upstream is nearly abandoned, so this repository is effectively the active fork — engine bugs get fixed here, and formats get modernized here.</p>
+<p>The overall goal: make this 2000s-era engine fit two sets of standards — “personal format aesthetics” and “agent collaboration”:</p>
+<ul>
+<li><strong>Personal aesthetics</strong>: assets as PNG (tiles/buildings) and WAV (voice), not mix/SHP palette formats;</li>
+<li><strong>Agent-friendly</strong>: configs as JSON + JSON Schema (validatable, enumerable, generated), not plain ini.</li>
+</ul>
+<h3 id="2-four-layers-of-modernization"><a class="header" href="#2-four-layers-of-modernization">2. Four Layers of Modernization</a></h3>
+<h4 id="21-data-injection-layer"><a class="header" href="#21-data-injection-layer">2.1 Data Injection Layer</a></h4>
+<p>Original game data (9 mix files) and MOD files are injected into the browser’s OPFS. This required an injection page <code>inject.html</code> (with progress bar and result reporting back to a <code>/api/inject-report</code> endpoint) plus a playwright automated injection script.</p>
+<h4 id="22-tile-layer-png-tileset"><a class="header" href="#22-tile-layer-png-tileset">2.2 Tile Layer (PNG tileset)</a></h4>
+<p>The custom tile set <code>yuanbao</code> is provided as PNG (256×128 / @2x), with <code>meta.json</code> describing tile numbers and subTiles. The engine gained a <code>PngTileset</code> loader that decodes PNGs and plugs them into the terrain tile system.</p>
+<h4 id="23-building-rendering-layer-png-direct-color"><a class="header" href="#23-building-rendering-layer-png-direct-color">2.3 Building Rendering Layer (PNG direct color)</a></h4>
+<p>Buildings originally only accepted SHP (8-bit palette indices). We added <code>PngShpFile</code> (wrapping RGBA into a ShpFile-compatible object), ImageFinder <code>.shp</code> → <code>.png</code> fallback, and RGBAFormat direct-color materials in ShpBuilder. This path hit six layers of pitfalls — see “Why ‘No Error, No Crash’ Bugs Are the Hardest”.</p>
+<h4 id="24-rules-configuration-layer-json-schema"><a class="header" href="#24-rules-configuration-layer-json-schema">2.4 Rules Configuration Layer (JSON Schema)</a></h4>
+<p>Custom buildings/tech tree/economy are described in <code>design/*.json</code>, locked down by JSON Schema (event enums, required fields, <code>additionalProperties:false</code>). The build script <code>build-json-rules.mjs</code> generates flat INI sections. Voice config <code>design/voice/*.json</code> follows the same pattern, with event keys aligned to the 64 EVA events the engine actually triggers.</p>
+<h3 id="3-the-modernized-shape"><a class="header" href="#3-the-modernized-shape">3. The Modernized Shape</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Layer</th><th>Vanilla</th><th>After</th></tr>
+</thead>
+<tbody>
+<tr><td>Tiles</td><td>.tem in mix</td><td>PNG + meta.json (incl. @2x)</td></tr>
+<tr><td>Buildings</td><td>artmd Image → .shp</td><td>Image → .png (ImageFinder fallback)</td></tr>
+<tr><td>Voice</td><td>ceva/csof wav in mix</td><td>TTS-generated wav in OPFS (bilingual)</td></tr>
+<tr><td>Rules</td><td>hand-written rulesmd.ini</td><td>design JSON → generated ini</td></tr>
+<tr><td>Validation</td><td>none</td><td>JSON Schema (IDE real-time)</td></tr>
+<tr><td>Verification</td><td>manual</td><td>playwright into Skirmish</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="4-the-cost"><a class="header" href="#4-the-cost">4. The Cost</a></h3>
+<ul>
+<li>More than a dozen engine source files changed (render pipeline, bundle manifest, art parsing); every repack requires a hard refresh in the browser;</li>
+<li>PNG direct color and SHP palette are two render pipelines that must be maintained side by side;</li>
+<li>New engine files must be manually registered in <code>_module-map.json</code>, otherwise SystemJS 404;</li>
+<li>Any render-chain change needs regression against “playable”: select, box-select, deploy, attack.</li>
+</ul>
+<h3 id="5-conclusion-1"><a class="header" href="#5-conclusion-1">5. Conclusion</a></h3>
+<p>Reshaping an old engine into “my shape” means modernizing four layers (data injection, tiles, building rendering, rules config). The payoff is reproducible, validatable, agent-friendly assets; the cost is deep adaptation of the engine render pipeline. The whole effort is documented in <code>docs/PORTING.md</code> for reuse by future MODs.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="mixshpini--pngwavjson-modernizing-an-old-engines-data-formats"><a class="header" href="#mixshpini--pngwavjson-modernizing-an-old-engines-data-formats">mix/SHP/ini → PNG/WAV/JSON: Modernizing an Old Engine’s Data Formats</a></h1>
+<blockquote>
+<p>Date: 2026-08-07</p>
+</blockquote>
+<h3 id="1-why-migrate-three-formats"><a class="header" href="#1-why-migrate-three-formats">1. Why Migrate Three Formats</a></h3>
+<p>The OpenYRWeb engine inherited Red Alert 2’s classic data formats: binary mix archives, 8-bit palette SHP images, and unstructured ini rules. These were the performance-optimal choices in the 2000s, but they are unfriendly to modern development and agent collaboration. The modernization chose three replacements:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Original</th><th>New</th><th>Rationale</th></tr>
+</thead>
+<tbody>
+<tr><td>mix (binary archive)</td><td>directory + OPFS injection</td><td>incremental edits, version control</td></tr>
+<tr><td>SHP (palette indices)</td><td>PNG (RGBA direct color)</td><td>universal image toolchains, @2x support</td></tr>
+<tr><td>ini (untyped)</td><td>JSON + JSON Schema</td><td>validatable, enumerable, generated, IDE completion</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="2-shp--png-migration-path"><a class="header" href="#2-shp--png-migration-path">2. SHP → PNG Migration Path</a></h3>
+<p>SHP is 8-bit palette-indexed and rendered through a palette; PNG is 32-bit RGBA. Migration is not just swapping files — it is adapting the render pipeline:</p>
+<ol>
+<li><strong>Tile layer</strong>: added <code>PngTileset</code>, which reads <code>meta.json</code> (tile number → PNG file + subTile layout), decodes, and plugs into the terrain tile system;</li>
+<li><strong>Building layer</strong>: added <code>PngShpFile</code> (wrapping RGBA into a ShpFile-compatible object); <code>ImageFinder</code> falls back to same-name <code>.png</code> when <code>.shp</code> is missing;</li>
+<li><strong>Material layer</strong>: <code>ShpBuilder</code> supports RGBAFormat direct-color materials (MeshBasicMaterial), skipping the palette and batching paths.</li>
+</ol>
+<p>Key pitfall: SHP has a “main frame + shadow half-frame” layout (<code>frameCount = numImages * (hasShadow ? 0.5 : 1)</code>); a PNG has one frame, so applying that formula directly turns 1 frame into 0 frames and aggregates an empty file. RGBA direct-color frames must be special-cased.</p>
+<h3 id="3-adding-wav-voice"><a class="header" href="#3-adding-wav-voice">3. Adding WAV Voice</a></h3>
+<p>Voice originally lived as ceva/csof wav inside mix, played via the <code>[DialogList]</code> table in <code>eva.ini</code>. Adding custom WAV voice:</p>
+<ul>
+<li>Batch-synthesize with TTS (Qwen-TTS, Neil voice), output <code>audio/voice/{lang}/EVA_*.wav</code>;</li>
+<li><code>design/voice/{lang}/event_voice_mapping.json</code> maps event → filename → text;</li>
+<li>Event keys align with the 64 EVA events the engine actually triggers, so the mapping is validatable.</li>
+</ul>
+<h3 id="4-ini--json-migration-path"><a class="header" href="#4-ini--json-migration-path">4. ini → JSON Migration Path</a></h3>
+<p>Rules move from “hand-written flat ini sections” to “design JSON → generated ini”:</p>
+<pre><code class="language-json">// design/entities/buildings/通用/油井.json
+{
+  "extends": null,
+  "id": "oil-well",
+  "abstract": true,
+  "techLevel": 1,
+  "cost": 800,
+  "produceCash": { "startup": 500, "amount": 25, "delay": 5 }
+}
+</code></pre>
+<ul>
+<li>Object inheritance supported (abstract base → faction entities extends);</li>
+<li>JSON Schema locks the structure: required fields, <code>additionalProperties:false</code>, event-name enums;</li>
+<li><code>build-json-rules.mjs</code> resolves inheritance, validates reference integrity, and generates flat INI sections;</li>
+<li>The engine only reads rulesmd.ini, so generated sections must be merged into the <code>[BuildingTypes]</code> registry (currently the generator emits them; the merge step is follow-up work).</li>
+</ul>
+<h3 id="5-payoff-and-remaining-work"><a class="header" href="#5-payoff-and-remaining-work">5. Payoff and Remaining Work</a></h3>
+<p><strong>Payoff</strong>: reproducible (re-run the generator), validatable (Schema + playwright), agent-friendly (JSON is enumerable and hintable).</p>
+<p><strong>Remaining</strong>: auto-merging generated flat INI sections into rulesmd.ini’s <code>[BuildingTypes]</code> registry is not yet automated; the engine consumption side of voice mapping (event trigger → play custom wav) is still pending — vanilla eva.ini voice keeps serving as fallback. Both are recorded in <code>docs/PORTING.md</code> as next iterations.</p>
+<h3 id="6-conclusion"><a class="header" href="#6-conclusion">6. Conclusion</a></h3>
+<p>Format modernization is essentially “adapting three pipelines one by one”: data loading (mix → OPFS), resource wrapping (SHP → PngShpFile), and render materials (palette → RGBA). Every layer hides assumptions; change one layer and one breaks. Once those assumptions are written into the pitfall log (<code>docs/PORTING.md</code>), future migrations of the same kind can reuse the debugging path.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="engine-modding-tradeoffs-playability-first-aesthetics-serve-the-feel"><a class="header" href="#engine-modding-tradeoffs-playability-first-aesthetics-serve-the-feel">Engine-Modding Tradeoffs: Playability First, Aesthetics Serve the Feel</a></h1>
+<blockquote>
+<p>Date: 2026-08-07</p>
+</blockquote>
+<h3 id="1-why-keep-modding-inside-a-browser"><a class="header" href="#1-why-keep-modding-inside-a-browser">1. Why Keep Modding Inside a Browser</a></h3>
+<p>OpenYRWeb is a browser-based Red Alert engine. One might ask: why not rewrite the game as a native Rust window? The answer is practical:</p>
+<ul>
+<li><strong>Playability drives motivation</strong>: the browser version runs, injects, and enters Skirmish; every change gets instant feedback. A rewrite would kill all iteration momentum;</li>
+<li><strong>Testability makes changes safe</strong>: playwright headless can automate entering Skirmish, checking the canvas, and scanning errors — this is the confidence to modify the engine without fear;</li>
+<li><strong>Free ecosystem bonuses</strong>: @2x hi-DPI assets, WebGL rendering, OPFS persistence, fetch loading — all free in a browser.</li>
+</ul>
+<p>Rust windows and terminals are a more “personal” form factor, but this project is a “follow-the-ecosystem compromise” — the compromise buys playability and testability.</p>
+<h3 id="2-three-tradeoff-principles"><a class="header" href="#2-three-tradeoff-principles">2. Three Tradeoff Principles</a></h3>
+<h4 id="21-asset-formats-follow-personal-aesthetics"><a class="header" href="#21-asset-formats-follow-personal-aesthetics">2.1 Asset formats follow personal aesthetics</a></h4>
+<ul>
+<li>Tiles/buildings as PNG (RGBA direct color), not SHP palettes — universal image toolchains, and @2x comes free;</li>
+<li>Voice as WAV (TTS-generated), not vanilla mix wavs — regenerating bilingual voice is a re-run away;</li>
+<li>Result: a clean, reproducible, versionable asset tree.</li>
+</ul>
+<h4 id="22-configs-follow-agents"><a class="header" href="#22-configs-follow-agents">2.2 Configs follow agents</a></h4>
+<ul>
+<li>Rules, voice mapping, and MOD metadata are all JSON + JSON Schema;</li>
+<li>Schema locks enums (event names, factions, categories), <code>additionalProperties:false</code> blocks typos;</li>
+<li>The build script turns design JSON into flat INI the engine can read — humans read JSON, the engine reads INI, agents edit JSON.</li>
+</ul>
+<h4 id="23-playability-is-the-regression-baseline"><a class="header" href="#23-playability-is-the-regression-baseline">2.3 Playability is the regression baseline</a></h4>
+<p>Any render-chain change is regression-tested by “can you actually play Skirmish”: select, box-select, deploy, attack. Crash chains usually end in dead interaction, not a red screen — “playable” is the most honest smoke test.</p>
+<h3 id="3-the-cost-of-the-tradeoffs"><a class="header" href="#3-the-cost-of-the-tradeoffs">3. The Cost of the Tradeoffs</a></h3>
+<ul>
+<li>More than a dozen engine source files changed; after every repack the browser needs a hard refresh (Cmd+Shift+R);</li>
+<li>PNG direct color and SHP palette are two render pipelines maintained side by side — more surface area;</li>
+<li>New engine files must be manually registered in <code>_module-map.json</code>, otherwise SystemJS 404;</li>
+<li>The browser form factor means the debugging toolchain is console/elements panels, not a Rust compiler and terminal — part of the compromise.</li>
+</ul>
+<h3 id="4-conclusion"><a class="header" href="#4-conclusion">4. Conclusion</a></h3>
+<p>The modding tradeoff is not “technically optimal” but a three-way balance of aesthetics + agent collaboration + playability: PNG/WAV assets please yourself, JSON/Schema configs please agents, and “playable” regression pleases the feel. These principles keep the modding sustainable — every step has positive feedback, so there is always motivation to keep going.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="replacing-terrain-tiles-with-png-digging-metajson-truth-out-of-mix"><a class="header" href="#replacing-terrain-tiles-with-png-digging-metajson-truth-out-of-mix">Replacing Terrain Tiles with PNG: Digging meta.json Truth Out of mix</a></h1>
+<blockquote>
+<p>Date: 2026-08-07</p>
+</blockquote>
+<h3 id="1-goal-and-background"><a class="header" href="#1-goal-and-background">1. Goal and Background</a></h3>
+<p>OpenYRWeb’s terrain tiles originally lived in .tem files inside mix, described by <code>[TileSetXXXX]</code> sections in <code>temperatmd.ini</code> (tileSetIndex → SetName/FileName/TilesInSet). The custom tile set <code>yuanbao</code> wants PNG replacement: 256×128 tiles plus @2x hi-DPI versions, semantically matching “barracks/light factory/oil well/construction yard” building tiles.</p>
+<h3 id="2-digging-the-truth-out-of-mix"><a class="header" href="#2-digging-the-truth-out-of-mix">2. Digging the Truth Out of mix</a></h3>
+<p>The first step was understanding how the engine indexes tiles. A script unzipped <code>temperatmd.ini</code> from <code>ra2md.mix &gt; localmd.mix</code> and printed each section:</p>
+<pre><code>TileSet0010: SetName=Cliff Set FileName=Cliff TilesInSet=40
+</code></pre>
+<p><strong>Key finding: <code>yuanbao</code>’s <code>tileSetIndex=10</code> corresponds to the vanilla “Cliff Set”</strong>. This means:</p>
+<ul>
+<li>Putting custom building tiles on yuanbao’s tile numbers will <strong>overwrite every cliff tile on the map that uses that number</strong>;</li>
+<li>If you don’t want cliff terrain overwritten, a PNG tileset should only replace the tiles it owns, and missing tiles must fall back to vanilla .tem.</li>
+</ul>
+<h3 id="3-metajson-structure"><a class="header" href="#3-metajson-structure">3. meta.json Structure</a></h3>
+<p>PNG tileset directory layout:</p>
+<pre><code>tilesets/yuanbao/
+├── meta.json            # tile semantics + subTile layout
+├── tile_16.png / @2x    # barracks (stone)
+├── tile_17.png / @2x    # barracks (brick)
+├── tile_20.png / @2x    # light factory
+└── oil_well.png / @2x   # oil well
+</code></pre>
+<p>Each tile entry in <code>meta.json</code>:</p>
+<pre><code class="language-json">{
+  "tile": 16,
+  "description": "兵营（石头房子）",
+  "variants": [{
+    "file": "tile_16.png",
+    "subTiles": [{
+      "x": 0, "y": 0, "w": 256, "h": 128,
+      "terrainType": 0, "rampType": 0
+    }]
+  }]
+}
+</code></pre>
+<h3 id="4-two-big-pitfalls"><a class="header" href="#4-two-big-pitfalls">4. Two Big Pitfalls</a></h3>
+<h4 id="41-tilesetindex-overwrites-the-cliff-set"><a class="header" href="#41-tilesetindex-overwrites-the-cliff-set">4.1 tileSetIndex Overwrites the Cliff Set</a></h4>
+<p>After putting a construction-yard tile into yuanbao, the game showed “cliff images became construction-yard images” — because yuanbao’s tileSetIndex=10 is exactly the Cliff Set, and tile 1 overwrote cliff tile 1. <strong>Fix: remove the tile 1 entry from meta.json; the cliff set returns to vanilla.</strong></p>
+<h4 id="42-subtile-crash-after-removing-a-tile"><a class="header" href="#42-subtile-crash-after-removing-a-tile">4.2 SubTile Crash After Removing a Tile</a></h4>
+<p>After removing tile 1, the game failed with:</p>
+<pre><code>SubTile 0 not found
+</code></pre>
+<p>Root cause: map data still references cliff tile 1, but the PNG tileset no longer has tile 1; <code>TileSets.initTileSets</code> mistakenly used <code>png.meta.fileName</code> (“yuanbao”) as the TMP fallback prefix, looking for <code>yuanbao01.tem</code> (nonexistent), while the vanilla cliff tile is <code>cliff01.tem</code> — entry.files ended up empty → getTileImage threw. <strong>Fix: the TMP fallback prefix always uses the vanilla FileName (“Cliff”), so missing tiles fall back to the vanilla cliff tiles.</strong></p>
+<h3 id="5-injection-and-verification"><a class="header" href="#5-injection-and-verification">5. Injection and Verification</a></h3>
+<ul>
+<li><code>scripts/gen-inject-page.mjs</code> recursively collects the tilesets directory (including subdirectories) into the injection manifest;</li>
+<li>After adding PNGs, regenerate inject.html + hard-refresh (Cmd+Shift+R) and re-inject;</li>
+<li>playwright verification: entering Skirmish has no SubTile crash and the canvas renders.</li>
+</ul>
+<h3 id="6-conclusion-1"><a class="header" href="#6-conclusion-1">6. Conclusion</a></h3>
+<p>The truth about PNG tileset replacement: <strong>tileSetIndex decides which vanilla tile set you are replacing</strong>. Picking the wrong index silently overwrites someone else’s terrain; deleting tiles triggers a fallback-chain crash. First dig out the index mapping in <code>temperatmd.ini</code>, then decide which numbers your PNGs take and where missing tiles fall back — that is the prerequisite for not stepping on landmines.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="128-tts-voice-lines-into-a-red-alert-engine-qwen-tts--neil-batch-synthesis"><a class="header" href="#128-tts-voice-lines-into-a-red-alert-engine-qwen-tts--neil-batch-synthesis">128 TTS Voice Lines into a Red Alert Engine: Qwen-TTS + Neil Batch Synthesis</a></h1>
+<blockquote>
+<p>Date: 2026-08-07</p>
+</blockquote>
+<h3 id="1-goal-1"><a class="header" href="#1-goal-1">1. Goal</a></h3>
+<p>Give the Red Alert engine a reproducible bilingual commander voice: 64 EVA events × two languages = 128 WAVs, all batch-synthesized by TTS and injected into the browser’s OPFS. The principles: code committed, keys never on disk, regenerate anytime.</p>
+<h3 id="2-why-qwen-ttss-neil"><a class="header" href="#2-why-qwen-ttss-neil">2. Why Qwen-TTS’s Neil</a></h3>
+<p>We surveyed voices across three Aliyun TTS APIs:</p>
+<ul>
+<li><strong>CosyVoice / Qwen-Audio-TTS</strong>: system voices are all longan/loong series; downloaded the 1000+ base-voice Excel files and searched — no Neil;</li>
+<li><strong>MiniMax</strong>: system voices use <code>male-qn-*</code> / <code>female-*</code> IDs, no Neil;</li>
+<li><strong>Qwen-TTS</strong>: <strong>has Neil</strong> (voice name “阿闻”, male news anchor, 10 languages incl. zh/en), supported by <code>qwen3-tts-instruct-flash</code>.</li>
+</ul>
+<p>Neil’s news-anchor voice suits “commander announcements”, and <code>instructions</code> control pacing/emotion — one instruction per language.</p>
+<h3 id="3-batch-generation-script"><a class="header" href="#3-batch-generation-script">3. Batch Generation Script</a></h3>
+<p><code>scripts/tts-generate.mts</code> (TypeScript, tsc-checked):</p>
+<pre><code class="language-ts">const MODEL = "qwen3-tts-instruct-flash";
+const VOICE = "Neil";
+const INSTRUCTIONS = {
+  en: "News anchor style, steady pace, calm and neutral emotion.",
+  "zh-CN": "新闻播报风格，语速适中，吐字清晰，情感沉稳中性。",
+};
+</code></pre>
+<p>Flow: read <code>design/voice/{lang}/event_voice_mapping.json</code> → call the DashScope API per line → download wav into <code>audio/voice/{lang}/EVA_*.wav</code>. Supports <code>--lang / --event / --force</code> for incremental regeneration.</p>
+<h3 id="4-keys-never-touch-disk"><a class="header" href="#4-keys-never-touch-disk">4. Keys Never Touch Disk</a></h3>
+<ul>
+<li>API key comes only from the environment (<code>process.env.DASHSCOPE_API_KEY</code>); no hardcoding in the script;</li>
+<li><code>.gitignore</code> gained <code>.env</code> / <code>.env.*</code> (keeping <code>.env.example</code>) so <code>git add .</code> can’t commit secrets;</li>
+<li>Request headers use a runtime <code>Bearer ${API_KEY}</code>; logs never echo the key.</li>
+</ul>
+<p>Verified: searching all git-tracked files for the real key prefix → zero matches.</p>
+<h3 id="5-how-voice-reaches-the-engine"><a class="header" href="#5-how-voice-reaches-the-engine">5. How Voice Reaches the Engine</a></h3>
+<ul>
+<li>Output: <code>audio/voice/{en,zh-CN}/EVA_1MinuteRemaining.wav</code> etc., 128 files;</li>
+<li>The engine’s EVA announcer plays via <code>eva.ini</code> <code>[DialogList]</code> (Allied=cevaXXX) → vanilla wav from mix;</li>
+<li>The engine consumption side of custom voice (event trigger → read design/voice mapping → play custom wav) is follow-up wiring; vanilla voice serves as fallback for now.</li>
+</ul>
+<h3 id="6-injection-manifest-fix"><a class="header" href="#6-injection-manifest-fix">6. Injection Manifest Fix</a></h3>
+<p><code>gen-inject-page.mjs</code> originally collected only files at the <code>audio/</code> root — it did not recurse into <code>audio/voice/{lang}/</code>, so new voice lines were never injected. Changed to recursive collection (<code>collectFiles</code> walks subdirectories), and filtered <code>.DS_Store</code> (macOS junk files caused injection 404s).</p>
+<h3 id="7-conclusion-1"><a class="header" href="#7-conclusion-1">7. Conclusion</a></h3>
+<p>The full pipeline for 128 TTS lines: voice research (Neil) → batch script (.mts + env key) → generate wav → inject (recursive manifest) → engine wiring (pending). Core principles: <strong>reproducible code, keys never on disk, output regenerable anytime</strong> — this skeleton also serves future voice iteration and engine wiring.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="bilingual-eva-announcer-letting-custom-voice-take-over-from-vanilla"><a class="header" href="#bilingual-eva-announcer-letting-custom-voice-take-over-from-vanilla">Bilingual EVA Announcer: Letting Custom Voice Take Over from Vanilla</a></h1>
+<blockquote>
+<p>Date: 2026-08-07</p>
+</blockquote>
+<h3 id="1-background-5"><a class="header" href="#1-background-5">1. Background</a></h3>
+<p>The engine’s EVA announcer voice is part of the game experience. Vanilla plays ceva/csof wav from mix via the <code>[DialogList]</code> table in <code>eva.ini</code>. Making the announcer speak Chinese or custom English requires two things: first, knowing exactly which EVA events the engine can trigger; second, designing a mapping structure for custom voice.</p>
+<h3 id="2-mapping-out-the-engines-64-eva-events"><a class="header" href="#2-mapping-out-the-engines-64-eva-events">2. Mapping Out the Engine’s 64 EVA Events</a></h3>
+<p>Don’t guess — dig from source and vanilla data:</p>
+<ul>
+<li>Engine source <code>eva.play("EVA_xxx")</code> call sites: grep all literals, dedupe to get the EVA events the engine actually triggers;</li>
+<li>Extract <code>eva.ini</code> from <code>ra2.mix &gt; local.mix</code>, parse <code>[DialogList]</code> (356 valid entries), and read <code>Text</code> (vanilla English) and <code>Allied/Russian</code> (voice files) per entry;</li>
+<li>Cross-check: all 64 engine-referenced events exist in eva.ini with Text + voice.</li>
+</ul>
+<p><strong>Key insight: the engine only triggers 64 events; the mission-objective classes in the 356-entry full list (EVA_MissionAccomplished etc.) are unused.</strong> So custom voice only needs the subset the engine actually fires.</p>
+<h3 id="3-event-semantics-annotation"><a class="header" href="#3-event-semantics-annotation">3. Event Semantics Annotation</a></h3>
+<p>The 64 events were grouped by purpose to decide what to make:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Group</th><th>Count</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td>Economy/build/unit (core)</td><td>30</td><td>construction complete, insufficient funds, low power, unit ready</td></tr>
+<tr><td>Capture/garrison</td><td>4</td><td>building captured, garrisoned, abandoned</td></tr>
+<tr><td>Spy/infiltrate/upgrade</td><td>12</td><td>cash stolen, radar sabotaged, unit promoted</td></tr>
+<tr><td>Alliance</td><td>5</td><td>formed, broken, requested</td></tr>
+<tr><td>Superweapon</td><td>13</td><td>nuke, Iron Curtain, chrono, lightning (optional, MOD has none)</td></tr>
+</tbody>
+</table>
+</div>
+<p>Each entry has vanilla English + Chinese translation, forming a bilingual table.</p>
+<h3 id="4-voice-mapping-structure-json--schema"><a class="header" href="#4-voice-mapping-structure-json--schema">4. Voice Mapping Structure (JSON + Schema)</a></h3>
+<p><code>design/voice/{en,zh-CN}/event_voice_mapping.json</code>:</p>
+<pre><code class="language-json">{
+  "events": {
+    "EVA_ConstructionComplete": {
+      "filename": "EVA_ConstructionComplete.wav",
+      "text": "建造完成。"
+    }
+  }
+}
+</code></pre>
+<p><code>schema/voice.schema.json</code> locks down:</p>
+<ul>
+<li>Event keys must belong to the 64-event EVA enum (<code>propertyNames.enum</code>);</li>
+<li>Each entry requires <code>filename</code> + <code>text</code>, <code>additionalProperties:false</code>;</li>
+<li><code>filename</code> must equal the event key + <code>.wav</code>.</li>
+</ul>
+<p>Typos fail at edit time instead of runtime.</p>
+<h3 id="5-engine-consumption-side-pending"><a class="header" href="#5-engine-consumption-side-pending">5. Engine Consumption Side (Pending)</a></h3>
+<p>Current state: voice files are generated and injected into OPFS; the mapping is in place and passes Schema validation. But the engine’s <code>eva.play()</code> still goes through eva.ini → vanilla mix voice. Making custom voice actually play requires engine wiring: event trigger → read <code>design/voice/{lang}/mapping</code> → play custom wav (fall back to eva.ini vanilla if missing). This is the next candidate task, recorded in <code>docs/PORTING.md</code>.</p>
+<h3 id="6-conclusion-2"><a class="header" href="#6-conclusion-2">6. Conclusion</a></h3>
+<p>The bilingual announcer skeleton is “event enum (64) + bilingual text + JSON Schema mapping + TTS generation”. Map the engine’s trigger surface first, so you don’t synthesize 300 unused lines out of the 356-entry full set; the Schema locking the enum keeps the mapping in sync with engine reality — the first step toward letting vanilla voice step aside.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="locking-down-rules-config-with-json-schema-event-enums-and-ai-hallucination-guards"><a class="header" href="#locking-down-rules-config-with-json-schema-event-enums-and-ai-hallucination-guards">Locking Down Rules Config with JSON Schema: Event Enums and AI-Hallucination Guards</a></h1>
+<blockquote>
+<p>Date: 2026-08-07</p>
+</blockquote>
+<h3 id="1-why-rules-config-needs-a-schema"><a class="header" href="#1-why-rules-config-needs-a-schema">1. Why Rules Config Needs a Schema</a></h3>
+<p>The Red Alert engine’s rules are ini (unstructured, untyped). When a MOD wants to express structured concepts like “oil-well economy”, “three-faction inheritance”, or “64-line voice mapping”, hand-written ini is error-prone, hard to validate, and hard for agents to edit. The modernization: rules described as JSON, locked down by JSON Schema, with a build script generating the flat INI the engine reads.</p>
+<h3 id="2-three-layer-config-system"><a class="header" href="#2-three-layer-config-system">2. Three-Layer Config System</a></h3>
+<pre><code>design/
+├── mod.json                    # MOD metadata (i18n bilingual)
+├── economy.json                # oil-well economy (amount, delay, startup)
+├── tech-tree.json              # tech tree (T1/T2/T3 progression)
+├── entities/buildings/
+│   ├── 通用/油井.json          # abstract base (cost, output, prereqs)
+│   ├── 盟军/油井.json          # extends base, owner=[Allied]
+│   ├── 苏军/油井.json          # extends base, owner=[Soviet]
+│   └── 尤里/油井.json          # extends base, owner=[Yuri]
+└── voice/{en,zh-CN}/event_voice_mapping.json
+</code></pre>
+<p>Each JSON under <code>schema/</code> has a matching Schema (draft-07, consistent with the engine side).</p>
+<h3 id="3-how-the-schema-locks-down"><a class="header" href="#3-how-the-schema-locks-down">3. How the Schema “Locks Down”</a></h3>
+<p>Using <code>building.schema.json</code> as an example, the key constraints:</p>
+<pre><code class="language-json">{
+  "required": ["id", "name"],
+  "properties": {
+    "extends": { "type": "string" },
+    "abstract": { "type": "boolean", "default": false },
+    "code": { "pattern": "^[A-Z0-9]{1,8}$" },
+    "owner": { "items": { "enum": ["Allied", "Soviet", "Yuri"] } }
+  },
+  "if": { "properties": { "abstract": { "const": true } } },
+  "then": { "description": "abstract template needs only id + name" },
+  "else": { "required": ["code", "techLevel", "prerequisites", "buildCat"] },
+  "additionalProperties": false
+}
+</code></pre>
+<ul>
+<li><code>required</code> + <code>additionalProperties:false</code>: missing or extra fields both fail;</li>
+<li><code>enum</code>: owner can only be the three factions; buildCat only fixed categories;</li>
+<li><code>if/then/else</code>: abstract base and concrete entities require different fields;</li>
+<li>The voice Schema uses <code>propertyNames.enum</code> to pin event keys to the 64-EVA-event enum.</li>
+</ul>
+<h3 id="4-guarding-against-ai-hallucination"><a class="header" href="#4-guarding-against-ai-hallucination">4. Guarding Against AI Hallucination</a></h3>
+<p>When an agent edits config, hallucinations (typoed field names, invented events, bad formats) are stopped by three walls:</p>
+<ol>
+<li><strong>Editor real-time validation</strong>: JSON carries a <code>$schema</code> pointer; IDEs auto-complete and report errors;</li>
+<li><strong>Build-time validation</strong>: <code>build-json-rules.mjs</code> resolves inheritance, validates reference integrity (unique id/code, existing prerequisites), runs Schema validation, and exits on failure;</li>
+<li><strong>Runtime enums</strong>: voice event keys must hit the 64-event enum the engine actually triggers — inventing a nonexistent EVA event is rejected by the Schema outright.</li>
+</ol>
+<h3 id="5-object-inheritance"><a class="header" href="#5-object-inheritance">5. Object Inheritance</a></h3>
+<pre><code>通用/油井.json (abstract: techLevel=1, cost=800, produceCash=500/25/5)
+├── 盟军/油井.json → AILW (owner=Allied)
+├── 苏军/油井.json → SILW (owner=Soviet)
+└── 尤里/油井.json → YILW (owner=Yuri)
+</code></pre>
+<p>The build deep-merges overrides onto the base and generates flat INI sections (<code>ProduceCashStartup/Amount/Delay</code> etc.). Adding a faction is just duplicating an entity JSON and changing owner/code.</p>
+<h3 id="6-conclusion-3"><a class="header" href="#6-conclusion-3">6. Conclusion</a></h3>
+<p>JSON Schema locks the contract between “human-readable JSON” and “engine-readable INI”: structure errors surface at edit time, reference errors at build time, and enum errors at Schema time — three walls keep AI hallucinations out of the rules layer. This is also the foundation of the MOD being “agent-friendly”: agents can edit config without breaking it, because the Schema is their guardrail.</p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="red-alert-2-mod-yellow-alert-main-menu-music--suno-ai-style-prompt"><a class="header" href="#red-alert-2-mod-yellow-alert-main-menu-music--suno-ai-style-prompt">Red Alert 2 Mod Yellow Alert Main Menu Music — Suno AI Style Prompt</a></h1>
 <blockquote>
