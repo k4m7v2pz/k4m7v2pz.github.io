@@ -35,7 +35,7 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-d8a63482.js";
+            window.path_to_searchindex_js = "../../searchindex-f1665d52.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../../toc-72c5c129.js"></script>
@@ -276,6 +276,10 @@ Phase elapsed (NOT total turn elapsed) — `Pondering… 8s`, `Running ReadFile�
 - 第二篇博文（163088439）勘误了词表问题，但没有指出 `fmt_dur` 在 2026-05-02 之前显示的是整轮累计时间（`turn_elapsed()`）而非阶段时间（`phase_elapsed()`）
 - 近期 AI 输出的 `XhYm / YmZs / Zs` 格式描述是两个 `fmt_dur` 函数的杂糅，且遗漏了 `ms` 和 sub-minute 小数
 - 验证方法：`cd  &amp;&amp; git log --all --oneline -S 'fmt_dur' -- crates/atomcode-tuix/src/render/mod.rs`
+
+&lt;!-- 许可声明 --&gt;
+&gt; 本文采用木兰开放作品许可协议 署名，第1版 (MulanOWL BY v1) 授权。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
+&gt; 原始版本见：https://k4m7v2pz.github.io/zh/blog/programming/atomcode-fmt-dur-controversy.html
 </code></pre>
 
                     </main>

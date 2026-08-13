@@ -35,7 +35,7 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-d8a63482.js";
+            window.path_to_searchindex_js = "../../searchindex-f1665d52.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../../toc-72c5c129.js"></script>
@@ -236,6 +236,11 @@
 <p><strong>遗留</strong>：生成的 flat INI 段与 rulesmd.ini 的 <code>[BuildingTypes]</code> 注册尚未自动化合入；语音 mapping 的引擎消费端（事件触发 → 播 wav）仍是待接线状态——原版 eva.ini 语音继续兜底。这两条作为后续迭代方向记录在 <code>docs/PORTING.md</code>。</p>
 <h3 id="6-结论"><a class="header" href="#6-结论">6. 结论</a></h3>
 <p>格式现代化的本质是「三层管道的逐一适配」：数据加载（mix → OPFS）→ 资源包装（SHP → PngShpFile）→ 渲染材质（palette → RGBA）。每一层都有隐性假设，改一层崩一层；把假设写成踩坑记录（<code>docs/PORTING.md</code>）后，后续同类迁移可以直接复用排查路径。</p>
+<!-- 许可声明 -->
+<blockquote>
+<p>本文采用木兰开放作品许可协议 署名，第1版 (MulanOWL BY v1) 授权。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
+原始版本见：https://k4m7v2pz.github.io/zh/blog/games/openyrweb-data-format-modernization.html</p>
+</blockquote>
 
                     </main>
 

@@ -35,7 +35,7 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-d8a63482.js";
+            window.path_to_searchindex_js = "../../searchindex-f1665d52.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../../toc-72c5c129.js"></script>
@@ -255,6 +255,11 @@
 <li><strong>对话式 AI</strong>：提问“如何把 R36S 的 EmuELEC 系统从旧 TF 卡迁到新卡”，把本文作为上下文，AI 应给出分区分析、dd 整块拷贝、引导区补拷三步方案，并提醒 macOS 用 rdisk 原始设备。</li>
 <li><strong>代码 Agent</strong>：可直接执行的命令序列是 dd 备份旧卡、fdisk 分析、dd 拷 P1（skip=16 seek=16 count=1024）与 P2（skip=1040 seek=1040 count=5104）、newfs_msdos 建 ROM 分区、dd 补引导区（skip=1 seek=1 count=32767）、dd 读回 md5 校验。核对要点：P1/P2 起始扇区必须与镜像一致，引导区必须补拷，UUID 必须匹配。</li>
 </ol>
+<!-- 许可声明 -->
+<blockquote>
+<p>本文采用木兰开放作品许可协议 署名，第1版 (MulanOWL BY v1) 授权。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
+原始版本见：https://k4m7v2pz.github.io/zh/blog/games/r36s-tf-card-migration-rk3326.html</p>
+</blockquote>
 
                     </main>
 

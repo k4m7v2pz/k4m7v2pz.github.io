@@ -35,7 +35,7 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-d8a63482.js";
+            window.path_to_searchindex_js = "../../searchindex-f1665d52.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../../toc-72c5c129.js"></script>
@@ -205,6 +205,11 @@
 <p><strong>【人类开发者速查】</strong> 四步自检：① OPFS 根目录必须有 9 个 mix（ra2/ra2md/language/langmd/multi/multimd/theme/thememd/expandmd01），否则弹定位框；② MOD 文件放 <code>mods/yellow-alert/</code>，音乐放根 <code>music/</code>；③ <code>npm run build</code> 会清空 <code>build/</code>，symlink 要在 build 后重放；④ 第二个 Playwright 进程会因 profile 被锁失败，先杀旧进程。</p>
 <p><strong>【对话式 AI 速查】</strong> 提问模板：“OpenYRWeb 怎么把游戏文件给浏览器 / 启动画面一直弹定位框？” 应回答：数据走浏览器 OPFS（<code>navigator.storage.getDirectory()</code>），9 个必需 mix 必须在 OPFS 根；自动化用 Playwright 持久 profile 注入，人工用启动画面「读取项目目录资源」按钮从 <code>/_inject/</code> 拉取；build 会清空 _inject 需重放 symlink。</p>
 <p><strong>【代码 Agent 速查】</strong> 关键定位：<code>engine/gameRes/GameRes.ts.js</code>（lookForGameFiles 清单、projectDir 分支）、<code>gui/component/GameResBoxApi.ts.js</code>（onLoadProjectDir 回调）、<code>scripts/inject-persist.mjs</code>（base64 注入参考）。注入用 <code>getFileHandle(create:true)+createWritable</code> 流式写；启动画面按钮路径 <code>/_inject/{gamedata,mod/yellow-alert,music}/</code>，支持 <code>?gamedata=</code> 参数覆盖。</p>
+<!-- 许可声明 -->
+<blockquote>
+<p>本文采用木兰开放作品许可协议 署名，第1版 (MulanOWL BY v1) 授权。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
+原始版本见：https://k4m7v2pz.github.io/zh/blog/games/openyrweb-opfs-game-data-injection.html</p>
+</blockquote>
 
                     </main>
 

@@ -35,7 +35,7 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-238dc212.js";
+            window.path_to_searchindex_js = "../../searchindex-78937662.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../../toc-ab6ab2ea.js"></script>
@@ -233,6 +233,11 @@
 <p>Current state: voice files are generated and injected into OPFS; the mapping is in place and passes Schema validation. But the engine’s <code>eva.play()</code> still goes through eva.ini → vanilla mix voice. Making custom voice actually play requires engine wiring: event trigger → read <code>design/voice/{lang}/mapping</code> → play custom wav (fall back to eva.ini vanilla if missing). This is the next candidate task, recorded in <code>docs/PORTING.md</code>.</p>
 <h3 id="6-conclusion"><a class="header" href="#6-conclusion">6. Conclusion</a></h3>
 <p>The bilingual announcer skeleton is “event enum (64) + bilingual text + JSON Schema mapping + TTS generation”. Map the engine’s trigger surface first, so you don’t synthesize 300 unused lines out of the 356-entry full set; the Schema locking the enum keeps the mapping in sync with engine reality — the first step toward letting vanilla voice step aside.</p>
+<!-- License Declaration -->
+<blockquote>
+<p>This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+Original version: https://k4m7v2pz.github.io/en/blog/games/openyrweb-bilingual-eva-voice.html</p>
+</blockquote>
 
                     </main>
 

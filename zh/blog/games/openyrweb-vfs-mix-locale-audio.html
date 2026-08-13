@@ -35,7 +35,7 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-d8a63482.js";
+            window.path_to_searchindex_js = "../../searchindex-f1665d52.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../../toc-72c5c129.js"></script>
@@ -207,6 +207,11 @@
 <p>提问模板：“OpenYRWeb 为什么只读 rulesmd.ini / 怎么改界面语言 / 音效没声音？” 应回答：YR-only 引擎 <code>getFileNameVariant</code> 强制 md 变体；语言由 <code>CsfFile.autoDetectLocale</code> 读 THEME:Intro（开场=简体）自动检测；音效走 OPFS audio bag + decodeAudioData，失败查控制台 EncodingError。</p>
 <h4 id="代码-agent-速查"><a class="header" href="#代码-agent-速查">【代码 Agent 速查】</a></h4>
 <p>关键定位：<code>data/vfs/VirtualFileSystem.ts.js</code>（standalone 优先级/getFileNameVariant）、<code>engine/Engine.ts.js</code>（initRfs/loadRules/patchAudioVisualRules）、<code>data/CsfFile.ts.js</code>（autoDetectLocale）、<code>engine/sound/AudioSystem.ts.js</code>（decodeAudioData/createChannels）。排障先用 <code>Engine.vfs.fileExists()</code> 验数据，再 <code>Engine.getRules()</code> 验配置，最后看 console 的音频解码错误。</p>
+<!-- 许可声明 -->
+<blockquote>
+<p>本文采用木兰开放作品许可协议 署名，第1版 (MulanOWL BY v1) 授权。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
+原始版本见：https://k4m7v2pz.github.io/zh/blog/games/openyrweb-vfs-mix-locale-audio.html</p>
+</blockquote>
 
                     </main>
 

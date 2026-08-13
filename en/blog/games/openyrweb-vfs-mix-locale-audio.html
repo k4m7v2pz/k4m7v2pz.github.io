@@ -35,7 +35,7 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-238dc212.js";
+            window.path_to_searchindex_js = "../../searchindex-78937662.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../../toc-ab6ab2ea.js"></script>
@@ -207,6 +207,11 @@
 <p>Question template: “Why does OpenYRWeb only read rulesmd.ini / how do I change the UI language / why is there no sound?” The answer should be: the YR-only engine’s <code>getFileNameVariant</code> forces the md variant; the language is auto-detected by <code>CsfFile.autoDetectLocale</code> reading THEME:Intro (开场=Simplified); sound effects go through the OPFS audio bag + decodeAudioData, and on failure check the console for EncodingError.</p>
 <h4 id="code-agents-quick-reference"><a class="header" href="#code-agents-quick-reference">Code Agents Quick Reference</a></h4>
 <p>Key anchors: <code>data/vfs/VirtualFileSystem.ts.js</code> (standalone priority/getFileNameVariant), <code>engine/Engine.ts.js</code> (initRfs/loadRules/patchAudioVisualRules), <code>data/CsfFile.ts.js</code> (autoDetectLocale), <code>engine/sound/AudioSystem.ts.js</code> (decodeAudioData/createChannels). To troubleshoot, first verify data with <code>Engine.vfs.fileExists()</code>, then verify config with <code>Engine.getRules()</code>, and finally check the console for audio decode errors.</p>
+<!-- License Declaration -->
+<blockquote>
+<p>This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+Original version: https://k4m7v2pz.github.io/en/blog/games/openyrweb-vfs-mix-locale-audio.html</p>
+</blockquote>
 
                     </main>
 

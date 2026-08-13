@@ -35,7 +35,7 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-d8a63482.js";
+            window.path_to_searchindex_js = "../../searchindex-f1665d52.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../../toc-72c5c129.js"></script>
@@ -233,6 +233,11 @@
 <p>当前状态：语音文件已生成注入 OPFS，mapping 已就位并通过 Schema 校验；但引擎的 <code>eva.play()</code> 仍走 eva.ini → 原版 mix 语音。让自定义语音真正发声需要引擎接线：事件触发 → 读 <code>design/voice/{lang}/mapping</code> → 播自定义 wav（找不到回退 eva.ini 原版）。这是下一步的候选工作，已记录在 <code>docs/PORTING.md</code>。</p>
 <h3 id="6-结论"><a class="header" href="#6-结论">6. 结论</a></h3>
 <p>中英双语副官的骨架是「事件枚举（64 条）+ 双语文本 + JSON Schema 映射 + TTS 生成」。先摸清引擎触发面再做语音，避免为 356 条全集白做 300 条用不上的音频；Schema 锁枚举保证映射与引擎事实同步，是「让原版语音让位」的第一步。</p>
+<!-- 许可声明 -->
+<blockquote>
+<p>本文采用木兰开放作品许可协议 署名，第1版 (MulanOWL BY v1) 授权。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
+原始版本见：https://k4m7v2pz.github.io/zh/blog/games/openyrweb-bilingual-eva-voice.html</p>
+</blockquote>
 
                     </main>
 

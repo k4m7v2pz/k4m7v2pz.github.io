@@ -35,7 +35,7 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-238dc212.js";
+            window.path_to_searchindex_js = "../../searchindex-78937662.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../../toc-ab6ab2ea.js"></script>
@@ -236,6 +236,11 @@
 <p><strong>Remaining</strong>: auto-merging generated flat INI sections into rulesmd.ini’s <code>[BuildingTypes]</code> registry is not yet automated; the engine consumption side of voice mapping (event trigger → play custom wav) is still pending — vanilla eva.ini voice keeps serving as fallback. Both are recorded in <code>docs/PORTING.md</code> as next iterations.</p>
 <h3 id="6-conclusion"><a class="header" href="#6-conclusion">6. Conclusion</a></h3>
 <p>Format modernization is essentially “adapting three pipelines one by one”: data loading (mix → OPFS), resource wrapping (SHP → PngShpFile), and render materials (palette → RGBA). Every layer hides assumptions; change one layer and one breaks. Once those assumptions are written into the pitfall log (<code>docs/PORTING.md</code>), future migrations of the same kind can reuse the debugging path.</p>
+<!-- License Declaration -->
+<blockquote>
+<p>This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+Original version: https://k4m7v2pz.github.io/en/blog/games/openyrweb-data-format-modernization.html</p>
+</blockquote>
 
                     </main>
 
