@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # macOS 上 Nushell 自定义配置陷阱：一个让我的工具链函数突然消失的根因复盘
 
 > **一句话总结：** macOS 上 nushell 实际读取的配置文件路径不是 `~/.config/nushell/config.nu`，而是 `~/Library/Application Support/nushell/config.nu`。改错地方会让你的自定义函数"看起来改好了，新开标签页又变回旧的"。
@@ -84,5 +86,5 @@ echo $nu.config-path | path expand
 ---
 
 <!-- 许可声明 -->
-> 本文采用木兰开放作品许可协议 署名，第1版 (MulanOWL BY v1) 授权。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
+> 本文采用木兰开放作品许可协议 署名-专利许可，第1版 (MulanOWL BY-PL v1) 授权，亦可选用 CC0-1.0（公共领域奉献）。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
 > 原始版本见：https://k4m7v2pz.github.io/zh/blog/tools/macos-nushell-config-path-pitfall.html

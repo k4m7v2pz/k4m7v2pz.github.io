@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 ## 一、触发场景：换内核后 LCD 背光亮但屏幕黑
 
 一台 RK3326 平台（Cortex-A35 / Mali-G31 / 640×480 MIPI-DSI）的嵌入式 Linux 设备，原系统内核 5.10 正常点亮屏幕。为了升级系统，替换为内核 6.12 的新镜像并整盘写入存储卡，上电后——**背光亮起，但屏幕始终黑屏，进不了系统**。
@@ -143,5 +145,5 @@ strings KERNEL | grep "Linux version"
 - 止损：面板序列缺失 + 驱动不兼容 = 配置不可修复，弃用镜像回到原系统
 
 <!-- 许可声明 -->
-> 本文采用木兰开放作品许可协议 署名，第1版 (MulanOWL BY v1) 授权。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
+> 本文采用木兰开放作品许可协议 署名-专利许可，第1版 (MulanOWL BY-PL v1) 授权，亦可选用 CC0-1.0（公共领域奉献）。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
 > 原始版本见：https://k4m7v2pz.github.io/zh/blog/programming/rk3326-dtb-panel-debug.html

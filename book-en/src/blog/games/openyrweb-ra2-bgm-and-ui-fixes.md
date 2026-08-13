@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # Porting an RA2 MOD to OpenYRWeb: BGM Mounting and UI Overflow Fixes
 
 > Date: 2026-08-02
@@ -99,5 +101,5 @@ After the three fixes, the main-menu and in-game BGM work, the list shows the Ch
 After making changes, re-run `bun run scripts/inject-persist.mjs` to inject OPFS, then refresh the page.
 
 <!-- License Declaration -->
-> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
 > Original version: https://k4m7v2pz.github.io/en/blog/games/openyrweb-ra2-bgm-and-ui-fixes.html

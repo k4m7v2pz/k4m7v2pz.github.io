@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # Fixing SSH-into-Windows Character-by-Character Output Accumulation: \r Carriage Return Treated as Newline, winpty with Win10 1607 and No ConPTY
 
 > Date: 2026-08-05
@@ -134,5 +136,5 @@ expect reproduction: `spawn ssh host` then `send "命令\r"` — overlapping out
 ---
 
 <!-- License statement -->
-> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright belongs to the author; attribution is required, but for enterprise compliance please retain the original statement.
+> This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright belongs to the author; attribution is required, but for enterprise compliance please retain the original statement.
 > Original version: https://k4m7v2pz.github.io/en/blog/operating-system/windows/ssh-windows-output-buffering.html

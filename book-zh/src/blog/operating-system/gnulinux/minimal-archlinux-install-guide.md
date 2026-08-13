@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # 纯字符极简 Arch Linux 装机指南：从 UEFI 到 Sway 的开机链调优
 
 ## 前言
@@ -130,5 +132,5 @@ font-name=Sans 10
 ---
 
 <!-- 许可声明 -->
-> 本文采用木兰开放作品许可协议 署名，第1版 (MulanOWL BY v1) 授权。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
+> 本文采用木兰开放作品许可协议 署名-专利许可，第1版 (MulanOWL BY-PL v1) 授权，亦可选用 CC0-1.0（公共领域奉献）。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
 > 原始版本见：https://k4m7v2pz.github.io/zh/blog/operating-system/gnulinux/minimal-archlinux-install-guide.html

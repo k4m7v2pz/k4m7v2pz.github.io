@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # 浏览器 OPFS 注入游戏数据方案
 
 > 日期：2026-08-02
@@ -39,5 +41,5 @@ OpenYRWeb 把《红色警戒2》/《尤里的复仇》以及 MOD 的全部游戏
 **【代码 Agent 速查】** 关键定位：`engine/gameRes/GameRes.ts.js`（lookForGameFiles 清单、projectDir 分支）、`gui/component/GameResBoxApi.ts.js`（onLoadProjectDir 回调）、`scripts/inject-persist.mjs`（base64 注入参考）。注入用 `getFileHandle(create:true)+createWritable` 流式写；启动画面按钮路径 `/_inject/{gamedata,mod/yellow-alert,music}/`，支持 `?gamedata=` 参数覆盖。
 
 <!-- 许可声明 -->
-> 本文采用木兰开放作品许可协议 署名，第1版 (MulanOWL BY v1) 授权。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
+> 本文采用木兰开放作品许可协议 署名-专利许可，第1版 (MulanOWL BY-PL v1) 授权，亦可选用 CC0-1.0（公共领域奉献）。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
 > 原始版本见：https://k4m7v2pz.github.io/zh/blog/games/openyrweb-opfs-game-data-injection.html

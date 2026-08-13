@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # OpenYRWeb: Troubleshooting Battlefield Cursor Speed Anomalies
 
 > Date: 2026-08-05
@@ -63,5 +65,5 @@ Executable flow: grep pointer lock request points → set unadjustedMovement to 
 ---
 
 <!-- License Declaration -->
-> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
 > Original version: https://k4m7v2pz.github.io/en/blog/games/openyrweb-cursor-speed.html

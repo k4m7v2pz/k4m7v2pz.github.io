@@ -1,3 +1,4 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
 
 # 7-Zip SFX 标准打包规范：为何 7zSD.sfx 是唯一正确的安装型 Stub
 
@@ -95,5 +96,5 @@ RunProgram="cmd.exe"
 ---
 
 <!-- 许可声明 -->
-> 本文采用木兰开放作品许可协议 署名，第1版 (MulanOWL BY v1) 授权。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
+> 本文采用木兰开放作品许可协议 署名-专利许可，第1版 (MulanOWL BY-PL v1) 授权，亦可选用 CC0-1.0（公共领域奉献）。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
 > 原始版本见：https://k4m7v2pz.github.io/zh/blog/operating-system/windows/7zip-sfx-stub-selection.html

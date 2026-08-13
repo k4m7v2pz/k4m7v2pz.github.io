@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # CSDN Writing Agent Content Review: What Gets Rejected and How to Get Around It
 
 > Date: 2026-08-07
@@ -54,5 +56,5 @@ After rewriting, the same article passed and the Agent expanded it normally.
 - For a review-free, unlimited publishing channel, a self-hosted GitHub Pages site (mdBook) is a better choice — this repository is one example
 
 <!-- License Declaration -->
-> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
 > Original version: https://k4m7v2pz.github.io/en/blog/tools/csdn-writing-agent-content-review.html

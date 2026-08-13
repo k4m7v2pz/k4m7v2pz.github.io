@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # Remote Management of Windows 10 LTSB in Restricted Networks: When OpenSSH Fails, WinRM to the Rescue
 
 ## 1. Scenario & Constraints
@@ -212,5 +214,5 @@ Paired with `uv` — the modern Python package manager on macOS — the "tempora
 
 ---
 <!-- License Declaration -->
-> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
 > Original version: https://k4m7v2pz.github.io/en/blog/operating-system/windows/windows-ltsb-winrm-remote-management.html

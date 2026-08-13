@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # AtomCode Terminal Spinner Labels: What Are Those "Divining" and "Brewing" Words Really Saying?
 
 ## 1. Origin: Mistaken for Model Queueing
@@ -77,5 +79,5 @@ The **Divining... 5m2s** format is assembled in `format_spinner_label` in `crate
 
 ---
 <!-- License Declaration -->
-> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
 > Original version: https://k4m7v2pz.github.io/en/blog/programming/atomcode-spinner-thinking-labels.html

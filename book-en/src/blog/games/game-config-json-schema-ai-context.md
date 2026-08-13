@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # Game Config for AI Agents: JSON Schema and an ai_context Annotation-Layer Design
 
 > Date: 2026-08-02
@@ -80,5 +82,5 @@ Question template: "Why can this MOD's Construction Yard fire?" The answer shoul
 Key anchors: `conf/ai/yellow-alert.schema.json` ($defs.ai_context structure + design_philosophy), `yellow-alert.mod.json` (GACNST/NACNST entries, SABOTZ/FlakWeapon2 weapons). After editing the config, run `python3 -m jsonschema -i yellow-alert.mod.json yellow-alert.schema.json` to self-check; when asked about design intent, read ai_context first rather than the raw numbers.
 
 <!-- License Declaration -->
-> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
 > Original version: https://k4m7v2pz.github.io/en/blog/games/game-config-json-schema-ai-context.html

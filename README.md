@@ -81,9 +81,9 @@ k4m7v2pz.github.io/
 
 ## 许可协议
 
-本仓库实行**双许可**：
+本仓库实行**双许可**，使用者任选其一：
 
-- **仓库代码、配置与构建工作流**（如 `book.toml`、`build.rvs`、`main.py`、CI 脚本等）：采用 **木兰宽松许可证 v2 (Mulan PSL v2)** 授权，见仓库根目录 `LICENSE`。
-- **原创内容（文章、配图、音频等作品）**：采用 **木兰开放作品许可协议 署名，第1版 (Mulan OWL BY v1)** 授权，见仓库根目录 `LICENSE-CONTENT`。
+- **仓库代码、配置与构建工作流**（如 `main.py`、`scripts/`、`build.rvs`、`book.toml`、CI 工作流等）：采用 **木兰宽松许可证 v2 (Mulan PSL v2)** 或 **Unlicense** 授权，见仓库根目录 `LICENSE-CODE`。
+- **原创内容（文章、配图、音频等作品）**：采用 **木兰开放作品许可协议 署名-专利许可，第1版 (Mulan OWL BY-PL v1)** 或 **CC0-1.0** 授权，见仓库根目录 `LICENSE-CONTENT`。
 
-版权归作者所有。内容转载/复用须按 Mulan OWL BY v1 要求保留来源网址与署名声明；代码分发按 Mulan PSL v2 要求保留原始版权、专利、商标及免责声明。
+版权归作者所有。选 Mulan PSL v2 / Mulan OWL BY-PL 支须保留原始版权、专利、商标及免责声明（内容另须署名）；选 Unlicense / CC0 支的使用者，可自由删除所有 LICENSE 文件，无需保留任何声明。贡献者不强制要求署名，不追究署名义务。

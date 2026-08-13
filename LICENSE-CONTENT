@@ -1,12 +1,12 @@
-本站点（k4m7v2pz.github.io）所有原创内容（文章、配图、音频等作品）采用木兰开放作品许可协议 署名，第1版（Mulan Open Works License Attribution, Version 1，简称 MulanOWL BY v1）授权。
+本文件适用于仓库中的原创内容（文章、配图、音频等作品，如 book-zh/book-en 的博客文章及其配图、音乐等），双许可，使用者任选其一：
+  1. Mulan OWL BY-PL v1（木兰开放作品许可协议 署名-专利许可，第1版）
+  2. CC0-1.0（公共领域奉献）
 
-仓库代码、配置文件与构建工作流（如 book.toml、build.rvs、main.py、CI 脚本等）采用木兰宽松许可证，第2版（Mulan PSL v2）授权，见仓库根目录 LICENSE 文件。
+=== 木兰开放作品许可协议 署名-专利许可，第1版 ===
 
-=== 木兰开放作品许可协议 署名，第1版 ===
+2022年12月 http://license.coscl.org.cn/MulanOWLBYPLv1
 
-2022年12月 http://license.coscl.org.cn/MulanOWLBYv1
-
-“您”对“本作品”的复制、使用、修改及“传播”受木兰开放作品许可协议 署名，第1版（以下简称“本许可协议”）的如下条款的约束：
+“您”对“本作品”的复制、使用、修改及“传播”受木兰开放作品许可协议 署名-专利许可，第1版（以下简称“本许可协议”）的如下条款的约束：
 
 0. 定义
 
@@ -28,11 +28,19 @@
 
 在“您”遵守“本许可协议”的前提下，每个“贡献者”根据“本许可协议”授予“您”永久性的、全球性的、免费的、非独占的、不可撤销的版权许可，供“您”以复制、修改、“传播”等方式利用“本作品”。
 
-2. 无其他许可
+2. 授予专利许可
 
-除“本许可协议”明确规定外，“本许可协议”不提供包括商标、专利在内的任何其他许可。
+2.1 在“您”遵守“本许可协议”的前提下，每个“贡献者”根据“本许可协议”授予“您”永久性的、全球性的、免费的、非独占的、不可撤销的（根据“本许可协议”规定提前终止的除外）专利许可，供“您”依据“本作品”制造、委托制造产品，使用、销售、许诺销售、进口该产品。前述专利许可仅限于“贡献者”现在或将来拥有或控制的、其在“本作品”中享有版权的部分所覆盖的、依据“本作品”本身制造、委托制造产品，使用、销售、许诺销售、进口该产品而必然会侵犯的专利权利要求或外观设计特征。
 
-3. “传播”条件
+2.2 若“您”直接或间接地、就“本作品”对任何人发起专利侵权诉讼（包括反诉或交叉诉讼）或其他专利维权行动，指控其侵犯专利权，则“本许可协议”授予“您”的专利许可自“您”提起诉讼或发起维权行动之日终止。
+
+2.3 第2.1条和2.2条中的专利包括外观设计；适用法域的法律对外观设计的保护不纳入专利保护范围的，不影响第2.1条中“贡献者”对外观设计的许可及第2.2条中对“您”的外观设计许可的终止。
+
+3. 无其他许可
+
+除“本许可协议”明确规定外，“本许可协议”不提供包括商标在内的任何其他许可。
+
+4. “传播”条件
 
 “您”可以任何方式“传播”“本作品”或“您的”“演绎作品”，但应当满足以下条件：
 
@@ -46,9 +54,9 @@
 
 “您”可以以合理方式标注“您”所使用的“本作品”或其部分的标题、版本等信息；若“您”使用的“本作品”或其部分或“您的”“演绎作品”是通过信息网络“传播”，本条第（1）-（3）项中所述文本或网址可以使用超链接。
 
-4. 违约与终止
+5. 违约与终止
 
-4.1 若“您”违反“本许可协议”，任何“贡献者”有权书面通知“您”终止其根据“本许可协议”授予“您”的许可。该“贡献者”根据“本许可协议”授予“您”的许可自“您”接到其终止通知之日起终止。仅在如下三种情形下，即使“您”收到“贡献者”的通知也并不终止其授予“您”的许可：
+5.1 若“您”违反“本许可协议”，任何“贡献者”有权书面通知“您”终止其根据“本许可协议”授予“您”的许可。该“贡献者”根据“本许可协议”授予“您”的许可自“您”接到其终止通知之日起终止。仅在如下三种情形下，即使“您”收到“贡献者”的通知也并不终止其授予“您”的许可：
 
 （1）“您”在接到该终止通知之前已停止所有违反行为；
 
@@ -56,25 +64,25 @@
 
 （3）“贡献者”明示恢复授予“您”的许可。
 
-4.2 即使“您”在“本许可协议”下被授予的许可终止，只要从“您”处直接或间接接收“本作品”的其他人遵守“本许可协议”的规定，他们根据“本许可协议”享有的权利不受影响。
+5.2 即使“您”在“本许可协议”下被授予的许可终止，只要从“您”处直接或间接接收“本作品”的其他人遵守“本许可协议”的规定，他们根据“本许可协议”享有的权利不受影响。
 
-4.3 “本许可协议”第0、4、5、6条，不因“本许可协议”终止而失效。
+5.3 “本许可协议”第0、5、6、7条，不因“本许可协议”终止而失效。
 
-5. 免责声明与责任限制
+6. 免责声明与责任限制
 
 “本作品”在提供时不带有任何明示或默示的担保。在任何情况下，“贡献者”不对任何人因使用“本作品”而引发的任何直接或间接损失承担任何责任，不论该等损失因何种原因导致或者基于何种法律理论，即使其曾被告知有该等损失的可能性。
 
-6. 语言
+7. 语言
 
 “本许可协议”以中英文双语表述，中英文版本具有同等法律效力。若中英文版本存在任何不一致，以中文版为准。
 
 条款结束
 
-=== Mulan Open Works License Attribution, Version 1 ===
+=== Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1) ===
 
-December 2022 http://license.coscl.org.cn/MulanOWLBYv1
+December 2022 http://license.coscl.org.cn/MulanOWLBYPLv1
 
-Your reproduction, use, modification and Dissemination of This Work shall be subject to Mulan Open Works License Attribution, Version 1 (This License) with following terms and conditions:
+Your reproduction, use, modification and Dissemination of This Work shall be subject to Mulan Open Works License Attribution-PatentLicensed, Version 1 (This License) with following terms and conditions:
 
 0. Definition
 
@@ -96,17 +104,25 @@ Effective Technical Measures means those technical measures taken by copyright h
 
 Subject to Your compliance with the terms and conditions of This License, each Contributor hereby grants You, according to This License, a perpetual, worldwide, royalty-free, non-exclusive, irrevocable copyright license to copy, modify, Disseminate, and in other manner use This Work.
 
-2. No Other License
+2. Grant of Patent License
 
-Except for those as expressly stated in This License, This License does not provide any other licenses, including trademark license or patent license.
+2.1 Subject to Your compliance with the terms and conditions of This License, each Contributor hereby grants You, according to This License, a perpetual, worldwide, royalty-free, non-exclusive, irrevocable (unless terminated early according to This License) patent license for You to make, have made, use, sell, offer for sale and import any products based on This Work. The foregoing patent license applies only to patent claims or design features that are owned or controlled by the Contributor now or in future, covered by the copyrighted portion of This Work and necessarily infringed by making, having made, using, selling, offering for sale, or importing the products based on This Work.
 
-3. Dissemination Conditions
+2.2 If You directly or indirectly institute patent litigation (including a cross-claim or counterclaim in a litigation) or other patent enforcement activities against anyone with respect to This Work, accusing them of infringement of patents, then any patent license granted to You under This License for This Work shall terminate as of the date such litigation or activity is filed or taken.
+
+2.3 The patents in Sections 2.1 and 2.2 include design; if design is not protected under patent law of the applicable jurisdiction, the Contributor's license of design in Section 2.1 and the termination of Your license of design in Section 2.2 remains unaffected.
+
+3. No Other License
+
+Except for those as expressly stated in This License, This License does not provide any other licenses, including trademark license.
+
+4. Dissemination Conditions
 
 You may Disseminate This Work or Your Adapted Work in any manner, provided that the following conditions are met:
 
 (1) You must provide the text or URI of This License with This Work or Your Adapted Work;
 
-(2) You must retain any URI, Contributor’s attribution and/or copyright statements (unless the Contributor requires removal), modification statements, patent statements, trademark statements, and disclaimer statements of This Work or parts thereof that You use;
+(2) You must retain any URI, Contributor's attribution and/or copyright statements (unless the Contributor requires removal), modification statements, patent statements, trademark statements, and disclaimer statements of This Work or parts thereof that You use;
 
 (3) If You create an Adapted Work based on This Work and Disseminate it, You must indicate in a reasonable manner that You modified This Work;
 
@@ -114,26 +130,65 @@ You may Disseminate This Work or Your Adapted Work in any manner, provided that 
 
 You may indicate in a reasonable manner the information such as the title or version of This Work or parts thereof that You use; if This Work or parts thereof that You use or Your Adapted Work is Disseminated through information networks, You may use hyperlinks for provision of the foregoing texts or URIs in (1)-(3) of Section 4.
 
-4. Breach and Termination
+5. Breach and Termination
 
-4.1 If You breached This License, any Contributor has the right to notify You in writing to terminate its license granted to You under This License. The license granted to You by such Contributor terminates upon Your receipt of such notice of termination. Notwithstanding the foregoing, Your license will not be terminated even if You received a notice of termination from Contributor, under three circumstances as set forth below:
+5.1 If You breached This License, any Contributor has the right to notify You in writing to terminate its license granted to You under This License. The license granted to You by such Contributor terminates upon Your receipt of such notice of termination. Notwithstanding the foregoing, Your license will not be terminated even if You received a notice of termination from Contributor, under three circumstances as set forth below:
 
 (1) You have cured all the breaches prior to receipt of such notice of termination; or,
 
-(2) it’s Your first time to receive a notice of termination from such Contributor pursuant to This License, and You have cured all the breaches within 30 days of receipt of such notice; or,
+(2) it's Your first time to receive a notice of termination from such Contributor pursuant to This License, and You have cured all the breaches within 30 days of receipt of such notice; or,
 
 (3) Contributor has expressly reinstated the license granted to You.
 
-4.2 Termination of Your license under This License shall not affect any rights under This License granted to any others who directly or indirectly receive This Work from You, provided that they comply with the terms and conditions of This License.
+5.2 Termination of Your license under This License shall not affect any rights under This License granted to any others who directly or indirectly receive This Work from You, provided that they comply with the terms and conditions of This License.
 
-4.3 Sections 0, 4, 5, and 6 survive termination of This License.
+5.3 Sections 0, 5, 6, and 7 survive termination of This License.
 
-5. Disclaimer of Warranty and Limitation of Liability
+6. Disclaimer of Warranty and Limitation of Liability
 
 THIS WORK IS PROVIDED WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED. IN NO EVENT SHALL ANY CONTRIBUTOR BE LIABLE TO YOU FOR ANY DAMAGES, INCLUDING BUT NOT LIMITED TO ANY DIRECT OR INDIRECT DAMAGES ARISING FROM YOUR USE OR INABILITY TO USE THIS WORK, NO MATTER HOW IT IS CAUSED OR BASED ON WHICH LEGAL THEORY, EVEN IF SUCH CONTRIBUTOR HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
 
-6. Language
+7. Language
 
 THIS LICENSE IS WRITTEN IN BOTH CHINESE AND ENGLISH, AND THE CHINESE VERSION AND ENGLISH VERSION SHALL HAVE THE SAME LEGAL EFFECT. IN CASE OF DIVERGENCE BETWEEN THE CHINESE AND ENGLISH VERSIONS, THE CHINESE VERSION SHALL PREVAIL.
 
 END OF THE TERMS AND CONDITIONS
+
+=== CC0 1.0 Universal ===
+
+CREATIVE COMMONS CORPORATION IS NOT A LAW FIRM AND DOES NOT PROVIDE LEGAL SERVICES. DISTRIBUTION OF THIS DOCUMENT DOES NOT CREATE AN ATTORNEY-CLIENT RELATIONSHIP. CREATIVE COMMONS PROVIDES THIS INFORMATION ON AN "AS-IS" BASIS. CREATIVE COMMONS MAKES NO WARRANTIES REGARDING THE USE OF THIS DOCUMENT OR THE INFORMATION OR WORKS PROVIDED HEREUNDER, AND DISCLAIMS LIABILITY FOR DAMAGES RESULTING FROM THE USE OF THIS DOCUMENT OR THE INFORMATION OR WORKS PROVIDED HEREUNDER.
+
+Statement of Purpose
+
+The laws of most jurisdictions throughout the world automatically confer exclusive Copyright and Related Rights (defined below) upon the creator and subsequent owner(s) (each and all, an "owner") of an original work of authorship and/or a database (each, a "Work").
+
+Certain owners wish to permanently relinquish those rights to a Work for the purpose of contributing to a commons of creative, cultural and scientific works ("Commons") that the public can reliably and without fear of later claims of infringement build upon, modify, incorporate in other works, reuse and redistribute as freely as possible in any form whatsoever and for any purposes, including without limitation commercial purposes. These owners may contribute to the Commons to promote the ideal of a free culture and the further production of creative, cultural and scientific works, or to gain reputation or greater distribution for their Work in part through the use and efforts of others.
+
+For these and/or other purposes and motivations, and without any expectation of additional consideration or compensation, the person associating CC0 with a Work (the "Affirmer"), to the extent that he or she is an owner of Copyright and Related Rights in the Work, voluntarily elects to apply CC0 to the Work and publicly distribute the Work under its terms, with knowledge of his or her Copyright and Related Rights in the Work and the meaning and intended legal effect of CC0 on those rights.
+
+1. Copyright and Related Rights.
+
+A Work made available under CC0 may be protected by copyright and related or neighboring rights ("Copyright and Related Rights"). Copyright and Related Rights include, but are not limited to, the following:
+
+- the right to reproduce, adapt, distribute, perform, display, communicate, and translate a Work;
+- moral rights retained by the original author(s) and/or performer(s);
+- publicity and privacy rights pertaining to a person's image or likeness depicted in a Work;
+- rights protecting against unfair competition in regards to a Work, subject to the limitations in paragraph 4(a), below;
+- rights protecting the extraction, dissemination, use and reuse of data in a Work;
+- database rights (such as those arising under Directive 96/9/EC of the European Parliament and of the Council of 11 March 1996 on the legal protection of databases, and under any national implementation thereof, including any amended or successor version of such directive); and
+- other similar, equivalent or corresponding rights throughout the world based on applicable law or treaty, and any national implementations thereof.
+
+2. Waiver.
+
+To the greatest extent permitted by, but not in contravention of, applicable law, Affirmer hereby overtly, fully, permanently, irrevocably and unconditionally waives, abandons, and surrenders all of Affirmer's Copyright and Related Rights and associated claims and causes of action, whether now known or unknown (including existing as well as future claims and causes of action), in the Work (i) in all territories worldwide, (ii) for the maximum duration provided by applicable law or treaty (including future time extensions), (iii) in any current or future medium and for any number of copies, and (iv) for any purpose whatsoever, including without limitation commercial, advertising or promotional purposes (the "Waiver"). Affirmer makes the Waiver for the benefit of each member of the public at large and to the detriment of Affirmer's heirs and successors, fully intending that such Waiver shall not be subject to revocation, rescission, cancellation, termination, or any other legal or equitable action to disrupt the quiet enjoyment of the Work by the public as contemplated by Affirmer's express Statement of Purpose.
+
+3. Public License Fallback.
+
+Should any part of the Waiver for any reason be judged legally invalid or ineffective under applicable law, then the Waiver shall be preserved to the maximum extent permitted taking into account Affirmer's express Statement of Purpose. In addition, to the extent the Waiver is so judged Affirmer hereby grants to each affected person a royalty-free, non transferable, non sublicensable, non exclusive, irrevocable and unconditional license to exercise Affirmer's Copyright and Related Rights in the Work (i) in all territories worldwide, (ii) for the maximum duration provided by applicable law or treaty (including future time extensions), (iii) in any current or future medium and for any number of copies, and (iv) for any purpose whatsoever, including without limitation commercial, advertising or promotional purposes (the "License"). The License shall be deemed effective as of the date CC0 was applied by Affirmer to the Work. Should any part of the License for any reason be judged legally invalid or ineffective under applicable law, such partial invalidity or ineffectiveness shall not invalidate the remainder of the License, and in such case Affirmer hereby affirms that he or she will not (i) exercise any of his or her remaining Copyright and Related Rights in the Work or (ii) assert any associated claims and causes of action with respect to the Work, in either case contrary to Affirmer's express Statement of Purpose.
+
+4. Limitations and Disclaimers.
+
+- No trademark or patent rights held by Affirmer are waived, abandoned, surrendered, licensed or otherwise affected by this document.
+- Affirmer offers the Work as-is and makes no representations or warranties of any kind concerning the Work, express, implied, statutory or otherwise, including without limitation warranties of title, merchantability, fitness for a particular purpose, non infringement, or the absence of latent or other defects, accuracy, or the present or absence of errors, whether or not discoverable, all to the greatest extent permissible under applicable law.
+- Affirmer disclaims responsibility for clearing rights of other persons that may apply to the Work or any use thereof, including without limitation any person's Copyright and Related Rights in the Work. Further, Affirmer disclaims responsibility for obtaining any necessary consents, permissions or other rights required for any use of the Work.
+- Affirmer understands and acknowledges that Creative Commons is not a party to this document and has no duty or obligation with respect to this CC0 or use of the Work.

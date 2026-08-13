@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # 128 TTS Voice Lines into a Red Alert Engine: Qwen-TTS + Neil Batch Synthesis
 
 > Date: 2026-08-07
@@ -54,5 +56,5 @@ Verified: searching all git-tracked files for the real key prefix → zero match
 The full pipeline for 128 TTS lines: voice research (Neil) → batch script (.mts + env key) → generate wav → inject (recursive manifest) → engine wiring (pending). Core principles: **reproducible code, keys never on disk, output regenerable anytime** — this skeleton also serves future voice iteration and engine wiring.
 
 <!-- License Declaration -->
-> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
 > Original version: https://k4m7v2pz.github.io/en/blog/games/openyrweb-tts-voice-batch.html

@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # XuanTie 0.17.5 InputExpression Bug: Root Cause Analysis
 
 > **One-liner summary:** The `EvalContext` switch in `evaluator/evaluator.go` of `XuanTie-Lang` 0.17.5 (commit `2d25b20`) is missing the `case *ast.InputExpression:` branch. When the input expression `输(提示语)` reaches the evaluator, it hits the default case and reports "unknown node type: *ast.InputExpression". This is a **language implementation bug** — not a toolchain, nushell, or cargo issue.
@@ -58,5 +60,5 @@ func evalInputExpression(node *ast.InputExpression, ctx *EvalContext) object.Obj
 
 ---
 <!-- License Declaration -->
-> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
 > Original version: https://k4m7v2pz.github.io/en/blog/programming/xuantie-input-expression-bug.html

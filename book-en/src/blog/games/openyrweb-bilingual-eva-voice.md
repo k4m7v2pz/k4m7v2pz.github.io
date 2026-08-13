@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # Bilingual EVA Announcer: Letting Custom Voice Take Over from Vanilla
 
 > Date: 2026-08-07
@@ -62,5 +64,5 @@ Current state: voice files are generated and injected into OPFS; the mapping is 
 The bilingual announcer skeleton is "event enum (64) + bilingual text + JSON Schema mapping + TTS generation". Map the engine's trigger surface first, so you don't synthesize 300 unused lines out of the 356-entry full set; the Schema locking the enum keeps the mapping in sync with engine reality — the first step toward letting vanilla voice step aside.
 
 <!-- License Declaration -->
-> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
 > Original version: https://k4m7v2pz.github.io/en/blog/games/openyrweb-bilingual-eva-voice.html

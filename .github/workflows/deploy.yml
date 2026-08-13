@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MulanPSL-2.0 OR Unlicense
 name: Deploy to GitHub Pages
 
 on:

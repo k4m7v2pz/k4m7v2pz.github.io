@@ -6,6 +6,8 @@ description: Configure Windows 10/11 to use Zed editor for the right-click "Edit
 categories: os
 ---
 
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # Set Zed as the Default Editor for .bat Files
 
 ## Overview
@@ -146,5 +148,5 @@ This approach meets editing needs without breaking the normal execution function
 ---
 
 <!-- License Declaration -->
-> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
 > Original version: https://k4m7v2pz.github.io/en/blog/operating-system/windows/set-zed-as-bat-editor.html

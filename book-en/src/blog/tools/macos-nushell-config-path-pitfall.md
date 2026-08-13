@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # macOS Nushell Config Path Pitfall: Root Cause Analysis of Disappearing Custom Functions
 
 > **One-liner summary:** On macOS, nushell reads its configuration from `~/Library/Application Support/nushell/config.nu`, **not** `~/.config/nushell/config.nu`. Editing the wrong file makes your custom functions "look updated but revert on new terminal tabs."
@@ -61,5 +63,5 @@ echo $nu.config-path | path expand
 
 ---
 <!-- License Declaration -->
-> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
 > Original version: https://k4m7v2pz.github.io/en/blog/tools/macos-nushell-config-path-pitfall.html

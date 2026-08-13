@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # k4m7v2pz 的博客
 
 **开源独立游戏资产 & 工具** — 可拉取、可修改、可商用的代码与资产

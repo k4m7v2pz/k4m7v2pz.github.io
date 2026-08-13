@@ -6,6 +6,8 @@ description: A complete walkthrough of diagnosing and fixing a black screen duri
 categories: games
 ---
 
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # Debugging Black Screen on Mighty Rodent Splash Screen
 
 > Date: 2026-07-09
@@ -125,5 +127,5 @@ Co-Authored-By: AtomCode (GLM-5.2) <noreply@atomgit.com>
 ---
 
 <!-- License Declaration -->
-> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
 > Original version: https://k4m7v2pz.github.io/en/blog/games/mighty-rodent-splash-black-screen-debug.html

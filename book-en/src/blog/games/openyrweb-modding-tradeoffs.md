@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # Engine-Modding Tradeoffs: Playability First, Aesthetics Serve the Feel
 
 > Date: 2026-08-07
@@ -42,5 +44,5 @@ Any render-chain change is regression-tested by "can you actually play Skirmish"
 The modding tradeoff is not "technically optimal" but a three-way balance of aesthetics + agent collaboration + playability: PNG/WAV assets please yourself, JSON/Schema configs please agents, and "playable" regression pleases the feel. These principles keep the modding sustainable — every step has positive feedback, so there is always motivation to keep going.
 
 <!-- License Declaration -->
-> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
 > Original version: https://k4m7v2pz.github.io/en/blog/games/openyrweb-modding-tradeoffs.html

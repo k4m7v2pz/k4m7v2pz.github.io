@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MulanPSL-2.0 OR Unlicense
 def main():
     print("Hello from pthmz-github-io!")
 

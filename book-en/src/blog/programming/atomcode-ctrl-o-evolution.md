@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # Inside AtomCode's Ctrl+O: The Evolution from Tool Output to Reasoning Visibility
 
 > Date: 2026-08-02
@@ -135,5 +137,5 @@ When referencing or modifying verbose mode in code, note:
 - **Verification**: `cd  && git log --all --oneline -S 'toggle_tool_output' -- '*.rs'` to see all the commits involved
 
 <!-- License Declaration -->
-> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
 > Original version: https://k4m7v2pz.github.io/en/blog/programming/atomcode-ctrl-o-evolution.html

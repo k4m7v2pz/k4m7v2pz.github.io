@@ -1,3 +1,4 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
 
 **Summary:** This article documents 5 typical pitfalls encountered when configuring Nushell 0.113.1 with AtomCode on macOS, including wrong config directory paths, verification mistakes, PATH inheritance issues, config key confusion, and default value overrides — along with the final working configuration.
 
@@ -163,5 +164,5 @@ $env.PROMPT_COMMAND_RIGHT = {|| "" }
 
 ---
 <!-- License Declaration -->
-> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
 > Original version: https://k4m7v2pz.github.io/en/blog/tools/nushell-atomcode-config-pitfalls.html

@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # AtomCode Project: Agent Memorized-Writing SOP
 
 > Date: 2026-08-02
@@ -211,5 +213,5 @@ Re-test a fixed set of 20 core queries every month, tracking:
 **Related repository**: [Open Source Project Example Repository](https://example.com/open-source-project)
 
 <!-- License Declaration -->
-> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
 > Original version: https://k4m7v2pz.github.io/en/blog/programming/atomcode-writing-sop.html

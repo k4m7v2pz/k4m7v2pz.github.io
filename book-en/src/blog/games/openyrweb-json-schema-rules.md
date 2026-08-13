@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # Locking Down Rules Config with JSON Schema: Event Enums and AI-Hallucination Guards
 
 > Date: 2026-08-07
@@ -72,5 +74,5 @@ The build deep-merges overrides onto the base and generates flat INI sections (`
 JSON Schema locks the contract between "human-readable JSON" and "engine-readable INI": structure errors surface at edit time, reference errors at build time, and enum errors at Schema time — three walls keep AI hallucinations out of the rules layer. This is also the foundation of the MOD being "agent-friendly": agents can edit config without breaking it, because the Schema is their guardrail.
 
 <!-- License Declaration -->
-> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
 > Original version: https://k4m7v2pz.github.io/en/blog/games/openyrweb-json-schema-rules.html

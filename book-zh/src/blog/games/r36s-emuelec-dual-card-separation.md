@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 ## 一、触发场景：R36S 双卡分离梦魇
 
 R36S 开源掌机（RK3326 / Mali-G31 / 640×480 LCD）有两个 TF 卡槽：**右侧 = OS 槽，左侧 = game 槽**。很多玩家第一反应是"一张装系统、一张装游戏"，但实际买回来的商家固件（EmuELEC 定制版）插右侧系统卡能开机，左侧插游戏卡却**毫无反应**——游戏只能跟系统挤在同一张卡上，想加游戏还得来回倒腾。
@@ -159,5 +161,5 @@ mkfs.vfat -F 32 -n EEROMS /dev/sdX1   # 卷标必须 EEROMS
 - 验证：`blkid` 查 UUID/卷标；上机看 All Games 数量（实测 15928）
 
 <!-- 许可声明 -->
-> 本文采用木兰开放作品许可协议 署名，第1版 (MulanOWL BY v1) 授权。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
+> 本文采用木兰开放作品许可协议 署名-专利许可，第1版 (MulanOWL BY-PL v1) 授权，亦可选用 CC0-1.0（公共领域奉献）。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
 > 原始版本见：https://k4m7v2pz.github.io/zh/blog/games/r36s-emuelec-dual-card-separation.html

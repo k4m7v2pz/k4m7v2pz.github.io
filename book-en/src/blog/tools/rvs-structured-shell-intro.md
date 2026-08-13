@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # rvs (rust-verb-shell): A Structured Shell for Humans and AI Agents
 
 > Date: 2026-08-02
@@ -201,5 +203,5 @@ rvs --sandbox /tmp/safe-box --json get-child-item
 rvs = all-lowercase Verb-Noun commands + optional sandbox + human-friendly table output + an AI-oriented `--json` mode. The project lives at [rust-verb-shell: A Rust-based PowerShell-style Shell Project - AtomGit](https://atomgit.com/k4m7v2pz/rust-verb-shell), versioned with CalVer `YY.M.P`, currently `v26.7.0`.
 
 <!-- License Declaration -->
-> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
 > Original version: https://k4m7v2pz.github.io/en/blog/tools/rvs-structured-shell-intro.html

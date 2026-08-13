@@ -6,6 +6,8 @@ description: 记录在 macOS Apple Silicon 环境下 WezTerm 新标签页启动 
 categories: tools
 ---
 
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 **摘要：** 本文记录了在 macOS（Apple Silicon）环境下，wezterm 新标签页启动 nushell 后无法找到 `cargo` 命令的排查与修复过程。核心坑点包括 nushell 不自动 source `~/.cargo/env`、默认配置目录不是 `~/.config/nushell/` 以及字符串插值语法差异。
 
 ## 1. 症状
@@ -114,5 +116,5 @@ cargo run
 ---
 
 <!-- 许可声明 -->
-> 本文采用木兰开放作品许可协议 署名，第1版 (MulanOWL BY v1) 授权。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
+> 本文采用木兰开放作品许可协议 署名-专利许可，第1版 (MulanOWL BY-PL v1) 授权，亦可选用 CC0-1.0（公共领域奉献）。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
 > 原始版本见：https://k4m7v2pz.github.io/zh/blog/tools/wezterm-nushell-cargo-not-found.html

@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # R36S System Migration in Practice: Moving Losslessly from a No-Name Cheap TF Card to a Branded Card
 
 > Date: 2026-08-02
@@ -102,5 +104,5 @@ extlinux.conf's boot= and disk= point to the two partition UUIDs; any approach t
 3. **Code agents**: the directly executable command sequence is dd to back up the old card, fdisk to analyze, dd to copy P1 (skip=16 seek=16 count=1024) and P2 (skip=1040 seek=1040 count=5104), newfs_msdos to create the ROM partition, dd to restore the boot area (skip=1 seek=1 count=32767), and dd to read back for md5 verification. Verification points: P1/P2 start sectors must match the image, the boot area must be copied, and the UUIDs must match.
 
 <!-- License Declaration -->
-> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
 > Original version: https://k4m7v2pz.github.io/en/blog/games/r36s-tf-card-migration-rk3326.html

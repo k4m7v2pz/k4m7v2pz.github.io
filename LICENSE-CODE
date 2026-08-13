@@ -1,0 +1,58 @@
+本文件适用于仓库中的代码 / 配置 / 工作流（如 main.py、scripts/、build.rvs、book.toml、CI 工作流等），双许可，使用者任选其一：
+  1. Mulan PSL v2（木兰宽松许可证，第2版）
+  2. Unlicense（公有领域奉献）
+
+=== Mulan PSL v2 ===
+
+木兰宽松许可证，第2版
+
+Copyright (c) 2020 北京大学
+
+本许可证适用于由版权持有人（或任何被授予权利的实体）在许可证规定的条件下提供的软件及相关文档（以下简称"软件"）。
+
+1. 授予许可
+   每个版权持有人在此授予您永久性的、全球性的、免费的、非独占的、不可撤销的版权许可，您可以复制、使用、修改、分发本软件的副本，不论是否进行修改，也无论是以源代码形式还是目标代码形式。
+
+2. 授予专利许可
+   每个版权持有人在此授予您永久性的、全球性的、免费的、非独占的、不可撤销的（除本许可证第5条规定的终止情形外）专利许可，以制造、使用、销售、许诺销售、进口本软件，以及以其他方式运行、实施本软件中包含的该版权持有人的专利技术。
+
+3. 保留声明义务
+   您在分发本软件时，必须向接收者提供本许可证的副本，并保留本软件中的所有版权、商标、专利及免责声明。
+
+4. 免责声明
+   本软件按"原样"提供，不提供任何明示或暗示的担保，包括但不限于适销性、特定用途适用性或不侵权的担保。在任何情况下，版权持有人或贡献者均不对因使用本软件产生的任何直接、间接、偶然、特殊、惩罚性或后果性损害承担责任，即使已被告知发生此类损害的可能性。
+
+5. 终止许可
+   如果您对任何实体发起专利诉讼（包括交叉诉讼或反诉），指控本软件或本软件的任何部分侵犯了该实体的专利权，则您在本许可证项下获得的所有专利许可自起诉之日起终止。
+
+6. 许可证版本
+   本许可证为中文文本，英文译本仅供参考。如中英文版本存在冲突，以中文版本为准。
+
+您可以在 http://license.coscl.org.cn/MulanPSL2 获取本许可证的完整文本。
+
+=== Unlicense ===
+
+This is free and unencumbered software released into the public domain.
+
+Anyone is free to copy, modify, publish, use, compile, sell, or
+distribute this software, either in source code form or as a compiled
+binary, for any purpose, commercial or non-commercial, and by any
+means.
+
+In jurisdictions that recognize copyright laws, the author or authors
+of this software dedicate any and all copyright interest in the
+software to the public domain. We make this dedication for the benefit
+of the public at large and to the detriment of our heirs and
+successors. We intend this dedication to be an overt act of
+relinquishment in perpetuity of all present and future rights to this
+software under copyright law.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+
+For more information, please refer to <https://unlicense.org/>

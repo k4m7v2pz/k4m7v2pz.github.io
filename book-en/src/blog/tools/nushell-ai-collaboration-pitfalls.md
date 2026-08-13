@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # NuShell AI Collaboration Pitfalls: 5 Golden Rules for AI Assistants
 
 > This article documents syntax "hallucination" errors frequently produced by AI assistants (ChatGPT, Claude, Copilot) when generating NuShell code, due to their Bash/Zsh training corpus. It serves as a correction reference for AI assistants and a migration guide for Bash users.
@@ -91,5 +93,5 @@ env MY_VAR=hello ssh user@host
 
 ---
 <!-- License Declaration -->
-> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
 > Original version: https://k4m7v2pz.github.io/en/blog/tools/nushell-ai-collaboration-pitfalls.html

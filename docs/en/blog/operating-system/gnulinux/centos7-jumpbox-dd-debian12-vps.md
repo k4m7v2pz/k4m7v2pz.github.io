@@ -6,6 +6,8 @@ description: A step-by-step guide to DD reinstalling Debian 12 on a cheap Duokai
 categories: os
 ---
 
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 ## 1. Why Bother With This "10-Buck Box"?
 
 Pure curiosity and the itch to tinker. When I saw a **Duokaiyun** VPS for 10 RMB/month, my first thought was to run a **Trae Agent** or an **OpenCode** terminal-based tool on it.
@@ -75,5 +77,5 @@ After rebooting, wait about 5-15 minutes, then try to connect via SSH. If you ca
 ---
 
 <!-- License Declaration -->
-> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
 > Original version: https://k4m7v2pz.github.io/en/blog/operating-system/gnulinux/centos7-jumpbox-dd-debian12-vps.html

@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # WezTerm CJK Glyph Rendering Chaos: Diagnosis and Fix
 
 > Date: 2026-08-02
@@ -131,5 +133,5 @@ When checking out a WezTerm config, if `font_rules` has fewer than 4 entries, fi
 *This article applies to WezTerm 20240201 and later. Tested on macOS; the principle is the same on Linux/Windows — just substitute the corresponding platform's Chinese font name.*
 
 <!-- License Declaration -->
-> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
 > Original version: https://k4m7v2pz.github.io/en/blog/tools/wezterm-cjk-glyph-fix.html

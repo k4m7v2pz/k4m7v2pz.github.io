@@ -3,6 +3,8 @@ title: 关于
 description: 作者简介、开源理念、代码托管平台及同步策略
 ---
 
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # 关于
 
 ## 热爱与资源
@@ -105,6 +107,6 @@ description: 作者简介、开源理念、代码托管平台及同步策略
 
 ### 许可声明
 
-> © 2026 至今 k4m7v2pz. 本站点所有原创内容（文章）采用木兰开放作品许可协议 署名，第1版 (Mulan OWL BY v1) 授权。
-> 内容转载/复用须按 Mulan OWL BY v1 保留来源网址与署名声明；仓库代码遵循 LICENSE（木兰 PSL v2）。
+> © 2026 至今 k4m7v2pz. 本站点所有原创内容（文章）采用木兰开放作品许可协议 署名-专利许可，第1版 (Mulan OWL BY-PL v1) 或 CC0-1.0 授权。
+> 选 Mulan OWL BY-PL 支须保留来源网址与署名声明；选 CC0 支无需保留任何声明；仓库代码遵循 LICENSE-CODE（Mulan PSL v2 或 Unlicense）。
 > 内容同步发布于 CSDN，原始版本以本站点为准。

@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # Reverse-Engineering the RA2/YR CSF File Format
 
 > Date: 2026-08-02
@@ -67,5 +69,5 @@ Key anchors:
 Parse with a struct.unpack_from loop; when serializing, note that WRTS's elen goes after the value bytes; after editing, re-parse with CsfFile to self-check.
 
 <!-- License Declaration -->
-> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
 > Original version: https://k4m7v2pz.github.io/en/blog/games/ra2-yr-csf-format-reverse.html

@@ -6,6 +6,8 @@ description: 记录将 Bevy 0.13 的 2D 像素游戏升级到 0.14 版本的全�
 categories: programming
 ---
 
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 > 本文记录将一个 Bevy 0.13 的 2D 像素游戏升级到 0.14 版本的全过程踩坑记录。0.14 是作者在 macOS 上运行最稳定的版本（更高版本会出现黑屏问题），因此锁定此版本。升级后，还顺手将项目中从 Python 迁移过来的两个模块（调试控制台和剧本系统）进行了补充。
 
 ## 一、为什么是 0.14
@@ -356,5 +358,5 @@ pub struct ScriptEvent {
 ---
 
 <!-- 许可声明 -->
-> 本文采用木兰开放作品许可协议 署名，第1版 (MulanOWL BY v1) 授权。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
+> 本文采用木兰开放作品许可协议 署名-专利许可，第1版 (MulanOWL BY-PL v1) 授权，亦可选用 CC0-1.0（公共领域奉献）。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
 > 原始版本见：https://k4m7v2pz.github.io/zh/blog/programming/rust-bevy-0.13-to-0.14-upgrade-guide.html

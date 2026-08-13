@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # Reshaping a Red Alert Engine: OpenYRWeb Modernization Overview
 
 > Date: 2026-08-07
@@ -52,5 +54,5 @@ Custom buildings/tech tree/economy are described in `design/*.json`, locked down
 Reshaping an old engine into "my shape" means modernizing four layers (data injection, tiles, building rendering, rules config). The payoff is reproducible, validatable, agent-friendly assets; the cost is deep adaptation of the engine render pipeline. The whole effort is documented in `docs/PORTING.md` for reuse by future MODs.
 
 <!-- License Declaration -->
-> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
 > Original version: https://k4m7v2pz.github.io/en/blog/games/openyrweb-modernization-overview.html

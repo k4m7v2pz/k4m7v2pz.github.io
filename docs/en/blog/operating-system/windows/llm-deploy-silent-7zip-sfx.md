@@ -5,6 +5,8 @@ tags: [7-Zip, SFX, silent-install, Windows, Automation, CI, LLM]
 description: "Reproducible steps: select the correct 7zSD.sfx stub, write a BOM-free config, use PowerShell to concatenate a single-file EXE, and run a minimal self-check to prevent regression to Extract-to behavior."
 ---
 
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # LLM/CI Deployment Guide: Building Silent 7-Zip SFX Installers (No Dialogs)
 
 ## 1) Input/Output Contract
@@ -75,5 +77,5 @@ Write-Host "Built: $Out"
 ---
 
 <!-- License Declaration -->
-> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
 > Original version: https://k4m7v2pz.github.io/en/blog/operating-system/windows/llm-deploy-silent-7zip-sfx.html

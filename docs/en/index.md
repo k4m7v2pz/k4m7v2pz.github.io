@@ -3,6 +3,8 @@ title: Home
 description: Open-source indie game assets & tools navigation
 ---
 
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # K4m7v2pz's Blog
 
 **Open-source indie game assets & tools** — code and assets you can pull, modify, and use commercially.

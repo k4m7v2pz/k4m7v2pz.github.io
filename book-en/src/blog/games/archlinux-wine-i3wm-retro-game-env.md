@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # Arch Linux + Wine + i3wm Retro Gaming Environment
 
 > Date: 2026-08-02
@@ -307,5 +309,5 @@ With the configuration above, 《重武器老鼠》 runs smoothly on Arch Linux 
 A general reference template for running old Windows games on a Linux desktop. Enjoy your retro gaming!
 
 <!-- License Declaration -->
-> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
 > Original version: https://k4m7v2pz.github.io/en/blog/games/archlinux-wine-i3wm-retro-game-env.html

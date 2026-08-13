@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # OpenYRWeb 浏览器引擎内幕：VFS-mix 加载、locale 检测与音频链路
 
 > 日期：2026-08-02
@@ -49,5 +51,5 @@ OpenYRWeb 的四个关键词是 **OPFS、VFS、YR-only、CSF 自检语言**；�
 关键定位：`data/vfs/VirtualFileSystem.ts.js`（standalone 优先级/getFileNameVariant）、`engine/Engine.ts.js`（initRfs/loadRules/patchAudioVisualRules）、`data/CsfFile.ts.js`（autoDetectLocale）、`engine/sound/AudioSystem.ts.js`（decodeAudioData/createChannels）。排障先用 `Engine.vfs.fileExists()` 验数据，再 `Engine.getRules()` 验配置，最后看 console 的音频解码错误。
 
 <!-- 许可声明 -->
-> 本文采用木兰开放作品许可协议 署名，第1版 (MulanOWL BY v1) 授权。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
+> 本文采用木兰开放作品许可协议 署名-专利许可，第1版 (MulanOWL BY-PL v1) 授权，亦可选用 CC0-1.0（公共领域奉献）。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
 > 原始版本见：https://k4m7v2pz.github.io/zh/blog/games/openyrweb-vfs-mix-locale-audio.html

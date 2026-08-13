@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # Bytebeat Moog City Reconstruction v3.2: Technical Analysis and Implementation
 
 > Date: 2026-08-02
@@ -156,5 +158,5 @@ Suggestions during development:
 3. Try modifying `d` (the base tempo divisor), the delay feedback coefficient (currently 3), or the pitch arrays to explore different sounds.
 
 <!-- License Declaration -->
-> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
 > Original version: https://k4m7v2pz.github.io/en/blog/programming/bytebeat-moog-city-reconstruction.html

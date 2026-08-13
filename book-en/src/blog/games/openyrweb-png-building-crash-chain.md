@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # Why "No Error, No Crash" Bugs Are the Hardest: A Six-Layer Crash Chain in PNG Building Rendering
 
 > Date: 2026-08-07
@@ -87,5 +89,5 @@ Layer 2 (getEntries returning strings) is the classic case: all three intermedia
 Bugs that error and crash are like roadblocks — visible at a glance. Bugs that fail silently are like slow leaks — they need layer-by-layer inspection. When adding a new format (PNG direct color) to an old engine, the real cost is not "add one Image key" but understanding every layer's assumptions (bundle manifest, injection loop, aggregate frame count, material format, material methods). These assumptions are recorded in `docs/PORTING.md` so future PNG asset integration can reuse the same debugging path.
 
 <!-- License Declaration -->
-> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
 > Original version: https://k4m7v2pz.github.io/en/blog/games/openyrweb-png-building-crash-chain.html

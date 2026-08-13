@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # rvs（rust-verb-shell）：面向人类和 AI Agent 的结构化 Shell
 
 > 日期：2026-08-02
@@ -252,5 +254,5 @@ rvs --json get-command```bash
 rvs = 全小写 Verb-Noun 命令 + 可选沙盒 + 人类表格输出 + AI 的 `--json` 模式。项目在 [rust-verb-shell:基于 Rust 的 PowerShell 风格 Shell 项目 - AtomGit](https://atomgit.com/k4m7v2pz/rust-verb-shell)，版本号 CalVer `YY.M.P`，当前 `v26.7.0`。
 
 <!-- 许可声明 -->
-> 本文采用木兰开放作品许可协议 署名，第1版 (MulanOWL BY v1) 授权。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
+> 本文采用木兰开放作品许可协议 署名-专利许可，第1版 (MulanOWL BY-PL v1) 授权，亦可选用 CC0-1.0（公共领域奉献）。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
 > 原始版本见：https://k4m7v2pz.github.io/zh/blog/tools/rvs-structured-shell-intro.html

@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # Replacing Terrain Tiles with PNG: Digging meta.json Truth Out of mix
 
 > Date: 2026-08-07
@@ -75,5 +77,5 @@ Root cause: map data still references cliff tile 1, but the PNG tileset no longe
 The truth about PNG tileset replacement: **tileSetIndex decides which vanilla tile set you are replacing**. Picking the wrong index silently overwrites someone else's terrain; deleting tiles triggers a fallback-chain crash. First dig out the index mapping in `temperatmd.ini`, then decide which numbers your PNGs take and where missing tiles fall back — that is the prerequisite for not stepping on landmines.
 
 <!-- License Declaration -->
-> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
 > Original version: https://k4m7v2pz.github.io/en/blog/games/openyrweb-png-tileset-terrain.html

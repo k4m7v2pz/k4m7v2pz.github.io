@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # PowerShell Invoke-RestMethod SSL/TLS 安全通道错误排查
 
 > 日期：2026-08-02
@@ -129,5 +131,5 @@ irm https://example.com/target-script.ps1 | iex```powershell
 这是一台 Windows 10 LTSB 2016 (Build 14393) + 2 GB 内存的 QEMU 虚拟机，TLS/Crypto 栈停留在 2016 年基线，已通过启用 TLS 1.2 强加密成功安装 AtomCode 5.0.0，但平台整体面临 协议栈老旧、内存紧张、补丁滞后、生命周期临近终结 四大挑战。后续给出的所有技术方案都必须以该平台的现实约束为前提，避免“现代最佳实践”式的建议。
 
 <!-- 许可声明 -->
-> 本文采用木兰开放作品许可协议 署名，第1版 (MulanOWL BY v1) 授权。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
+> 本文采用木兰开放作品许可协议 署名-专利许可，第1版 (MulanOWL BY-PL v1) 授权，亦可选用 CC0-1.0（公共领域奉献）。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
 > 原始版本见：https://k4m7v2pz.github.io/zh/blog/operating-system/windows/powershell-invoke-restmethod-ssl-tls.html

@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # BGM Mounting and Display-Name Translation for RA2 MODs
 
 > Date: 2026-08-02
@@ -100,5 +102,5 @@ The three essentials of BGM are all indispensable — **thememd.ini declares the
 After making changes, inject OPFS and refresh the page; music files go in the root `music/`, mod files in `mods/yellow-alert/`.
 
 <!-- License Declaration -->
-> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
 > Original version: https://k4m7v2pz.github.io/en/blog/games/ra2-mod-bgm-thememd-csf.html

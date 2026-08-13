@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # 把红警引擎改成我的形状：OpenYRWeb 现代化改造全景
 
 > 日期：2026-08-07
@@ -52,5 +54,5 @@ OpenYRWeb 是红警2 / 尤里的复仇的开源浏览器移植引擎（Apache-2.
 把老引擎改成「我的形状」，本质是在四层（数据注入、图块、建筑渲染、规则配置）各自做格式现代化。收益是可复现、可校验、Agent 友好；成本是引擎渲染管线的深度适配。这套改造全部记录在 `docs/PORTING.md`，后续 MOD 直接复用。
 
 <!-- 许可声明 -->
-> 本文采用木兰开放作品许可协议 署名，第1版 (MulanOWL BY v1) 授权。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
+> 本文采用木兰开放作品许可协议 署名-专利许可，第1版 (MulanOWL BY-PL v1) 授权，亦可选用 CC0-1.0（公共领域奉献）。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
 > 原始版本见：https://k4m7v2pz.github.io/zh/blog/games/openyrweb-modernization-overview.html

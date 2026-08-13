@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # From rg to rr: The r-Prefix Fetish of CLI Tools
 
 > Date: 2026-08-02
@@ -163,5 +165,5 @@ And that's the final satire — **the joke itself gets treated as a convention.*
 🎯 **In one sentence**: A tool's name can be a coincidence, a bad pun, or even "couldn't think of anything better at the time" — as long as it solves a real pain point, users will remember it on their own. Conversely, when a README opens with "naming conventions" instead of "the problems it solves", it has already gone astray.
 
 <!-- License Declaration -->
-> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
 > Original version: https://k4m7v2pz.github.io/en/blog/programming/rg-to-rr-r-prefix-cult.html

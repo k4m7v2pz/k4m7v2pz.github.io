@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # XFCE 桌面环境 + lightdm 显示管理器包列表参考
 
 本文档记录从 Arch Linux 包列表仓库移除的 XFCE 环境相关包，如需要在新机器上安装 XFCE 环境，可参考此列表。
@@ -72,5 +74,5 @@
 ---
 
 <!-- 许可声明 -->
-> 本文采用木兰开放作品许可协议 署名，第1版 (MulanOWL BY v1) 授权。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
+> 本文采用木兰开放作品许可协议 署名-专利许可，第1版 (MulanOWL BY-PL v1) 授权，亦可选用 CC0-1.0（公共领域奉献）。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
 > 原始版本见：https://k4m7v2pz.github.io/zh/blog/operating-system/gnulinux/xfce-lightdm-package-list.html

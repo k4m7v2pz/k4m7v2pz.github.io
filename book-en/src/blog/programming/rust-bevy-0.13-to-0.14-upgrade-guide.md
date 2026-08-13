@@ -1,3 +1,4 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
 
 > This article documents the complete process of upgrading a Bevy 0.13 2D pixel game to version 0.14. Version 0.14 is the most stable version on macOS (higher versions have black screen issues), so we're locking to this version. After the upgrade, two modules migrated from Python prototypes (debug console and script system) were also rewritten and integrated.
 
@@ -348,5 +349,5 @@ The upgrade process is tedious, but the stability improvement on macOS with 0.14
 
 ---
 <!-- License Declaration -->
-> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
 > Original version: https://k4m7v2pz.github.io/en/blog/programming/rust-bevy-0.13-to-0.14-upgrade-guide.html

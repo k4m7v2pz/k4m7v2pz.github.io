@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # RK3326 Device Tree Panel Debug: LCD Backlight On but Black Screen After Kernel Upgrade
 
 > Date: 2026-08-07
@@ -137,5 +139,5 @@ Question: "RK3326 device black screen after kernel upgrade, backlight on, how to
 - Stop-loss: missing panel sequence + driver incompatibility = not fixable at config level; revert to stock image
 
 <!-- License Declaration -->
-> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
 > Original version: https://k4m7v2pz.github.io/en/blog/programming/rk3326-dtb-panel-debug.html

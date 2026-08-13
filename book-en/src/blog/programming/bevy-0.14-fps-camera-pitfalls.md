@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # Bevy 0.14 FPS Camera Pitfalls: From Black Screen to Pointer Lock to Child Entity Camera
 
 > This article documents the real debugging chain of "cursor won't move, camera won't turn" when porting a Three.js FPS game to macOS with Rust + Bevy 0.14.
@@ -79,5 +81,5 @@ fn button_handler(
 
 ---
 <!-- License Declaration -->
-> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
 > Original version: https://k4m7v2pz.github.io/en/blog/programming/bevy-0.14-fps-camera-pitfalls.html

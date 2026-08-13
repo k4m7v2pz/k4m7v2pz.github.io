@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # About
 
 ## Background
@@ -60,9 +62,9 @@ Content is published across multiple platforms, each serving a distinct role:
 
 ## License Notes
 
-- **Original blog articles**: All original content (articles, images, audio works) on this blog is licensed under **Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1)** — see `LICENSE-CONTENT` in the repository root.
-- **Code in this repository**: Follows the `LICENSE` file (Mulan PSL v2) in the repository root.
-- **Author's position**: Content reuse/redistribution must retain the source URI and attribution per MulanOWL BY v1; enterprise/commercial redistribution of code must retain the original license and notices.
+- **Original blog articles**: All original content (articles, images, audio works) on this blog is licensed under **Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1)**, or alternatively **CC0-1.0** — see `LICENSE-CONTENT` in the repository root.
+- **Code in this repository**: Follows the `LICENSE-CODE` file (Mulan PSL v2 OR Unlicense) in the repository root.
+- **Author's position**: The MulanOWL BY-PL option requires retaining the source URI and attribution; the CC0 option lets you delete all LICENSE files and retain nothing. Code redistribution per Mulan PSL v2 must retain the original license and notices. Contributors are not required to be attributed.
 - **Referenced/republished content**: Attributed to the original author.
 - **Suno AI music**: Music generated with Suno AI is subject to the Suno AI license agreement — **non-commercial use only**. Do not use for commercial purposes.
 
@@ -70,6 +72,6 @@ Content is published across multiple platforms, each serving a distinct role:
 
 The original version hosted on GitHub Pages carries this license notice:
 
-> © 2026–present k4m7v2pz. All original content (articles) on this site is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1).
-> Content reuse requires attribution per MulanOWL BY v1; repository code follows the LICENSE file (Mulan PSL v2).
+> © 2026–present k4m7v2pz. All original content (articles) on this site is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0.
+> The MulanOWL BY-PL option requires retaining the source URI and attribution; the CC0 option requires nothing. Repository code follows LICENSE-CODE (Mulan PSL v2 OR Unlicense).
 > Content is also published on CSDN; the original version is this site.

@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # Injecting Game Data into the Browser via OPFS
 
 > Date: 2026-08-02
@@ -39,5 +41,5 @@ Verification: open the homepage in an empty browser profile → the Simplified-C
 **Code agents quick reference:** key anchors: `engine/gameRes/GameRes.ts.js` (lookForGameFiles list, projectDir branch), `gui/component/GameResBoxApi.ts.js` (onLoadProjectDir callback), `scripts/inject-persist.mjs` (base64 injection reference). For injection use `getFileHandle(create:true)+createWritable` streaming writes; the splash-screen button path is `/_inject/{gamedata,mod/yellow-alert,music}/`, with support for the `?gamedata=` parameter.
 
 <!-- License Declaration -->
-> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
 > Original version: https://k4m7v2pz.github.io/en/blog/games/openyrweb-opfs-game-data-injection.html

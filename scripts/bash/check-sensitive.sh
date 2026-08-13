@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: MulanPSL-2.0 OR Unlicense
 #
 # check-sensitive.sh — 提交/推送前敏感信息守卫
 #

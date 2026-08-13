@@ -6,6 +6,8 @@ description: Troubleshooting cargo not found in WezTerm new tabs launching Nushe
 categories: tools
 ---
 
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 **Summary:** This article documents troubleshooting `cargo` not found in new WezTerm tabs running Nushell on macOS (Apple Silicon). Core issues include nushell not sourcing `~/.cargo/env`, the default config directory not being `~/.config/nushell/`, and string interpolation syntax differences.
 
 ## 1. Symptoms
@@ -114,5 +116,5 @@ New WezTerm tabs work without manual sourcing.
 ---
 
 <!-- License Declaration -->
-> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
 > Original version: https://k4m7v2pz.github.io/en/blog/tools/wezterm-nushell-cargo-not-found.html

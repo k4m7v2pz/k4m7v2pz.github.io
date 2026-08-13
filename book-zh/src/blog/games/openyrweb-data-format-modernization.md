@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # mix/SHP/ini → PNG/WAV/JSON：老引擎的数据格式现代化
 
 > 日期：2026-08-07
@@ -62,5 +64,5 @@ SHP 是 8-bit 调色板索引，渲染时按 palette 上色；PNG 是 32-bit RGB
 格式现代化的本质是「三层管道的逐一适配」：数据加载（mix → OPFS）→ 资源包装（SHP → PngShpFile）→ 渲染材质（palette → RGBA）。每一层都有隐性假设，改一层崩一层；把假设写成踩坑记录（`docs/PORTING.md`）后，后续同类迁移可以直接复用排查路径。
 
 <!-- 许可声明 -->
-> 本文采用木兰开放作品许可协议 署名，第1版 (MulanOWL BY v1) 授权。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
+> 本文采用木兰开放作品许可协议 署名-专利许可，第1版 (MulanOWL BY-PL v1) 授权，亦可选用 CC0-1.0（公共领域奉献）。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
 > 原始版本见：https://k4m7v2pz.github.io/zh/blog/games/openyrweb-data-format-modernization.html

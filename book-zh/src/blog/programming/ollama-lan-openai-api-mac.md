@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # 16GB Mac 本地跑大模型：ollama 局域网 OpenAI 兼容 API 实战
 
 > 日期：2026-08-02
@@ -147,5 +149,5 @@ curl http://localhost:11434/v1/embeddings
 **下一篇预告**：将详细介绍如何配置 LaunchAgent plist 文件、编写启停脚本，并演示如何在 AtomCode、脚本中调用本机 OpenAI 兼容 API。
 
 <!-- 许可声明 -->
-> 本文采用木兰开放作品许可协议 署名，第1版 (MulanOWL BY v1) 授权。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
+> 本文采用木兰开放作品许可协议 署名-专利许可，第1版 (MulanOWL BY-PL v1) 授权，亦可选用 CC0-1.0（公共领域奉献）。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
 > 原始版本见：https://k4m7v2pz.github.io/zh/blog/programming/ollama-lan-openai-api-mac.html

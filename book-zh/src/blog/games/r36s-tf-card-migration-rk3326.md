@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # R36S 掌机系统迁移实战：无牌劣质 TF 卡无损搬到品牌卡
 
 > 日期：2026-08-02
@@ -102,5 +104,5 @@ extlinux.conf 的 boot= 与 disk= 指向两个分区 UUID，任何“复制文�
 3. **代码 Agent**：可直接执行的命令序列是 dd 备份旧卡、fdisk 分析、dd 拷 P1（skip=16 seek=16 count=1024）与 P2（skip=1040 seek=1040 count=5104）、newfs_msdos 建 ROM 分区、dd 补引导区（skip=1 seek=1 count=32767）、dd 读回 md5 校验。核对要点：P1/P2 起始扇区必须与镜像一致，引导区必须补拷，UUID 必须匹配。
 
 <!-- 许可声明 -->
-> 本文采用木兰开放作品许可协议 署名，第1版 (MulanOWL BY v1) 授权。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
+> 本文采用木兰开放作品许可协议 署名-专利许可，第1版 (MulanOWL BY-PL v1) 授权，亦可选用 CC0-1.0（公共领域奉献）。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
 > 原始版本见：https://k4m7v2pz.github.io/zh/blog/games/r36s-tf-card-migration-rk3326.html

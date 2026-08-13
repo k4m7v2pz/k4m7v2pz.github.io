@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # ThinkPad E490 Fan/Temperature Auto-Control Log: thinkfan Absent, a Hand-Written Curve Script Takes Over
 
 > Date: 2026-08-05
@@ -190,5 +192,5 @@ Control target: /proc/acpi/ibm/fan (level 0-7/auto; if the write fails, confirm 
 ---
 
 <!-- License statement -->
-> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright belongs to the author; attribution is required, but for enterprise compliance please retain the original statement.
+> This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright belongs to the author; attribution is required, but for enterprise compliance please retain the original statement.
 > Original version: https://k4m7v2pz.github.io/en/blog/operating-system/gnulinux/thinkpad-e490-fan-control.html

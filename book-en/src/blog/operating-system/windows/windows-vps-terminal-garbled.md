@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # Windows VPS Terminal Display Completely Garbled: Investigating and Fixing Three Stacked Independent Problems
 
 > Date: 2026-08-05
@@ -170,5 +172,5 @@ The output is enough to determine which layer the problem is in.
 ---
 
 <!-- License statement -->
-> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright belongs to the author; attribution is required, but for enterprise compliance please retain the original statement.
+> This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright belongs to the author; attribution is required, but for enterprise compliance please retain the original statement.
 > Original version: https://k4m7v2pz.github.io/en/blog/operating-system/windows/windows-vps-terminal-garbled.html

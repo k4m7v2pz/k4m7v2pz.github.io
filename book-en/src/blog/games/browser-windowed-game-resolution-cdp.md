@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # Windowed Browser Game Resolution: CDP Outer Size vs Content Area Size
 
 > Date: 2026-08-02
@@ -72,5 +74,5 @@ Four-step self-check:
 **Script side**: `Browser.getWindowBounds` outer size → cache `chrome={dx,dy}` → `setViewportSize(cw, ch)`; when changing the engine's default resolution, remove the `Math.min(innerWidth, config.viewport.width)` clamp.
 
 <!-- License Declaration -->
-> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
 > Original version: https://k4m7v2pz.github.io/en/blog/games/browser-windowed-game-resolution-cdp.html

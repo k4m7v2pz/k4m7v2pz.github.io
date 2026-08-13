@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 ## 一、触发场景：40GB 分卷 + 中文密码的固件镜像
 
 某天接到任务：把一份 R36S 掌机的「64G 单卡懒人固件」解压成磁盘镜像。文件在移动硬盘上：
@@ -137,5 +139,5 @@ python3 -c "import hashlib; print('浪子玩数码'.encode('gbk').hex())"  # 看
 - 完整脚本思路见 2.md，实测 105 MiB/s 可复现
 
 <!-- 许可声明 -->
-> 本文采用木兰开放作品许可协议 署名，第1版 (MulanOWL BY v1) 授权。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
+> 本文采用木兰开放作品许可协议 署名-专利许可，第1版 (MulanOWL BY-PL v1) 授权，亦可选用 CC0-1.0（公共领域奉献）。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
 > 原始版本见：https://k4m7v2pz.github.io/zh/blog/tools/macos-multivolume-zip-chinese-password.html

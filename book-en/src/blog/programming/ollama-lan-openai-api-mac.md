@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # Running LLMs Locally on a 16GB Mac: A Practical Guide to ollama's LAN OpenAI-Compatible API
 
 > Date: 2026-08-02
@@ -147,5 +149,5 @@ curl http://localhost:11434/v1/embeddings
 **Next article preview**: a detailed walkthrough of configuring the LaunchAgent plist file, writing the start/stop scripts, and a demo of calling the local OpenAI-compatible API from AtomCode and scripts.
 
 <!-- License Declaration -->
-> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
 > Original version: https://k4m7v2pz.github.io/en/blog/programming/ollama-lan-openai-api-mac.html

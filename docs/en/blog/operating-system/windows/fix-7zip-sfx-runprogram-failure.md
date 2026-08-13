@@ -5,6 +5,8 @@ tags: [7-Zip, SFX, RunProgram, troubleshooting, Windows, Automation]
 description: "When SFX double-click shows an Extract-to dialog, Silent/GUIMode are ignored, or nothing happens at all, the root cause is almost always wrong stub type or broken encoding/path constraints."
 ---
 
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # Fix 7-Zip SFX RunProgram Failure: Correct Stub Selection and Diagnostic Matrix
 
 ## 1) Typical Error Description
@@ -74,5 +76,5 @@ RunProgram="cmd.exe"
 ---
 
 <!-- License Declaration -->
-> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
 > Original version: https://k4m7v2pz.github.io/en/blog/operating-system/windows/fix-7zip-sfx-runprogram-failure.html

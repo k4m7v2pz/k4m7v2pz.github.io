@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # OpenYRWeb 移植红警 MOD 实战：BGM 挂载与 UI 越界修复
 
 > 日期：2026-08-02
@@ -99,5 +101,5 @@ Repeat=yes```ini
 改完重跑 `bun run scripts/inject-persist.mjs` 注入 OPFS 后刷新页面。
 
 <!-- 许可声明 -->
-> 本文采用木兰开放作品许可协议 署名，第1版 (MulanOWL BY v1) 授权。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
+> 本文采用木兰开放作品许可协议 署名-专利许可，第1版 (MulanOWL BY-PL v1) 授权，亦可选用 CC0-1.0（公共领域奉献）。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
 > 原始版本见：https://k4m7v2pz.github.io/zh/blog/games/openyrweb-ra2-bgm-and-ui-fixes.html

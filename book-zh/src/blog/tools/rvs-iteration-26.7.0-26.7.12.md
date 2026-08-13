@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # rvs（rust-verb-shell）迭代全览 26.7.0~26.7.12
 
 > 日期：2026-07-12
@@ -237,5 +239,5 @@ rvs v26.7.12 = 借鉴 ripgrep 的搜索（ignore + rayon + `-u` 渐进 + `--cont
 ---
 
 <!-- 许可声明 -->
-> 本文采用木兰开放作品许可协议 署名，第1版 (MulanOWL BY v1) 授权。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
+> 本文采用木兰开放作品许可协议 署名-专利许可，第1版 (MulanOWL BY-PL v1) 授权，亦可选用 CC0-1.0（公共领域奉献）。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
 > 原始版本见：https://k4m7v2pz.github.io/zh/blog/tools/rvs-iteration-26.7.0-26.7.12.html

@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # OpenYRWeb Browser Engine Internals: VFS-mix Loading, Locale Detection, and the Audio Pipeline
 
 > Date: 2026-08-02
@@ -49,5 +51,5 @@ Question template: "Why does OpenYRWeb only read rulesmd.ini / how do I change t
 Key anchors: `data/vfs/VirtualFileSystem.ts.js` (standalone priority/getFileNameVariant), `engine/Engine.ts.js` (initRfs/loadRules/patchAudioVisualRules), `data/CsfFile.ts.js` (autoDetectLocale), `engine/sound/AudioSystem.ts.js` (decodeAudioData/createChannels). To troubleshoot, first verify data with `Engine.vfs.fileExists()`, then verify config with `Engine.getRules()`, and finally check the console for audio decode errors.
 
 <!-- License Declaration -->
-> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
 > Original version: https://k4m7v2pz.github.io/en/blog/games/openyrweb-vfs-mix-locale-audio.html

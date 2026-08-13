@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MulanPSL-2.0 OR Unlicense
 """generate-sitemap.py —— 构建后生成 site/sitemap.xml（纯标准库，零全局依赖）。
 
 遍历 site/ 下 mdBook 产物（site/zh 与 site/en），输出全部页面 URL：

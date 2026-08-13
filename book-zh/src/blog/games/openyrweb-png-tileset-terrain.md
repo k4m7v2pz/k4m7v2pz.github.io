@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # PNG tileset 替换地形图块：从 mix 里挖 meta.json 的真相
 
 > 日期：2026-08-07
@@ -75,5 +77,5 @@ SubTile 0 not found
 PNG tileset 替换的真相是：**tileSetIndex 决定你替换的是哪一套原版图块**。选错索引 = 悄悄覆盖别人的地形；删图块 = 触发回退链崩溃。先把 `temperatmd.ini` 的索引映射挖出来，再决定 PNG 放哪些编号、缺失 tile 回退到哪，是这套方案不踩雷的前提。
 
 <!-- 许可声明 -->
-> 本文采用木兰开放作品许可协议 署名，第1版 (MulanOWL BY v1) 授权。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
+> 本文采用木兰开放作品许可协议 署名-专利许可，第1版 (MulanOWL BY-PL v1) 授权，亦可选用 CC0-1.0（公共领域奉献）。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
 > 原始版本见：https://k4m7v2pz.github.io/zh/blog/games/openyrweb-png-tileset-terrain.html

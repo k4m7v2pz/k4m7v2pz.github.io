@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # Porting the Yellow Alert MOD to ChronoDivide: Pitfall Log
 
 > Date: 2026-08-02
@@ -259,5 +261,5 @@ Website=https://game.ra2web.com```ini
 *This document is generated from Chrono Divide v0.83.2 + Yellow Alert's actual run logs, 2026-07-31.*
 
 <!-- License Declaration -->
-> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
 > Original version: https://k4m7v2pz.github.io/en/blog/games/yellow-alert-chronodivide-mod-port.html

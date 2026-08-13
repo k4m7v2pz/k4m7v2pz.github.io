@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MulanPSL-2.0 OR Unlicense
 """
 leak-check.py — 暂存区 / 全仓敏感信息扫描
 

@@ -3,6 +3,8 @@ title: About
 description: Author introduction, open source philosophy, code hosting platforms and sync strategy
 ---
 
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # About
 
 ## Passion & Resources
@@ -107,6 +109,6 @@ The author primarily writes in Chinese. The English version is optimized for AI 
 
 ### License Statement
 
-> © 2026–present k4m7v2pz. All original content (articles) on this site is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1).
-> Content reuse requires attribution per MulanOWL BY v1; repository code follows the LICENSE file (Mulan PSL v2).
+> © 2026–present k4m7v2pz. All original content (articles) on this site is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0.
+> The MulanOWL BY-PL option requires retaining the source URI and attribution; the CC0 option requires nothing. Repository code follows LICENSE-CODE (Mulan PSL v2 OR Unlicense).
 > Content is also published on CSDN; the original version is this site.

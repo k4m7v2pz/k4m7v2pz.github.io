@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+
 # Bevy 0.14.2 Player Sprite Not Rendering: Full Debugging Log
 
 > Date: 2026-08-02
@@ -96,5 +98,5 @@ The project code corresponding to this document lives on the dev branch of [rust
 If you've hit the same symptom and have a solution, feel free to discuss it in the project Issues.
 
 <!-- License Declaration -->
-> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
 > Original version: https://k4m7v2pz.github.io/en/blog/programming/bevy-0.14.2-sprite-not-rendering.html

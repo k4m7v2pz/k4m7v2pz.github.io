@@ -1,3 +1,4 @@
+<!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
 
 **摘要：** 本文记录了在 macOS 上配置 Nushell 0.113.1 与 AtomCode 时遇到的 5 个典型坑，包括配置目录路径错误、验证方式误区、PATH 继承问题、配置项名称混淆以及默认值覆盖问题，并给出最终生效配置。
 
@@ -164,5 +165,5 @@ $env.PROMPT_COMMAND_RIGHT = {|| "" }
 ---
 
 <!-- 许可声明 -->
-> 本文采用木兰开放作品许可协议 署名，第1版 (MulanOWL BY v1) 授权。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
+> 本文采用木兰开放作品许可协议 署名-专利许可，第1版 (MulanOWL BY-PL v1) 授权，亦可选用 CC0-1.0（公共领域奉献）。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
 > 原始版本见：https://k4m7v2pz.github.io/zh/blog/tools/nushell-atomcode-config-pitfalls.html
