@@ -35,7 +35,7 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-f1665d52.js";
+            window.path_to_searchindex_js = "../../searchindex-8224ec63.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../../toc-72c5c129.js"></script>
@@ -180,7 +180,8 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <p><strong>摘要：</strong> 本文记录了在 macOS（Apple Silicon）环境下，wezterm 新标签页启动 nushell 后无法找到 <code>cargo</code> 命令的排查与修复过程。核心坑点包括 nushell 不自动 source <code>~/.cargo/env</code>、默认配置目录不是 <code>~/.config/nushell/</code> 以及字符串插值语法差异。</p>
+                        <!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+<p><strong>摘要：</strong> 本文记录了在 macOS（Apple Silicon）环境下，wezterm 新标签页启动 nushell 后无法找到 <code>cargo</code> 命令的排查与修复过程。核心坑点包括 nushell 不自动 source <code>~/.cargo/env</code>、默认配置目录不是 <code>~/.config/nushell/</code> 以及字符串插值语法差异。</p>
 <h2 id="1-症状"><a class="header" href="#1-症状">1. 症状</a></h2>
 <p>在 wezterm 新开的 nushell 标签页里直接跑 <code>cargo run</code>：</p>
 <pre><code>~/Documents/Code.localized/ra2md&gt; cargo run
@@ -257,7 +258,7 @@ cargo run
 </ul>
 <hr><!-- 许可声明 -->
 <blockquote>
-<p>本文采用木兰开放作品许可协议 署名，第1版 (MulanOWL BY v1) 授权。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
+<p>本文采用木兰开放作品许可协议 署名-专利许可，第1版 (MulanOWL BY-PL v1) 授权，亦可选用 CC0-1.0（公共领域奉献）。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
 原始版本见：https://k4m7v2pz.github.io/zh/blog/tools/wezterm-nushell-cargo-not-found.html</p>
 </blockquote>
 

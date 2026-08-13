@@ -35,7 +35,7 @@
             const path_to_root = "../../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../../searchindex-f1665d52.js";
+            window.path_to_searchindex_js = "../../../searchindex-8224ec63.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../../../toc-72c5c129.js"></script>
@@ -180,7 +180,8 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h2 id="一痛点溯源为什么我要动这块10-元机"><a class="header" href="#一痛点溯源为什么我要动这块10-元机">一、痛点溯源：为什么我要动这块“10 元机“？</a></h2>
+                        <!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+<h2 id="一痛点溯源为什么我要动这块10-元机"><a class="header" href="#一痛点溯源为什么我要动这块10-元机">一、痛点溯源：为什么我要动这块“10 元机“？</a></h2>
 <p>纯粹是手痒想折腾点新玩法。看到<strong>多开云</strong>这种 10 元/月的低配机，第一反应是买一台挂着跑跑 <strong>Trae Agent</strong>，或者丢在后台跑跑 <strong>OpenCode</strong> 这类字符界面工具。</p>
 <p>结果刚连上就吃了闭门羹。排查后发现是 <strong><code>glibc</code> 版本不兼容</strong>——这些现代工具链要求 <code>glibc</code> &gt;= 2.28，而商家给的默认底包还是经典的 <strong>CentOS 7</strong>（自带 <code>glibc 2.17</code>）。</p>
 <p>去找商家客服要个 Debian 或 Ubuntu 20.04+ 的镜像？不存在的，便宜机器的镜像库就那两三个老古董。商家不给换，那就自己动手！既然没法直接更换系统，那就拿 CentOS 7 当跳板，直接 DD 重装大法，硬生生把系统底包给“刷“成现代化的 <strong>Debian 12</strong>。</p>
@@ -222,7 +223,7 @@ chmod +x reinstall.sh
 </ul>
 <hr><!-- 许可声明 -->
 <blockquote>
-<p>本文采用木兰开放作品许可协议 署名，第1版 (MulanOWL BY v1) 授权。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
+<p>本文采用木兰开放作品许可协议 署名-专利许可，第1版 (MulanOWL BY-PL v1) 授权，亦可选用 CC0-1.0（公共领域奉献）。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
 原始版本见：https://k4m7v2pz.github.io/zh/blog/operating-system/gnulinux/centos7-jumpbox-dd-debian12-vps.html</p>
 </blockquote>
 
