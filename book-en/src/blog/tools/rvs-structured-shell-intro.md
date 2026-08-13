@@ -199,3 +199,7 @@ rvs --sandbox /tmp/safe-box --json get-child-item
 #### One-Line Summary
 
 rvs = all-lowercase Verb-Noun commands + optional sandbox + human-friendly table output + an AI-oriented `--json` mode. The project lives at [rust-verb-shell: A Rust-based PowerShell-style Shell Project - AtomGit](https://atomgit.com/k4m7v2pz/rust-verb-shell), versioned with CalVer `YY.M.P`, currently `v26.7.0`.
+
+<!-- License Declaration -->
+> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/tools/rvs-structured-shell-intro.html

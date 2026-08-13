@@ -65,3 +65,7 @@
 - `data/IdxFile.ts.js`（类似分块读取参考）
 
 解析用 struct.unpack_from 循环，序列化注意 WRTS 的 elen 在值字节之后；改完用 CsfFile 重新解析自检。
+
+<!-- 许可声明 -->
+> 本文采用木兰开放作品许可协议 署名，第1版 (MulanOWL BY v1) 授权。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
+> 原始版本见：https://k4m7v2pz.github.io/zh/blog/games/ra2-yr-csf-format-reverse.html

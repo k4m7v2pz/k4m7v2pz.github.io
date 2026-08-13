@@ -40,3 +40,7 @@ Any render-chain change is regression-tested by "can you actually play Skirmish"
 ### 4. Conclusion
 
 The modding tradeoff is not "technically optimal" but a three-way balance of aesthetics + agent collaboration + playability: PNG/WAV assets please yourself, JSON/Schema configs please agents, and "playable" regression pleases the feel. These principles keep the modding sustainable — every step has positive feedback, so there is always motivation to keep going.
+
+<!-- License Declaration -->
+> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/games/openyrweb-modding-tradeoffs.html

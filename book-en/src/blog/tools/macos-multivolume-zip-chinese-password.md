@@ -140,3 +140,7 @@ Question: "Multi-volume zip password won't verify — how to find the encoding?"
 - Multi-volume: custom reader by volume offset, patch ZIP64 locator diskno/disks
 - Inflate: `zlib.decompressobj(-15)` raw deflate; trailing 10B is HMAC-SHA1
 - Full script idea in §3; 105 MiB/s reproducible
+
+<!-- License Declaration -->
+> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/tools/macos-multivolume-zip-chinese-password.html

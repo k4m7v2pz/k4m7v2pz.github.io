@@ -78,3 +78,7 @@ schema 顶层定义了以下关键字段：
 ### 11. 代码 Agent 速查
 
 关键定位：`conf/ai/yellow-alert.schema.json`（$defs.ai_context 结构 + design_philosophy）、`yellow-alert.mod.json`（GACNST/NACNST 条目、SABOTZ/FlakWeapon2 武器）。改配置后跑 `python3 -m jsonschema -i yellow-alert.mod.json yellow-alert.schema.json` 自检；问设计意图优先读 ai_context 而非数值。
+
+<!-- 许可声明 -->
+> 本文采用木兰开放作品许可协议 署名，第1版 (MulanOWL BY v1) 授权。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
+> 原始版本见：https://k4m7v2pz.github.io/zh/blog/games/game-config-json-schema-ai-context.html

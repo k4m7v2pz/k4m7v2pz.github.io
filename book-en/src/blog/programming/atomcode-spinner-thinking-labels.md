@@ -77,5 +77,5 @@ The **Divining... 5m2s** format is assembled in `format_spinner_label` in `crate
 
 ---
 <!-- License Declaration -->
-> This article is licensed under Mulan PSL v2. Copyright reserved. No attribution required. For enterprise compliance, please retain the original license notice.
+> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
 > Original version: https://k4m7v2pz.github.io/en/blog/programming/atomcode-spinner-thinking-labels.html

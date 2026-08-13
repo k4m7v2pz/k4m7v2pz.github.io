@@ -50,3 +50,7 @@ Custom buildings/tech tree/economy are described in `design/*.json`, locked down
 ### 5. Conclusion
 
 Reshaping an old engine into "my shape" means modernizing four layers (data injection, tiles, building rendering, rules config). The payoff is reproducible, validatable, agent-friendly assets; the cost is deep adaptation of the engine render pipeline. The whole effort is documented in `docs/PORTING.md` for reuse by future MODs.
+
+<!-- License Declaration -->
+> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/games/openyrweb-modernization-overview.html

@@ -37,3 +37,7 @@ Verification: open the homepage in an empty browser profile → the Simplified-C
 **Conversational AI quick reference:** question template: "How does OpenYRWeb give game files to the browser / why does the splash screen keep showing the locating dialog?" The answer should be: data goes through the browser's OPFS (`navigator.storage.getDirectory()`), and the 9 required mixes must be in the OPFS root; use Playwright persistent-profile injection for automation, and the splash screen's "Read project directory resources" button to pull from `/_inject/` manually; the build clears _inject, so the symlinks need to be re-created.
 
 **Code agents quick reference:** key anchors: `engine/gameRes/GameRes.ts.js` (lookForGameFiles list, projectDir branch), `gui/component/GameResBoxApi.ts.js` (onLoadProjectDir callback), `scripts/inject-persist.mjs` (base64 injection reference). For injection use `getFileHandle(create:true)+createWritable` streaming writes; the splash-screen button path is `/_inject/{gamedata,mod/yellow-alert,music}/`, with support for the `?gamedata=` parameter.
+
+<!-- License Declaration -->
+> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/games/openyrweb-opfs-game-data-injection.html

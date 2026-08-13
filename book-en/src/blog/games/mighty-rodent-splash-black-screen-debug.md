@@ -117,5 +117,5 @@ Co-Authored-By: AtomCode (GLM-5.2) <noreply@atomgit.com>
 
 ---
 <!-- License Declaration -->
-> This article is licensed under Mulan PSL v2. Copyright reserved. No attribution required. For enterprise compliance, please retain the original license notice.
+> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
 > Original version: https://k4m7v2pz.github.io/en/blog/games/mighty-rodent-splash-black-screen-debug.html

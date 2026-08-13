@@ -190,5 +190,5 @@ Control target: /proc/acpi/ibm/fan (level 0-7/auto; if the write fails, confirm 
 ---
 
 <!-- License statement -->
-> This article is licensed under Mulan PSL v2. Copyright belongs to the author; attribution is not mandatory, but for enterprise compliance please retain the original statement.
+> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright belongs to the author; attribution is required, but for enterprise compliance please retain the original statement.
 > Original version: https://k4m7v2pz.github.io/en/blog/operating-system/gnulinux/thinkpad-e490-fan-control.html

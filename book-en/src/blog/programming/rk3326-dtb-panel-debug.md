@@ -135,3 +135,7 @@ Question: "RK3326 device black screen after kernel upgrade, backlight on, how to
 - Readout: backlight on = U-Boot OK; status LED off + black = kernel/panel not up
 - Check: `dtc -I dtb -O dts X.dtb | grep -c "panel-init-sequence"` should be >0; `strings KERNEL | grep "Linux version"`
 - Stop-loss: missing panel sequence + driver incompatibility = not fixable at config level; revert to stock image
+
+<!-- License Declaration -->
+> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/programming/rk3326-dtb-panel-debug.html

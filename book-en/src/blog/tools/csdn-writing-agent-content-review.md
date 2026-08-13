@@ -52,3 +52,7 @@ After rewriting, the same article passed and the Agent expanded it normally.
 - Getting around it is not loophole-hunting: abstracting "specific device experience" into "generic technical methodology" keeps the article's value, passes review more easily, and reaches more readers
 - If material gets rejected, don't keep rephrasing — **change the topic angle** (from device perspective to technical perspective) usually works in one try
 - For a review-free, unlimited publishing channel, a self-hosted GitHub Pages site (mdBook) is a better choice — this repository is one example
+
+<!-- License Declaration -->
+> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/tools/csdn-writing-agent-content-review.html

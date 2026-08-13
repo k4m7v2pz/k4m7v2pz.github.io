@@ -143,3 +143,7 @@ curl.exe -L -o install.ps1 https://example.com/target-script.ps1
 
 >
 This is a QEMU VM running Windows 10 LTSB 2016 (Build 14393) with 2 GB RAM, whose TLS/Crypto stack sits at the 2016 baseline. AtomCode 5.0.0 was installed successfully by enabling TLS 1.2 strong crypto, but the platform overall faces four challenges: outdated protocol stack, tight memory, patch backlog, and approaching end of life. Every technical recommendation going forward must be grounded in this platform's real constraints — avoid "modern best practice"-style advice.
+
+<!-- License Declaration -->
+> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/operating-system/windows/powershell-invoke-restmethod-ssl-tls.html

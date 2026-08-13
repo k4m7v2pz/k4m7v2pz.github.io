@@ -70,3 +70,7 @@ rvs 已部署到 `<lan-host>` / 局域网打印机 / Ubuntu VPS / 远程 Windows
 - `session.proxy` 字段自动报告本机代理（如 Mac 7890 http/socks、支持局域网），agent 据此让远端走 `http://<局域网IP>:7890` 联网；
 - `exec  ""` 跨机器执行；
 - `search-content` 替代 grep。
+
+<!-- 许可声明 -->
+> 本文采用木兰开放作品许可协议 署名，第1版 (MulanOWL BY v1) 授权。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
+> 原始版本见：https://k4m7v2pz.github.io/zh/blog/tools/rvs-changelog-26.7.17-26.8.10.html

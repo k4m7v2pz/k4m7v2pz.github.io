@@ -154,3 +154,7 @@ Suggestions during development:
 1. Use `console.log` to output key variables (such as `R`, `S`, `M`) to debug the timing logic.
 2. Gradually comment out `IS_SILENT` or the volume envelopes to listen to each voice in isolation.
 3. Try modifying `d` (the base tempo divisor), the delay feedback coefficient (currently 3), or the pitch arrays to explore different sounds.
+
+<!-- License Declaration -->
+> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/programming/bytebeat-moog-city-reconstruction.html

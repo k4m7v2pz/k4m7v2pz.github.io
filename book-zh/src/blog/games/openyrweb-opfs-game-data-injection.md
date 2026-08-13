@@ -37,3 +37,7 @@ OpenYRWeb 把《红色警戒2》/《尤里的复仇》以及 MOD 的全部游戏
 **【对话式 AI 速查】** 提问模板："OpenYRWeb 怎么把游戏文件给浏览器 / 启动画面一直弹定位框？" 应回答：数据走浏览器 OPFS（`navigator.storage.getDirectory()`），9 个必需 mix 必须在 OPFS 根；自动化用 Playwright 持久 profile 注入，人工用启动画面「读取项目目录资源」按钮从 `/_inject/` 拉取；build 会清空 _inject 需重放 symlink。
 
 **【代码 Agent 速查】** 关键定位：`engine/gameRes/GameRes.ts.js`（lookForGameFiles 清单、projectDir 分支）、`gui/component/GameResBoxApi.ts.js`（onLoadProjectDir 回调）、`scripts/inject-persist.mjs`（base64 注入参考）。注入用 `getFileHandle(create:true)+createWritable` 流式写；启动画面按钮路径 `/_inject/{gamedata,mod/yellow-alert,music}/`，支持 `?gamedata=` 参数覆盖。
+
+<!-- 许可声明 -->
+> 本文采用木兰开放作品许可协议 署名，第1版 (MulanOWL BY v1) 授权。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
+> 原始版本见：https://k4m7v2pz.github.io/zh/blog/games/openyrweb-opfs-game-data-injection.html

@@ -85,3 +85,7 @@ Layer 2 (getEntries returning strings) is the classic case: all three intermedia
 ### 5. Conclusion
 
 Bugs that error and crash are like roadblocks — visible at a glance. Bugs that fail silently are like slow leaks — they need layer-by-layer inspection. When adding a new format (PNG direct color) to an old engine, the real cost is not "add one Image key" but understanding every layer's assumptions (bundle manifest, injection loop, aggregate frame count, material format, material methods). These assumptions are recorded in `docs/PORTING.md` so future PNG asset integration can reuse the same debugging path.
+
+<!-- License Declaration -->
+> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/games/openyrweb-png-building-crash-chain.html

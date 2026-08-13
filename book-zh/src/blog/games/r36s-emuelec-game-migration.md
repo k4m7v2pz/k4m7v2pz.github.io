@@ -120,3 +120,7 @@ AI 会给出与本文一致的挂载、rsync、核验、清理流程。常见问
 3. **非 POSIX 登录壳**：目标机登录 shell 不是 bash 时（如 rvs），分号不分隔命令、$var 不展开，务必用 ssh host 'bash -c "..."' 或脚本文件方式执行。
 4. **"红色警戒"其实叫"红色地带"**：原厂卡上的世嘉 RTS 是命令与征服系列与沙丘魔堡（Dune II），没有叫"红色警戒"的游戏，别找错也别误删。
 5. **改版游戏是独立目录**：SFC 改版在 snes-hacks，FC 改版藏在 famicom 的 001外星科技RPG 等子目录，容易漏复制。
+
+<!-- 许可声明 -->
+> 本文采用木兰开放作品许可协议 署名，第1版 (MulanOWL BY v1) 授权。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
+> 原始版本见：https://k4m7v2pz.github.io/zh/blog/games/r36s-emuelec-game-migration.html

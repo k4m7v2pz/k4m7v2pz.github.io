@@ -133,3 +133,7 @@ Ctrl+O（macOS 上即 Ctrl+O）是 AtomCode TUI 中切换 verbose 模式的快�
 - Ctrl+O 的反馈文本在 `mod.rs:7875-7878`，样式跟随主题（浅色 `\x1b[90m`，深色 `\x1b[2m`）
 - `feat/collapse-bridge` 分支的 `streams_tool_output_by_default` 是旧版（只有 `local-shell-` 例外），如果 cherry-pick verbose 相关 commit 到这个分支，需要同步更新这个函数
 - **验证方法**：`cd  && git log --all --oneline -S 'toggle_tool_output' -- '*.rs'` 查看所有涉及 commit
+
+<!-- 许可声明 -->
+> 本文采用木兰开放作品许可协议 署名，第1版 (MulanOWL BY v1) 授权。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
+> 原始版本见：https://k4m7v2pz.github.io/zh/blog/programming/atomcode-ctrl-o-evolution.html

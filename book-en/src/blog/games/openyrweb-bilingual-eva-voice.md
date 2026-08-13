@@ -60,3 +60,7 @@ Current state: voice files are generated and injected into OPFS; the mapping is 
 ### 6. Conclusion
 
 The bilingual announcer skeleton is "event enum (64) + bilingual text + JSON Schema mapping + TTS generation". Map the engine's trigger surface first, so you don't synthesize 300 unused lines out of the 356-entry full set; the Schema locking the enum keeps the mapping in sync with engine reality — the first step toward letting vanilla voice step aside.
+
+<!-- License Declaration -->
+> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/games/openyrweb-bilingual-eva-voice.html

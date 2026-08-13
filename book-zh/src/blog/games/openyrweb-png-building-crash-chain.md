@@ -85,3 +85,7 @@ this.mesh.setPaletteIndex / setOpacity / setExtraLight is not a function
 ### 5. 结论
 
 报错并崩溃的问题像路障，一眼看到；安静失败的问题像漏气，需要逐层排查。给旧引擎接新格式（PNG 直色）时，真正的成本不在「加一个 Image 键」，而在理解渲染管线的每一层假设（打包清单、注入循环、聚合帧数、材质格式、材质方法）。这些假设写成了 `docs/PORTING.md` 的踩坑记录，后续接入其他 PNG 素材时可以直接照抄排查路径。
+
+<!-- 许可声明 -->
+> 本文采用木兰开放作品许可协议 署名，第1版 (MulanOWL BY v1) 授权。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
+> 原始版本见：https://k4m7v2pz.github.io/zh/blog/games/openyrweb-png-building-crash-chain.html

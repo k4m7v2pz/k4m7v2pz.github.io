@@ -135,3 +135,7 @@ python3 -c "import hashlib; print('浪子玩数码'.encode('gbk').hex())"  # 看
 - 多卷：自定义 reader 按卷偏移 seek/read，patch ZIP64 locator 的 diskno/disks
 - 解压：`zlib.decompressobj(-15)` raw deflate，尾部 10B 是 HMAC-SHA1
 - 完整脚本思路见 2.md，实测 105 MiB/s 可复现
+
+<!-- 许可声明 -->
+> 本文采用木兰开放作品许可协议 署名，第1版 (MulanOWL BY v1) 授权。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
+> 原始版本见：https://k4m7v2pz.github.io/zh/blog/tools/macos-multivolume-zip-chinese-password.html

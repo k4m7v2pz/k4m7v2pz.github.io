@@ -134,5 +134,5 @@ expect reproduction: `spawn ssh host` then `send "命令\r"` — overlapping out
 ---
 
 <!-- License statement -->
-> This article is licensed under Mulan PSL v2. Copyright belongs to the author; attribution is not mandatory, but for enterprise compliance please retain the original statement.
+> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright belongs to the author; attribution is required, but for enterprise compliance please retain the original statement.
 > Original version: https://k4m7v2pz.github.io/en/blog/operating-system/windows/ssh-windows-output-buffering.html

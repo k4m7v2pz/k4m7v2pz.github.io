@@ -69,3 +69,7 @@ rvs has been deployed to four machines — `<lan-host>` / LAN printer / Ubuntu V
 - The `session.proxy` field automatically reports the local proxy (e.g. Mac's 7890 http/socks, LAN-capable), letting agents route remote requests through `http://<LAN-IP>:7890`;
 - `exec  ""` to execute across machines;
 - `search-content` as a grep replacement.
+
+<!-- License Declaration -->
+> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/tools/rvs-changelog-26.7.17-26.8.10.html

@@ -121,3 +121,7 @@ config.harfbuzz_features = { 'language=zh-Hans' }```lua
 ---
 
 *本文适用于 WezTerm 20240201 及以上版本。macOS 环境实测通过，Linux/Windows 原理相同，替换对应平台的中文字体名即可。*
+
+<!-- 许可声明 -->
+> 本文采用木兰开放作品许可协议 署名，第1版 (MulanOWL BY v1) 授权。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
+> 原始版本见：https://k4m7v2pz.github.io/zh/blog/tools/wezterm-cjk-glyph-fix.html

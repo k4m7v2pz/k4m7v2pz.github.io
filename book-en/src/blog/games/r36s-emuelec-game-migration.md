@@ -120,3 +120,7 @@ The AI will give the same mount, rsync, verify, and clean-up flow as this articl
 3. **Non-POSIX login shells**: when the target machine's login shell isn't bash (e.g. rvs), semicolons don't separate commands and $var isn't expanded — always execute via `ssh host 'bash -c "..."'` or a script file.
 4. **"Red Alert" is actually "Red Zone"**: the Sega RTS games on the stock card are the Command & Conquer series and Dune II; there's no game called "Red Alert" — don't look for the wrong one and don't delete the wrong thing.
 5. **Hacks live in separate directories**: SFC hacks are in snes-hacks, while FC hacks hide inside subdirectories like 001外星科技RPG under famicom — easy to miss when copying.
+
+<!-- License Declaration -->
+> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/games/r36s-emuelec-game-migration.html

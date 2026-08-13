@@ -70,3 +70,7 @@ The build deep-merges overrides onto the base and generates flat INI sections (`
 ### 6. Conclusion
 
 JSON Schema locks the contract between "human-readable JSON" and "engine-readable INI": structure errors surface at edit time, reference errors at build time, and enum errors at Schema time — three walls keep AI hallucinations out of the rules layer. This is also the foundation of the MOD being "agent-friendly": agents can edit config without breaking it, because the Schema is their guardrail.
+
+<!-- License Declaration -->
+> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/games/openyrweb-json-schema-rules.html

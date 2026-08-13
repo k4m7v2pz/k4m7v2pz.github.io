@@ -65,3 +65,7 @@ Key anchors:
 - `data/IdxFile.ts.js` (similar chunked-reading reference)
 
 Parse with a struct.unpack_from loop; when serializing, note that WRTS's elen goes after the value bytes; after editing, re-parse with CsfFile to self-check.
+
+<!-- License Declaration -->
+> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/games/ra2-yr-csf-format-reverse.html

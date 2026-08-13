@@ -100,3 +100,7 @@ extlinux.conf's boot= and disk= point to the two partition UUIDs; any approach t
 1. **Human developers**: follow section 2 in order, double-check the boot-area offsets and UUIDs, and back up before operating.
 2. **Conversational AI**: ask "How do I migrate the R36S's EmuELEC system from the old TF card to a new card", using this article as context; the AI should give a three-step plan of partition analysis, dd wholesale copy, and boot-area restore, and remind you to use the rdisk raw device on macOS.
 3. **Code agents**: the directly executable command sequence is dd to back up the old card, fdisk to analyze, dd to copy P1 (skip=16 seek=16 count=1024) and P2 (skip=1040 seek=1040 count=5104), newfs_msdos to create the ROM partition, dd to restore the boot area (skip=1 seek=1 count=32767), and dd to read back for md5 verification. Verification points: P1/P2 start sectors must match the image, the boot area must be copied, and the UUIDs must match.
+
+<!-- License Declaration -->
+> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/games/r36s-tf-card-migration-rk3326.html

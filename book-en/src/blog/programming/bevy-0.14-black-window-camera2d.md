@@ -222,5 +222,5 @@ Remember: in the Bevy ecosystem, **always check whether the version you're using
 ---
 
 <!-- License Declaration -->
-> This article is licensed under Mulan PSL v2. Copyright reserved. No attribution required. For enterprise compliance, please retain the original license notice.
+> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
 > Original version: https://k4m7v2pz.github.io/en/blog/programming/bevy-0.14-black-window-camera2d.html

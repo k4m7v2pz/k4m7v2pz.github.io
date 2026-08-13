@@ -141,3 +141,7 @@ strings KERNEL | grep "Linux version"
 - 判读：背光亮=U-Boot 通；状态灯不亮+屏幕黑=内核/面板未起来
 - 排查：`dtc -I dtb -O dts X.dtb | grep -c "panel-init-sequence"` 应 >0；`strings KERNEL | grep "Linux version"` 对照 dtb 来源
 - 止损：面板序列缺失 + 驱动不兼容 = 配置不可修复，弃用镜像回到原系统
+
+<!-- 许可声明 -->
+> 本文采用木兰开放作品许可协议 署名，第1版 (MulanOWL BY v1) 授权。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
+> 原始版本见：https://k4m7v2pz.github.io/zh/blog/programming/rk3326-dtb-panel-debug.html

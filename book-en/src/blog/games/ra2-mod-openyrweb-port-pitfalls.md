@@ -79,3 +79,7 @@ The verification points are all in the engine source:
 - `game/order/DockOrder.ts.js` (isValidUnitForDock)
 
 After the changes, re-run the injection script and refresh the page to verify.
+
+<!-- License Declaration -->
+> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/games/ra2-mod-openyrweb-port-pitfalls.html

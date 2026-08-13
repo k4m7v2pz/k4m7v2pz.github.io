@@ -307,3 +307,7 @@ xinput set-prop "pointer:设备名" "libinput Accel Profile Enabled" 0, 1
 在 Linux 桌面环境下运行老 Windows 游戏的通用参考模板。Enjoy your retro gaming!
 
 p>
+
+<!-- 许可声明 -->
+> 本文采用木兰开放作品许可协议 署名，第1版 (MulanOWL BY v1) 授权。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
+> 原始版本见：https://k4m7v2pz.github.io/zh/blog/games/archlinux-wine-i3wm-retro-game-env.html

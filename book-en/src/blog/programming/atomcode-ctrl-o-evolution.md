@@ -133,3 +133,7 @@ When referencing or modifying verbose mode in code, note:
 - Ctrl+O's feedback text lives at `mod.rs:7875-7878`; the style follows the theme (light `\x1b[90m`, dark `\x1b[2m`)
 - On the `feat/collapse-bridge` branch, `streams_tool_output_by_default` is the old version (only the `local-shell-` exception); if you cherry-pick verbose-related commits onto that branch, update this function accordingly
 - **Verification**: `cd  && git log --all --oneline -S 'toggle_tool_output' -- '*.rs'` to see all the commits involved
+
+<!-- License Declaration -->
+> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/programming/atomcode-ctrl-o-evolution.html

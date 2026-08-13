@@ -70,3 +70,7 @@ Four-step self-check:
 - `gui/GameGui.ts.js` (`handleViewportChange`)
 
 **Script side**: `Browser.getWindowBounds` outer size → cache `chrome={dx,dy}` → `setViewportSize(cw, ch)`; when changing the engine's default resolution, remove the `Math.min(innerWidth, config.viewport.width)` clamp.
+
+<!-- License Declaration -->
+> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/games/browser-windowed-game-resolution-cdp.html

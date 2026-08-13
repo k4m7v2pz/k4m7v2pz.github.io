@@ -96,3 +96,7 @@ DIAG: enemies=16 background_layers=8```rust
 
 
 如果你遇到了相同的现象并有解决方案，欢迎在项目 Issues 中讨论。
+
+<!-- 许可声明 -->
+> 本文采用木兰开放作品许可协议 署名，第1版 (MulanOWL BY v1) 授权。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
+> 原始版本见：https://k4m7v2pz.github.io/zh/blog/programming/bevy-0.14.2-sprite-not-rendering.html

@@ -70,3 +70,7 @@ Agent 改配置时的幻觉（拼错字段名、编造事件、格式错）被�
 ### 6. 结论
 
 JSON Schema 把「人读的 JSON」和「引擎读的 INI」之间的契约锁死：结构错误在编辑期暴露、引用错误在构建期暴露、枚举错误在 Schema 期暴露——三道人墙把 AI 幻觉挡在规则层之外。这也是整个 MOD「Agent 友好」的根基：Agent 改配置不会改坏，因为 Schema 就是它的护栏。
+
+<!-- 许可声明 -->
+> 本文采用木兰开放作品许可协议 署名，第1版 (MulanOWL BY v1) 授权。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
+> 原始版本见：https://k4m7v2pz.github.io/zh/blog/games/openyrweb-json-schema-rules.html

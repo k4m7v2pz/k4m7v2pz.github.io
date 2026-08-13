@@ -52,3 +52,7 @@ Verified: searching all git-tracked files for the real key prefix → zero match
 ### 7. Conclusion
 
 The full pipeline for 128 TTS lines: voice research (Neil) → batch script (.mts + env key) → generate wav → inject (recursive manifest) → engine wiring (pending). Core principles: **reproducible code, keys never on disk, output regenerable anytime** — this skeleton also serves future voice iteration and engine wiring.
+
+<!-- License Declaration -->
+> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/games/openyrweb-tts-voice-batch.html

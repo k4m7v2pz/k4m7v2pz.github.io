@@ -154,3 +154,7 @@ Question: "R36S dual-card, game card in left slot no reaction?" Answer: check wh
 - System card: `dd if=image of=card bs=1M skip=16 seek=16 count=1024` (P1) + `skip=1040 seek=1040 count=5104` (P2) + `bs=512 skip=1 seek=1 count=32767` (bootloader); P1/P2 start sectors match source
 - Game card: `mkfs.vfat -F 32 -n EEROMS`, platform dirs at root
 - Verify: `blkid` for UUID/label; on device check All Games count (measured 15928)
+
+<!-- License Declaration -->
+> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/games/r36s-emuelec-dual-card-separation.html

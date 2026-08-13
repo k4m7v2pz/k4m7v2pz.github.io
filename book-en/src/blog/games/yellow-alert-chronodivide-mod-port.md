@@ -257,3 +257,7 @@ Website=https://game.ra2web.com```ini
 | `ERR_BLOCKED_BY_CLIENT` | Ad blocker | Ignore; doesn't affect the game |
 
 *This document is generated from Chrono Divide v0.83.2 + Yellow Alert's actual run logs, 2026-07-31.*
+
+<!-- License Declaration -->
+> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/games/yellow-alert-chronodivide-mod-port.html

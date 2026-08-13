@@ -154,3 +154,7 @@ t?(t/=6,
 1. 使用 `console.log` 输出关键变量（如 `R`, `S`, `M`）以调试时序逻辑。
 2. 逐步注释掉 `IS_SILENT` 或音量包络，单独聆听每个声部。
 3. 尝试修改 `d`（基础速度除数）、延迟反馈系数（当前为 3）或音高数组，探索不同听感。
+
+<!-- 许可声明 -->
+> 本文采用木兰开放作品许可协议 署名，第1版 (MulanOWL BY v1) 授权。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
+> 原始版本见：https://k4m7v2pz.github.io/zh/blog/programming/bytebeat-moog-city-reconstruction.html

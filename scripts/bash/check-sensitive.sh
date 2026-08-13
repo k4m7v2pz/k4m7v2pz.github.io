@@ -136,11 +136,16 @@ for f in "${files[@]}"; do
     report "$f" "私钥内容" "$hit"
   done < <(grep -InE 'BEGIN (RSA |EC |OPENSSH |DSA )?PRIVATE KEY' "$f" 2>/dev/null)
 
-  # 5) 疑似私人邮箱（放行占位符与 trailer；放行 SSH URL 形式 git@host:path）
+  # 5) 疑似私人邮箱（放行占位符与 trailer；放行 SSH URL 形式 git@host:path；
+  #    放行 systemd 模板单元 `name@instance.service` 这类路径，如 getty@tty1.service.d）
   while IFS= read -r hit; do
     case "$hit" in
       *example.com*|*example.org*|*example.net*|*noreply@atomgit.com*) ;;
       *)
+        # systemd 模板单元路径（getty@tty1.service.d、foo@bar.timer）不是邮箱
+        if [[ "$hit" =~ @[A-Za-z0-9._-]+\.(service|socket|target|device|mount|automount|swap|path|timer|slice|scope) ]]; then
+          continue
+        fi
         # SSH 克隆地址 `git@host:path` 不是邮箱（git@ 后跟域名+冒号路径）
         if [[ "$hit" =~ git@[A-Za-z0-9.-]+\.[A-Za-z]{2,}: ]]; then
           continue

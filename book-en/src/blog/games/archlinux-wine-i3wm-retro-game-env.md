@@ -305,3 +305,7 @@ With the configuration above, 《重武器老鼠》 runs smoothly on Arch Linux 
 **Related tags**: #ArchLinux #Wine #i3wm #重武器老鼠 #MightyRodent #retrogaming #LinuxGaming #PipeWire
 
 A general reference template for running old Windows games on a Linux desktop. Enjoy your retro gaming!
+
+<!-- License Declaration -->
+> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/games/archlinux-wine-i3wm-retro-game-env.html

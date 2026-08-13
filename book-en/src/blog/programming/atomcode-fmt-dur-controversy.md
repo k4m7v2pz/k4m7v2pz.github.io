@@ -103,3 +103,7 @@ When referencing or modifying `fmt_dur` in code, note:
 - The second blog post (163088439) corrects the word-list issue but fails to point out that before 2026-05-02 `fmt_dur` displayed the whole turn's accumulated time (`turn_elapsed()`) rather than the phase time (`phase_elapsed()`)
 - The recent AI output of the `XhYm / YmZs / Zs` format is a mishmash of the two `fmt_dur` functions and omits `ms` and sub-minute decimals
 - Verification method: `cd  && git log --all --oneline -S 'fmt_dur' -- crates/atomcode-tuix/src/render/mod.rs`
+
+<!-- License Declaration -->
+> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/programming/atomcode-fmt-dur-controversy.html

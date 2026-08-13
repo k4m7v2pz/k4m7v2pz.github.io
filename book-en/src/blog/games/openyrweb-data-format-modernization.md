@@ -60,3 +60,7 @@ Rules move from "hand-written flat ini sections" to "design JSON → generated i
 ### 6. Conclusion
 
 Format modernization is essentially "adapting three pipelines one by one": data loading (mix → OPFS), resource wrapping (SHP → PngShpFile), and render materials (palette → RGBA). Every layer hides assumptions; change one layer and one breaks. Once those assumptions are written into the pitfall log (`docs/PORTING.md`), future migrations of the same kind can reuse the debugging path.
+
+<!-- License Declaration -->
+> This article is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
+> Original version: https://k4m7v2pz.github.io/en/blog/games/openyrweb-data-format-modernization.html

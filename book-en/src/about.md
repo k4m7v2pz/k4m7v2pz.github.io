@@ -60,9 +60,9 @@ Content is published across multiple platforms, each serving a distinct role:
 
 ## License Notes
 
-- **Original blog articles**: All original content on this blog is licensed under **Mulan PSL v2**.
+- **Original blog articles**: All original content (articles, images, audio works) on this blog is licensed under **Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1)** — see `LICENSE-CONTENT` in the repository root.
 - **Code in this repository**: Follows the `LICENSE` file (Mulan PSL v2) in the repository root.
-- **Author's position**: The author does not actively enforce attribution. Personal use does not require attribution; enterprise/commercial redistribution must retain the original license and notices.
+- **Author's position**: Content reuse/redistribution must retain the source URI and attribution per MulanOWL BY v1; enterprise/commercial redistribution of code must retain the original license and notices.
 - **Referenced/republished content**: Attributed to the original author.
 - **Suno AI music**: Music generated with Suno AI is subject to the Suno AI license agreement — **non-commercial use only**. Do not use for commercial purposes.
 
@@ -70,6 +70,6 @@ Content is published across multiple platforms, each serving a distinct role:
 
 The original version hosted on GitHub Pages carries this license notice:
 
-> © 2026–present k4m7v2pz. All original content on this site is licensed under Mulan PSL v2.
-> The author does not actively enforce attribution. Personal use requires no credit; enterprise/commercial redistribution must retain the original license and notices.
+> © 2026–present k4m7v2pz. All original content (articles) on this site is licensed under Mulan Open Works License Attribution, Version 1 (MulanOWL BY v1).
+> Content reuse requires attribution per MulanOWL BY v1; repository code follows the LICENSE file (Mulan PSL v2).
 > Content is also published on CSDN; the original version is this site.
