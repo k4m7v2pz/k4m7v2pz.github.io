@@ -18,7 +18,7 @@
 
 ### 🎮 游戏项目
 
-- [rust-bevy-mighty-rodent](https://atomgit.com/k4m7v2pz/rust-bevy-mighty-rodent) — Mighty Rodent 逆向重写（Rust/Bevy）
+- [rust-bevy-mighty-rodent](https://atomgit.com/k4m7v2pz/rust-bevy-mighty-rodent) — Mighty Rodent 逆向重写（Rust/Bevy，热衷维护中）
 - [rust-bevy-endless-corridor](https://github.com/k4m7v2pz/rust-bevy-endless-corridor) — 无尽走廊（Rust/Bevy）
 - [RF-Client](https://github.com/k4m7v2pz/RF-Client) — 红警2重聚未来客户端（C#）
 - [rust-bevy-narrative-path-craft](https://github.com/k4m7v2pz/rust-bevy-narrative-path-craft) — 叙事路径创作（Rust/Bevy）

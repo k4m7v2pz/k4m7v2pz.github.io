@@ -18,7 +18,7 @@
 
 ### 🎮 Game Projects
 
-- [rust-bevy-mighty-rodent](https://atomgit.com/k4m7v2pz/rust-bevy-mighty-rodent) — Mighty Rodent reverse-engineering rewrite (Rust/Bevy)
+- [rust-bevy-mighty-rodent](https://atomgit.com/k4m7v2pz/rust-bevy-mighty-rodent) — Mighty Rodent reverse-engineering rewrite (Rust/Bevy, actively maintained)
 - [rust-bevy-endless-corridor](https://github.com/k4m7v2pz/rust-bevy-endless-corridor) — Endless corridor game (Rust/Bevy)
 - [RF-Client](https://github.com/k4m7v2pz/RF-Client) — Red Alert 2 Future Reunion Client (C#)
 - [rust-bevy-narrative-path-craft](https://github.com/k4m7v2pz/rust-bevy-narrative-path-craft) — Narrative path crafting (Rust/Bevy)
