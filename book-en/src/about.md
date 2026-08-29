@@ -16,11 +16,11 @@
 
 ## Code Hosting Platforms
 
-### Primary: AtomGit (GitCode)
+### Primary: AtomGit
 
 | Item | Description |
 |------|-------------|
-| URL | https://gitcode.com/k4m7v2pz |
+| URL | https://atomgit.com/k4m7v2pz |
 | Features | Generous storage and LFS quotas (free 2GB LFS, 30GB repo storage) |
 | Use | Primary platform for all code repositories |
 

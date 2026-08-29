@@ -16,11 +16,11 @@
 
 ## 代码托管平台
 
-### 首选：AtomGit（GitCode）
+### 首选：AtomGit
 
 | 项目 | 说明 |
 |------|------|
-| 地址 | https://gitcode.com/k4m7v2pz |
+| 地址 | https://atomgit.com/k4m7v2pz |
 | 特点 | 提供宽松的存储和 LFS 额度（免费 2GB LFS，30GB 仓库存储） |
 | 用途 | 代码仓库首更平台 |
 
