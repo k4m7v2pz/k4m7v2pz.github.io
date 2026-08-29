@@ -50,6 +50,14 @@
 | GitHub Pages | 纯净存档 | 无广告、无登录墙、无付费墙、无关键词审查。作为 CSDN 的备份站，避免 CSDN 未来转收费、页面广告或审查带来的内容不可达问题。 |
 | AtomGit / GitHub / Gitee | 代码托管 | 代码仓库的主平台与镜像，详见「代码托管平台」章节。 |
 
+## CSDN 博客
+
+- **用户名**：2601_96158891，**昵称**：k4m7v2pz
+- **主页**：https://blog.csdn.net/2601_96158891
+- **首发平台**：技术文章在 CSDN 首更
+- **自动备份**：发布时勾选「同时备份到 GitCode」选项，文章会以 .md 文件形式自动同步到 [gitcode_knowledge 仓库的 CSDN博文备份 目录](https://atomgit.com/k4m7v2pz/gitcode_knowledge/tree/main/CSDN%E5%8D%9A%E6%96%87%E5%A4%87%E4%BB%BD)
+- **本站搬运**：偶尔通过 Agent 将该备份仓中的 .md 文件搬运到本 GitHub Pages 博客存档
+
 ## 同步策略
 
 - 每个项目指定一个首更平台，其他平台通过 HTTPS 手动同步做镜像。

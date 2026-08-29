@@ -50,6 +50,14 @@ Content is published across multiple platforms, each serving a distinct role:
 | GitHub Pages | Clean archive | Ad-free, no login wall, no paywall, no keyword censorship. Serves as a backup for CSDN content, avoiding future paywalls, page ads, or censorship that could make content inaccessible on CSDN. |
 | AtomGit / GitHub / Gitee | Code hosting | Primary and mirror platforms for code repositories. See the "Code Hosting Platforms" section for details. |
 
+## CSDN Blog
+
+- **Username**: 2601_96158891, **Nickname**: k4m7v2pz
+- **Homepage**: https://blog.csdn.net/2601_96158891
+- **Primary publishing platform**: technical articles are first published on CSDN
+- **Auto backup**: when publishing, ticking the "Back up to GitCode as well" option automatically syncs the article as a .md file into the [CSDN article backup directory of the gitcode_knowledge repo](https://atomgit.com/k4m7v2pz/gitcode_knowledge/tree/main/CSDN%E5%8D%9A%E6%96%87%E5%A4%87%E4%BB%BD)
+- **Mirrored here**: occasionally, an Agent moves .md files from that backup repo into this GitHub Pages blog as an archive
+
 ## Sync Strategy
 
 - Each project has one primary platform where it is first published.
