@@ -14,7 +14,6 @@
 - [Minimal Arch Linux Installation Guide](blog/operating-system/gnulinux/minimal-archlinux-install-guide.md)
 - [XFCE Desktop + lightdm Package List Reference](blog/operating-system/gnulinux/xfce-lightdm-package-list.md)
 - [ThinkPad E490 Fan/Temperature Auto-Control Log: thinkfan Absent, a Hand-Written Curve Script Takes Over](blog/operating-system/gnulinux/thinkpad-e490-fan-control.md)
-- [Mainland China VPS Network Pitfalls: GitHub Blocked, Cloud PC Security Groups, HTTP Proxy Interception, and File Transfer Solutions](blog/operating-system/gnulinux/china-vps-network-pitfalls.md)
 
 ## Windows
 - [Embedded Python pip Installation](blog/operating-system/windows/embed-python-pip-installation-windows.md)
@@ -99,3 +98,6 @@
 
 # Suno AI
 - [Red Alert 2 Yellow Alert Main Menu Music — Suno AI Style Prompt](blog/sunoai/yellow-alert-suno-style-prompt.md)
+
+# Mainland China Networking
+- [Mainland China VPS Network Pitfalls: GitHub Blocked, Cloud PC Security Groups, HTTP Proxy Interception, and File Transfer Solutions](blog/china-network/china-vps-network-pitfalls.md)

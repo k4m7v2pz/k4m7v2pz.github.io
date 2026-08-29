@@ -14,7 +14,6 @@
 - [纯字符极简 Arch Linux 装机指南](blog/operating-system/gnulinux/minimal-archlinux-install-guide.md)
 - [XFCE 桌面环境 lightdm 包列表参考](blog/operating-system/gnulinux/xfce-lightdm-package-list.md)
 - [ThinkPad E490 风扇温度自动控制实录：thinkfan 缺位，自写曲线脚本接管](blog/operating-system/gnulinux/thinkpad-e490-fan-control.md)
-- [大陆机房 VPS 网络避坑指南：GitHub 被墙、云电脑安全组、HTTP 代理拦截与文件传输方案](blog/operating-system/gnulinux/china-vps-network-pitfalls.md)
 
 ## Windows
 - [嵌入式 Python Windows 版 pip 安装](blog/operating-system/windows/embed-python-pip-installation-windows.md)
@@ -99,3 +98,6 @@
 
 # Suno AI
 - [红警 2 黄色警戒 主菜单音乐 Suno AI 风格提示词](blog/sunoai/yellow-alert-suno-style-prompt.md)
+
+# 大陆网络技术
+- [大陆机房 VPS 网络避坑指南：GitHub 被墙、云电脑安全组、HTTP 代理拦截与文件传输方案](blog/china-network/china-vps-network-pitfalls.md)
