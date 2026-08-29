@@ -14,6 +14,7 @@
 - [Minimal Arch Linux Installation Guide](blog/operating-system/gnulinux/minimal-archlinux-install-guide.md)
 - [XFCE Desktop + lightdm Package List Reference](blog/operating-system/gnulinux/xfce-lightdm-package-list.md)
 - [ThinkPad E490 Fan/Temperature Auto-Control Log: thinkfan Absent, a Hand-Written Curve Script Takes Over](blog/operating-system/gnulinux/thinkpad-e490-fan-control.md)
+- [Mainland China VPS Network Pitfalls: GitHub Blocked, Cloud PC Security Groups, HTTP Proxy Interception, and File Transfer Solutions](blog/operating-system/gnulinux/china-vps-network-pitfalls.md)
 
 ## Windows
 - [Embedded Python pip Installation](blog/operating-system/windows/embed-python-pip-installation-windows.md)
