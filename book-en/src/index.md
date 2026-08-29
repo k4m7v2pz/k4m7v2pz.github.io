@@ -22,8 +22,6 @@
 - [rust-bevy-mighty-rodent](https://atomgit.com/k4m7v2pz/rust-bevy-mighty-rodent) — Mighty Rodent reverse-engineering rewrite (Rust/Bevy, actively maintained)
 - [rust-bevy-endless-corridor](https://github.com/k4m7v2pz/rust-bevy-endless-corridor) — Main dev ground: Agent-friendly two-space-indent code, enabling horror/narrative games to be built by Agents (Rust/Bevy)
 - [rust-bevy-narrative-path-craft](https://github.com/k4m7v2pz/rust-bevy-narrative-path-craft) — Story-engine placeholder: Agent/LLM-friendly narrative data structures; LLMs can grasp memes and character dialogue motives (Rust/Bevy)
-- [rust-egui-chplus-ide](https://github.com/k4m7v2pz/rust-egui-chplus-ide) — egui-based IDE (Rust)
-- [rust-tauri-chplus-ide](https://github.com/k4m7v2pz/rust-tauri-chplus-ide) — Tauri-based IDE (Svelte)
 - [GachimuchiSampling](https://github.com/k4m7v2pz/GachimuchiSampling) — Philosophy Sampling (PowerShell)
 - [rust-bevy-sky-rebound](https://atomgit.com/k4m7v2pz/rust-bevy-sky-rebound) — Bounce-to-the-sky game (Rust/Bevy, actively maintained)
 - [rust-bevy-bomber-man](https://atomgit.com/k4m7v2pz/rust-bevy-bomber-man) — Bomberman game (Rust/Bevy, fun to play)

@@ -22,8 +22,6 @@
 - [rust-bevy-mighty-rodent](https://atomgit.com/k4m7v2pz/rust-bevy-mighty-rodent) — Mighty Rodent 逆向重写（Rust/Bevy，热衷维护中）
 - [rust-bevy-endless-corridor](https://github.com/k4m7v2pz/rust-bevy-endless-corridor) — 开发主阵地：Agent 友好的 2 空格缩进代码，让恐怖/叙事类游戏可通过 Agent 开发（Rust/Bevy）
 - [rust-bevy-narrative-path-craft](https://github.com/k4m7v2pz/rust-bevy-narrative-path-craft) — 剧情引擎占位：Agent/LLM 友好的剧情数据结构，LLM 能理解「梗」与角色台词动机（Rust/Bevy）
-- [rust-egui-chplus-ide](https://github.com/k4m7v2pz/rust-egui-chplus-ide) — egui 版 IDE（Rust）
-- [rust-tauri-chplus-ide](https://github.com/k4m7v2pz/rust-tauri-chplus-ide) — Tauri 版 IDE（Svelte）
 - [GachimuchiSampling](https://github.com/k4m7v2pz/GachimuchiSampling) — 哲♂学采样（PowerShell）
 - [rust-bevy-sky-rebound](https://atomgit.com/k4m7v2pz/rust-bevy-sky-rebound) — 弹跳至天空游戏（Rust/Bevy，热衷维护）
 - [rust-bevy-bomber-man](https://atomgit.com/k4m7v2pz/rust-bevy-bomber-man) — 炸弹人游戏（Rust/Bevy，喜欢玩）
