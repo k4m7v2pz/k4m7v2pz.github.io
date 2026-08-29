@@ -1,44 +1,44 @@
 <!DOCTYPE HTML>
-<html lang="en" class="light sidebar-visible" dir="ltr">
+<html lang="zh" class="light sidebar-visible" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Mainland China VPS Network Pitfalls: GitHub Blocked, Cloud PC Security Groups, HTTP Proxy Interception, and File Transfer Solutions - K4m7v2pz&#x27;s Blog</title>
+        <title>大陆机房 VPS 网络避坑指南：GitHub 被墙、云电脑安全组、HTTP 代理拦截与文件传输方案 - K4m7v2pz&#x27;s Blog</title>
 
 
         <!-- Custom HTML head -->
 
-        <meta name="description" content="k4m7v2pz&#x27;s personal blog">
+        <meta name="description" content="k4m7v2pz 的博客">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
-        <link rel="icon" href="../../../favicon-de23e50b.svg">
-        <link rel="shortcut icon" href="../../../favicon-8114d1fc.png">
-        <link rel="stylesheet" href="../../../css/variables-8adf115d.css">
-        <link rel="stylesheet" href="../../../css/general-e96d0476.css">
-        <link rel="stylesheet" href="../../../css/chrome-d279d366.css">
-        <link rel="stylesheet" href="../../../css/print-9e4910d8.css" media="print">
+        <link rel="icon" href="../../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../../css/general-e96d0476.css">
+        <link rel="stylesheet" href="../../css/chrome-d279d366.css">
+        <link rel="stylesheet" href="../../css/print-9e4910d8.css" media="print">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="../../../fonts/fonts-9644e21d.css">
+        <link rel="stylesheet" href="../../fonts/fonts-9644e21d.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" id="mdbook-highlight-css" href="../../../highlight-493f70e1.css">
-        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../../../tomorrow-night-4c0ae647.css">
-        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../../../ayu-highlight-3fdfc3ac.css">
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
 
 
         <!-- Provide site root and default themes to javascript -->
         <script>
-            const path_to_root = "../../../";
+            const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../../searchindex-6259297f.js";
+            window.path_to_searchindex_js = "../../searchindex-8e3f2142.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../../toc-443577a4.js"></script>
+        <script src="../../toc-0313697f.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -105,7 +105,7 @@
             <!-- populated by js -->
             <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
             <noscript>
-                <iframe class="sidebar-iframe-outer" src="../../../toc.html"></iframe>
+                <iframe class="sidebar-iframe-outer" src="../../toc.html"></iframe>
             </noscript>
             <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -140,13 +140,13 @@
                     <h1 class="menu-title">K4m7v2pz&#x27;s Blog</h1>
 
                     <div class="right-buttons">
-                        <a href="../../../print.html" title="Print this book" aria-label="Print this book">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
                             <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
                         </a>
                         <a href="https://github.com/k4m7v2pz/k4m7v2pz.github.io" title="Git repository" aria-label="Git repository">
                             <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
                         </a>
-                        <a href="https://github.com/k4m7v2pz/k4m7v2pz.github.io/edit/dev/book-en/src/blog/operating-system/gnulinux/china-vps-network-pitfalls.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
+                        <a href="https://github.com/k4m7v2pz/k4m7v2pz.github.io/edit/dev/book-zh/src/blog/china-network/china-vps-network-pitfalls.md" title="Suggest an edit" aria-label="Suggest an edit" rel="edit">
                             <span class=fa-svg id="git-edit-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M421.7 220.3l-11.3 11.3-22.6 22.6-205 205c-6.6 6.6-14.8 11.5-23.8 14.1L30.8 511c-8.4 2.5-17.5 .2-23.7-6.1S-1.5 489.7 1 481.2L38.7 353.1c2.6-9 7.5-17.2 14.1-23.8l205-205 22.6-22.6 11.3-11.3 33.9 33.9 62.1 62.1 33.9 33.9zM96 353.9l-9.3 9.3c-.9 .9-1.6 2.1-2 3.4l-25.3 86 86-25.3c1.3-.4 2.5-1.1 3.4-2l9.3-9.3H112c-8.8 0-16-7.2-16-16V353.9zM453.3 19.3l39.4 39.4c25 25 25 65.5 0 90.5l-14.5 14.5-22.6 22.6-11.3 11.3-33.9-33.9-62.1-62.1L314.3 67.7l11.3-11.3 22.6-22.6 14.5-14.5c25-25 65.5-25 90.5 0z"/></svg></span>
                         </a>
 
@@ -181,164 +181,164 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
-<h1 id="mainland-china-vps-network-pitfalls-github-blocked-cloud-pc-security-groups-http-proxy-interception-and-file-transfer-solutions"><a class="header" href="#mainland-china-vps-network-pitfalls-github-blocked-cloud-pc-security-groups-http-proxy-interception-and-file-transfer-solutions">Mainland China VPS Network Pitfalls: GitHub Blocked, Cloud PC Security Groups, HTTP Proxy Interception, and File Transfer Solutions</a></h1>
-<h2 id="1-background"><a class="header" href="#1-background">1. Background</a></h2>
-<p>When installing software and setting up remote management on a NAT VPS hosted in mainland China, network issues are the biggest obstacle. GitHub is blocked so installation packages cannot be downloaded directly; the cloud PC’s security group blocks inbound connections so file transfer fails; and the HTTP proxy intercepts requests to non-standard ports, making WinRM return 404.</p>
-<p>This article collects the network pitfalls encountered while operating mainland China VPS instances, covering symptoms, root causes, fixes, and the final file transfer solution.</p>
-<h2 id="2-github-is-blocked"><a class="header" href="#2-github-is-blocked">2. GitHub Is Blocked</a></h2>
-<h3 id="21-symptom"><a class="header" href="#21-symptom">2.1 Symptom</a></h3>
-<p>Downloading files from GitHub directly on the VPS times out or fails to connect:</p>
+<h1 id="大陆机房-vps-网络避坑指南github-被墙云电脑安全组http-代理拦截与文件传输方案"><a class="header" href="#大陆机房-vps-网络避坑指南github-被墙云电脑安全组http-代理拦截与文件传输方案">大陆机房 VPS 网络避坑指南：GitHub 被墙、云电脑安全组、HTTP 代理拦截与文件传输方案</a></h1>
+<h2 id="1-背景"><a class="header" href="#1-背景">1. 背景</a></h2>
+<p>在大陆机房的 NAT VPS 上安装软件、配置远程管理时，网络问题是最大的障碍之一。GitHub 被墙导致无法直接下载安装包，云电脑的安全组阻止入站连接导致文件传输失败，HTTP 代理拦截非标准端口请求导致 WinRM 返回 404。</p>
+<p>本文整理大陆机房 VPS 运维中遇到的各类网络坑，包括现象、根因、修复方案，以及文件传输的最终解决方案。</p>
+<h2 id="2-github-被墙"><a class="header" href="#2-github-被墙">2. GitHub 被墙</a></h2>
+<h3 id="21-现象"><a class="header" href="#21-现象">2.1 现象</a></h3>
+<p>在 VPS 上直接下载 GitHub 上的文件，超时或连接失败：</p>
 <pre><code class="language-bash">wget https://github.com/PowerShell/Win32-OpenSSH/releases/download/v&lt;version&gt;/OpenSSH-Win64.zip
-# connection timeout
+# 连接超时
 </code></pre>
-<p>curl fails the same way:</p>
+<p>curl 同样失败：</p>
 <pre><code class="language-bash">curl -L -o OpenSSH-Win64.zip https://github.com/PowerShell/Win32-OpenSSH/releases/download/v&lt;version&gt;/OpenSSH-Win64.zip
 # Failed to connect to github.com port 443: Connection timed out
 </code></pre>
-<h3 id="22-github-mirrors-are-unavailable-too"><a class="header" href="#22-github-mirrors-are-unavailable-too">2.2 GitHub Mirrors Are Unavailable Too</a></h3>
-<p>Common GitHub mirrors all failed:</p>
+<h3 id="22-github-镜像也不可用"><a class="header" href="#22-github-镜像也不可用">2.2 GitHub 镜像也不可用</a></h3>
+<p>尝试常见的 GitHub 镜像，全部失败：</p>
 <div class="table-wrapper">
 <table>
 <thead>
-<tr><th>Mirror</th><th>Result</th></tr>
+<tr><th>镜像</th><th>结果</th></tr>
 </thead>
 <tbody>
-<tr><td>ghproxy.com</td><td>cannot connect</td></tr>
-<tr><td>mirror.ghproxy.com</td><td>cannot connect</td></tr>
-<tr><td>gh.api.99988866.xyz</td><td>cannot connect</td></tr>
-<tr><td>gh-proxy.com</td><td>cannot connect</td></tr>
+<tr><td>ghproxy.com</td><td>无法连接</td></tr>
+<tr><td>mirror.ghproxy.com</td><td>无法连接</td></tr>
+<tr><td>gh.api.99988866.xyz</td><td>无法连接</td></tr>
+<tr><td>gh-proxy.com</td><td>无法连接</td></tr>
 </tbody>
 </table>
 </div>
-<p>These mirrors are either blocked by domain or have shut down.</p>
-<h3 id="23-domestic-sites-are-basically-reachable"><a class="header" href="#23-domestic-sites-are-basically-reachable">2.3 Domestic Sites Are Basically Reachable</a></h3>
-<p>Testing domestic sites:</p>
-<pre><code class="language-bash"># Baidu
+<p>这些镜像要么域名被墙，要么服务已停止。</p>
+<h3 id="23-国内网站基本可用"><a class="header" href="#23-国内网站基本可用">2.3 国内网站基本可用</a></h3>
+<p>测试国内网站：</p>
+<pre><code class="language-bash"># 百度
 curl -s -o /dev/null -w "%{http_code} %{size_download}" https://www.baidu.com
 # 200 29050
 
-# atomgit (domestic code hosting)
+# atomgit（国内代码托管）
 curl -s -o /dev/null -w "%{http_code} %{size_download}" https://atomgit.com
 # 200 252674
 </code></pre>
-<p>Both Baidu and atomgit work fine, which shows domestic sites are basically reachable from a mainland China VPS — it is mainly GitHub and other overseas sites that are blocked.</p>
-<h3 id="24-fixes"><a class="header" href="#24-fixes">2.4 Fixes</a></h3>
-<p><strong>Option 1: Download source from a domestic mirror and compile it manually</strong></p>
-<p>OpenSSH source can be pulled from a domestic mirror (e.g. an atomgit mirror of OpenSSH), but compiling OpenSSH on Windows requires Visual Studio Build Tools + CMake + Perl + NASM + OpenSSL. The toolchain is complex and the build takes 1-2 hours — not recommended.</p>
-<p><strong>Option 2: Transfer the file from the cloud PC (recommended)</strong></p>
-<p>Download the installer on the cloud PC (it can reach GitHub or has domestic mirrors), then transfer it to the VPS using the file transfer approach. See the final file transfer solution in Section 5.</p>
-<p><strong>Option 3: Use a domestic package manager</strong></p>
-<p>Package managers such as MSYS2, Chocolatey and Scoop may have domestic mirrors, but installing the package manager itself also requires a download, which may also be blocked.</p>
-<h2 id="3-cloud-pc-inbound-security-group"><a class="header" href="#3-cloud-pc-inbound-security-group">3. Cloud PC Inbound Security Group</a></h2>
-<h3 id="31-symptom"><a class="header" href="#31-symptom">3.1 Symptom</a></h3>
-<p>Start an HTTP server on the cloud PC so the VPS can download files from it:</p>
-<pre><code class="language-bash"># Start an HTTP server on the cloud PC
+<p>百度和 atomgit 都能正常访问，说明大陆机房的国内网站基本可用，主要是 GitHub 等国外网站被墙。</p>
+<h3 id="24-修复方案"><a class="header" href="#24-修复方案">2.4 修复方案</a></h3>
+<p><strong>方案一：从国内镜像下载源码，手动编译</strong></p>
+<p>OpenSSH 的源码可以从国内镜像（如 atomgit 的 OpenSSH 镜像）下载，但 Windows 上编译 OpenSSH 需要 Visual Studio Build Tools + CMake + Perl + NASM + OpenSSL，环境复杂，编译时间长（1-2 小时），不推荐。</p>
+<p><strong>方案二：从云电脑传输文件（推荐）</strong></p>
+<p>在云电脑上下载好安装包（云电脑能访问 GitHub 或有国内镜像），然后通过文件传输方案传到 VPS。详见本文第五部分的文件传输最终方案。</p>
+<p><strong>方案三：用国内包管理器</strong></p>
+<p>MSYS2、Chocolatey、Scoop 等包管理器可能有国内镜像，但安装包管理器本身也需要下载，且可能也被墙。</p>
+<h2 id="3-云电脑入站安全组"><a class="header" href="#3-云电脑入站安全组">3. 云电脑入站安全组</a></h2>
+<h3 id="31-现象"><a class="header" href="#31-现象">3.1 现象</a></h3>
+<p>在云电脑上启动 HTTP 服务器，想让 VPS 主动下载文件：</p>
+<pre><code class="language-bash"># 云电脑上启动 HTTP 服务器
 python3 -m http.server 8765
 # Serving HTTP on 0.0.0.0 port 8765
 </code></pre>
-<p>Test the connection from the VPS:</p>
-<pre><code class="language-powershell">Test-NetConnection -ComputerName &lt;cloud-PC-IP&gt; -Port 8765
+<p>在 VPS 上测试连接：</p>
+<pre><code class="language-powershell">Test-NetConnection -ComputerName &lt;云电脑IP&gt; -Port 8765
 # TcpTestSucceeded : False
 </code></pre>
-<p>The connection fails.</p>
-<h3 id="32-every-port-is-unreachable"><a class="header" href="#32-every-port-is-unreachable">3.2 Every Port Is Unreachable</a></h3>
-<p>Testing multiple ports on the cloud PC:</p>
+<p>连接失败。</p>
+<h3 id="32-所有端口都不可达"><a class="header" href="#32-所有端口都不可达">3.2 所有端口都不可达</a></h3>
+<p>测试云电脑的多个端口：</p>
 <div class="table-wrapper">
 <table>
 <thead>
-<tr><th>Port</th><th>Service</th><th>Result</th></tr>
+<tr><th>端口</th><th>服务</th><th>结果</th></tr>
 </thead>
 <tbody>
-<tr><td>80</td><td>nginx</td><td>❌ unreachable</td></tr>
-<tr><td>8080</td><td>unknown</td><td>❌ unreachable</td></tr>
-<tr><td>8091</td><td>python-server</td><td>❌ unreachable</td></tr>
-<tr><td>8118</td><td>tinyproxy</td><td>❌ unreachable</td></tr>
-<tr><td>6080</td><td>websocat</td><td>❌ unreachable</td></tr>
-<tr><td>8765</td><td>python http.server</td><td>❌ unreachable</td></tr>
+<tr><td>80</td><td>nginx</td><td>❌ 不可达</td></tr>
+<tr><td>8080</td><td>未知</td><td>❌ 不可达</td></tr>
+<tr><td>8091</td><td>python-server</td><td>❌ 不可达</td></tr>
+<tr><td>8118</td><td>tinyproxy</td><td>❌ 不可达</td></tr>
+<tr><td>6080</td><td>websocat</td><td>❌ 不可达</td></tr>
+<tr><td>8765</td><td>python http.server</td><td>❌ 不可达</td></tr>
 </tbody>
 </table>
 </div>
-<p>All inbound ports are blocked by the security group.</p>
-<h3 id="33-root-cause"><a class="header" href="#33-root-cause">3.3 Root Cause</a></h3>
-<p>The cloud PC (the runtime environment of the Doubao work mode) has strict inbound security group rules: only specific internal service ports are allowed (e.g. Chrome CDP’s 9222, but it only listens on 127.0.0.1), and no port is accessible from outside.</p>
-<p>Even though the cloud PC has a public IP, the outside world cannot actively connect to any of its ports.</p>
-<h3 id="34-the-cloud-pc-public-ip-changes-dynamically"><a class="header" href="#34-the-cloud-pc-public-ip-changes-dynamically">3.4 The Cloud PC Public IP Changes Dynamically</a></h3>
-<p>The cloud PC’s public IP also changes over time (e.g. 101.x.x.1 → 101.x.x.190), so you cannot rely on a fixed IP.</p>
-<h3 id="35-no-sudo-privileges"><a class="header" href="#35-no-sudo-privileges">3.5 No sudo Privileges</a></h3>
-<p>The cloud PC has no sudo privileges (blocked by the <code>"no new privileges"</code> flag), so iptables or nginx configs cannot be modified to open ports.</p>
-<h3 id="36-fix-reverse-the-direction"><a class="header" href="#36-fix-reverse-the-direction">3.6 Fix: Reverse the Direction</a></h3>
-<p>The cloud PC’s inbound is blocked, but its <strong>outbound works</strong>. So reverse the direction:</p>
+<p>所有端口入站都被安全组阻止。</p>
+<h3 id="33-根因"><a class="header" href="#33-根因">3.3 根因</a></h3>
+<p>云电脑（豆包工作模式的运行环境）有严格的入站安全组规则，只允许特定的内部服务端口（如 Chrome CDP 的 9222，但只监听 127.0.0.1），不允许外部访问任何端口。</p>
+<p>即使云电脑有公网 IP，外部也无法主动连接云电脑的任何端口。</p>
+<h3 id="34-云电脑公网-ip-动态变化"><a class="header" href="#34-云电脑公网-ip-动态变化">3.4 云电脑公网 IP 动态变化</a></h3>
+<p>云电脑的公网 IP 还会动态变化（如 101.x.x.1 → 101.x.x.190），不能依赖固定 IP。</p>
+<h3 id="35-无-sudo-权限"><a class="header" href="#35-无-sudo-权限">3.5 无 sudo 权限</a></h3>
+<p>云电脑没有 sudo 权限（<code>"no new privileges"</code> flag 阻止），无法修改 iptables 或 nginx 配置来开放端口。</p>
+<h3 id="36-修复方案反转方向"><a class="header" href="#36-修复方案反转方向">3.6 修复方案：反转方向</a></h3>
+<p>云电脑入站被阻止，但<strong>出站是通的</strong>。所以反转方向：</p>
 <ul>
-<li>❌ Cloud PC starts an HTTP server, VPS downloads (inbound blocked)</li>
-<li>✅ VPS starts an HTTP server, cloud PC uploads (outbound works)</li>
+<li>❌ 云电脑启 HTTP 服务器，VPS 主动下载（入站被阻止）</li>
+<li>✅ VPS 启 HTTP 服务器，云电脑主动上传（出站通）</li>
 </ul>
-<p>See the final file transfer solution in Section 5.</p>
-<h2 id="4-cloud-pc-http-proxy-interception"><a class="header" href="#4-cloud-pc-http-proxy-interception">4. Cloud PC HTTP Proxy Interception</a></h2>
-<h3 id="41-symptom"><a class="header" href="#41-symptom">4.1 Symptom</a></h3>
-<p>Connecting from the cloud PC to the VPS WinRM port with pywinrm returns 404:</p>
+<p>详见本文第五部分的文件传输最终方案。</p>
+<h2 id="4-云电脑-http-代理拦截"><a class="header" href="#4-云电脑-http-代理拦截">4. 云电脑 HTTP 代理拦截</a></h2>
+<h3 id="41-现象"><a class="header" href="#41-现象">4.1 现象</a></h3>
+<p>从云电脑用 pywinrm 连接 VPS 的 WinRM 端口，返回 404：</p>
 <pre><code class="language-python">import winrm
-s = winrm.Session('http://&lt;public-IP&gt;:&lt;public-WinRM-port&gt;/wsman',
-                  auth=('Administrator', '&lt;password&gt;'), transport='ntlm')
+s = winrm.Session('http://&lt;公网IP&gt;:&lt;WinRM公网端口&gt;/wsman',
+                  auth=('Administrator', '&lt;密码&gt;'), transport='ntlm')
 r = s.run_cmd('hostname')
 # WinRMTransportError: Bad HTTP response returned from server. Code 404
 </code></pre>
-<p>Test with curl:</p>
-<pre><code class="language-bash">curl -v -X POST http://&lt;public-IP&gt;:&lt;public-WinRM-port&gt;/wsman
+<p>用 curl 测试：</p>
+<pre><code class="language-bash">curl -v -X POST http://&lt;公网IP&gt;:&lt;WinRM公网端口&gt;/wsman
 # &lt; HTTP/1.1 404 Not Found
 # &lt; Server: Proxy-1.13.0
 </code></pre>
-<p>The response header <code>Server</code> is <code>Proxy-1.13.0</code> (nginx), not WinRM’s response.</p>
-<h3 id="42-root-cause-the-cloud-pc-has-an-http-proxy-configured-by-default"><a class="header" href="#42-root-cause-the-cloud-pc-has-an-http-proxy-configured-by-default">4.2 Root Cause: The Cloud PC Has an HTTP Proxy Configured by Default</a></h3>
-<p>Check the cloud PC’s environment variables:</p>
+<p>响应头的 Server 是 <code>Proxy-1.13.0</code>（nginx），不是 WinRM 的响应。</p>
+<h3 id="42-根因云电脑默认配置了-http-代理"><a class="header" href="#42-根因云电脑默认配置了-http-代理">4.2 根因：云电脑默认配置了 HTTP 代理</a></h3>
+<p>检查云电脑的环境变量：</p>
 <pre><code class="language-bash">env | grep -i proxy
 # http_proxy=http://proxy-sid-...@vortex-...:8080
 # https_proxy=http://proxy-sid-...@vortex-...:8080
 </code></pre>
-<p>The cloud PC has an HTTP proxy configured by default, so every HTTP/HTTPS request goes through the proxy. The proxy returns 404 for requests to non-standard ports (such as WinRM’s mapped 5985 port).</p>
-<h3 id="43-fix-disable-the-proxy"><a class="header" href="#43-fix-disable-the-proxy">4.3 Fix: Disable the Proxy</a></h3>
-<p><strong>Disable the proxy in Python:</strong></p>
+<p>云电脑默认配置了 HTTP 代理，所有 HTTP/HTTPS 请求都会走代理。代理服务器对非标准端口（如 WinRM 的 5985 映射端口）的请求返回 404。</p>
+<h3 id="43-修复禁用代理"><a class="header" href="#43-修复禁用代理">4.3 修复：禁用代理</a></h3>
+<p><strong>Python 中禁用代理：</strong></p>
 <pre><code class="language-python">import os
 for k in ['http_proxy','https_proxy','HTTP_PROXY','HTTPS_PROXY','all_proxy','ALL_PROXY']:
     os.environ.pop(k, None)
 os.environ['no_proxy'] = '*'
 </code></pre>
-<p><strong>Disable the proxy in curl:</strong></p>
-<pre><code class="language-bash">curl --noproxy '*' -X POST http://&lt;public-IP&gt;:&lt;port&gt;/wsman
+<p><strong>curl 禁用代理：</strong></p>
+<pre><code class="language-bash">curl --noproxy '*' -X POST http://&lt;公网IP&gt;:&lt;端口&gt;/wsman
 </code></pre>
-<p>After disabling the proxy, WinRM responds correctly:</p>
+<p>禁用代理后，WinRM 正常响应：</p>
 <pre><code class="language-python">r = s.run_cmd('hostname')
-# &lt;hostname&gt;
+# &lt;主机名&gt;
 </code></pre>
-<h3 id="44-notes"><a class="header" href="#44-notes">4.4 Notes</a></h3>
+<h3 id="44-注意事项"><a class="header" href="#44-注意事项">4.4 注意事项</a></h3>
 <ul>
-<li>The proxy only affects HTTP/HTTPS requests, not SSH (SSH is a separate protocol that does not use the HTTP proxy)</li>
-<li>But if you tunnel SSH through the HTTP proxy with tools like proxytunnel or corkscrew, it will be affected too</li>
-<li>The proxy config is at the environment-variable level; every new shell inherits it, so you must disable it every time</li>
+<li>代理只影响 HTTP/HTTPS 请求，不影响 SSH（SSH 是独立协议，不走 HTTP 代理）</li>
+<li>但如果用了 proxytunnel 或 corkscrew 等工具把 SSH 走 HTTP 代理，也会受影响</li>
+<li>云电脑的代理配置是环境变量级别，每个新的 shell 都会继承，需要每次禁用</li>
 </ul>
-<h2 id="5-the-final-file-transfer-solution"><a class="header" href="#5-the-final-file-transfer-solution">5. The Final File Transfer Solution</a></h2>
-<h3 id="51-failed-approaches-summary"><a class="header" href="#51-failed-approaches-summary">5.1 Failed Approaches Summary</a></h3>
+<h2 id="5-文件传输最终方案"><a class="header" href="#5-文件传输最终方案">5. 文件传输最终方案</a></h2>
+<h3 id="51-失败的方案总结"><a class="header" href="#51-失败的方案总结">5.1 失败的方案总结</a></h3>
 <div class="table-wrapper">
 <table>
 <thead>
-<tr><th>Approach</th><th>Failure Reason</th></tr>
+<tr><th>方案</th><th>失败原因</th></tr>
 </thead>
 <tbody>
-<tr><td>VPS downloads directly from GitHub</td><td>GitHub is blocked</td></tr>
-<tr><td>VPS downloads from a GitHub mirror</td><td>Mirrors are also unavailable</td></tr>
-<tr><td>Cloud PC starts an HTTP server, VPS downloads</td><td>Cloud PC inbound security group blocks it</td></tr>
-<tr><td>WinRM base64 chunked transfer</td><td>WinRM command-line length limit (~8KB)</td></tr>
+<tr><td>VPS 直接从 GitHub 下载</td><td>GitHub 被墙</td></tr>
+<tr><td>VPS 从 GitHub 镜像下载</td><td>镜像也不可用</td></tr>
+<tr><td>云电脑启 HTTP 服务器，VPS 下载</td><td>云电脑入站安全组阻止</td></tr>
+<tr><td>WinRM base64 分块传输</td><td>WinRM 命令行长度限制（约 8KB）</td></tr>
 </tbody>
 </table>
 </div>
-<h3 id="52-the-working-approach-reverse-upload-with-an-http-server-on-the-vps-side"><a class="header" href="#52-the-working-approach-reverse-upload-with-an-http-server-on-the-vps-side">5.2 The Working Approach: Reverse Upload with an HTTP Server on the VPS Side</a></h3>
-<p><strong>Idea</strong>: The cloud PC’s inbound is blocked, but its outbound works. So start a temporary HTTP server on the VPS (Windows), expose it to the public network via the Duokaiyun port mapping, then upload files from the cloud PC with curl.</p>
-<h4 id="step-1-start-an-http-server-on-the-vps"><a class="header" href="#step-1-start-an-http-server-on-the-vps">Step 1: Start an HTTP server on the VPS</a></h4>
-<p>PowerShell script (http_server.ps1):</p>
+<h3 id="52-成功方案vps-侧启-http-服务器反向上传"><a class="header" href="#52-成功方案vps-侧启-http-服务器反向上传">5.2 成功方案：VPS 侧启 HTTP 服务器反向上传</a></h3>
+<p><strong>思路</strong>：云电脑入站被阻止，但出站通。所以在 VPS（Windows）上启动临时 HTTP 服务器，通过多开云端口映射暴露到公网，然后从云电脑用 curl 上传文件。</p>
+<h4 id="步骤一在-vps-上启动-http-服务器"><a class="header" href="#步骤一在-vps-上启动-http-服务器">步骤一：在 VPS 上启动 HTTP 服务器</a></h4>
+<p>PowerShell 脚本（http_server.ps1）：</p>
 <pre><code class="language-powershell">$ErrorActionPreference = 'Stop'
 $listener = New-Object System.Net.HttpListener
 $listener.Prefixes.Add('http://+:8080/')
 $listener.Start()
-Write-Output "HTTP server started, listening on port 8080"
+Write-Output "HTTP服务器已启动，监听8080端口"
 while ($listener.IsListening) {
     try {
         $context = $listener.GetContext()
@@ -358,139 +358,136 @@ while ($listener.IsListening) {
             $buffer = [System.Text.Encoding]::UTF8.GetBytes($msg)
             $response.ContentLength64 = $buffer.Length
             $response.OutputStream.Write($buffer, 0, $buffer.Length)
-            Write-Output "Upload complete: $msg"
+            Write-Output "上传完成: $msg"
         }
         $response.Close()
     } catch { }
 }
 </code></pre>
-<h4 id="step-2-start-it-with-wmi-independent-of-the-winrm-session"><a class="header" href="#step-2-start-it-with-wmi-independent-of-the-winrm-session">Step 2: Start it with WMI (independent of the WinRM session)</a></h4>
-<p>Processes started over WinRM may be killed when the WinRM session ends. Use WMI <code>Win32_Process.Create</code> instead, so the process is independent of the WinRM session:</p>
+<h4 id="步骤二用-wmi-启动独立于-winrm-会话"><a class="header" href="#步骤二用-wmi-启动独立于-winrm-会话">步骤二：用 WMI 启动（独立于 WinRM 会话）</a></h4>
+<p>通过 WinRM 启动的进程，在 WinRM 会话结束后可能被杀。用 WMI <code>Win32_Process.Create</code> 启动，进程独立于 WinRM 会话：</p>
 <pre><code class="language-powershell">$process = [WMICLASS]"Win32_Process"
 $result = $process.Create("powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -File C:\Users\Administrator\http_server.ps1")
 Write-Output "ProcessId: $($result.ProcessId)"
 </code></pre>
-<h4 id="step-3-add-port-mapping--firewall-rule"><a class="header" href="#step-3-add-port-mapping--firewall-rule">Step 3: Add port mapping + firewall rule</a></h4>
+<h4 id="步骤三添加端口映射--防火墙"><a class="header" href="#步骤三添加端口映射--防火墙">步骤三：添加端口映射 + 防火墙</a></h4>
 <ul>
-<li>Add a port mapping in the Duokaiyun console: public port → internal port 8080</li>
-<li>Allow 8080 in the Windows firewall:</li>
+<li>多开云控制台添加端口映射：公网端口 → 内网 8080</li>
+<li>Windows 防火墙允许 8080：</li>
 </ul>
 <pre><code class="language-powershell">New-NetFirewallRule -DisplayName 'HTTP Upload' -Direction Inbound -Protocol TCP -LocalPort 8080 -Action Allow -EdgeTraversalPolicy Allow
 </code></pre>
-<h4 id="step-4-upload-from-the-cloud-pc"><a class="header" href="#step-4-upload-from-the-cloud-pc">Step 4: Upload from the cloud PC</a></h4>
+<h4 id="步骤四从云电脑上传"><a class="header" href="#步骤四从云电脑上传">步骤四：从云电脑上传</a></h4>
 <pre><code class="language-bash">curl --noproxy '*' -X POST --data-binary @OpenSSH-Win64.zip \
-  "http://&lt;public-IP&gt;:&lt;public-HTTP-upload-port&gt;/upload?filename=OpenSSH-Win64.zip"
+  "http://&lt;公网IP&gt;:&lt;HTTP上传公网端口&gt;/upload?filename=OpenSSH-Win64.zip"
 </code></pre>
-<h4 id="measured-results"><a class="header" href="#measured-results">Measured Results</a></h4>
+<h4 id="实测结果"><a class="header" href="#实测结果">实测结果</a></h4>
 <ul>
-<li>A 4.8MB file uploaded in only 7 seconds</li>
-<li>Speed: 691 KB/s</li>
-<li>The file’s MD5 on the VPS matches the source file</li>
+<li>4.8MB 文件上传仅需 7 秒</li>
+<li>速度 691 KB/s</li>
+<li>上传后 VPS 上的文件 MD5 与源文件一致</li>
 </ul>
-<h3 id="53-generalization-any-file-can-be-transferred-this-way"><a class="header" href="#53-generalization-any-file-can-be-transferred-this-way">5.3 Generalization: Any File Can Be Transferred This Way</a></h3>
-<p>This approach is not limited to the OpenSSH installer — any file can be transferred from the cloud PC to the VPS this way:</p>
+<h3 id="53-通用化任何文件都可以这样传"><a class="header" href="#53-通用化任何文件都可以这样传">5.3 通用化：任何文件都可以这样传</a></h3>
+<p>这个方案不仅限于 OpenSSH 安装包，任何文件都可以通过这种方式从云电脑传到 VPS：</p>
 <ol>
-<li>Start an HTTP server on the VPS (or FTP, SMB, etc.)</li>
-<li>Add a port mapping in the console</li>
-<li>Upload from the cloud PC with curl/ftp</li>
+<li>VPS 上启 HTTP 服务器（或 FTP、SMB 等）</li>
+<li>控制台添加端口映射</li>
+<li>云电脑用 curl/ftp 上传</li>
 </ol>
-<p>The key is to <strong>reverse the direction</strong>: do not have the VPS actively connect to the cloud PC (inbound is blocked); have the cloud PC actively connect to the VPS (outbound works).</p>
-<h2 id="6-other-network-pitfalls"><a class="header" href="#6-other-network-pitfalls">6. Other Network Pitfalls</a></h2>
-<h3 id="61-the-windows-template-disables-windows-update"><a class="header" href="#61-the-windows-template-disables-windows-update">6.1 The Windows Template Disables Windows Update</a></h3>
-<p>The Duokaiyun Windows template disables the Windows Update service (wuauserv), which causes:</p>
+<p>关键是<strong>反转方向</strong>：不要让 VPS 主动连云电脑（入站被阻止），要让云电脑主动连 VPS（出站通）。</p>
+<h2 id="6-其他网络坑"><a class="header" href="#6-其他网络坑">6. 其他网络坑</a></h2>
+<h3 id="61-windows-模板禁用-windows-update"><a class="header" href="#61-windows-模板禁用-windows-update">6.1 Windows 模板禁用 Windows Update</a></h3>
+<p>多开云 Windows 模板禁用了 Windows Update 服务（wuauserv），导致：</p>
 <ul>
-<li><code>Add-WindowsCapability</code> fails (error 1083)</li>
-<li><code>dism /online /Add-Capability</code> fails</li>
-<li>No optional feature can be installed (OpenSSH Server, .NET Framework, etc.)</li>
+<li><code>Add-WindowsCapability</code> 失败（错误 1083）</li>
+<li><code>dism /online /Add-Capability</code> 失败</li>
+<li>无法安装任何可选功能（OpenSSH Server、.NET Framework 等）</li>
 </ul>
-<p>The only way is to download the installer manually.</p>
-<h3 id="62-internal-ports-222222-are-restricted"><a class="header" href="#62-internal-ports-222222-are-restricted">6.2 Internal Ports 22/2222 Are Restricted</a></h3>
-<p>When adding a port mapping in the Duokaiyun console, submitting internal port 22 or 2222 fails (it redirects to the home page without any message). Non-standard ports (e.g. 3456, 5985, 8080) can be added normally.</p>
-<p>SSH must listen on a non-standard port (e.g. 3456).</p>
-<h3 id="63-atomgit-mirrors-have-no-releases"><a class="header" href="#63-atomgit-mirrors-have-no-releases">6.3 atomgit Mirrors Have No Releases</a></h3>
-<p>atomgit’s mirrors of GitHub projects only contain code branches, not release attachments. Projects that need prebuilt binaries (e.g. OpenSSH-Win64.zip) cannot be downloaded from atomgit mirrors.</p>
-<h2 id="7-tracing-the-misconceptions"><a class="header" href="#7-tracing-the-misconceptions">7. Tracing the Misconceptions</a></h2>
-<h3 id="71-github-is-blocked-just-use-ghproxy--false"><a class="header" href="#71-github-is-blocked-just-use-ghproxy--false">7.1 “GitHub is blocked, just use ghproxy” — false</a></h3>
-<p>Common GitHub mirrors such as ghproxy and mirror.ghproxy.com are also unavailable on mainland China VPSes (domain blocked or service shut down). You need other domestic mirrors, or transfer the file manually.</p>
-<h3 id="72-start-an-http-server-on-the-cloud-pc-and-download-from-the-vps--false"><a class="header" href="#72-start-an-http-server-on-the-cloud-pc-and-download-from-the-vps--false">7.2 “Start an HTTP server on the cloud PC and download from the VPS” — false</a></h3>
-<p>All inbound ports on the cloud PC are blocked by the security group, so the VPS cannot reach any port on the cloud PC. You must reverse the direction: start an HTTP server on the VPS, and upload from the cloud PC.</p>
-<h3 id="73-winrm-returning-404-means-winrm-is-misconfigured--not-necessarily"><a class="header" href="#73-winrm-returning-404-means-winrm-is-misconfigured--not-necessarily">7.3 “WinRM returning 404 means WinRM is misconfigured” — not necessarily</a></h3>
-<p>The 404 may come from the cloud PC’s HTTP proxy (nginx), not from WinRM. Look at the <code>Server</code> field in the response header to tell who returned the error. After disabling the proxy, WinRM responds correctly.</p>
-<h3 id="74-winrm-base64-chunked-transfer-can-send-large-files--false"><a class="header" href="#74-winrm-base64-chunked-transfer-can-send-large-files--false">7.4 “WinRM base64 chunked transfer can send large files” — false</a></h3>
-<p>WinRM’s command-line length limit is about 8KB; with base64 encoding, 6KB of data already exceeds the limit. A 4.8MB file would require thousands of chunks, which is completely impractical. Use HTTP/FTP or similar protocols instead.</p>
-<h3 id="75-a-public-ip-on-the-cloud-pc-means-it-can-serve-the-outside-world--false"><a class="header" href="#75-a-public-ip-on-the-cloud-pc-means-it-can-serve-the-outside-world--false">7.5 “A public IP on the cloud PC means it can serve the outside world” — false</a></h3>
-<p>The cloud PC’s public IP changes dynamically, and the inbound security group blocks every port. Even with a public IP, no external party can actively connect to any service on the cloud PC.</p>
-<h2 id="8-actionable-takeaways-a-checklist-for-mainland-china-vps-networking"><a class="header" href="#8-actionable-takeaways-a-checklist-for-mainland-china-vps-networking">8. Actionable Takeaways: A Checklist for Mainland China VPS Networking</a></h2>
-<h3 id="81-downloading-files"><a class="header" href="#81-downloading-files">8.1 Downloading Files</a></h3>
+<p>只能手动下载安装包安装。</p>
+<h3 id="62-内网端口-222222-被限制"><a class="header" href="#62-内网端口-222222-被限制">6.2 内网端口 22/2222 被限制</a></h3>
+<p>多开云控制台添加端口映射时，内网端口填 22 或 2222 会提交失败（跳转到首页无提示）。非标准端口（如 3456、5985、8080）可以正常添加。</p>
+<p>SSH 服务需要监听非标准端口（如 3456）。</p>
+<h3 id="63-atomgit-镜像没有-releases"><a class="header" href="#63-atomgit-镜像没有-releases">6.3 atomgit 镜像没有 releases</a></h3>
+<p>atomgit 对 GitHub 项目的镜像只包含代码分支，不包含 releases 附件。需要预编译二进制的项目（如 OpenSSH-Win64.zip）不能从 atomgit 镜像下载。</p>
+<h2 id="7-谬误溯源"><a class="header" href="#7-谬误溯源">7. 谬误溯源</a></h2>
+<h3 id="71-github-被墙用-ghproxy-就行不成立"><a class="header" href="#71-github-被墙用-ghproxy-就行不成立">7.1 「GitHub 被墙，用 ghproxy 就行」——不成立</a></h3>
+<p>ghproxy、mirror.ghproxy.com 等常见 GitHub 镜像在大陆机房也不可用（域名被墙或服务停止）。需要找其他国内镜像，或手动传输文件。</p>
+<h3 id="72-云电脑启个-http-服务器vps-下载就行不成立"><a class="header" href="#72-云电脑启个-http-服务器vps-下载就行不成立">7.2 「云电脑启个 HTTP 服务器，VPS 下载就行」——不成立</a></h3>
+<p>云电脑所有端口入站被安全组阻止，VPS 无法访问云电脑的任何端口。需要反转方向：VPS 启 HTTP 服务器，云电脑上传。</p>
+<h3 id="73-winrm-返回-404--winrm-没配置好不一定是"><a class="header" href="#73-winrm-返回-404--winrm-没配置好不一定是">7.3 「WinRM 返回 404 = WinRM 没配置好」——不一定是</a></h3>
+<p>404 可能是云电脑的 HTTP 代理（nginx）返回的，不是 WinRM 返回的。看响应头的 Server 字段判断是谁返回的错误。禁用代理后 WinRM 正常响应。</p>
+<h3 id="74-winrm-base64-分块能传大文件不成立"><a class="header" href="#74-winrm-base64-分块能传大文件不成立">7.4 「WinRM base64 分块能传大文件」——不成立</a></h3>
+<p>WinRM 命令行长度限制约 8KB，base64 编码后 6KB 的数据就超长。4.8MB 文件需要上千块，完全不可行。需要用 HTTP/FTP 等协议传输。</p>
+<h3 id="75-云电脑有公网-ip-就能对外提供服务不成立"><a class="header" href="#75-云电脑有公网-ip-就能对外提供服务不成立">7.5 「云电脑有公网 IP 就能对外提供服务」——不成立</a></h3>
+<p>云电脑的公网 IP 是动态变化的，且入站安全组阻止所有端口。即使有公网 IP，外部也无法主动连接云电脑的任何服务。</p>
+<h2 id="8-落地结论大陆机房-vps-网络避坑-checklist"><a class="header" href="#8-落地结论大陆机房-vps-网络避坑-checklist">8. 落地结论：大陆机房 VPS 网络避坑 checklist</a></h2>
+<h3 id="81-下载文件"><a class="header" href="#81-下载文件">8.1 下载文件</a></h3>
 <ul>
-<li><input disabled="" type="checkbox"> Test whether GitHub is reachable first (<code>curl -I https://github.com</code>)</li>
-<li><input disabled="" type="checkbox"> If not, look for domestic mirrors (atomgit, Tsinghua mirror, Aliyun mirror, etc.)</li>
-<li><input disabled="" type="checkbox"> If no domestic mirror has it, download on the cloud PC and transfer it</li>
-<li><input disabled="" type="checkbox"> atomgit mirrors only have code, no release attachments</li>
+<li><input disabled="" type="checkbox"> 先测试 GitHub 是否可达（<code>curl -I https://github.com</code>）</li>
+<li><input disabled="" type="checkbox"> 不可达则找国内镜像（atomgit、清华镜像、阿里镜像等）</li>
+<li><input disabled="" type="checkbox"> 国内镜像也没有的，从云电脑下载后传输</li>
+<li><input disabled="" type="checkbox"> atomgit 镜像只有代码，没有 releases 附件</li>
 </ul>
-<h3 id="82-file-transfer-cloud-pc--vps"><a class="header" href="#82-file-transfer-cloud-pc--vps">8.2 File Transfer (Cloud PC ↔ VPS)</a></h3>
+<h3 id="82-文件传输云电脑--vps"><a class="header" href="#82-文件传输云电脑--vps">8.2 文件传输（云电脑 ↔ VPS）</a></h3>
 <ul>
-<li><input disabled="" type="checkbox"> Do not have the VPS actively connect to the cloud PC (inbound is blocked)</li>
-<li><input disabled="" type="checkbox"> Reverse the direction: start an HTTP/FTP server on the VPS, upload from the cloud PC</li>
-<li><input disabled="" type="checkbox"> Start background processes on the VPS with WMI (independent of the remote session)</li>
-<li><input disabled="" type="checkbox"> Add a port mapping in the console + allow the port in the VPS firewall</li>
-<li><input disabled="" type="checkbox"> Upload from the cloud PC with <code>curl --noproxy '*'</code> (proxy disabled)</li>
-<li><input disabled="" type="checkbox"> Verify the MD5 after uploading</li>
+<li><input disabled="" type="checkbox"> 不要让 VPS 主动连云电脑（入站被阻止）</li>
+<li><input disabled="" type="checkbox"> 反转方向：VPS 启 HTTP/FTP 服务器，云电脑上传</li>
+<li><input disabled="" type="checkbox"> VPS 上用 WMI 启动后台进程（独立于远程会话）</li>
+<li><input disabled="" type="checkbox"> 控制台添加端口映射 + VPS 防火墙放行</li>
+<li><input disabled="" type="checkbox"> 云电脑用 <code>curl --noproxy '*'</code> 上传（禁用代理）</li>
+<li><input disabled="" type="checkbox"> 上传后验证 MD5</li>
 </ul>
-<h3 id="83-remote-management"><a class="header" href="#83-remote-management">8.3 Remote Management</a></h3>
+<h3 id="83-远程管理"><a class="header" href="#83-远程管理">8.3 远程管理</a></h3>
 <ul>
-<li><input disabled="" type="checkbox"> Disable the cloud PC’s HTTP proxy before connecting via WinRM/SSH</li>
-<li><input disabled="" type="checkbox"> Use NTLM authentication for WinRM</li>
-<li><input disabled="" type="checkbox"> Use a non-standard port for SSH (22/2222 may be restricted)</li>
-<li><input disabled="" type="checkbox"> For 404 errors, check the <code>Server</code> field in the response header first to tell whether the proxy or the service returned it</li>
+<li><input disabled="" type="checkbox"> WinRM/SSH 连接前禁用云电脑 HTTP 代理</li>
+<li><input disabled="" type="checkbox"> WinRM 用 NTLM 认证</li>
+<li><input disabled="" type="checkbox"> SSH 用非标准端口（22/2222 可能被限制）</li>
+<li><input disabled="" type="checkbox"> 404 错误先看响应头的 Server 字段，判断是代理还是服务返回的</li>
 </ul>
-<h3 id="84-windows-specific"><a class="header" href="#84-windows-specific">8.4 Windows-Specific</a></h3>
+<h3 id="84-windows-特有"><a class="header" href="#84-windows-特有">8.4 Windows 特有</a></h3>
 <ul>
-<li><input disabled="" type="checkbox"> Windows Update is disabled, so Add-WindowsCapability cannot be used</li>
-<li><input disabled="" type="checkbox"> Download and install the installer manually</li>
-<li><input disabled="" type="checkbox"> Transfer the installer to the VPS with the file transfer approach</li>
+<li><input disabled="" type="checkbox"> Windows Update 被禁用，不能用 Add-WindowsCapability</li>
+<li><input disabled="" type="checkbox"> 手动下载安装包安装</li>
+<li><input disabled="" type="checkbox"> 安装包通过文件传输方案传到 VPS</li>
 </ul>
-<h3 id="85-quick-command-reference"><a class="header" href="#85-quick-command-reference">8.5 Quick Command Reference</a></h3>
-<pre><code class="language-bash"># Disable the proxy (Python)
+<h3 id="85-关键命令速查"><a class="header" href="#85-关键命令速查">8.5 关键命令速查</a></h3>
+<pre><code class="language-bash"># 禁用代理（Python）
 import os
 for k in ['http_proxy','https_proxy','HTTP_PROXY','HTTPS_PROXY']:
     os.environ.pop(k, None)
 os.environ['no_proxy'] = '*'
 
-# Disable the proxy (curl)
+# 禁用代理（curl）
 curl --noproxy '*' http://example.com
 
-# Test port connectivity
-nc -vz -w 5 &lt;IP&gt; &lt;port&gt;
+# 测试端口连通性
+nc -vz -w 5 &lt;IP&gt; &lt;端口&gt;
 
-# Upload a file to the VPS HTTP server
+# 上传文件到 VPS 的 HTTP 服务器
 curl --noproxy '*' -X POST --data-binary @file.zip \
-  "http://&lt;IP&gt;:&lt;port&gt;/upload?filename=file.zip"
+  "http://&lt;IP&gt;:&lt;端口&gt;/upload?filename=file.zip"
 </code></pre>
-<pre><code class="language-powershell"># Start an HTTP server on Windows (background via WMI)
+<pre><code class="language-powershell"># Windows 上启动 HTTP 服务器（用 WMI 后台启动）
 $process = [WMICLASS]"Win32_Process"
 $process.Create("powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -File C:\path\http_server.ps1")
 
-# Allow a port in the firewall
+# 防火墙放行端口
 New-NetFirewallRule -DisplayName 'HTTP Upload' -Direction Inbound -Protocol TCP -LocalPort 8080 -Action Allow
 </code></pre>
-<hr><!-- License Declaration -->
+<hr><!-- 许可声明 -->
 <blockquote>
-<p>This article is licensed under Mulan Open Works License Attribution-PatentLicensed, Version 1 (MulanOWL BY-PL v1), or alternatively CC0-1.0 (public domain dedication). Copyright reserved. Attribution required. For enterprise compliance, please retain the original license notice.
-Original version: https://k4m7v2pz.github.io/en/blog/operating-system/gnulinux/china-vps-network-pitfalls.html</p>
+<p>本文采用木兰开放作品许可协议 署名-专利许可，第1版 (MulanOWL BY-PL v1) 授权，亦可选用 CC0-1.0（公共领域奉献）。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
+原始版本见：https://k4m7v2pz.github.io/zh/blog/china-network/china-vps-network-pitfalls.html</p>
 </blockquote>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../../../blog/operating-system/gnulinux/thinkpad-e490-fan-control.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../../blog/sunoai/yellow-alert-suno-style-prompt.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                             </a>
 
-                            <a rel="next prefetch" href="../../../blog/operating-system/windows/embed-python-pip-installation-windows.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
-                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -498,13 +495,10 @@ Original version: https://k4m7v2pz.github.io/en/blog/operating-system/gnulinux/c
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../../../blog/operating-system/gnulinux/thinkpad-e490-fan-control.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../../blog/sunoai/yellow-alert-suno-style-prompt.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
-                    <a rel="next prefetch" href="../../../blog/operating-system/windows/embed-python-pip-installation-windows.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
-                    </a>
             </nav>
 
         </div>
@@ -522,13 +516,13 @@ Original version: https://k4m7v2pz.github.io/en/blog/operating-system/gnulinux/c
         </script>
 
 
-        <script src="../../../elasticlunr-ef4e11c1.min.js"></script>
-        <script src="../../../mark-09e88c2c.min.js"></script>
-        <script src="../../../searcher-09f2665d.js"></script>
+        <script src="../../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../../mark-09e88c2c.min.js"></script>
+        <script src="../../searcher-09f2665d.js"></script>
 
-        <script src="../../../clipboard-1626706a.min.js"></script>
-        <script src="../../../highlight-abc7f01d.js"></script>
-        <script src="../../../book-609e4cb8.js"></script>
+        <script src="../../clipboard-1626706a.min.js"></script>
+        <script src="../../highlight-abc7f01d.js"></script>
+        <script src="../../book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
 

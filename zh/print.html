@@ -36,10 +36,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-0fb31f6a.js";
+            window.path_to_searchindex_js = "searchindex-8e3f2142.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-7ae13383.js"></script>
+        <script src="toc-0313697f.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -833,305 +833,6 @@ WantedBy=multi-user.target
 <blockquote>
 <p>本文采用木兰开放作品许可协议 署名-专利许可，第1版 (MulanOWL BY-PL v1) 授权，亦可选用 CC0-1.0（公共领域奉献）。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
 原始版本见：https://k4m7v2pz.github.io/zh/blog/operating-system/gnulinux/thinkpad-e490-fan-control.html</p>
-</blockquote>
-<div style="break-before: page; page-break-before: always;"></div><!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
-<h1 id="大陆机房-vps-网络避坑指南github-被墙云电脑安全组http-代理拦截与文件传输方案"><a class="header" href="#大陆机房-vps-网络避坑指南github-被墙云电脑安全组http-代理拦截与文件传输方案">大陆机房 VPS 网络避坑指南：GitHub 被墙、云电脑安全组、HTTP 代理拦截与文件传输方案</a></h1>
-<h2 id="1-背景"><a class="header" href="#1-背景">1. 背景</a></h2>
-<p>在大陆机房的 NAT VPS 上安装软件、配置远程管理时，网络问题是最大的障碍之一。GitHub 被墙导致无法直接下载安装包，云电脑的安全组阻止入站连接导致文件传输失败，HTTP 代理拦截非标准端口请求导致 WinRM 返回 404。</p>
-<p>本文整理大陆机房 VPS 运维中遇到的各类网络坑，包括现象、根因、修复方案，以及文件传输的最终解决方案。</p>
-<h2 id="2-github-被墙"><a class="header" href="#2-github-被墙">2. GitHub 被墙</a></h2>
-<h3 id="21-现象"><a class="header" href="#21-现象">2.1 现象</a></h3>
-<p>在 VPS 上直接下载 GitHub 上的文件，超时或连接失败：</p>
-<pre><code class="language-bash">wget https://github.com/PowerShell/Win32-OpenSSH/releases/download/v&lt;version&gt;/OpenSSH-Win64.zip
-# 连接超时
-</code></pre>
-<p>curl 同样失败：</p>
-<pre><code class="language-bash">curl -L -o OpenSSH-Win64.zip https://github.com/PowerShell/Win32-OpenSSH/releases/download/v&lt;version&gt;/OpenSSH-Win64.zip
-# Failed to connect to github.com port 443: Connection timed out
-</code></pre>
-<h3 id="22-github-镜像也不可用"><a class="header" href="#22-github-镜像也不可用">2.2 GitHub 镜像也不可用</a></h3>
-<p>尝试常见的 GitHub 镜像，全部失败：</p>
-<div class="table-wrapper">
-<table>
-<thead>
-<tr><th>镜像</th><th>结果</th></tr>
-</thead>
-<tbody>
-<tr><td>ghproxy.com</td><td>无法连接</td></tr>
-<tr><td>mirror.ghproxy.com</td><td>无法连接</td></tr>
-<tr><td>gh.api.99988866.xyz</td><td>无法连接</td></tr>
-<tr><td>gh-proxy.com</td><td>无法连接</td></tr>
-</tbody>
-</table>
-</div>
-<p>这些镜像要么域名被墙，要么服务已停止。</p>
-<h3 id="23-国内网站基本可用"><a class="header" href="#23-国内网站基本可用">2.3 国内网站基本可用</a></h3>
-<p>测试国内网站：</p>
-<pre><code class="language-bash"># 百度
-curl -s -o /dev/null -w "%{http_code} %{size_download}" https://www.baidu.com
-# 200 29050
-
-# atomgit（国内代码托管）
-curl -s -o /dev/null -w "%{http_code} %{size_download}" https://atomgit.com
-# 200 252674
-</code></pre>
-<p>百度和 atomgit 都能正常访问，说明大陆机房的国内网站基本可用，主要是 GitHub 等国外网站被墙。</p>
-<h3 id="24-修复方案"><a class="header" href="#24-修复方案">2.4 修复方案</a></h3>
-<p><strong>方案一：从国内镜像下载源码，手动编译</strong></p>
-<p>OpenSSH 的源码可以从国内镜像（如 atomgit 的 OpenSSH 镜像）下载，但 Windows 上编译 OpenSSH 需要 Visual Studio Build Tools + CMake + Perl + NASM + OpenSSL，环境复杂，编译时间长（1-2 小时），不推荐。</p>
-<p><strong>方案二：从云电脑传输文件（推荐）</strong></p>
-<p>在云电脑上下载好安装包（云电脑能访问 GitHub 或有国内镜像），然后通过文件传输方案传到 VPS。详见本文第五部分的文件传输最终方案。</p>
-<p><strong>方案三：用国内包管理器</strong></p>
-<p>MSYS2、Chocolatey、Scoop 等包管理器可能有国内镜像，但安装包管理器本身也需要下载，且可能也被墙。</p>
-<h2 id="3-云电脑入站安全组"><a class="header" href="#3-云电脑入站安全组">3. 云电脑入站安全组</a></h2>
-<h3 id="31-现象"><a class="header" href="#31-现象">3.1 现象</a></h3>
-<p>在云电脑上启动 HTTP 服务器，想让 VPS 主动下载文件：</p>
-<pre><code class="language-bash"># 云电脑上启动 HTTP 服务器
-python3 -m http.server 8765
-# Serving HTTP on 0.0.0.0 port 8765
-</code></pre>
-<p>在 VPS 上测试连接：</p>
-<pre><code class="language-powershell">Test-NetConnection -ComputerName &lt;云电脑IP&gt; -Port 8765
-# TcpTestSucceeded : False
-</code></pre>
-<p>连接失败。</p>
-<h3 id="32-所有端口都不可达"><a class="header" href="#32-所有端口都不可达">3.2 所有端口都不可达</a></h3>
-<p>测试云电脑的多个端口：</p>
-<div class="table-wrapper">
-<table>
-<thead>
-<tr><th>端口</th><th>服务</th><th>结果</th></tr>
-</thead>
-<tbody>
-<tr><td>80</td><td>nginx</td><td>❌ 不可达</td></tr>
-<tr><td>8080</td><td>未知</td><td>❌ 不可达</td></tr>
-<tr><td>8091</td><td>python-server</td><td>❌ 不可达</td></tr>
-<tr><td>8118</td><td>tinyproxy</td><td>❌ 不可达</td></tr>
-<tr><td>6080</td><td>websocat</td><td>❌ 不可达</td></tr>
-<tr><td>8765</td><td>python http.server</td><td>❌ 不可达</td></tr>
-</tbody>
-</table>
-</div>
-<p>所有端口入站都被安全组阻止。</p>
-<h3 id="33-根因"><a class="header" href="#33-根因">3.3 根因</a></h3>
-<p>云电脑（豆包工作模式的运行环境）有严格的入站安全组规则，只允许特定的内部服务端口（如 Chrome CDP 的 9222，但只监听 127.0.0.1），不允许外部访问任何端口。</p>
-<p>即使云电脑有公网 IP，外部也无法主动连接云电脑的任何端口。</p>
-<h3 id="34-云电脑公网-ip-动态变化"><a class="header" href="#34-云电脑公网-ip-动态变化">3.4 云电脑公网 IP 动态变化</a></h3>
-<p>云电脑的公网 IP 还会动态变化（如 101.x.x.1 → 101.x.x.190），不能依赖固定 IP。</p>
-<h3 id="35-无-sudo-权限"><a class="header" href="#35-无-sudo-权限">3.5 无 sudo 权限</a></h3>
-<p>云电脑没有 sudo 权限（<code>"no new privileges"</code> flag 阻止），无法修改 iptables 或 nginx 配置来开放端口。</p>
-<h3 id="36-修复方案反转方向"><a class="header" href="#36-修复方案反转方向">3.6 修复方案：反转方向</a></h3>
-<p>云电脑入站被阻止，但<strong>出站是通的</strong>。所以反转方向：</p>
-<ul>
-<li>❌ 云电脑启 HTTP 服务器，VPS 主动下载（入站被阻止）</li>
-<li>✅ VPS 启 HTTP 服务器，云电脑主动上传（出站通）</li>
-</ul>
-<p>详见本文第五部分的文件传输最终方案。</p>
-<h2 id="4-云电脑-http-代理拦截"><a class="header" href="#4-云电脑-http-代理拦截">4. 云电脑 HTTP 代理拦截</a></h2>
-<h3 id="41-现象"><a class="header" href="#41-现象">4.1 现象</a></h3>
-<p>从云电脑用 pywinrm 连接 VPS 的 WinRM 端口，返回 404：</p>
-<pre><code class="language-python">import winrm
-s = winrm.Session('http://&lt;公网IP&gt;:&lt;WinRM公网端口&gt;/wsman',
-                  auth=('Administrator', '&lt;密码&gt;'), transport='ntlm')
-r = s.run_cmd('hostname')
-# WinRMTransportError: Bad HTTP response returned from server. Code 404
-</code></pre>
-<p>用 curl 测试：</p>
-<pre><code class="language-bash">curl -v -X POST http://&lt;公网IP&gt;:&lt;WinRM公网端口&gt;/wsman
-# &lt; HTTP/1.1 404 Not Found
-# &lt; Server: Proxy-1.13.0
-</code></pre>
-<p>响应头的 Server 是 <code>Proxy-1.13.0</code>（nginx），不是 WinRM 的响应。</p>
-<h3 id="42-根因云电脑默认配置了-http-代理"><a class="header" href="#42-根因云电脑默认配置了-http-代理">4.2 根因：云电脑默认配置了 HTTP 代理</a></h3>
-<p>检查云电脑的环境变量：</p>
-<pre><code class="language-bash">env | grep -i proxy
-# http_proxy=http://proxy-sid-...@vortex-...:8080
-# https_proxy=http://proxy-sid-...@vortex-...:8080
-</code></pre>
-<p>云电脑默认配置了 HTTP 代理，所有 HTTP/HTTPS 请求都会走代理。代理服务器对非标准端口（如 WinRM 的 5985 映射端口）的请求返回 404。</p>
-<h3 id="43-修复禁用代理"><a class="header" href="#43-修复禁用代理">4.3 修复：禁用代理</a></h3>
-<p><strong>Python 中禁用代理：</strong></p>
-<pre><code class="language-python">import os
-for k in ['http_proxy','https_proxy','HTTP_PROXY','HTTPS_PROXY','all_proxy','ALL_PROXY']:
-    os.environ.pop(k, None)
-os.environ['no_proxy'] = '*'
-</code></pre>
-<p><strong>curl 禁用代理：</strong></p>
-<pre><code class="language-bash">curl --noproxy '*' -X POST http://&lt;公网IP&gt;:&lt;端口&gt;/wsman
-</code></pre>
-<p>禁用代理后，WinRM 正常响应：</p>
-<pre><code class="language-python">r = s.run_cmd('hostname')
-# &lt;主机名&gt;
-</code></pre>
-<h3 id="44-注意事项"><a class="header" href="#44-注意事项">4.4 注意事项</a></h3>
-<ul>
-<li>代理只影响 HTTP/HTTPS 请求，不影响 SSH（SSH 是独立协议，不走 HTTP 代理）</li>
-<li>但如果用了 proxytunnel 或 corkscrew 等工具把 SSH 走 HTTP 代理，也会受影响</li>
-<li>云电脑的代理配置是环境变量级别，每个新的 shell 都会继承，需要每次禁用</li>
-</ul>
-<h2 id="5-文件传输最终方案"><a class="header" href="#5-文件传输最终方案">5. 文件传输最终方案</a></h2>
-<h3 id="51-失败的方案总结"><a class="header" href="#51-失败的方案总结">5.1 失败的方案总结</a></h3>
-<div class="table-wrapper">
-<table>
-<thead>
-<tr><th>方案</th><th>失败原因</th></tr>
-</thead>
-<tbody>
-<tr><td>VPS 直接从 GitHub 下载</td><td>GitHub 被墙</td></tr>
-<tr><td>VPS 从 GitHub 镜像下载</td><td>镜像也不可用</td></tr>
-<tr><td>云电脑启 HTTP 服务器，VPS 下载</td><td>云电脑入站安全组阻止</td></tr>
-<tr><td>WinRM base64 分块传输</td><td>WinRM 命令行长度限制（约 8KB）</td></tr>
-</tbody>
-</table>
-</div>
-<h3 id="52-成功方案vps-侧启-http-服务器反向上传"><a class="header" href="#52-成功方案vps-侧启-http-服务器反向上传">5.2 成功方案：VPS 侧启 HTTP 服务器反向上传</a></h3>
-<p><strong>思路</strong>：云电脑入站被阻止，但出站通。所以在 VPS（Windows）上启动临时 HTTP 服务器，通过多开云端口映射暴露到公网，然后从云电脑用 curl 上传文件。</p>
-<h4 id="步骤一在-vps-上启动-http-服务器"><a class="header" href="#步骤一在-vps-上启动-http-服务器">步骤一：在 VPS 上启动 HTTP 服务器</a></h4>
-<p>PowerShell 脚本（http_server.ps1）：</p>
-<pre><code class="language-powershell">$ErrorActionPreference = 'Stop'
-$listener = New-Object System.Net.HttpListener
-$listener.Prefixes.Add('http://+:8080/')
-$listener.Start()
-Write-Output "HTTP服务器已启动，监听8080端口"
-while ($listener.IsListening) {
-    try {
-        $context = $listener.GetContext()
-        $request = $context.Request
-        $response = $context.Response
-        if ($request.HttpMethod -eq 'POST' -and $request.Url.LocalPath -eq '/upload') {
-            $filename = $request.QueryString['filename']
-            if (-not $filename) { $filename = 'upload.bin' }
-            $filepath = Join-Path 'C:\Users\Administrator\Downloads' $filename
-            $stream = $request.InputStream
-            $fileStream = [System.IO.File]::Create($filepath)
-            $stream.CopyTo($fileStream)
-            $fileStream.Close()
-            $stream.Close()
-            $fi = Get-Item $filepath
-            $msg = "OK: $filepath ($($fi.Length) bytes)"
-            $buffer = [System.Text.Encoding]::UTF8.GetBytes($msg)
-            $response.ContentLength64 = $buffer.Length
-            $response.OutputStream.Write($buffer, 0, $buffer.Length)
-            Write-Output "上传完成: $msg"
-        }
-        $response.Close()
-    } catch { }
-}
-</code></pre>
-<h4 id="步骤二用-wmi-启动独立于-winrm-会话"><a class="header" href="#步骤二用-wmi-启动独立于-winrm-会话">步骤二：用 WMI 启动（独立于 WinRM 会话）</a></h4>
-<p>通过 WinRM 启动的进程，在 WinRM 会话结束后可能被杀。用 WMI <code>Win32_Process.Create</code> 启动，进程独立于 WinRM 会话：</p>
-<pre><code class="language-powershell">$process = [WMICLASS]"Win32_Process"
-$result = $process.Create("powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -File C:\Users\Administrator\http_server.ps1")
-Write-Output "ProcessId: $($result.ProcessId)"
-</code></pre>
-<h4 id="步骤三添加端口映射--防火墙"><a class="header" href="#步骤三添加端口映射--防火墙">步骤三：添加端口映射 + 防火墙</a></h4>
-<ul>
-<li>多开云控制台添加端口映射：公网端口 → 内网 8080</li>
-<li>Windows 防火墙允许 8080：</li>
-</ul>
-<pre><code class="language-powershell">New-NetFirewallRule -DisplayName 'HTTP Upload' -Direction Inbound -Protocol TCP -LocalPort 8080 -Action Allow -EdgeTraversalPolicy Allow
-</code></pre>
-<h4 id="步骤四从云电脑上传"><a class="header" href="#步骤四从云电脑上传">步骤四：从云电脑上传</a></h4>
-<pre><code class="language-bash">curl --noproxy '*' -X POST --data-binary @OpenSSH-Win64.zip \
-  "http://&lt;公网IP&gt;:&lt;HTTP上传公网端口&gt;/upload?filename=OpenSSH-Win64.zip"
-</code></pre>
-<h4 id="实测结果"><a class="header" href="#实测结果">实测结果</a></h4>
-<ul>
-<li>4.8MB 文件上传仅需 7 秒</li>
-<li>速度 691 KB/s</li>
-<li>上传后 VPS 上的文件 MD5 与源文件一致</li>
-</ul>
-<h3 id="53-通用化任何文件都可以这样传"><a class="header" href="#53-通用化任何文件都可以这样传">5.3 通用化：任何文件都可以这样传</a></h3>
-<p>这个方案不仅限于 OpenSSH 安装包，任何文件都可以通过这种方式从云电脑传到 VPS：</p>
-<ol>
-<li>VPS 上启 HTTP 服务器（或 FTP、SMB 等）</li>
-<li>控制台添加端口映射</li>
-<li>云电脑用 curl/ftp 上传</li>
-</ol>
-<p>关键是<strong>反转方向</strong>：不要让 VPS 主动连云电脑（入站被阻止），要让云电脑主动连 VPS（出站通）。</p>
-<h2 id="6-其他网络坑"><a class="header" href="#6-其他网络坑">6. 其他网络坑</a></h2>
-<h3 id="61-windows-模板禁用-windows-update"><a class="header" href="#61-windows-模板禁用-windows-update">6.1 Windows 模板禁用 Windows Update</a></h3>
-<p>多开云 Windows 模板禁用了 Windows Update 服务（wuauserv），导致：</p>
-<ul>
-<li><code>Add-WindowsCapability</code> 失败（错误 1083）</li>
-<li><code>dism /online /Add-Capability</code> 失败</li>
-<li>无法安装任何可选功能（OpenSSH Server、.NET Framework 等）</li>
-</ul>
-<p>只能手动下载安装包安装。</p>
-<h3 id="62-内网端口-222222-被限制"><a class="header" href="#62-内网端口-222222-被限制">6.2 内网端口 22/2222 被限制</a></h3>
-<p>多开云控制台添加端口映射时，内网端口填 22 或 2222 会提交失败（跳转到首页无提示）。非标准端口（如 3456、5985、8080）可以正常添加。</p>
-<p>SSH 服务需要监听非标准端口（如 3456）。</p>
-<h3 id="63-atomgit-镜像没有-releases"><a class="header" href="#63-atomgit-镜像没有-releases">6.3 atomgit 镜像没有 releases</a></h3>
-<p>atomgit 对 GitHub 项目的镜像只包含代码分支，不包含 releases 附件。需要预编译二进制的项目（如 OpenSSH-Win64.zip）不能从 atomgit 镜像下载。</p>
-<h2 id="7-谬误溯源"><a class="header" href="#7-谬误溯源">7. 谬误溯源</a></h2>
-<h3 id="71-github-被墙用-ghproxy-就行不成立"><a class="header" href="#71-github-被墙用-ghproxy-就行不成立">7.1 「GitHub 被墙，用 ghproxy 就行」——不成立</a></h3>
-<p>ghproxy、mirror.ghproxy.com 等常见 GitHub 镜像在大陆机房也不可用（域名被墙或服务停止）。需要找其他国内镜像，或手动传输文件。</p>
-<h3 id="72-云电脑启个-http-服务器vps-下载就行不成立"><a class="header" href="#72-云电脑启个-http-服务器vps-下载就行不成立">7.2 「云电脑启个 HTTP 服务器，VPS 下载就行」——不成立</a></h3>
-<p>云电脑所有端口入站被安全组阻止，VPS 无法访问云电脑的任何端口。需要反转方向：VPS 启 HTTP 服务器，云电脑上传。</p>
-<h3 id="73-winrm-返回-404--winrm-没配置好不一定是"><a class="header" href="#73-winrm-返回-404--winrm-没配置好不一定是">7.3 「WinRM 返回 404 = WinRM 没配置好」——不一定是</a></h3>
-<p>404 可能是云电脑的 HTTP 代理（nginx）返回的，不是 WinRM 返回的。看响应头的 Server 字段判断是谁返回的错误。禁用代理后 WinRM 正常响应。</p>
-<h3 id="74-winrm-base64-分块能传大文件不成立"><a class="header" href="#74-winrm-base64-分块能传大文件不成立">7.4 「WinRM base64 分块能传大文件」——不成立</a></h3>
-<p>WinRM 命令行长度限制约 8KB，base64 编码后 6KB 的数据就超长。4.8MB 文件需要上千块，完全不可行。需要用 HTTP/FTP 等协议传输。</p>
-<h3 id="75-云电脑有公网-ip-就能对外提供服务不成立"><a class="header" href="#75-云电脑有公网-ip-就能对外提供服务不成立">7.5 「云电脑有公网 IP 就能对外提供服务」——不成立</a></h3>
-<p>云电脑的公网 IP 是动态变化的，且入站安全组阻止所有端口。即使有公网 IP，外部也无法主动连接云电脑的任何服务。</p>
-<h2 id="8-落地结论大陆机房-vps-网络避坑-checklist"><a class="header" href="#8-落地结论大陆机房-vps-网络避坑-checklist">8. 落地结论：大陆机房 VPS 网络避坑 checklist</a></h2>
-<h3 id="81-下载文件"><a class="header" href="#81-下载文件">8.1 下载文件</a></h3>
-<ul>
-<li><input disabled="" type="checkbox"> 先测试 GitHub 是否可达（<code>curl -I https://github.com</code>）</li>
-<li><input disabled="" type="checkbox"> 不可达则找国内镜像（atomgit、清华镜像、阿里镜像等）</li>
-<li><input disabled="" type="checkbox"> 国内镜像也没有的，从云电脑下载后传输</li>
-<li><input disabled="" type="checkbox"> atomgit 镜像只有代码，没有 releases 附件</li>
-</ul>
-<h3 id="82-文件传输云电脑--vps"><a class="header" href="#82-文件传输云电脑--vps">8.2 文件传输（云电脑 ↔ VPS）</a></h3>
-<ul>
-<li><input disabled="" type="checkbox"> 不要让 VPS 主动连云电脑（入站被阻止）</li>
-<li><input disabled="" type="checkbox"> 反转方向：VPS 启 HTTP/FTP 服务器，云电脑上传</li>
-<li><input disabled="" type="checkbox"> VPS 上用 WMI 启动后台进程（独立于远程会话）</li>
-<li><input disabled="" type="checkbox"> 控制台添加端口映射 + VPS 防火墙放行</li>
-<li><input disabled="" type="checkbox"> 云电脑用 <code>curl --noproxy '*'</code> 上传（禁用代理）</li>
-<li><input disabled="" type="checkbox"> 上传后验证 MD5</li>
-</ul>
-<h3 id="83-远程管理"><a class="header" href="#83-远程管理">8.3 远程管理</a></h3>
-<ul>
-<li><input disabled="" type="checkbox"> WinRM/SSH 连接前禁用云电脑 HTTP 代理</li>
-<li><input disabled="" type="checkbox"> WinRM 用 NTLM 认证</li>
-<li><input disabled="" type="checkbox"> SSH 用非标准端口（22/2222 可能被限制）</li>
-<li><input disabled="" type="checkbox"> 404 错误先看响应头的 Server 字段，判断是代理还是服务返回的</li>
-</ul>
-<h3 id="84-windows-特有"><a class="header" href="#84-windows-特有">8.4 Windows 特有</a></h3>
-<ul>
-<li><input disabled="" type="checkbox"> Windows Update 被禁用，不能用 Add-WindowsCapability</li>
-<li><input disabled="" type="checkbox"> 手动下载安装包安装</li>
-<li><input disabled="" type="checkbox"> 安装包通过文件传输方案传到 VPS</li>
-</ul>
-<h3 id="85-关键命令速查"><a class="header" href="#85-关键命令速查">8.5 关键命令速查</a></h3>
-<pre><code class="language-bash"># 禁用代理（Python）
-import os
-for k in ['http_proxy','https_proxy','HTTP_PROXY','HTTPS_PROXY']:
-    os.environ.pop(k, None)
-os.environ['no_proxy'] = '*'
-
-# 禁用代理（curl）
-curl --noproxy '*' http://example.com
-
-# 测试端口连通性
-nc -vz -w 5 &lt;IP&gt; &lt;端口&gt;
-
-# 上传文件到 VPS 的 HTTP 服务器
-curl --noproxy '*' -X POST --data-binary @file.zip \
-  "http://&lt;IP&gt;:&lt;端口&gt;/upload?filename=file.zip"
-</code></pre>
-<pre><code class="language-powershell"># Windows 上启动 HTTP 服务器（用 WMI 后台启动）
-$process = [WMICLASS]"Win32_Process"
-$process.Create("powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -File C:\path\http_server.ps1")
-
-# 防火墙放行端口
-New-NetFirewallRule -DisplayName 'HTTP Upload' -Direction Inbound -Protocol TCP -LocalPort 8080 -Action Allow
-</code></pre>
-<hr><!-- 许可声明 -->
-<blockquote>
-<p>本文采用木兰开放作品许可协议 署名-专利许可，第1版 (MulanOWL BY-PL v1) 授权，亦可选用 CC0-1.0（公共领域奉献）。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
-原始版本见：https://k4m7v2pz.github.io/zh/blog/operating-system/gnulinux/china-vps-network-pitfalls.html</p>
 </blockquote>
 <div style="break-before: page; page-break-before: always;"></div><!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
 <h1 id="嵌入式-python-windows-版-pip-安装教程-python-embed"><a class="header" href="#嵌入式-python-windows-版-pip-安装教程-python-embed">嵌入式 Python Windows 版 pip 安装教程 (python-embed)</a></h1>
@@ -2405,12 +2106,12 @@ UseDNS no
 <h1 id="nushell--atomcode-配置踩坑记录"><a href="#nushell--atomcode-配置踩坑记录" class="header">Nushell + AtomCode 配置踩坑记录</a></h1>
 <!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
 <p><strong>摘要：</strong> 本文记录了在 macOS 上配置 Nushell 0.113.1 与 AtomCode 时遇到的 5 个典型坑，包括配置目录路径错误、验证方式误区、PATH 继承问题、配置项名称混淆以及默认值覆盖问题，并给出最终生效配置。</p>
-<h2 id="1-背景-1"><a class="header" href="#1-背景-1">1. 背景</a></h2>
+<h2 id="1-背景"><a class="header" href="#1-背景">1. 背景</a></h2>
 <p>日期：2026-07-07</p>
 <p>环境：macOS，Nushell 0.113.1（Homebrew），<code>nu</code> 在 <code>/opt/homebrew/bin/nu</code></p>
 <p>目标：① nushell 里能用 <code>atomcode</code> 命令；② 启动不显示 welcome message；③ 行末不显示时间</p>
 <h2 id="2-坑-1nushell-实际加载的配置目录不是-confignushell"><a class="header" href="#2-坑-1nushell-实际加载的配置目录不是-confignushell">2. 坑 1：nushell 实际加载的配置目录不是 <code>~/.config/nushell/</code></a></h2>
-<h3 id="21-现象-1"><a class="header" href="#21-现象-1">2.1 现象</a></h3>
+<h3 id="21-现象"><a class="header" href="#21-现象">2.1 现象</a></h3>
 <p>在 <code>~/.config/nushell/env.nu</code> 里写 <code>$env.PROMPT_COMMAND_RIGHT = {|| "" }</code>，毫无效果——行末时间照旧显示。</p>
 <h3 id="22-真相"><a class="header" href="#22-真相">2.2 真相</a></h3>
 <p>macOS 上 nushell 0.113 加载的默认配置目录是：</p>
@@ -2425,7 +2126,7 @@ $nu.default-config-dir
 <h3 id="23-修复"><a class="header" href="#23-修复">2.3 修复</a></h3>
 <p>所有改动都放到 <code>~/Library/Application Support/nushell/</code> 下的 <code>env.nu</code> / <code>config.nu</code>。</p>
 <h2 id="3-坑-2nu--c-不加载-confignu用它验证配置会误判"><a class="header" href="#3-坑-2nu--c-不加载-confignu用它验证配置会误判">3. 坑 2：<code>nu -c</code> 不加载 <code>config.nu</code>，用它验证配置会误判</a></h2>
-<h3 id="31-现象-1"><a class="header" href="#31-现象-1">3.1 现象</a></h3>
+<h3 id="31-现象"><a class="header" href="#31-现象">3.1 现象</a></h3>
 <p>在 <code>config.nu</code> 里设了 <code>$env.config.show_banner = false</code>，跑 <code>nu -c '$env.config.show_banner'</code> 返回 <code>true</code>，看似没生效。</p>
 <h3 id="32-真相"><a class="header" href="#32-真相">3.2 真相</a></h3>
 <p><code>nu -c '...'</code>（非交互式脚本模式）<strong>根本不加载 <code>config.nu</code></strong>，它读的是内置默认值。所以用 <code>nu -c</code> 查 <code>$env.config.show_banner</code> 永远是默认的 <code>true</code>，会让人误以为设置没生效。</p>
@@ -2436,7 +2137,7 @@ $nu.default-config-dir
 </code></pre>
 <p>或者用 <code>expect</code> 模拟 TTY 启动真交互式会话来肉眼确认。</p>
 <h2 id="4-坑-3新开终端标签页报-atomcode-not-found但旧会话里好好的"><a class="header" href="#4-坑-3新开终端标签页报-atomcode-not-found但旧会话里好好的">4. 坑 3：新开终端标签页报 <code>atomcode not found</code>，但旧会话里好好的</a></h2>
-<h3 id="41-现象-1"><a class="header" href="#41-现象-1">4.1 现象</a></h3>
+<h3 id="41-现象"><a class="header" href="#41-现象">4.1 现象</a></h3>
 <p>在已开的终端里 nushell 能找到 <code>atomcode</code>（<code>which atomcode</code> 命中 <code>~/.local/bin/atomcode</code>）。但<strong>新开一个终端标签页</strong>后启动 nushell，跑 <code>atomcode</code> 报：</p>
 <pre><code>Error: nu::shell::external_command
   × External command failed
@@ -9399,7 +9100,7 @@ const INSTRUCTIONS = {
 <blockquote>
 <p>日期：2026-08-07</p>
 </blockquote>
-<h3 id="1-背景-2"><a class="header" href="#1-背景-2">1. 背景</a></h3>
+<h3 id="1-背景-1"><a class="header" href="#1-背景-1">1. 背景</a></h3>
 <p>红警引擎的副官（EVA）语音是游戏体验的一部分。原版引擎播放 mix 里的 ceva/csof wav（<code>eva.ini</code> 的 <code>[DialogList]</code> 查表）。想让副官说中文/说自定义英文，需要两条路：一是摸清引擎到底会触发哪些 EVA 事件，二是设计一套自定义语音的映射结构。</p>
 <h3 id="2-摸清引擎的-64-条-eva-事件"><a class="header" href="#2-摸清引擎的-64-条-eva-事件">2. 摸清引擎的 64 条 EVA 事件</a></h3>
 <p>第一步不是猜，而是从源码和原版数据里挖：</p>
@@ -9546,6 +9247,305 @@ const INSTRUCTIONS = {
 <blockquote>
 <p>本文采用木兰开放作品许可协议 署名-专利许可，第1版 (MulanOWL BY-PL v1) 授权，亦可选用 CC0-1.0（公共领域奉献）。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
 原始版本见：https://k4m7v2pz.github.io/zh/blog/sunoai/yellow-alert-suno-style-prompt.html</p>
+</blockquote>
+<div style="break-before: page; page-break-before: always;"></div><!-- SPDX-License-Identifier: MulanOWL-PL OR CC0-1.0 -->
+<h1 id="大陆机房-vps-网络避坑指南github-被墙云电脑安全组http-代理拦截与文件传输方案"><a class="header" href="#大陆机房-vps-网络避坑指南github-被墙云电脑安全组http-代理拦截与文件传输方案">大陆机房 VPS 网络避坑指南：GitHub 被墙、云电脑安全组、HTTP 代理拦截与文件传输方案</a></h1>
+<h2 id="1-背景-2"><a class="header" href="#1-背景-2">1. 背景</a></h2>
+<p>在大陆机房的 NAT VPS 上安装软件、配置远程管理时，网络问题是最大的障碍之一。GitHub 被墙导致无法直接下载安装包，云电脑的安全组阻止入站连接导致文件传输失败，HTTP 代理拦截非标准端口请求导致 WinRM 返回 404。</p>
+<p>本文整理大陆机房 VPS 运维中遇到的各类网络坑，包括现象、根因、修复方案，以及文件传输的最终解决方案。</p>
+<h2 id="2-github-被墙"><a class="header" href="#2-github-被墙">2. GitHub 被墙</a></h2>
+<h3 id="21-现象-1"><a class="header" href="#21-现象-1">2.1 现象</a></h3>
+<p>在 VPS 上直接下载 GitHub 上的文件，超时或连接失败：</p>
+<pre><code class="language-bash">wget https://github.com/PowerShell/Win32-OpenSSH/releases/download/v&lt;version&gt;/OpenSSH-Win64.zip
+# 连接超时
+</code></pre>
+<p>curl 同样失败：</p>
+<pre><code class="language-bash">curl -L -o OpenSSH-Win64.zip https://github.com/PowerShell/Win32-OpenSSH/releases/download/v&lt;version&gt;/OpenSSH-Win64.zip
+# Failed to connect to github.com port 443: Connection timed out
+</code></pre>
+<h3 id="22-github-镜像也不可用"><a class="header" href="#22-github-镜像也不可用">2.2 GitHub 镜像也不可用</a></h3>
+<p>尝试常见的 GitHub 镜像，全部失败：</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>镜像</th><th>结果</th></tr>
+</thead>
+<tbody>
+<tr><td>ghproxy.com</td><td>无法连接</td></tr>
+<tr><td>mirror.ghproxy.com</td><td>无法连接</td></tr>
+<tr><td>gh.api.99988866.xyz</td><td>无法连接</td></tr>
+<tr><td>gh-proxy.com</td><td>无法连接</td></tr>
+</tbody>
+</table>
+</div>
+<p>这些镜像要么域名被墙，要么服务已停止。</p>
+<h3 id="23-国内网站基本可用"><a class="header" href="#23-国内网站基本可用">2.3 国内网站基本可用</a></h3>
+<p>测试国内网站：</p>
+<pre><code class="language-bash"># 百度
+curl -s -o /dev/null -w "%{http_code} %{size_download}" https://www.baidu.com
+# 200 29050
+
+# atomgit（国内代码托管）
+curl -s -o /dev/null -w "%{http_code} %{size_download}" https://atomgit.com
+# 200 252674
+</code></pre>
+<p>百度和 atomgit 都能正常访问，说明大陆机房的国内网站基本可用，主要是 GitHub 等国外网站被墙。</p>
+<h3 id="24-修复方案"><a class="header" href="#24-修复方案">2.4 修复方案</a></h3>
+<p><strong>方案一：从国内镜像下载源码，手动编译</strong></p>
+<p>OpenSSH 的源码可以从国内镜像（如 atomgit 的 OpenSSH 镜像）下载，但 Windows 上编译 OpenSSH 需要 Visual Studio Build Tools + CMake + Perl + NASM + OpenSSL，环境复杂，编译时间长（1-2 小时），不推荐。</p>
+<p><strong>方案二：从云电脑传输文件（推荐）</strong></p>
+<p>在云电脑上下载好安装包（云电脑能访问 GitHub 或有国内镜像），然后通过文件传输方案传到 VPS。详见本文第五部分的文件传输最终方案。</p>
+<p><strong>方案三：用国内包管理器</strong></p>
+<p>MSYS2、Chocolatey、Scoop 等包管理器可能有国内镜像，但安装包管理器本身也需要下载，且可能也被墙。</p>
+<h2 id="3-云电脑入站安全组"><a class="header" href="#3-云电脑入站安全组">3. 云电脑入站安全组</a></h2>
+<h3 id="31-现象-1"><a class="header" href="#31-现象-1">3.1 现象</a></h3>
+<p>在云电脑上启动 HTTP 服务器，想让 VPS 主动下载文件：</p>
+<pre><code class="language-bash"># 云电脑上启动 HTTP 服务器
+python3 -m http.server 8765
+# Serving HTTP on 0.0.0.0 port 8765
+</code></pre>
+<p>在 VPS 上测试连接：</p>
+<pre><code class="language-powershell">Test-NetConnection -ComputerName &lt;云电脑IP&gt; -Port 8765
+# TcpTestSucceeded : False
+</code></pre>
+<p>连接失败。</p>
+<h3 id="32-所有端口都不可达"><a class="header" href="#32-所有端口都不可达">3.2 所有端口都不可达</a></h3>
+<p>测试云电脑的多个端口：</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>端口</th><th>服务</th><th>结果</th></tr>
+</thead>
+<tbody>
+<tr><td>80</td><td>nginx</td><td>❌ 不可达</td></tr>
+<tr><td>8080</td><td>未知</td><td>❌ 不可达</td></tr>
+<tr><td>8091</td><td>python-server</td><td>❌ 不可达</td></tr>
+<tr><td>8118</td><td>tinyproxy</td><td>❌ 不可达</td></tr>
+<tr><td>6080</td><td>websocat</td><td>❌ 不可达</td></tr>
+<tr><td>8765</td><td>python http.server</td><td>❌ 不可达</td></tr>
+</tbody>
+</table>
+</div>
+<p>所有端口入站都被安全组阻止。</p>
+<h3 id="33-根因"><a class="header" href="#33-根因">3.3 根因</a></h3>
+<p>云电脑（豆包工作模式的运行环境）有严格的入站安全组规则，只允许特定的内部服务端口（如 Chrome CDP 的 9222，但只监听 127.0.0.1），不允许外部访问任何端口。</p>
+<p>即使云电脑有公网 IP，外部也无法主动连接云电脑的任何端口。</p>
+<h3 id="34-云电脑公网-ip-动态变化"><a class="header" href="#34-云电脑公网-ip-动态变化">3.4 云电脑公网 IP 动态变化</a></h3>
+<p>云电脑的公网 IP 还会动态变化（如 101.x.x.1 → 101.x.x.190），不能依赖固定 IP。</p>
+<h3 id="35-无-sudo-权限"><a class="header" href="#35-无-sudo-权限">3.5 无 sudo 权限</a></h3>
+<p>云电脑没有 sudo 权限（<code>"no new privileges"</code> flag 阻止），无法修改 iptables 或 nginx 配置来开放端口。</p>
+<h3 id="36-修复方案反转方向"><a class="header" href="#36-修复方案反转方向">3.6 修复方案：反转方向</a></h3>
+<p>云电脑入站被阻止，但<strong>出站是通的</strong>。所以反转方向：</p>
+<ul>
+<li>❌ 云电脑启 HTTP 服务器，VPS 主动下载（入站被阻止）</li>
+<li>✅ VPS 启 HTTP 服务器，云电脑主动上传（出站通）</li>
+</ul>
+<p>详见本文第五部分的文件传输最终方案。</p>
+<h2 id="4-云电脑-http-代理拦截"><a class="header" href="#4-云电脑-http-代理拦截">4. 云电脑 HTTP 代理拦截</a></h2>
+<h3 id="41-现象-1"><a class="header" href="#41-现象-1">4.1 现象</a></h3>
+<p>从云电脑用 pywinrm 连接 VPS 的 WinRM 端口，返回 404：</p>
+<pre><code class="language-python">import winrm
+s = winrm.Session('http://&lt;公网IP&gt;:&lt;WinRM公网端口&gt;/wsman',
+                  auth=('Administrator', '&lt;密码&gt;'), transport='ntlm')
+r = s.run_cmd('hostname')
+# WinRMTransportError: Bad HTTP response returned from server. Code 404
+</code></pre>
+<p>用 curl 测试：</p>
+<pre><code class="language-bash">curl -v -X POST http://&lt;公网IP&gt;:&lt;WinRM公网端口&gt;/wsman
+# &lt; HTTP/1.1 404 Not Found
+# &lt; Server: Proxy-1.13.0
+</code></pre>
+<p>响应头的 Server 是 <code>Proxy-1.13.0</code>（nginx），不是 WinRM 的响应。</p>
+<h3 id="42-根因云电脑默认配置了-http-代理"><a class="header" href="#42-根因云电脑默认配置了-http-代理">4.2 根因：云电脑默认配置了 HTTP 代理</a></h3>
+<p>检查云电脑的环境变量：</p>
+<pre><code class="language-bash">env | grep -i proxy
+# http_proxy=http://proxy-sid-...@vortex-...:8080
+# https_proxy=http://proxy-sid-...@vortex-...:8080
+</code></pre>
+<p>云电脑默认配置了 HTTP 代理，所有 HTTP/HTTPS 请求都会走代理。代理服务器对非标准端口（如 WinRM 的 5985 映射端口）的请求返回 404。</p>
+<h3 id="43-修复禁用代理"><a class="header" href="#43-修复禁用代理">4.3 修复：禁用代理</a></h3>
+<p><strong>Python 中禁用代理：</strong></p>
+<pre><code class="language-python">import os
+for k in ['http_proxy','https_proxy','HTTP_PROXY','HTTPS_PROXY','all_proxy','ALL_PROXY']:
+    os.environ.pop(k, None)
+os.environ['no_proxy'] = '*'
+</code></pre>
+<p><strong>curl 禁用代理：</strong></p>
+<pre><code class="language-bash">curl --noproxy '*' -X POST http://&lt;公网IP&gt;:&lt;端口&gt;/wsman
+</code></pre>
+<p>禁用代理后，WinRM 正常响应：</p>
+<pre><code class="language-python">r = s.run_cmd('hostname')
+# &lt;主机名&gt;
+</code></pre>
+<h3 id="44-注意事项"><a class="header" href="#44-注意事项">4.4 注意事项</a></h3>
+<ul>
+<li>代理只影响 HTTP/HTTPS 请求，不影响 SSH（SSH 是独立协议，不走 HTTP 代理）</li>
+<li>但如果用了 proxytunnel 或 corkscrew 等工具把 SSH 走 HTTP 代理，也会受影响</li>
+<li>云电脑的代理配置是环境变量级别，每个新的 shell 都会继承，需要每次禁用</li>
+</ul>
+<h2 id="5-文件传输最终方案"><a class="header" href="#5-文件传输最终方案">5. 文件传输最终方案</a></h2>
+<h3 id="51-失败的方案总结"><a class="header" href="#51-失败的方案总结">5.1 失败的方案总结</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>方案</th><th>失败原因</th></tr>
+</thead>
+<tbody>
+<tr><td>VPS 直接从 GitHub 下载</td><td>GitHub 被墙</td></tr>
+<tr><td>VPS 从 GitHub 镜像下载</td><td>镜像也不可用</td></tr>
+<tr><td>云电脑启 HTTP 服务器，VPS 下载</td><td>云电脑入站安全组阻止</td></tr>
+<tr><td>WinRM base64 分块传输</td><td>WinRM 命令行长度限制（约 8KB）</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="52-成功方案vps-侧启-http-服务器反向上传"><a class="header" href="#52-成功方案vps-侧启-http-服务器反向上传">5.2 成功方案：VPS 侧启 HTTP 服务器反向上传</a></h3>
+<p><strong>思路</strong>：云电脑入站被阻止，但出站通。所以在 VPS（Windows）上启动临时 HTTP 服务器，通过多开云端口映射暴露到公网，然后从云电脑用 curl 上传文件。</p>
+<h4 id="步骤一在-vps-上启动-http-服务器"><a class="header" href="#步骤一在-vps-上启动-http-服务器">步骤一：在 VPS 上启动 HTTP 服务器</a></h4>
+<p>PowerShell 脚本（http_server.ps1）：</p>
+<pre><code class="language-powershell">$ErrorActionPreference = 'Stop'
+$listener = New-Object System.Net.HttpListener
+$listener.Prefixes.Add('http://+:8080/')
+$listener.Start()
+Write-Output "HTTP服务器已启动，监听8080端口"
+while ($listener.IsListening) {
+    try {
+        $context = $listener.GetContext()
+        $request = $context.Request
+        $response = $context.Response
+        if ($request.HttpMethod -eq 'POST' -and $request.Url.LocalPath -eq '/upload') {
+            $filename = $request.QueryString['filename']
+            if (-not $filename) { $filename = 'upload.bin' }
+            $filepath = Join-Path 'C:\Users\Administrator\Downloads' $filename
+            $stream = $request.InputStream
+            $fileStream = [System.IO.File]::Create($filepath)
+            $stream.CopyTo($fileStream)
+            $fileStream.Close()
+            $stream.Close()
+            $fi = Get-Item $filepath
+            $msg = "OK: $filepath ($($fi.Length) bytes)"
+            $buffer = [System.Text.Encoding]::UTF8.GetBytes($msg)
+            $response.ContentLength64 = $buffer.Length
+            $response.OutputStream.Write($buffer, 0, $buffer.Length)
+            Write-Output "上传完成: $msg"
+        }
+        $response.Close()
+    } catch { }
+}
+</code></pre>
+<h4 id="步骤二用-wmi-启动独立于-winrm-会话"><a class="header" href="#步骤二用-wmi-启动独立于-winrm-会话">步骤二：用 WMI 启动（独立于 WinRM 会话）</a></h4>
+<p>通过 WinRM 启动的进程，在 WinRM 会话结束后可能被杀。用 WMI <code>Win32_Process.Create</code> 启动，进程独立于 WinRM 会话：</p>
+<pre><code class="language-powershell">$process = [WMICLASS]"Win32_Process"
+$result = $process.Create("powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -File C:\Users\Administrator\http_server.ps1")
+Write-Output "ProcessId: $($result.ProcessId)"
+</code></pre>
+<h4 id="步骤三添加端口映射--防火墙"><a class="header" href="#步骤三添加端口映射--防火墙">步骤三：添加端口映射 + 防火墙</a></h4>
+<ul>
+<li>多开云控制台添加端口映射：公网端口 → 内网 8080</li>
+<li>Windows 防火墙允许 8080：</li>
+</ul>
+<pre><code class="language-powershell">New-NetFirewallRule -DisplayName 'HTTP Upload' -Direction Inbound -Protocol TCP -LocalPort 8080 -Action Allow -EdgeTraversalPolicy Allow
+</code></pre>
+<h4 id="步骤四从云电脑上传"><a class="header" href="#步骤四从云电脑上传">步骤四：从云电脑上传</a></h4>
+<pre><code class="language-bash">curl --noproxy '*' -X POST --data-binary @OpenSSH-Win64.zip \
+  "http://&lt;公网IP&gt;:&lt;HTTP上传公网端口&gt;/upload?filename=OpenSSH-Win64.zip"
+</code></pre>
+<h4 id="实测结果"><a class="header" href="#实测结果">实测结果</a></h4>
+<ul>
+<li>4.8MB 文件上传仅需 7 秒</li>
+<li>速度 691 KB/s</li>
+<li>上传后 VPS 上的文件 MD5 与源文件一致</li>
+</ul>
+<h3 id="53-通用化任何文件都可以这样传"><a class="header" href="#53-通用化任何文件都可以这样传">5.3 通用化：任何文件都可以这样传</a></h3>
+<p>这个方案不仅限于 OpenSSH 安装包，任何文件都可以通过这种方式从云电脑传到 VPS：</p>
+<ol>
+<li>VPS 上启 HTTP 服务器（或 FTP、SMB 等）</li>
+<li>控制台添加端口映射</li>
+<li>云电脑用 curl/ftp 上传</li>
+</ol>
+<p>关键是<strong>反转方向</strong>：不要让 VPS 主动连云电脑（入站被阻止），要让云电脑主动连 VPS（出站通）。</p>
+<h2 id="6-其他网络坑"><a class="header" href="#6-其他网络坑">6. 其他网络坑</a></h2>
+<h3 id="61-windows-模板禁用-windows-update"><a class="header" href="#61-windows-模板禁用-windows-update">6.1 Windows 模板禁用 Windows Update</a></h3>
+<p>多开云 Windows 模板禁用了 Windows Update 服务（wuauserv），导致：</p>
+<ul>
+<li><code>Add-WindowsCapability</code> 失败（错误 1083）</li>
+<li><code>dism /online /Add-Capability</code> 失败</li>
+<li>无法安装任何可选功能（OpenSSH Server、.NET Framework 等）</li>
+</ul>
+<p>只能手动下载安装包安装。</p>
+<h3 id="62-内网端口-222222-被限制"><a class="header" href="#62-内网端口-222222-被限制">6.2 内网端口 22/2222 被限制</a></h3>
+<p>多开云控制台添加端口映射时，内网端口填 22 或 2222 会提交失败（跳转到首页无提示）。非标准端口（如 3456、5985、8080）可以正常添加。</p>
+<p>SSH 服务需要监听非标准端口（如 3456）。</p>
+<h3 id="63-atomgit-镜像没有-releases"><a class="header" href="#63-atomgit-镜像没有-releases">6.3 atomgit 镜像没有 releases</a></h3>
+<p>atomgit 对 GitHub 项目的镜像只包含代码分支，不包含 releases 附件。需要预编译二进制的项目（如 OpenSSH-Win64.zip）不能从 atomgit 镜像下载。</p>
+<h2 id="7-谬误溯源"><a class="header" href="#7-谬误溯源">7. 谬误溯源</a></h2>
+<h3 id="71-github-被墙用-ghproxy-就行不成立"><a class="header" href="#71-github-被墙用-ghproxy-就行不成立">7.1 「GitHub 被墙，用 ghproxy 就行」——不成立</a></h3>
+<p>ghproxy、mirror.ghproxy.com 等常见 GitHub 镜像在大陆机房也不可用（域名被墙或服务停止）。需要找其他国内镜像，或手动传输文件。</p>
+<h3 id="72-云电脑启个-http-服务器vps-下载就行不成立"><a class="header" href="#72-云电脑启个-http-服务器vps-下载就行不成立">7.2 「云电脑启个 HTTP 服务器，VPS 下载就行」——不成立</a></h3>
+<p>云电脑所有端口入站被安全组阻止，VPS 无法访问云电脑的任何端口。需要反转方向：VPS 启 HTTP 服务器，云电脑上传。</p>
+<h3 id="73-winrm-返回-404--winrm-没配置好不一定是"><a class="header" href="#73-winrm-返回-404--winrm-没配置好不一定是">7.3 「WinRM 返回 404 = WinRM 没配置好」——不一定是</a></h3>
+<p>404 可能是云电脑的 HTTP 代理（nginx）返回的，不是 WinRM 返回的。看响应头的 Server 字段判断是谁返回的错误。禁用代理后 WinRM 正常响应。</p>
+<h3 id="74-winrm-base64-分块能传大文件不成立"><a class="header" href="#74-winrm-base64-分块能传大文件不成立">7.4 「WinRM base64 分块能传大文件」——不成立</a></h3>
+<p>WinRM 命令行长度限制约 8KB，base64 编码后 6KB 的数据就超长。4.8MB 文件需要上千块，完全不可行。需要用 HTTP/FTP 等协议传输。</p>
+<h3 id="75-云电脑有公网-ip-就能对外提供服务不成立"><a class="header" href="#75-云电脑有公网-ip-就能对外提供服务不成立">7.5 「云电脑有公网 IP 就能对外提供服务」——不成立</a></h3>
+<p>云电脑的公网 IP 是动态变化的，且入站安全组阻止所有端口。即使有公网 IP，外部也无法主动连接云电脑的任何服务。</p>
+<h2 id="8-落地结论大陆机房-vps-网络避坑-checklist"><a class="header" href="#8-落地结论大陆机房-vps-网络避坑-checklist">8. 落地结论：大陆机房 VPS 网络避坑 checklist</a></h2>
+<h3 id="81-下载文件"><a class="header" href="#81-下载文件">8.1 下载文件</a></h3>
+<ul>
+<li><input disabled="" type="checkbox"> 先测试 GitHub 是否可达（<code>curl -I https://github.com</code>）</li>
+<li><input disabled="" type="checkbox"> 不可达则找国内镜像（atomgit、清华镜像、阿里镜像等）</li>
+<li><input disabled="" type="checkbox"> 国内镜像也没有的，从云电脑下载后传输</li>
+<li><input disabled="" type="checkbox"> atomgit 镜像只有代码，没有 releases 附件</li>
+</ul>
+<h3 id="82-文件传输云电脑--vps"><a class="header" href="#82-文件传输云电脑--vps">8.2 文件传输（云电脑 ↔ VPS）</a></h3>
+<ul>
+<li><input disabled="" type="checkbox"> 不要让 VPS 主动连云电脑（入站被阻止）</li>
+<li><input disabled="" type="checkbox"> 反转方向：VPS 启 HTTP/FTP 服务器，云电脑上传</li>
+<li><input disabled="" type="checkbox"> VPS 上用 WMI 启动后台进程（独立于远程会话）</li>
+<li><input disabled="" type="checkbox"> 控制台添加端口映射 + VPS 防火墙放行</li>
+<li><input disabled="" type="checkbox"> 云电脑用 <code>curl --noproxy '*'</code> 上传（禁用代理）</li>
+<li><input disabled="" type="checkbox"> 上传后验证 MD5</li>
+</ul>
+<h3 id="83-远程管理"><a class="header" href="#83-远程管理">8.3 远程管理</a></h3>
+<ul>
+<li><input disabled="" type="checkbox"> WinRM/SSH 连接前禁用云电脑 HTTP 代理</li>
+<li><input disabled="" type="checkbox"> WinRM 用 NTLM 认证</li>
+<li><input disabled="" type="checkbox"> SSH 用非标准端口（22/2222 可能被限制）</li>
+<li><input disabled="" type="checkbox"> 404 错误先看响应头的 Server 字段，判断是代理还是服务返回的</li>
+</ul>
+<h3 id="84-windows-特有"><a class="header" href="#84-windows-特有">8.4 Windows 特有</a></h3>
+<ul>
+<li><input disabled="" type="checkbox"> Windows Update 被禁用，不能用 Add-WindowsCapability</li>
+<li><input disabled="" type="checkbox"> 手动下载安装包安装</li>
+<li><input disabled="" type="checkbox"> 安装包通过文件传输方案传到 VPS</li>
+</ul>
+<h3 id="85-关键命令速查"><a class="header" href="#85-关键命令速查">8.5 关键命令速查</a></h3>
+<pre><code class="language-bash"># 禁用代理（Python）
+import os
+for k in ['http_proxy','https_proxy','HTTP_PROXY','HTTPS_PROXY']:
+    os.environ.pop(k, None)
+os.environ['no_proxy'] = '*'
+
+# 禁用代理（curl）
+curl --noproxy '*' http://example.com
+
+# 测试端口连通性
+nc -vz -w 5 &lt;IP&gt; &lt;端口&gt;
+
+# 上传文件到 VPS 的 HTTP 服务器
+curl --noproxy '*' -X POST --data-binary @file.zip \
+  "http://&lt;IP&gt;:&lt;端口&gt;/upload?filename=file.zip"
+</code></pre>
+<pre><code class="language-powershell"># Windows 上启动 HTTP 服务器（用 WMI 后台启动）
+$process = [WMICLASS]"Win32_Process"
+$process.Create("powershell.exe -ExecutionPolicy Bypass -WindowStyle Hidden -File C:\path\http_server.ps1")
+
+# 防火墙放行端口
+New-NetFirewallRule -DisplayName 'HTTP Upload' -Direction Inbound -Protocol TCP -LocalPort 8080 -Action Allow
+</code></pre>
+<hr><!-- 许可声明 -->
+<blockquote>
+<p>本文采用木兰开放作品许可协议 署名-专利许可，第1版 (MulanOWL BY-PL v1) 授权，亦可选用 CC0-1.0（公共领域奉献）。版权归作者所有，转载须署名并保留本声明，企业合规请保留原始声明。
+原始版本见：https://k4m7v2pz.github.io/zh/blog/china-network/china-vps-network-pitfalls.html</p>
 </blockquote>
 
                     </main>
