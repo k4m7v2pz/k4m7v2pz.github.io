@@ -21,7 +21,6 @@
 
 - [rust-bevy-mighty-rodent](https://atomgit.com/k4m7v2pz/rust-bevy-mighty-rodent) — Mighty Rodent reverse-engineering rewrite (Rust/Bevy, actively maintained)
 - [rust-bevy-endless-corridor](https://github.com/k4m7v2pz/rust-bevy-endless-corridor) — Main dev ground: Agent-friendly two-space-indent code, enabling horror/narrative games to be built by Agents (Rust/Bevy)
-- [RF-Client](https://github.com/k4m7v2pz/RF-Client) — Red Alert 2 Future Reunion Client (C#)
 - [rust-bevy-narrative-path-craft](https://github.com/k4m7v2pz/rust-bevy-narrative-path-craft) — Story-engine placeholder: Agent/LLM-friendly narrative data structures; LLMs can grasp memes and character dialogue motives (Rust/Bevy)
 - [rust-egui-chplus-ide](https://github.com/k4m7v2pz/rust-egui-chplus-ide) — egui-based IDE (Rust)
 - [rust-tauri-chplus-ide](https://github.com/k4m7v2pz/rust-tauri-chplus-ide) — Tauri-based IDE (Svelte)
