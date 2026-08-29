@@ -31,7 +31,6 @@
 
 - [rust-time-machine-plus](https://github.com/k4m7v2pz/rust-time-machine-plus) — 苹果 Time Machine 复刻，多平台分布式备份（Rust）
 - [rust-yumo](https://github.com/k4m7v2pz/rust-yumo) — yumo 音频播放库（Rust）
-- [rust-creeper](https://github.com/k4m7v2pz/rust-creeper) — Rust 爬虫框架（Rust）
 - [python-arcade-endless-corridor](https://github.com/k4m7v2pz/python_arcade_endless_corridor) — Python Arcade 版无尽走廊（Python）
 - [hiddify-panel](https://github.com/k4m7v2pz/hiddifypanel) — 多用户反过滤面板（JavaScript）
 - [gitcode-knowledge](https://gitcode.com/k4m7v2pz/gitcode_knowledge) — GitCode 开搜个人知识库备份

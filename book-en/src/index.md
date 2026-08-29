@@ -31,7 +31,6 @@
 
 - [rust-time-machine-plus](https://github.com/k4m7v2pz/rust-time-machine-plus) — Apple Time Machine reimplementation (Rust)
 - [rust-yumo](https://github.com/k4m7v2pz/rust-yumo) — Yumo audio playback library (Rust)
-- [rust-creeper](https://github.com/k4m7v2pz/rust-creeper) — Rust crawler framework (Rust)
 - [python-arcade-endless-corridor](https://github.com/k4m7v2pz/python_arcade_endless_corridor) — Python Arcade endless corridor (Python)
 - [hiddify-panel](https://github.com/k4m7v2pz/hiddifypanel) — Multi-user anti-filtering panel (JavaScript)
 - [gitcode-knowledge](https://gitcode.com/k4m7v2pz/gitcode_knowledge) — GitCode personal knowledge base backup
