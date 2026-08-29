@@ -33,7 +33,6 @@
 - [ts-oyrw-infinite-oilwell](https://atomgit.com/k4m7v2pz/ts-oyrw-infinite-oilwell) — 无限油井 TS 版（TypeScript）
 - [rust-bevy-omniscent](https://atomgit.com/k4m7v2pz/rust-bevy-omniscent) — DOS 演示程序 Omniscent 重写（Rust/Bevy）
 - [rust-bevy-cruise-evade](https://atomgit.com/k4m7v2pz/rust-bevy-cruise-evade) — 极品飞车 9 感觉的追逃玩法（Rust/Bevy，起步中）
-- [chplus-game-*](https://atomgit.com/k4m7v2pz) — 五子棋/生命游戏/2048/扫雷/数独/拼图/成语/24点/猜数字等小游戏合集
 
 ### 📓 其他项目
 

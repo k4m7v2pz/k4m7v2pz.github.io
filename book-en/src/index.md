@@ -33,7 +33,6 @@
 - [ts-oyrw-infinite-oilwell](https://atomgit.com/k4m7v2pz/ts-oyrw-infinite-oilwell) — Infinite Oilwell TS version (TypeScript)
 - [rust-bevy-omniscent](https://atomgit.com/k4m7v2pz/rust-bevy-omniscent) — Rewrite of the DOS demo Omniscent (Rust/Bevy)
 - [rust-bevy-cruise-evade](https://atomgit.com/k4m7v2pz/rust-bevy-cruise-evade) — Need for Speed 9-style chase/evade gameplay (Rust/Bevy, just starting)
-- [chplus-game-*](https://atomgit.com/k4m7v2pz) — Gomoku/Game-of-Life/2048/Minesweeper/Sudoku/Puzzle/Idiom/24-point/Guess games collection
 
 ### 📓 Other Projects
 
