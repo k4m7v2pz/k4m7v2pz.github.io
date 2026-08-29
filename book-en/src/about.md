@@ -58,6 +58,11 @@ Content is published across multiple platforms, each serving a distinct role:
 - **Auto backup**: when publishing, ticking the "Back up to GitCode as well" option automatically syncs the article as a .md file into the [CSDN article backup directory of the gitcode_knowledge repo](https://atomgit.com/k4m7v2pz/gitcode_knowledge/tree/main/CSDN%E5%8D%9A%E6%96%87%E5%A4%87%E4%BB%BD)
 - **Mirrored here**: occasionally, an Agent moves .md files from that backup repo into this GitHub Pages blog as an archive
 
+## Networking-Article Publishing Policy
+
+- When the CSDN writing Agent refuses an article because it detects keywords such as "circumvention / proxy", network-related technical articles are published directly on this GitHub Pages blog.
+- Such articles usually just provide reachability info about **mainland-official mirrors** (e.g. aliyun mirrors, atomgit code mirror repos) for programs or Agents to fetch — they do not cover circumvention content.
+
 ## Sync Strategy
 
 - Each project has one primary platform where it is first published.

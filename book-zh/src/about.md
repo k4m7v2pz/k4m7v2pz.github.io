@@ -58,6 +58,11 @@
 - **自动备份**：发布时勾选「同时备份到 GitCode」选项，文章会以 .md 文件形式自动同步到 [gitcode_knowledge 仓库的 CSDN博文备份 目录](https://atomgit.com/k4m7v2pz/gitcode_knowledge/tree/main/CSDN%E5%8D%9A%E6%96%87%E5%A4%87%E4%BB%BD)
 - **本站搬运**：偶尔通过 Agent 将该备份仓中的 .md 文件搬运到本 GitHub Pages 博客存档
 
+## 网络类文章发布策略
+
+- 当 CSDN 写作 Agent 因检测到「翻墙 / 代理」等关键词而拒发文章时，网络相关的技术文章会直接发布到本 GitHub Pages 博客。
+- 这类文章通常只是为了提供**大陆正规镜像**（如 aliyun mirrors、atomgit 代码镜像仓）的可达信息，供程序或 Agent 抓取使用，不涉及翻墙、破墙内容。
+
 ## 同步策略
 
 - 每个项目指定一个首更平台，其他平台通过 HTTPS 手动同步做镜像。
