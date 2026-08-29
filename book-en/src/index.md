@@ -9,9 +9,6 @@
 ### 🔧 Windows / Tools
 
 - [rust-verb-shell](https://atomgit.com/k4m7v2pz/rust-verb-shell) — Self-built cross-platform structured shell (rvs), replacing PowerShell/Nushell, partially zsh/bash (Rust)
-- [disable-mouse-acceleration](https://github.com/k4m7v2pz/disable-mouse-acceleration) — Disable Windows mouse accel (C#)
-- [natural-scrolling](https://github.com/k4m7v2pz/natural-scrolling) — Mac-style natural scrolling (C++)
-- [solid-wallpaper](https://github.com/k4m7v2pz/solid-wallpaper) — Solid color wallpaper tool (C#)
 - [xtl-toolchain](https://atomgit.com/k4m7v2pz/xtl-toolchain) — XuanTie language toolchain wrapper (Rust)
 - [rust-cafe-tune](https://atomgit.com/k4m7v2pz/rust-cafe-tune) — Internet-cafe machine customization CLI: mouse optimization, software install, wallpaper & log management (Rust, cross-platform, regularly used & maintained)
 - [rust-backup-tool](https://atomgit.com/k4m7v2pz/rust-backup-tool) — Cross-platform backup program (Rust, self-used & actively maintained)

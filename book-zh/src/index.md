@@ -9,9 +9,6 @@
 ### 🔧 Windows / 工具
 
 - [rust-verb-shell](https://atomgit.com/k4m7v2pz/rust-verb-shell) — 自研跨平台结构化 Shell（rvs），替换 PowerShell/Nushell，部分替代 zsh/bash（Rust）
-- [disable-mouse-acceleration](https://github.com/k4m7v2pz/disable-mouse-acceleration) — 关闭 Windows 鼠标加速度（C#）
-- [natural-scrolling](https://github.com/k4m7v2pz/natural-scrolling) — Mac 风格自然滚动（C++）
-- [solid-wallpaper](https://github.com/k4m7v2pz/solid-wallpaper) — 纯色壁纸工具（C#）
 - [xtl-toolchain](https://atomgit.com/k4m7v2pz/xtl-toolchain) — 玄铁语言工具链封装（Rust）
 - [rust-cafe-tune](https://atomgit.com/k4m7v2pz/rust-cafe-tune) — 网吧上机客制化 CLI：鼠标优化、软件安装、壁纸与日志管理（Rust，跨平台，常用常维护）
 - [rust-backup-tool](https://atomgit.com/k4m7v2pz/rust-backup-tool) — 跨操作系统备份程序（Rust，自用并持续维护）
