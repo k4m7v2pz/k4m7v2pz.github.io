@@ -28,11 +28,9 @@
 
 ### 📓 其他项目
 
-- [rust-time-machine-plus](https://github.com/k4m7v2pz/rust-time-machine-plus) — 苹果 Time Machine 复刻，多平台分布式备份（Rust）
 - [rust-yumo](https://github.com/k4m7v2pz/rust-yumo) — yumo 音频播放库（Rust）
 - [python-arcade-endless-corridor](https://github.com/k4m7v2pz/python_arcade_endless_corridor) — Python Arcade 版无尽走廊（Python）
-- [hiddify-panel](https://github.com/k4m7v2pz/hiddifypanel) — 多用户反过滤面板（JavaScript）
-- [gitcode-knowledge](https://atomgit.com/k4m7v2pz/gitcode_knowledge) — AtomGit 个人知识库备份
+- [gitcode-knowledge](https://atomgit.com/k4m7v2pz/gitcode_knowledge) — CSDN 文章 Markdown 备份仓（厌倦 CSDN 网页体验可看这里或本站）
 
 [▶ 全部仓库](https://atomgit.com/k4m7v2pz)
 

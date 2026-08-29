@@ -28,11 +28,9 @@
 
 ### 📓 Other Projects
 
-- [rust-time-machine-plus](https://github.com/k4m7v2pz/rust-time-machine-plus) — Apple Time Machine reimplementation (Rust)
 - [rust-yumo](https://github.com/k4m7v2pz/rust-yumo) — Yumo audio playback library (Rust)
 - [python-arcade-endless-corridor](https://github.com/k4m7v2pz/python_arcade_endless_corridor) — Python Arcade endless corridor (Python)
-- [hiddify-panel](https://github.com/k4m7v2pz/hiddifypanel) — Multi-user anti-filtering panel (JavaScript)
-- [gitcode-knowledge](https://atomgit.com/k4m7v2pz/gitcode_knowledge) — AtomGit personal knowledge base backup
+- [gitcode-knowledge](https://atomgit.com/k4m7v2pz/gitcode_knowledge) — Markdown backup of CSDN articles (prefer this or this site over the CSDN web experience)
 
 [▶ All repos](https://atomgit.com/k4m7v2pz)
 
