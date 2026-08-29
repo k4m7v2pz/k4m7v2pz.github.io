@@ -8,6 +8,7 @@
 
 ### 🔧 Windows / 工具
 
+- [rust-verb-shell](https://atomgit.com/k4m7v2pz/rust-verb-shell) — 自研跨平台结构化 Shell（rvs），替换 PowerShell/Nushell，部分替代 zsh/bash（Rust）
 - [disable-mouse-acceleration](https://github.com/k4m7v2pz/disable-mouse-acceleration) — 关闭 Windows 鼠标加速度（C#）
 - [natural-scrolling](https://github.com/k4m7v2pz/natural-scrolling) — Mac 风格自然滚动（C++）
 - [solid-wallpaper](https://github.com/k4m7v2pz/solid-wallpaper) — 纯色壁纸工具（C#）

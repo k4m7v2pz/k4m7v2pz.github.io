@@ -8,6 +8,7 @@
 
 ### 🔧 Windows / Tools
 
+- [rust-verb-shell](https://atomgit.com/k4m7v2pz/rust-verb-shell) — Self-built cross-platform structured shell (rvs), replacing PowerShell/Nushell, partially zsh/bash (Rust)
 - [disable-mouse-acceleration](https://github.com/k4m7v2pz/disable-mouse-acceleration) — Disable Windows mouse accel (C#)
 - [natural-scrolling](https://github.com/k4m7v2pz/natural-scrolling) — Mac-style natural scrolling (C++)
 - [solid-wallpaper](https://github.com/k4m7v2pz/solid-wallpaper) — Solid color wallpaper tool (C#)
